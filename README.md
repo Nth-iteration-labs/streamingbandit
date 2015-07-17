@@ -1,4 +1,4 @@
-streampy
+streamingbandit
 ========
 
 Development of streaming solutions to contextual bandit problem in Python
@@ -11,6 +11,7 @@ Pre-requisites
 -- json
 -- redis
 -- yaml
+-- mongo
 
 - Redis 2.8+
 
@@ -27,7 +28,7 @@ Running streampy
 ================
 
 When everything is configured, run Redis via the terminal (redis-server).
-Then you can start streampy via the terminal (python streampy).
+Then you can start streamingbandit via the terminal (python streamingbandit).
 
 To-do list
 ==========
