@@ -18,6 +18,8 @@ urls = [
     # static pages (index + API reference)
     (r"/", docshandlers.IndexHandler),
     (r"(?i)/reference.html", docshandlers.ReferenceHandler),
+    # management interface front-end
+    (r"(?i)/management.html", managementhandlers.IndexHandler),
 
     # action and reward handler (core)
     (r"(?i)/([0-9]+)/getaction.json", corehandlers.ActionHandler),
@@ -34,8 +36,7 @@ urls = [
     (r"(?i)/stats/([0-9]+)/getcurrenttheta.json", statshandlers.WorkInProgress),
     (r"(?i)/stats/([0-9]+)/gethourlytheta.json", statshandlers.WorkInProgress),
                
-    # management interface front-end
-    (r"(?i)/manage/index.html", managementhandlers.IndexHandler),            
+            
 ]
 
 settings = dict({

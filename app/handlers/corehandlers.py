@@ -66,4 +66,4 @@ class RewardHandler(tornado.web.RequestHandler):
             exp.run_reward_code(self.context, self.action, self.reward)
             self.write(json.dumps(self.action))  
         else:
-            # ERROR MESSAGE
+            self.write("ERROR")
