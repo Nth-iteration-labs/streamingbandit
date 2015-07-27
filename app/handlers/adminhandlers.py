@@ -27,28 +27,35 @@ class AddExperiment(tornado.web.RequestHandler):
         name : the name of the experiment (checked for duplicates)
         error : (optional) error message
         """
-        
-        # Firt retrieve the POST arguments:
         exp_obj = {}
         exp_obj["name"] = self.get_body_argument("name")
         exp_obj["getAction"] = self.get_body_argument("getaction")
         exp_obj["setReward"] = self.get_body_argument("setreward")
-        exp_obj["adviceID"] = self.get_body_argument("adviceid")
-        exp_obj["hourly"] = self.get_body_argument("hourly")
 
-        # Then insert into database (returns the ID):
         db = Database() 
         insertid = db.insert_experiment(exp_obj)
-    
-        # Set the JSON response:      
+        
         response = {}
         response["name"] = exp_obj["name"]
         response["id"] = insertid
         response["error"] = False
         self.write(json.dumps(response))
 
-
-
+class DeleteExperiment(tornado.web.RequestHandler):
+    
+    def get(self, exp_id):
+        """ Delete an experiment given an experiment id
+        
+        Input argument:
+            exp_id : The ID of the experiment to be deleted
+        
+        Returs:
+        A JSON Blob indicating the response
+        """
+        db = Database()
+        response = db.delete_experiment(exp_id)
+        self.write(json.dumps(response))
+        
 
 class GetListOfExperiments(tornado.web.RequestHandler):
     
@@ -85,7 +92,7 @@ class GetExperiment(tornado.web.RequestHandler):
 class EditExperiment(tornado.web.RequestHandler):
     
     def get(self):
-        self.write("404 ERROR")   # we really need nicer error handling
+        self.write_error(400)   # we really need nicer error handling
     
     def post(self, exp_id):
         """ Retrieve a list of experiments running on this server
@@ -100,34 +107,35 @@ class EditExperiment(tornado.web.RequestHandler):
         Returns:
         A JSON Blob containing error yes / no
         """
-        # Build object:
         exp_obj = {}
         exp_obj["name"] = self.get_body_argument("name")
         exp_obj["getAction"] = self.get_body_argument("getaction")
-        exp_obj["setReward"] = self.get_body_argument("setreward")
-        exp_obj["adviceID"] = self.get_body_argument("adviceid")
-        exp_obj["hourly"] = self.get_body_argument("hourly")        
+        exp_obj["setReward"] = self.get_body_argument("setreward")      
         
-        # Edit
         db = Database()
         response = {}
         response["id"] = db.edit_experiment(exp_obj, exp_id)
         self.write(json.dumps(response))
 
 
+
+
 class ListDefaults(tornado.web.RequestHandler):
     
-    # Load the file of defaults and return a list of their names:
     def get(self):
         json_data=open("./libs/defaults.json").read()
         data = json.loads(json_data)
         self.write(data)
         
-class GetDefaultCodeByName(tornado.web.RequestHandler):
+class GetDefault(tornado.web.RequestHandler):
     
-    # Load 
-    def get(self):
+    def get(self, default_id):
+        # first the name of the experiment
         json_data=open("./libs/defaults.json").read()
-        data = json.loads(json_data)
+        raw=json.loads(json_data)       
+        data={}
+        data["name"] = raw["defaults"][default_id]["name"]
+        data["getAction"]=open("./libs/defaults/"+raw["defaults"][default_id]["getActionCode"]).read()
+        data["setReward"]=open("./libs/defaults/"+raw["defaults"][default_id]["setRewardCode"]).read()
         self.write(data)
     

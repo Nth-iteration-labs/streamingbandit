@@ -27,10 +27,12 @@ urls = [
     (r"(?i)/([0-9]+)/setreward.json", corehandlers.RewardHandler),
      
     # admin / management REST api (REST api for administration of experiments)
-    (r"(?i)/admin/exp/defaults.json", adminhandlers.ListDefaults),
     (r"(?i)/admin/exp/add.json", adminhandlers.AddExperiment),
     (r"(?i)/admin/exp/list.json", adminhandlers.GetListOfExperiments),
+    (r"(?i)/admin/exp/defaults.json", adminhandlers.ListDefaults),
+    (r"(?i)/admin/exp/default/([0-9]+)/get.json", adminhandlers.GetDefault),
     (r"(?i)/admin/exp/([0-9]+)/get.json", adminhandlers.GetExperiment),
+    (r"(?i)/admin/exp/([0-9]+)/delete.json", adminhandlers.DeleteExperiment),
     (r"(?i)/admin/exp/([0-9]+)/edit.json", adminhandlers.EditExperiment),
 
     # analytics REST api (REST api for stats / logs)

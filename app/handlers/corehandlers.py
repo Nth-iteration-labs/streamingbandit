@@ -20,21 +20,16 @@ class ActionHandler(tornado.web.RequestHandler):
         A JSON object containing "action": XX
         Or an object containing "error": ...
         """
-        
-        # 1. Get details call:
         context = json.loads(self.get_argument("context", default="{}"))
         key = self.get_argument("key", default = False)
         
-        # 2. Instantiate experiment.
         __EXP__ = Experiment(exp_id, key)
         
-        # 3. Check if valid (key ok? experiment exist in DB?)
         if __EXP__.is_valid():
-            # Retrieve the code of the exepriment and execute:
             response = __EXP__.run_action_code(context)
-            self.write(json.dumps(response))
+            self.write(json.dumps({'status':'success', 'action':response}))
         else:
-            self.write("You did not supply a valid key")
+            self.write_error(400)       # Needs proper error handling
 
 class RewardHandler(tornado.web.RequestHandler):
 
@@ -60,6 +55,6 @@ class RewardHandler(tornado.web.RequestHandler):
             action = json.loads(self.get_argument("action", default="{}"))
             reward = float(self.get_argument("reward", default=0))
             __EXP__.run_reward_code(context, action, reward)
-            self.write("PROCESSED")  
+            self.write(json.dumps({'status':'success','_debug': {'action':action,'context':context}}))  
         else:
-            self.write("ERROR")
+            self.write_error(400)       # Needs proper error handling

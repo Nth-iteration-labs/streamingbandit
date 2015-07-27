@@ -62,7 +62,18 @@
       <!-- Example row of columns -->
       <div class="row">
          <h2>All currently active experiments:</h2>
-         <ul id="experimentsList"></ul>
+         <table class="table table-striped" id="ExperimentsList">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th width=75%>Name</th>
+                    <th>Edit</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
       </div>
 
     <hr>
@@ -84,7 +95,7 @@
             <textarea class="form-control" id="setRewardText" rows=3></textarea>
             </div>
             <div class="form-group">
-            <a class="btn btn-default" id="CreateButton" role="button">Create a new experiment!</a>
+            <a class="btn btn-default" id="CreateButton" role="button">Create experiment!</a>
             <a class="btn btn-default" id="EditButton" role="button">Edit this experiment!</a>
             </div>
         </form>
@@ -94,7 +105,9 @@
 
       <div class="row">
         <h2>Load default experiments</h2>
-        <p>StreamingBandit ships with a number of default experiments implemented. Click <a href="#" onclick=loadDefaults();>here</a> to load these.</p>
+        <p>StreamingBandit ships with a number of default experiments implemented. Click on their name to load them.</p>
+        <div id="DefaultList">
+        </div>
       </div>
 
       <hr>

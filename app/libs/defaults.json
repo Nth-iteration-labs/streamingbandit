@@ -1,14 +1,13 @@
-{"experiments":
-    [ {
-        "name": "ABC...Test", {
-            "getActionCode":"ab_getaction.py",
-            "setRewardCode":"ab_setreward.py" 
-        }       
-    },
-    {
-        "name": "Thompson sampling K-arm",{
-            "getActionCode":"thompson_getaction.py",
-            "setRewardCode":"ab_setreward.py"
+{"defaults":{
+    "1":{
+        "name": "ABC...Test", 
+        "getActionCode":"ab_getaction.py",
+        "setRewardCode":"ab_setreward.py"
+        },
+    "2":{
+        "name": "Thompson sampling K-arm",
+        "getActionCode":"thomp_getaction.py",
+        "setRewardCode":"thomp_setreward.py"
         }
-    } ]
+    }
 }

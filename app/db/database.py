@@ -77,26 +77,27 @@ class Database:
     
     def experiment_properties(self, basestr, key):
         return self.r_server.hgetall(basestr)[key]
-    
-    ## ADMIN CALLS:
+   
+   
+   ########################################################
+   ## ADMIN CALLS:
+   ########################################################
+   
     def insert_experiment(self, obj, explistkey="admin:experiments"):
-        # Find the length of the number of experiments:
         members = self.r_server.smembers(explistkey)
         exp_id = len(members) + 1
-        
-        # Add the experiment to the list of experiment:
         self.r_server.sadd(explistkey, exp_id)
- 
-        # Add the experiment to key exp:length++
-        obj["active"] = 1  # Use for delete (never truly delete)
         self.r_server.hmset("exp:%s:properties" % exp_id, obj)
-        
-        # Return the ID of the experiment for future ref.
         return(exp_id)
     
     def edit_experiment(self, obj, exp_id,  explistkey="admin:experiments"):
         obj["active"] = 1
         self.r_server.hmset("exp:%s:properties" % exp_id, obj)
+        return(exp_id)
+        
+    def delete_experiment(self, exp_id, explistkey="admin:experiments"):
+        self.r_server.srem(explistkey, exp_id)
+        self.r_server.delete("exp:%s:properties" % exp_id)
         return(exp_id)
         
     def get_all_experiments(self, explistkey="admin:experiments"):

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from db.database import Database
 from db.advicelog import Advice
+from math import sqrt; from itertools import count, islice
 
 class Experiment():
     
@@ -19,10 +20,10 @@ class Experiment():
         none
             
         Returns:
-        A boolean: true if a valid key is provided, false otherwise.
+        A boolean: true if a valid key is provided (a prime), false otherwise.
         """
-        # After database has a decent is_valid function, change to self.db.is_valid(exp_id)
-        self.valid = True
+        if(self.is_prime(int(self.key))):
+            self.valid = True
         return self.valid
     
     def run_action_code(self, context, action={}):    
@@ -40,7 +41,6 @@ class Experiment():
         exec(code)
         return True
     
-    # Function for logging:  
     def log_data(self, value):
         self.advice_db.log_row(value)
         return True
@@ -52,3 +52,11 @@ class Experiment():
     def get_theta(self, context = None, action=None, all_action=False, all_context=False, all_float=True, name="theta"):
         key = "exp:%s:" % (self.exp_id) +name    
         return self.db.get_theta(key, context, action, all_action, all_context, all_float)
+        
+    def is_prime(self, n):
+        if n < 2: return False
+        for number in islice(count(2), int(sqrt(n)-1)):
+            if not n%number:
+                return False
+        return True
+        
