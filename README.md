@@ -29,7 +29,7 @@ Running streamingbandit
 
 When everything is configured, do the following:
 - Start redis (using redis-server command)
-- Start mogno (using mongod command)
+- Start mongo (using mongod command)
 
 Then you can start streamingbandit server via the terminal (using python app.py). (note that this would be the simple local testing process, for actual deployment one would need a different approach).
 
