@@ -11,7 +11,6 @@ class Experiment():
         self.properties = self.db.get_one_experiment(self.exp_id)
         self.key = key
         self.valid = False     # should be taken from Redis
-        self.log_advice_bool = (self.properties['adviceID'] == 'true')    # should be taken from Redis
     
     def is_valid(self):
         """Checks wheter the exp_id and key match for the current experiment.
@@ -26,17 +25,8 @@ class Experiment():
         self.valid = True
         return self.valid
     
-    def advice(self):
-        return self.log_advice_bool
-        
-    def gen_advice_id(self, context, action):
-        return self.advice_db.log_advice(context, action)
-        
-    def get_by_advice_id(self, _id):
-        return self.advice_db.get_advice(_id)
-    
-    def run_action_code(self, context):    
-        self.action = {}
+    def run_action_code(self, context, action={}):    
+        self.action = action
         self.context = context
         code = self.db.experiment_properties("exp:%s:properties" % (self.exp_id), "getAction")
         exec(code)
@@ -50,8 +40,7 @@ class Experiment():
         exec(code)
         return True
     
-    # Function for logging:
-    # Needs to be inserted in Mongo Still:    
+    # Function for logging:  
     def log_data(self, value):
         self.advice_db.log_row(value)
         return True

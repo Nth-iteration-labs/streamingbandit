@@ -114,13 +114,20 @@ class EditExperiment(tornado.web.RequestHandler):
         response["id"] = db.edit_experiment(exp_obj, exp_id)
         self.write(json.dumps(response))
 
-class LoadDefaults(tornado.web.RequestHandler):
+
+class ListDefaults(tornado.web.RequestHandler):
     
-    def get(self, file_location="bla"):
-        self.write("loading defaults")
-        # Get defaults from file
+    # Load the file of defaults and return a list of their names:
+    def get(self):
+        json_data=open("./libs/defaults.json").read()
+        data = json.loads(json_data)
+        self.write(data)
         
-        # Run through file one by one and insert
-        # db.insert_experiment(exp_obj)
-        
-        # Respond with the number of instantiated experiments
+class GetDefaultCodeByName(tornado.web.RequestHandler):
+    
+    # Load 
+    def get(self):
+        json_data=open("./libs/defaults.json").read()
+        data = json.loads(json_data)
+        self.write(data)
+    

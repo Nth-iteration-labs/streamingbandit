@@ -23,9 +23,11 @@
         <!-- Code mirror -->
         <script src="../static/js/codemirror-compressed.js"></script>
         <link rel="stylesheet" href="../static/css/codemirror.css">
-
         <script src="../static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+
     </head>
+
+
     <body>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -39,18 +41,19 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="../">Streampy</a>
-          <a class="navbar-brand" href="../reference.html">Reference</a>
-          <a class="navbar-brand" href="http://github.com/MKaptein/streampy">GitHub</a>
+          <a class="navbar-brand" href="./index.html">Home</a>
+          <a class="navbar-brand" href="./reference.html">Docs</a>
+          <a class="navbar-brand" href="./management.html">Manage</a>
+          <a class="navbar-brand" href="https://github.com/MKaptein/streamingbandit">Download</a>
         </div>
-
       </div>
     </nav>
 
+    <!-- END OF HEADER -->
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1>Streampy management</h1>
+        <h1>Manage your experiments</h1>
         <p>On this page you can view the experiments on this server and create new experiments</p>
       </div>
     </div>
@@ -62,144 +65,58 @@
          <ul id="experimentsList"></ul>
       </div>
 
+    <hr>
+
 <!-- FORM FIELDS NEEDED TO CREATE AN EXPERIMENT -->
       <div class="row">
          <h2>Create or edit an experiment</h2>
         <form name="CreateExpForm">
-            <p>Name of the experiment: </br><input type="text" id="nameOfExperiment"></input></p>
-            <p>
-            The getAdvice() code:</br>
-            <textarea id="getAdviceText"></textarea>
-            </p>
-            <p>
-            The setReward() code:</br>
-            <textarea id="setRewardText"></textarea>
-            </p>
-             <p>
+            <div class="form-group">
+            <label for="InputExpName">Name of the experiment:</label>
+            <input type="text" class="form-control" id="nameOfExperiment"></input></p>
+            </div>
+            <div class="form-group">
+            <label>The getAdvice() code:</label>
+            <textarea class="form-control" id="getAdviceText" rows=2></textarea>
+            </div>
+            <div class="form-group">
+            <label>The setReward() code:</label>
+            <textarea class="form-control" id="setRewardText" rows=3></textarea>
+            </div>
+            <div class="form-group">
             <a class="btn btn-default" id="CreateButton" role="button">Create a new experiment!</a>
             <a class="btn btn-default" id="EditButton" role="button">Edit this experiment!</a>
-            </p>
-      
+            </div>
         </form>
       </div>
 
       <hr>
 
       <div class="row">
-        <h2>Load defaults from library</h2>
-        <p>STREAMPY ships with a number of default experiments implemented. Click <a href="#" onclick=loadDefaults();>here</a> to load these.</p>
+        <h2>Load default experiments</h2>
+        <p>StreamingBandit ships with a number of default experiments implemented. Click <a href="#" onclick=loadDefaults();>here</a> to load these.</p>
+      </div>
+
+      <hr>
+
+      <div class="row">
+        <h2>Import Libraries</h2>
+        <p>StreamingBandit can use a number of externally developed libraries. Some are shipped in the default package, but you can easily install new ones.</p>
       </div>
 <!-- END CREATE FORM FIELDS -->
 
       <hr>
 
+    <!-- END OF BODY -->
+
       <footer>
-        <p>&copy; N-th Iteration Lab 2015</p>
+        <p>&copy; N-th Iteration Lab 2015 (<a href="http://www.nth-iteration.com">www.nth-iteration.com</a>)</p>
       </footer>
     </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
-
         <script src="../static/js/vendor/bootstrap.min.js"></script>
         <script src="../static/js/main.js"></script>
-        <script type="text/javascript">
-
-            BASE_URL = "../"
-
-            var getAdviceCode = CodeMirror.fromTextArea($("#getAdviceText").get(0),{
-                lineNumbers: true,
-                mode:"python", 
-                theme:"default"});
-
-            var setRewardCode = CodeMirror.fromTextArea($("#setRewardText").get(0),{
-                lineNumbers: true,
-                mode:"python", 
-                theme:"default"});
-
-            // Post a new experiment to the server:
-            $( "#CreateButton" ).click(function() {
-                name = $("#nameOfExperiment").val(); 
-                code1 = getAdviceCode.getValue(); 
-                code2 = setRewardCode.getValue();
-                adviceId = true;
-                hourly = false;
-
-                $.post( BASE_URL+"admin/exp/add.json", { 
-                    name: name, 
-                    getaction: code1,
-                    setreward: code2,
-                    adviceid: adviceId,
-                    hourly: hourly
-                    })
-                    .done(function( data ) {
-                        // pretty ugly, but hey ;)
-                        location.reload();
-                  });                              
-            });
-
-            // Edit experiment
-            function editExperiment(id){
-                // First get the code
-                $.getJSON( BASE_URL+"admin/exp/"+id+"/get.json", function( data ){
-                    console.log(data)
-                    // Populate
-                    $("#nameOfExperiment").val(data.name)
-                    getAdviceCode.setValue(data.getAction);  
-                    setRewardCode.setValue(data.setReward);
-                }); 
-
-                // Change the button
-                $("#CreateButton").html("Store as new")
-                $('#EditButton').show();
-
-                // Set the handler:
-                $( "#EditButton").click(function() {
-
-                    name = $("#nameOfExperiment").val(); 
-                    code1 = getAdviceCode.getValue(); 
-                    code2 = setRewardCode.getValue();
-                    adviceId = true;
-                    hourly = false;
-
-                    // Edit the experiment:
-                    $.post( BASE_URL+"admin/exp/"+id+"/edit.json", { 
-                        name: name, 
-                        getaction: code1,
-                        setreward: code2,
-                        adviceid: adviceId,
-                        hourly: hourly
-                    })
-                    .done(function( data ) {
-                        // pretty ugly, but hey ;)
-                        location.reload();
-                     });    
-                });
-            }
-
-            // Get the list of experiments:
-            $(document).ready(function() {
-                $('#EditButton').hide();
-                console.log( "ready!" );
-
-                // Get the JSON blob with all experiments:
-                $.getJSON( BASE_URL+"admin/exp/list.json", function( data ) {
-                    console.log(data)
-                    var items = [];
-                    $.each(data, function(key, val){
-                        items.push('<li>' + key + ': ' + val.name + ' (<a href="#" onclick="editExperiment('+key+')">edit</a>)</li>');
-                    });  
-                    $('#experimentsList').append( items.join('') );                  
-                })
-                .fail(function() {
-                    console.log( "error" );
-                  });
-    
-            });
-
-            // Load default experiments
-            function loadDefaults(){
-                alert("Loading defaults")
-            }
-        </script>    
-
+        <script src="../static/js/admin.js"></script>
     </body>
 </html>
+
