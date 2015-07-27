@@ -2,6 +2,8 @@
 from db.database import Database
 from db.advicelog import Advice
 from math import sqrt; from itertools import count, islice
+import logging
+logging.basicConfig(filename="filename.log", level=logging.DEBUG)
 
 class Experiment():
     
@@ -30,6 +32,7 @@ class Experiment():
         self.action = action
         self.context = context
         code = self.db.experiment_properties("exp:%s:properties" % (self.exp_id), "getAction")
+        logging.debug(code)
         exec(code)
         return self.action
         

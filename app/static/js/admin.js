@@ -1,4 +1,5 @@
 BASE_URL = "../"
+API_URL = "http://localhost:8080"
 CURR_ID = 0
 
 var getAdviceCode = CodeMirror.fromTextArea($("#getAdviceText").get(0),{
@@ -54,7 +55,8 @@ function editExperiment(id){
         getAdviceCode.setValue(data.getAction);  
         setRewardCode.setValue(data.setReward);
     }); 
-
+    $("#TestGetAdvice").html('(<a href="'+API_URL+'/'+id+'/getAction.json?key='+13+'" target="_blank">try out</a>)')
+    $("#TestSetReward").html('(<a href="'+API_URL+'/'+id+'/setReward.json?key='+13+'&reward='+1+'&action='+encodeURIComponent(JSON.stringify({choice:1}))+'" target="_blank">try out</a>)')
     $("#CreateButton").html("Store as new")
     $('#EditButton').show();
 }

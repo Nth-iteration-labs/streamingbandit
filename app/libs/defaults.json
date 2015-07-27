@@ -1,13 +1,23 @@
 {"defaults":{
     "1":{
+        "name": "Void()", 
+        "getActionCode":"empty.py",
+        "setRewardCode":"empty.py"
+        },
+    "2":{
         "name": "ABC...Test", 
         "getActionCode":"ab_getaction.py",
         "setRewardCode":"ab_setreward.py"
         },
-    "2":{
+    "3":{
         "name": "Thompson sampling K-arm",
         "getActionCode":"thomp_getaction.py",
         "setRewardCode":"thomp_setreward.py"
+        },
+    "4":{
+        "name": "LockIn Amplifier (1d)",
+        "getActionCode":"LiA_getaction.py",
+        "setRewardCode":"LiA_setreward.py"
         }
     }
 }

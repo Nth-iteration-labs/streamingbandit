@@ -5,6 +5,8 @@ import tornado.ioloop
 import tornado.web
 from tornado.options import define, options
 import json,os
+import logging
+import logging.handlers
 
 # inport Streampy classes
 from handlers import corehandlers
@@ -13,12 +15,20 @@ from handlers import adminhandlers
 from handlers import statshandlers
 from handlers import managementhandlers
 
+# Logging:
+access_log = logging.getLogger("tornado.access")
+app_log = logging.getLogger("tornado.application")
+gen_log = logging.getLogger("tornado.general")
+access_log.setLevel(10)
+
+# urls handlers
 urls = [
 
     # static pages (index + API reference)
     (r"/", docshandlers.IndexHandler),
     (r"(?i)/index.html", docshandlers.IndexHandler),
     (r"(?i)/reference.html", docshandlers.ReferenceHandler),
+    
     # management interface front-end
     (r"(?i)/management.html", managementhandlers.IndexHandler),
 
