@@ -1,6 +1,9 @@
 #vim editor
-
 *.swp
+
+#MAC
+.DS_STORE
+
 *.egg-info
 filename.info
 
