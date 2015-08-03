@@ -4,22 +4,49 @@ import tornado.escape
 import tornado.ioloop
 import tornado.web
 from tornado.options import define, options
-import json,os
+import json,os,yaml
 import logging
 import logging.handlers
 
-# inport Streampy classes
+# import Streampy classes
 from handlers import corehandlers
 from handlers import docshandlers
 from handlers import adminhandlers
 from handlers import statshandlers
 from handlers import managementhandlers
 
+f = open("config.cfg",'r')
+settings = yaml.load(f)
+f.close()
+        
 # Logging:
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
 access_log = logging.getLogger("tornado.access")
-app_log = logging.getLogger("tornado.application")
-gen_log = logging.getLogger("tornado.general")
-access_log.setLevel(10)
+access_log.setLevel(settings["log.level"])
+app_log = logging.getLogger("myLogger")
+app_log.setLevel(settings["log.level"])
+
+ch = logging.StreamHandler()
+ch.setLevel(settings["log.console.level"])
+ch.setFormatter(formatter)
+
+
+logHanderAccess = logging.handlers.RotatingFileHandler(settings["log.access"], maxBytes=4096, backupCount=2)
+logHanderApp = logging.handlers.RotatingFileHandler(settings["log.app"], maxBytes=4096, backupCount=2)
+
+logHanderAccess.setFormatter(formatter)
+logHanderApp.setFormatter(formatter)
+
+access_log.addHandler(logHanderAccess)
+access_log.addHandler(ch)
+app_log.addHandler(logHanderApp)
+app_log.addHandler(ch)
+
+
+   
+app_log.info("Starting application {0}".format( settings["listen.port"]))
+
 
 # urls handlers
 urls = [
@@ -52,16 +79,16 @@ urls = [
             
 ]
 
-settings = dict({
+tornadeConfig = dict({
     "template_path": os.path.join(os.path.dirname(__file__),"templates"),
     "static_path": os.path.join(os.path.dirname(__file__),"static"),
     "debug": True
 })
 
-application = tornado.web.Application(urls,**settings)
+application = tornado.web.Application(urls,**tornadeConfig)
 
 def main():
-    application.listen(8080)
+    application.listen(settings["listen.port"])
     tornado.ioloop.IOLoop.instance().start()
 
 # Starting Server:
