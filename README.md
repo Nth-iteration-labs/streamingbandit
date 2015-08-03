@@ -1,65 +1,61 @@
-streamingbandit
-========
+# streamingbandit
 
 Provides a webser to quickly setup and evaluate possible solutions to contextual multi-armed bandit problems. Allows user to create new "experiments", each with their own policy, and disclose an API to evaluate the policy in applications.
 
-Pre-requisites
-==============
+# Pre-requisites
 
-- Python 3.x+ with the following packages:
--- Tornado
--- json
--- redis
--- yaml (PYYamel)
--- mongo
--- Redis 2.8+
+Python 3.x+ (although 2.7 seems to work) with the following packages:
+* Tornado
+* json
+* redis
+* yaml (PYYamel)
+* mongo
+* Redis 2.8+
 
-Installation & Configuration
-============================
+# Installation & Configuration
 
-# Python dependencies for StreamingBandit:
+## Python dependencies for StreamingBandit:
 
-## Mac/Linux
+### Mac/Linux
 To install all dependencies:
 
 ```
 sudo python setup.py install
 ```
-## Windows
+### Windows
 run (as administrator?):
 ```
 python setup.py install
 ``` 
 
 
-# Redis
-## Mac
+## Redis
+### Mac
 to install redis on Mac via _Brew_
 ```
 brew install redis
 ```
 
-## Linux
+### Linux
 You could look at this tutorial: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-redis
 
-# MongoDB
-## Mac
+## MongoDB
+### Mac
 To install Brew via _Brew_
 ```
 brew install mongodb
 ```
 
-## Linux (ubuntu/debian)
+### Linux (ubuntu/debian)
 see http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/
 
 Configuration file (<root>/app/config.cfg) contains both Redis-server IP and Port as well as the mongo server IP and port. If you run all three on the same host, your good to go with the default settings, otherwise change them to your environment
 
-Running streamingbandit 
-================
+# Running streamingbandit 
 
 When everything is configured, do the following:
-- Start redis (using redis-server command)
-- Start mongodb (using mongod command)
+* Start redis (using redis-server command)
+* Start mongodb (using mongod command)
 
 (idealy they are automagically started, as they are usally used in a server-context)
 
@@ -67,19 +63,13 @@ Then you can start streamingbandit web-server via the terminal (using python app
 
 On you local machine browse to: http://localhost:8080 (which is the default port where Tornado will run)
 Then, either browse to:
-- http://localhost:8080/reference.html to see the docs or,
-- http://localhost:8080/management.html to manage the experiments running on the server.
+* http://localhost:8080/reference.html to see the docs or,
+* http://localhost:8080/management.html to manage the experiments running on the server.
 
-To-do list
-==========
+# To-do list
 (see issues).
 
 
-Disclamer
-=========
-The author and/or contributers are not liable for any damage which has occured or may occur in connection with and/or results from the use of this application. 
-
-Usage is at your own risk.
 
 _Happy Streaming_
 
