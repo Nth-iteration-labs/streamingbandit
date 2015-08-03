@@ -1,6 +1,7 @@
 #vim editor
 *.swp
-
+*.komodoproject
+*.log.*
 #MAC
 .DS_STORE
 
