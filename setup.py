@@ -18,6 +18,7 @@ setup(name='StreamingBandid',
 		'tornado',
 		'redis',
 		'PyYAML',
-		'pymongo'
+		'pymongo',
+		'json'
 	]	
      )
