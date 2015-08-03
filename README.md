@@ -10,28 +10,60 @@ Pre-requisites
 -- Tornado
 -- json
 -- redis
--- yaml
+-- yaml (PYYamel)
 -- mongo
 -- Redis 2.8+
 
 Installation & Configuration
 ============================
 
-A nice way to install the missing packages is to use easy_install or pip.
-See the Python website for a detailed how-to.
-Redis has to be installed using command-line or the Redis website.
-Mongo needs to be installed similarly.
+# Python dependencies for StreamingBandit:
 
-Configuration file (config.cfg) contains both Redis-server IP and Port as well as the mongo server IP and port. If you run this on your own machine, keep default settings, which are "localhost" and 6379 and 27017 respectively.
+## Mac/Linux
+To install all dependencies:
+
+```
+sudo python setup.py install
+```
+## Windows
+run (as administrator?):
+```
+python setup.py install
+``` 
+
+
+# Redis
+## Mac
+to install redis on Mac via _Brew_
+```
+brew install redis
+```
+
+## Linux
+You could look at this tutorial: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-redis
+
+# MongoDB
+## Mac
+To install Brew via _Brew_
+```
+brew install mongodb
+```
+
+## Linux (ubuntu/debian)
+see http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/
+
+Configuration file (<root>/app/config.cfg) contains both Redis-server IP and Port as well as the mongo server IP and port. If you run all three on the same host, your good to go with the default settings, otherwise change them to your environment
 
 Running streamingbandit 
 ================
 
 When everything is configured, do the following:
 - Start redis (using redis-server command)
-- Start mongo (using mongod command)
+- Start mongodb (using mongod command)
 
-Then you can start streamingbandit server via the terminal (using python app.py). (note that this would be the simple local testing process, for actual deployment one would need a different approach).
+(idealy they are automagically started, as they are usally used in a server-context)
+
+Then you can start streamingbandit web-server via the terminal (using python app.py). (note that this would be the simple local testing process, for actual deployment one would need a different approach).
 
 On you local machine browse to: http://localhost:8080 (which is the default port where Tornado will run)
 Then, either browse to:
@@ -41,3 +73,14 @@ Then, either browse to:
 To-do list
 ==========
 (see issues).
+
+
+Disclamer
+=========
+The author and/or contributers are not liable for any damage which has occured or may occur in connection with and/or results from the use of this application. 
+
+Usage is at your own risk.
+
+_Happy Streaming_
+
+
