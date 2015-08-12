@@ -21,7 +21,7 @@ class IndexHandler(BaseHandler):
         Output: HTML template file management.html
         """
         if not self.current_user:
-            self.render("login.html")
+            self.render("login.html", warning="")
             return
         else:
             self.render("management.html")
