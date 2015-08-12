@@ -5,8 +5,9 @@ from math import sqrt; from itertools import count, islice
 import logging
 
 class Experiment():
+         
     
-    def __init__(self, exp_id, key):
+    def __init__(self, exp_id, key = "notUsedForLoopBack"):
         self.db = Database()
         self.advice_db = Advice()
         self.exp_id = exp_id   # sets the experimentID
