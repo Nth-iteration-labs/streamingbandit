@@ -85,14 +85,14 @@ urls = [
             
 ]
 
-tornadeConfig = dict({
+tornadoConfig = dict({
     "template_path": os.path.join(os.path.dirname(__file__),"templates"),
     "static_path": os.path.join(os.path.dirname(__file__),"static"),
     "debug": True,   # Should get from config?
     "cookie_secret":"12"
 })
 
-application = tornado.web.Application(urls,**tornadeConfig)
+application = tornado.web.Application(urls,**tornadoConfig)
 
 def main():
     application.listen(settings["listen.port"])
