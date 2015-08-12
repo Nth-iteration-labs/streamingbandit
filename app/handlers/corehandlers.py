@@ -26,8 +26,14 @@ class ActionHandler(tornado.web.RequestHandler):
         __EXP__ = Experiment(exp_id, key)
         
         if __EXP__.is_valid():
+            
             response = __EXP__.run_action_code(context)
-            self.write(json.dumps({'status':'success', 'action':response}))
+            
+            if self.settings['debug']:
+                self.write(json.dumps({'action':response, 'context':context}))
+            else:
+                self.write(json.dumps({'action':response}))
+                
         else:
             self.write_error(400)       # Needs proper error handling
 
@@ -54,7 +60,13 @@ class RewardHandler(tornado.web.RequestHandler):
             context = json.loads(self.get_argument("context", default="{}"))
             action = json.loads(self.get_argument("action", default="{}"))
             reward = float(self.get_argument("reward", default=0))
+            
             __EXP__.run_reward_code(context, action, reward)
-            self.write(json.dumps({'status':'success','_debug': {'action':action,'context':context}}))  
+            
+            if self.settings['debug']:
+                self.write(json.dumps({'status':'success', 'action':action,'context':context, 'reward':reward}))
+            else: 
+                self.write(json.dumps({'status':'success'}))
+                
         else:
             self.write_error(400)       # Needs proper error handling

@@ -3,8 +3,9 @@ import tornado.escape
 import tornado.ioloop
 import tornado.web
 import json
-
+import random
 from db.database import Database
+
 
 class AddExperiment(tornado.web.RequestHandler):
     
@@ -27,19 +28,27 @@ class AddExperiment(tornado.web.RequestHandler):
         name : the name of the experiment (checked for duplicates)
         error : (optional) error message
         """
-        exp_obj = {}
-        exp_obj["name"] = self.get_body_argument("name")
-        exp_obj["getAction"] = self.get_body_argument("getaction")
-        exp_obj["setReward"] = self.get_body_argument("setreward")
-
-        db = Database() 
-        insertid = db.insert_experiment(exp_obj)
+        if self.get_secure_cookie("user"):
+            exp_obj = {}
+            exp_obj["name"] = self.get_body_argument("name")
+            exp_obj["getAction"] = self.get_body_argument("getaction")
+            exp_obj["setReward"] = self.get_body_argument("setreward")
         
-        response = {}
-        response["name"] = exp_obj["name"]
-        response["id"] = insertid
-        response["error"] = False
-        self.write(json.dumps(response))
+            # Generate key (also stored in REDIS)
+            exp_obj["key"] = hex(random.getrandbits(42))[2:-1]
+
+            db = Database() 
+            insertid = db.insert_experiment(exp_obj)
+        
+            response = {}
+            response["name"] = exp_obj["name"]
+            response["id"] = insertid
+            response["key"] = exp_obj["key"]
+            response["error"] = False
+            self.write(json.dumps(response))
+        else:
+            self.write("AUTH_ERROR")
+
 
 class DeleteExperiment(tornado.web.RequestHandler):
     
@@ -52,9 +61,12 @@ class DeleteExperiment(tornado.web.RequestHandler):
         Returs:
         A JSON Blob indicating the response
         """
-        db = Database()
-        response = db.delete_experiment(exp_id)
-        self.write(json.dumps(response))
+        if self.get_secure_cookie("user"):
+            db = Database()
+            response = db.delete_experiment(exp_id)
+            self.write(json.dumps(response))
+        else:
+            self.write("AUTH_ERROR")
         
 
 class GetListOfExperiments(tornado.web.RequestHandler):
@@ -68,9 +80,12 @@ class GetListOfExperiments(tornado.web.RequestHandler):
         Returns:
         A JSON Blob containing a list of expid : name pairs, or a single entry
         """
-        db = Database()
-        response = db.get_all_experiments()
-        self.write(json.dumps(response))
+        if self.get_secure_cookie("user"):
+            db = Database()
+            response = db.get_all_experiments()
+            self.write(json.dumps(response))
+        else:
+            self.write("AUTH_ERROR")
         
         
 class GetExperiment(tornado.web.RequestHandler):
@@ -84,9 +99,12 @@ class GetExperiment(tornado.web.RequestHandler):
         Returns:
         A JSON Blob containing all the info for the expriment
         """
-        db = Database()
-        response = db.get_one_experiment(exp_id)
-        self.write(json.dumps(response))
+        if self.get_secure_cookie("user"):
+            db = Database()
+            response = db.get_one_experiment(exp_id)
+            self.write(json.dumps(response))
+        else:
+            self.write("AUTH_ERROR")
 
         
 class EditExperiment(tornado.web.RequestHandler):
@@ -107,35 +125,43 @@ class EditExperiment(tornado.web.RequestHandler):
         Returns:
         A JSON Blob containing error yes / no
         """
-        exp_obj = {}
-        exp_obj["name"] = self.get_body_argument("name")
-        exp_obj["getAction"] = self.get_body_argument("getaction")
-        exp_obj["setReward"] = self.get_body_argument("setreward")      
+        if self.get_secure_cookie("user"):
+            exp_obj = {}
+            exp_obj["name"] = self.get_body_argument("name")
+            exp_obj["getAction"] = self.get_body_argument("getaction")
+            exp_obj["setReward"] = self.get_body_argument("setreward")      
         
-        db = Database()
-        response = {}
-        response["id"] = db.edit_experiment(exp_obj, exp_id)
-        self.write(json.dumps(response))
-
-
+            db = Database()
+            response = {}
+            response["id"] = db.edit_experiment(exp_obj, exp_id)
+            self.write(json.dumps(response))
+        else:
+            self.write("AUTH_ERROR")
 
 
 class ListDefaults(tornado.web.RequestHandler):
     
     def get(self):
-        json_data=open("./libs/defaults.json").read()
-        data = json.loads(json_data)
-        self.write(data)
-        
+        if self.get_secure_cookie("user"):
+            json_data=open("./libs/defaults.json").read()
+            data = json.loads(json_data)
+            self.write(data)
+        else:
+            self.write("AUTH_ERROR")
+ 
+       
 class GetDefault(tornado.web.RequestHandler):
     
     def get(self, default_id):
-        # first the name of the experiment
-        json_data=open("./libs/defaults.json").read()
-        raw=json.loads(json_data)       
-        data={}
-        data["name"] = raw["defaults"][default_id]["name"]
-        data["getAction"]=open("./libs/defaults/"+raw["defaults"][default_id]["getActionCode"]).read()
-        data["setReward"]=open("./libs/defaults/"+raw["defaults"][default_id]["setRewardCode"]).read()
-        self.write(data)
-    
+        
+        if self.get_secure_cookie("user"):
+            # first the name of the experiment
+            json_data=open("./libs/defaults.json").read()
+            raw=json.loads(json_data)       
+            data={}
+            data["name"] = raw["defaults"][default_id]["name"]
+            data["getAction"]=open("./libs/defaults/"+raw["defaults"][default_id]["getActionCode"]).read()
+            data["setReward"]=open("./libs/defaults/"+raw["defaults"][default_id]["setRewardCode"]).read()
+            self.write(data)
+        else:
+            self.write("AUTH_ERROR")

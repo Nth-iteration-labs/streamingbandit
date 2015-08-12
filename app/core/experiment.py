@@ -24,7 +24,8 @@ class Experiment():
         Returns:
         A boolean: true if a valid key is provided (a prime), false otherwise.
         """
-        if(self.is_prime(int(self.key))):
+        key = self.db.experiment_properties("exp:%s:properties" % (self.exp_id), "key")
+        if key == self.key:
             self.valid = True
         return self.valid
     
@@ -32,7 +33,7 @@ class Experiment():
         self.action = action
         self.context = context
         code = self.db.experiment_properties("exp:%s:properties" % (self.exp_id), "getAction")
-        logging.debug(code)
+        #logging.debug(code)
         exec(code)
         return self.action
         

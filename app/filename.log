@@ -199,3 +199,1000 @@ self.action["vince"] = "gijsen"
 INFO:tornado.access:200 GET /1/getAction.json?key=11&fasdfasdfas=121&context={%22choice%22:%22test%22} (::1) 7.50ms
 INFO:tornado.access:304 GET /index.html (::1) 3.70ms
 WARNING:tornado.access:404 GET /staticcss/main.css (::1) 2.02ms
+INFO:tornado.access:200 GET /management.html (::1) 1.88ms
+INFO:tornado.access:200 GET /admin/exp/list.json (::1) 3.57ms
+INFO:tornado.access:200 GET /admin/exp/defaults.json (::1) 0.70ms
+INFO:tornado.access:200 GET /admin/exp/default/4/get.json (::1) 1.94ms
+INFO:tornado.access:200 GET /admin/exp/default/1/get.json (::1) 2.38ms
+INFO:tornado.access:200 GET /admin/exp/default/2/get.json (::1) 1.87ms
+INFO:tornado.access:200 GET /admin/exp/list.json (::1) 2.10ms
+INFO:tornado.access:200 GET /management.html (::1) 2.24ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 8.19ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.71ms
+INFO:tornado.access:304 GET /static/css/main.css (::1) 0.62ms
+INFO:tornado.access:304 GET /static/js/codemirror-compressed.js (::1) 1.10ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.75ms
+INFO:tornado.access:304 GET /static/css/codemirror.css (::1) 0.58ms
+INFO:tornado.access:304 GET /static/js/admin.js (::1) 0.93ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.61ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.69ms
+INFO:tornado.access:200 GET /admin/exp/list.json (::1) 2.70ms
+INFO:tornado.access:200 GET /admin/exp/defaults.json (::1) 0.52ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/core/experiment.py modified; restarting server
+INFO:tornado.access:304 GET /admin/exp/default/2/get.json (::1) 1.18ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/core/experiment.py modified; restarting server
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/corehandlers.py modified; restarting server
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/corehandlers.py modified; restarting server
+INFO:tornado.access:200 GET /management.html (::1) 1.74ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 7.85ms
+INFO:tornado.access:304 GET /static/js/codemirror-compressed.js (::1) 0.89ms
+INFO:tornado.access:304 GET /static/css/main.css (::1) 0.57ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.59ms
+INFO:tornado.access:304 GET /static/css/codemirror.css (::1) 0.68ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 1.16ms
+INFO:tornado.access:304 GET /static/js/admin.js (::1) 0.66ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.67ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.52ms
+INFO:tornado.access:304 GET /admin/exp/list.json (::1) 2.87ms
+INFO:tornado.access:200 GET /admin/exp/defaults.json (::1) 0.56ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/corehandlers.py modified; restarting server
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/corehandlers.py modified; restarting server
+INFO:tornado.access:200 POST /admin/exp/add.json (::1) 3.56ms
+INFO:tornado.access:200 GET /management.html (::1) 1.38ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 7.09ms
+INFO:tornado.access:304 GET /static/css/main.css (::1) 0.67ms
+INFO:tornado.access:304 GET /static/css/codemirror.css (::1) 0.63ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.51ms
+INFO:tornado.access:304 GET /static/js/codemirror-compressed.js (::1) 1.01ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.54ms
+INFO:tornado.access:304 GET /static/js/admin.js (::1) 0.70ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.90ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.47ms
+INFO:tornado.access:200 GET /admin/exp/list.json (::1) 2.61ms
+INFO:tornado.access:304 GET /admin/exp/defaults.json (::1) 0.52ms
+INFO:tornado.access:200 GET /admin/exp/1/get.json (::1) 2.91ms
+INFO:tornado.access:200 GET /1/getAction.json?key=13 (::1) 5.60ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/corehandlers.py modified; restarting server
+ERROR:tornado.application:Uncaught exception GET /1/getAction.json?key=13 (::1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='GET', uri='/1/getAction.json?key=13', version='HTTP/1.1', remote_ip='::1', headers={'Connection': 'keep-alive', 'Accept-Language': 'en-us', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Referer': 'http://localhost:8080/management.html', 'Cache-Control': 'max-age=0', 'Host': 'localhost:8080', 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/600.7.12 (KHTML, like Gecko) Version/8.0.7 Safari/600.7.12', 'Accept-Encoding': 'gzip, deflate'})
+Traceback (most recent call last):
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 1346, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/corehandlers.py", line 30, in get
+    self.write(self.settings.debug)
+AttributeError: 'dict' object has no attribute 'debug'
+ERROR:tornado.access:500 GET /1/getAction.json?key=13 (::1) 6.73ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/corehandlers.py modified; restarting server
+ERROR:tornado.application:Uncaught exception GET /1/getAction.json?key=13 (::1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='GET', uri='/1/getAction.json?key=13', version='HTTP/1.1', remote_ip='::1', headers={'Referer': 'http://localhost:8080/management.html', 'Connection': 'keep-alive', 'Accept-Encoding': 'gzip, deflate', 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/600.7.12 (KHTML, like Gecko) Version/8.0.7 Safari/600.7.12', 'Host': 'localhost:8080', 'Accept-Language': 'en-us', 'Cache-Control': 'max-age=0', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'})
+Traceback (most recent call last):
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 1346, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/corehandlers.py", line 30, in get
+    self.write(self.settings["debug"])
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 655, in write
+    raise TypeError("write() only accepts bytes, unicode, and dict objects")
+TypeError: write() only accepts bytes, unicode, and dict objects
+ERROR:tornado.access:500 GET /1/getAction.json?key=13 (::1) 7.20ms
+ERROR:tornado.application:Uncaught exception GET /1/getAction.json?key=13 (::1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='GET', uri='/1/getAction.json?key=13', version='HTTP/1.1', remote_ip='::1', headers={'Referer': 'http://localhost:8080/management.html', 'Connection': 'keep-alive', 'Accept-Encoding': 'gzip, deflate', 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/600.7.12 (KHTML, like Gecko) Version/8.0.7 Safari/600.7.12', 'Host': 'localhost:8080', 'Accept-Language': 'en-us', 'Cache-Control': 'max-age=0', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'})
+Traceback (most recent call last):
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 1346, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/corehandlers.py", line 30, in get
+    self.write(self.settings["debug"])
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 655, in write
+    raise TypeError("write() only accepts bytes, unicode, and dict objects")
+TypeError: write() only accepts bytes, unicode, and dict objects
+ERROR:tornado.access:500 GET /1/getAction.json?key=13 (::1) 6.16ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/corehandlers.py modified; restarting server
+INFO:tornado.access:200 GET /1/getAction.json?key=13 (::1) 5.60ms
+INFO:tornado.access:200 GET /admin/exp/default/2/get.json (::1) 0.88ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/corehandlers.py modified; restarting server
+ERROR:tornado.application:Uncaught exception GET /1/getAction.json?key=13 (::1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='GET', uri='/1/getAction.json?key=13', version='HTTP/1.1', remote_ip='::1', headers={'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Encoding': 'gzip, deflate', 'Host': 'localhost:8080', 'Accept-Language': 'en-us', 'Referer': 'http://localhost:8080/management.html', 'Connection': 'keep-alive', 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/600.7.12 (KHTML, like Gecko) Version/8.0.7 Safari/600.7.12', 'Cache-Control': 'max-age=0'})
+Traceback (most recent call last):
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 1346, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/corehandlers.py", line 30, in get
+    self.write(self.settings['debug'])
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 655, in write
+    raise TypeError("write() only accepts bytes, unicode, and dict objects")
+TypeError: write() only accepts bytes, unicode, and dict objects
+ERROR:tornado.access:500 GET /1/getAction.json?key=13 (::1) 6.77ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/corehandlers.py modified; restarting server
+INFO:tornado.access:200 GET /1/getAction.json?key=13 (::1) 6.01ms
+INFO:tornado.access:200 GET /1/getAction.json?key=13 (::1) 5.89ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/corehandlers.py modified; restarting server
+INFO:tornado.access:200 GET /1/getAction.json?key=13 (::1) 6.42ms
+INFO:tornado.access:200 GET /1/getAction.json?key=13& (::1) 4.26ms
+INFO:tornado.access:200 GET /1/getAction.json?key=13&context={%22test%22:%2212%22,%22country%22:%22NL%22} (::1) 5.97ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/app.py modified; restarting server
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/adminhandlers.py modified; restarting server
+INFO:tornado.access:200 GET /1/getAction.json?key=13&context={%22test%22:%2212%22,%22country%22:%22NL%22} (::1) 5.66ms
+INFO:tornado.access:200 GET /management.html (::1) 2.32ms
+INFO:tornado.access:200 GET /admin/exp/list.json (::1) 2.74ms
+INFO:tornado.access:200 GET /admin/exp/defaults.json (::1) 0.62ms
+ERROR:tornado.application:Uncaught exception POST /admin/exp/add.json (::1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='POST', uri='/admin/exp/add.json', version='HTTP/1.1', remote_ip='::1', headers={'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8', 'Referer': 'http://localhost:8080/management.html', 'Connection': 'keep-alive', 'Origin': 'http://localhost:8080', 'Accept-Encoding': 'gzip, deflate', 'X-Requested-With': 'XMLHttpRequest', 'Accept-Language': 'en-us', 'Accept': '*/*', 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/600.7.12 (KHTML, like Gecko) Version/8.0.7 Safari/600.7.12', 'Host': 'localhost:8080', 'Content-Length': '34'})
+Traceback (most recent call last):
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 1346, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/adminhandlers.py", line 37, in post
+    m = hashlib.md5(time.time())
+TypeError: object supporting the buffer API required
+ERROR:tornado.access:500 POST /admin/exp/add.json (::1) 2.07ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/adminhandlers.py modified; restarting server
+INFO:tornado.access:200 GET /management.html (::1) 2.00ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 6.89ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.58ms
+INFO:tornado.access:304 GET /static/css/main.css (::1) 0.54ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.51ms
+INFO:tornado.access:304 GET /static/js/codemirror-compressed.js (::1) 1.00ms
+INFO:tornado.access:304 GET /static/css/codemirror.css (::1) 0.46ms
+INFO:tornado.access:304 GET /static/js/admin.js (::1) 0.50ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.54ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.43ms
+INFO:tornado.access:200 GET /admin/exp/list.json (::1) 3.00ms
+INFO:tornado.access:200 GET /admin/exp/defaults.json (::1) 0.60ms
+ERROR:tornado.application:Uncaught exception POST /admin/exp/add.json (::1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='POST', uri='/admin/exp/add.json', version='HTTP/1.1', remote_ip='::1', headers={'Referer': 'http://localhost:8080/management.html', 'Host': 'localhost:8080', 'X-Requested-With': 'XMLHttpRequest', 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8', 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/600.7.12 (KHTML, like Gecko) Version/8.0.7 Safari/600.7.12', 'Connection': 'keep-alive', 'Accept-Language': 'en-us', 'Accept-Encoding': 'gzip, deflate', 'Content-Length': '30', 'Accept': '*/*', 'Origin': 'http://localhost:8080'})
+Traceback (most recent call last):
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 1346, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/adminhandlers.py", line 37, in post
+    m = hashlib.md5(str(time.time()))
+TypeError: Unicode-objects must be encoded before hashing
+ERROR:tornado.access:500 POST /admin/exp/add.json (::1) 1.80ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/adminhandlers.py modified; restarting server
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/adminhandlers.py modified; restarting server
+INFO:tornado.access:200 POST /admin/exp/add.json (::1) 3.64ms
+INFO:tornado.access:200 GET /management.html (::1) 1.56ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 7.35ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.61ms
+INFO:tornado.access:304 GET /static/css/codemirror.css (::1) 0.52ms
+INFO:tornado.access:304 GET /static/js/codemirror-compressed.js (::1) 0.72ms
+INFO:tornado.access:304 GET /static/css/main.css (::1) 0.62ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.62ms
+INFO:tornado.access:304 GET /static/js/admin.js (::1) 0.48ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.57ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.45ms
+INFO:tornado.access:200 GET /admin/exp/list.json (::1) 2.89ms
+INFO:tornado.access:200 GET /admin/exp/defaults.json (::1) 0.60ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/adminhandlers.py modified; restarting server
+INFO:tornado.access:200 POST /admin/exp/add.json (::1) 3.21ms
+INFO:tornado.access:200 GET /management.html (::1) 1.52ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 7.18ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.61ms
+INFO:tornado.access:304 GET /static/css/codemirror.css (::1) 0.53ms
+INFO:tornado.access:304 GET /static/js/codemirror-compressed.js (::1) 0.75ms
+INFO:tornado.access:304 GET /static/css/main.css (::1) 0.52ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.48ms
+INFO:tornado.access:304 GET /static/js/admin.js (::1) 0.44ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.49ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.43ms
+INFO:tornado.access:200 GET /admin/exp/list.json (::1) 3.01ms
+INFO:tornado.access:200 GET /admin/exp/defaults.json (::1) 0.66ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/adminhandlers.py modified; restarting server
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/adminhandlers.py modified; restarting server
+INFO:tornado.access:200 GET /management.html (::1) 2.06ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 6.72ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.83ms
+INFO:tornado.access:304 GET /static/js/codemirror-compressed.js (::1) 1.25ms
+INFO:tornado.access:304 GET /static/css/main.css (::1) 0.61ms
+INFO:tornado.access:304 GET /static/css/codemirror.css (::1) 0.72ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.68ms
+INFO:tornado.access:200 GET /static/js/admin.js (::1) 0.77ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.66ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.57ms
+INFO:tornado.access:200 GET /admin/exp/list.json (::1) 3.34ms
+INFO:tornado.access:200 GET /admin/exp/defaults.json (::1) 0.70ms
+INFO:tornado.access:200 GET /admin/exp/1/delete.json (::1) 2.97ms
+INFO:tornado.access:200 GET /management.html (::1) 1.62ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 1.47ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.82ms
+INFO:tornado.access:304 GET /static/js/codemirror-compressed.js (::1) 0.87ms
+INFO:tornado.access:304 GET /static/css/main.css (::1) 0.46ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.48ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.48ms
+INFO:tornado.access:304 GET /static/css/codemirror.css (::1) 0.44ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.44ms
+INFO:tornado.access:304 GET /static/js/admin.js (::1) 0.44ms
+INFO:tornado.access:200 GET /admin/exp/list.json (::1) 2.98ms
+INFO:tornado.access:200 GET /admin/exp/defaults.json (::1) 0.80ms
+INFO:tornado.access:200 GET /admin/exp/2/delete.json (::1) 2.65ms
+INFO:tornado.access:200 GET /management.html (::1) 1.37ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 1.19ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.58ms
+INFO:tornado.access:304 GET /static/js/codemirror-compressed.js (::1) 0.89ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.57ms
+INFO:tornado.access:304 GET /static/css/codemirror.css (::1) 0.50ms
+INFO:tornado.access:304 GET /static/css/main.css (::1) 0.54ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.50ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.42ms
+INFO:tornado.access:304 GET /static/js/admin.js (::1) 0.47ms
+INFO:tornado.access:200 GET /admin/exp/list.json (::1) 2.70ms
+INFO:tornado.access:304 GET /admin/exp/defaults.json (::1) 0.61ms
+INFO:tornado.access:200 GET /admin/exp/3/delete.json (::1) 2.86ms
+INFO:tornado.access:200 GET /management.html (::1) 1.29ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 1.08ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.54ms
+INFO:tornado.access:304 GET /static/js/codemirror-compressed.js (::1) 0.76ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.58ms
+INFO:tornado.access:304 GET /static/css/codemirror.css (::1) 0.60ms
+INFO:tornado.access:304 GET /static/css/main.css (::1) 0.64ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.52ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.44ms
+INFO:tornado.access:304 GET /static/js/admin.js (::1) 0.53ms
+INFO:tornado.access:200 GET /admin/exp/list.json (::1) 2.60ms
+INFO:tornado.access:304 GET /admin/exp/defaults.json (::1) 0.53ms
+INFO:tornado.access:200 POST /admin/exp/add.json (::1) 3.15ms
+INFO:tornado.access:200 GET /management.html (::1) 1.48ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 1.14ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.62ms
+INFO:tornado.access:304 GET /static/js/codemirror-compressed.js (::1) 0.87ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.54ms
+INFO:tornado.access:304 GET /static/css/codemirror.css (::1) 0.53ms
+INFO:tornado.access:304 GET /static/css/main.css (::1) 0.54ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.52ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.44ms
+INFO:tornado.access:304 GET /static/js/admin.js (::1) 0.45ms
+INFO:tornado.access:200 GET /admin/exp/list.json (::1) 2.68ms
+INFO:tornado.access:304 GET /admin/exp/defaults.json (::1) 0.56ms
+INFO:tornado.access:200 POST /admin/exp/add.json (::1) 3.30ms
+INFO:tornado.access:200 GET /management.html (::1) 1.18ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 1.13ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.69ms
+INFO:tornado.access:304 GET /static/js/codemirror-compressed.js (::1) 0.83ms
+INFO:tornado.access:304 GET /static/css/codemirror.css (::1) 0.61ms
+INFO:tornado.access:304 GET /static/css/main.css (::1) 0.51ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.50ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.71ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.44ms
+INFO:tornado.access:304 GET /static/js/admin.js (::1) 0.48ms
+INFO:tornado.access:200 GET /admin/exp/list.json (::1) 2.91ms
+INFO:tornado.access:304 GET /admin/exp/defaults.json (::1) 0.59ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/core/experiment.py modified; restarting server
+INFO:tornado.access:200 GET /admin/exp/1/get.json (::1) 3.57ms
+INFO:tornado.access:200 GET /1/getAction.json?key=13 (::1) 5.65ms
+INFO:tornado.access:304 GET /1/getAction.json?key=13 (::1) 4.24ms
+INFO:tornado.access:304 GET /1/getAction.json?key=13 (::1) 4.14ms
+INFO:tornado.access:200 GET /1/getAction.json?key=2396290849326 (::1) 5.06ms
+INFO:tornado.access:200 GET /1/getAction.json?key=2396290849326&bla (::1) 4.88ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/adminhandlers.py modified; restarting server
+INFO:tornado.access:200 POST /admin/exp/add.json (::1) 3.66ms
+INFO:tornado.access:200 GET /management.html (::1) 1.73ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 7.07ms
+INFO:tornado.access:304 GET /static/js/codemirror-compressed.js (::1) 0.89ms
+INFO:tornado.access:304 GET /static/css/main.css (::1) 0.49ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.49ms
+INFO:tornado.access:304 GET /static/css/codemirror.css (::1) 0.52ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.49ms
+INFO:tornado.access:304 GET /static/js/admin.js (::1) 0.44ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.55ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.47ms
+INFO:tornado.access:200 GET /admin/exp/list.json (::1) 3.03ms
+INFO:tornado.access:200 GET /admin/exp/defaults.json (::1) 0.60ms
+INFO:tornado.access:200 GET /admin/exp/3/get.json (::1) 2.29ms
+INFO:tornado.access:200 GET /3/getAction.json?key=13 (::1) 5.93ms
+INFO:tornado.access:304 GET /3/getAction.json?key=13 (::1) 4.05ms
+INFO:tornado.access:304 GET /3/getAction.json?key=13 (::1) 4.86ms
+INFO:tornado.access:200 GET /3/getAction.json?key=0x3f797faf96e (::1) 4.82ms
+INFO:tornado.access:200 POST /admin/exp/add.json (::1) 3.36ms
+INFO:tornado.access:200 GET /management.html (::1) 1.30ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 0.94ms
+INFO:tornado.access:304 GET /static/css/main.css (::1) 0.57ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.81ms
+INFO:tornado.access:304 GET /static/css/codemirror.css (::1) 0.71ms
+INFO:tornado.access:304 GET /static/js/codemirror-compressed.js (::1) 0.94ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.61ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.52ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.55ms
+INFO:tornado.access:304 GET /static/js/admin.js (::1) 0.44ms
+INFO:tornado.access:200 GET /admin/exp/list.json (::1) 3.39ms
+INFO:tornado.access:200 GET /admin/exp/defaults.json (::1) 0.49ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/adminhandlers.py modified; restarting server
+INFO:tornado.access:200 POST /admin/exp/add.json (::1) 3.37ms
+INFO:tornado.access:200 GET /management.html (::1) 1.88ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 6.74ms
+INFO:tornado.access:304 GET /static/css/main.css (::1) 0.54ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.67ms
+INFO:tornado.access:304 GET /static/js/codemirror-compressed.js (::1) 0.90ms
+INFO:tornado.access:304 GET /static/css/codemirror.css (::1) 0.46ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.47ms
+INFO:tornado.access:304 GET /static/js/admin.js (::1) 0.43ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.50ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.41ms
+INFO:tornado.access:200 GET /admin/exp/list.json (::1) 3.50ms
+INFO:tornado.access:200 GET /admin/exp/defaults.json (::1) 0.81ms
+INFO:tornado.access:200 GET /management.html (::1) 1.32ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 1.21ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.89ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.70ms
+INFO:tornado.access:304 GET /static/css/main.css (::1) 0.80ms
+INFO:tornado.access:304 GET /static/css/codemirror.css (::1) 0.54ms
+INFO:tornado.access:304 GET /static/js/codemirror-compressed.js (::1) 0.99ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.82ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.83ms
+INFO:tornado.access:200 GET /static/js/admin.js (::1) 0.92ms
+INFO:tornado.access:304 GET /admin/exp/list.json (::1) 3.55ms
+INFO:tornado.access:200 GET /admin/exp/defaults.json (::1) 0.67ms
+INFO:tornado.access:200 GET /admin/exp/5/get.json (::1) 2.55ms
+INFO:tornado.access:200 GET /5/getAction.json?key=3e0ab34639 (::1) 5.62ms
+INFO:tornado.access:200 GET /5/setReward.json?key=3e0ab34639&reward=1&action=%7B%22choice%22%3A1%7D (::1) 6.91ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/adminhandlers.py modified; restarting server
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py modified; restarting server
+ERROR:tornado.application:Uncaught exception GET /management.html (::1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='GET', uri='/management.html', version='HTTP/1.1', remote_ip='::1', headers={'Accept-Language': 'en-us', 'Host': 'localhost:8080', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Connection': 'keep-alive', 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/600.7.12 (KHTML, like Gecko) Version/8.0.7 Safari/600.7.12', 'Referer': 'http://localhost:8080/management.html', 'Accept-Encoding': 'gzip, deflate', 'Cache-Control': 'max-age=0'})
+Traceback (most recent call last):
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 1346, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py", line 19, in get
+    if not self.current_user:
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 1028, in current_user
+    self._current_user = self.get_current_user()
+  File "/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py", line 9, in get_current_user
+    return self.get_secure_cookie("user")
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 608, in get_secure_cookie
+    self.require_setting("cookie_secret", "secure cookies")
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 1245, in require_setting
+    "application to use %s" % (name, feature))
+Exception: You must define the 'cookie_secret' setting in your application to use secure cookies
+ERROR:tornado.access:500 GET /management.html (::1) 2.12ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/app.py modified; restarting server
+INFO:tornado.access:200 GET /management.html (::1) 0.86ms
+INFO:tornado.access:200 GET /1/getAction.json?key=13&context={%22test%22:%2212%22,%22country%22:%22NL%22} (::1) 6.67ms
+INFO:tornado.access:200 GET /5/getAction.json?key=3e0ab34639 (::1) 6.02ms
+INFO:tornado.access:200 GET /5/getAction.json?key=3e0ab34639 (::1) 6.15ms
+INFO:tornado.access:200 GET /5/getAction.json?key=3e0ab34639 (::1) 6.27ms
+INFO:tornado.access:200 GET /5/getAction.json?key=3e0ab34639 (::1) 5.87ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/app.py modified; restarting server
+INFO:tornado.access:302 GET /management.html (::1) 0.74ms
+INFO:tornado.access:200 GET /login.html (::1) 0.32ms
+WARNING:tornado.access:404 POST /login (::1) 1.44ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py modified; restarting server
+WARNING:tornado.access:404 POST /login (::1) 1.32ms
+INFO:tornado.access:200 GET /login.html (::1) 0.50ms
+INFO:tornado.access:302 POST /login.html (::1) 1.04ms
+INFO:tornado.access:200 GET /management.html (::1) 0.44ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py modified; restarting server
+INFO:tornado.access:302 GET /management.html (::1) 0.92ms
+INFO:tornado.access:302 GET /management.html (::1) 0.45ms
+INFO:tornado.access:302 GET /management.html (::1) 0.39ms
+INFO:tornado.access:302 GET /management.html (::1) 0.39ms
+INFO:tornado.access:302 GET /management.html (::1) 0.40ms
+INFO:tornado.access:302 GET /management.html (::1) 0.37ms
+INFO:tornado.access:302 GET /management.html (::1) 0.36ms
+INFO:tornado.access:302 GET /management.html (::1) 0.35ms
+INFO:tornado.access:302 GET /management.html (::1) 0.36ms
+INFO:tornado.access:302 GET /management.html (::1) 0.36ms
+INFO:tornado.access:302 GET /management.html (::1) 0.35ms
+INFO:tornado.access:302 GET /management.html (::1) 0.32ms
+INFO:tornado.access:302 GET /management.html (::1) 0.32ms
+INFO:tornado.access:302 GET /management.html (::1) 0.33ms
+INFO:tornado.access:302 GET /management.html (::1) 0.33ms
+INFO:tornado.access:302 GET /management.html (::1) 0.33ms
+INFO:tornado.access:302 GET /management.html (::1) 0.32ms
+INFO:tornado.access:302 GET /management.html (::1) 0.63ms
+INFO:tornado.access:302 GET /management.html (::1) 0.52ms
+INFO:tornado.access:302 GET /management.html (::1) 0.35ms
+INFO:tornado.access:302 GET /management.html (::1) 0.34ms
+INFO:tornado.access:302 GET /management.html (::1) 0.35ms
+INFO:tornado.access:302 GET /management.html (::1) 0.39ms
+INFO:tornado.access:302 GET /management.html (::1) 0.38ms
+INFO:tornado.access:302 GET /management.html (::1) 0.43ms
+INFO:tornado.access:302 GET /management.html (::1) 0.38ms
+INFO:tornado.access:302 GET /management.html (::1) 0.36ms
+INFO:tornado.access:302 GET /management.html (::1) 0.35ms
+INFO:tornado.access:302 GET /management.html (::1) 0.35ms
+INFO:tornado.access:302 GET /management.html (::1) 0.37ms
+INFO:tornado.access:302 GET /management.html (::1) 0.39ms
+INFO:tornado.access:302 GET /management.html (::1) 0.35ms
+INFO:tornado.access:302 GET /management.html (::1) 0.34ms
+INFO:tornado.access:302 GET /management.html (::1) 0.45ms
+INFO:tornado.access:302 GET /management.html (::1) 0.47ms
+INFO:tornado.access:302 GET /management.html (::1) 0.38ms
+INFO:tornado.access:302 GET /management.html (::1) 0.36ms
+INFO:tornado.access:302 GET /management.html (::1) 0.34ms
+INFO:tornado.access:302 GET /management.html (::1) 0.36ms
+INFO:tornado.access:302 GET /management.html (::1) 0.42ms
+INFO:tornado.access:302 GET /management.html (::1) 0.41ms
+INFO:tornado.access:302 GET /management.html (::1) 0.36ms
+INFO:tornado.access:302 GET /management.html (::1) 0.41ms
+INFO:tornado.access:302 GET /management.html (::1) 0.40ms
+INFO:tornado.access:302 GET /management.html (::1) 0.39ms
+INFO:tornado.access:302 GET /management.html (::1) 0.37ms
+INFO:tornado.access:302 GET /management.html (::1) 0.39ms
+INFO:tornado.access:302 GET /management.html (::1) 0.40ms
+INFO:tornado.access:302 GET /management.html (::1) 0.39ms
+INFO:tornado.access:302 GET /management.html (::1) 0.38ms
+INFO:tornado.access:302 GET /management.html (::1) 0.36ms
+INFO:tornado.access:302 GET /management.html (::1) 0.69ms
+INFO:tornado.access:302 GET /management.html (::1) 0.41ms
+INFO:tornado.access:302 GET /management.html (::1) 0.38ms
+INFO:tornado.access:302 GET /management.html (::1) 0.38ms
+INFO:tornado.access:302 GET /management.html (::1) 0.37ms
+INFO:tornado.access:302 GET /management.html (::1) 0.35ms
+INFO:tornado.access:302 GET /management.html (::1) 0.38ms
+INFO:tornado.access:302 GET /management.html (::1) 0.44ms
+INFO:tornado.access:302 GET /management.html (::1) 0.43ms
+INFO:tornado.access:302 GET /management.html (::1) 0.40ms
+INFO:tornado.access:302 GET /management.html (::1) 0.40ms
+INFO:tornado.access:302 GET /management.html (::1) 0.40ms
+INFO:tornado.access:302 GET /management.html (::1) 0.40ms
+INFO:tornado.access:302 GET /management.html (::1) 0.42ms
+INFO:tornado.access:302 GET /management.html (::1) 0.41ms
+INFO:tornado.access:302 GET /management.html (::1) 0.40ms
+INFO:tornado.access:302 GET /management.html (::1) 0.40ms
+INFO:tornado.access:302 GET /management.html (::1) 0.48ms
+INFO:tornado.access:302 GET /management.html (::1) 0.44ms
+INFO:tornado.access:302 GET /management.html (::1) 0.40ms
+INFO:tornado.access:302 GET /management.html (::1) 0.71ms
+INFO:tornado.access:302 GET /management.html (::1) 0.47ms
+INFO:tornado.access:302 GET /management.html (::1) 0.37ms
+INFO:tornado.access:302 GET /management.html (::1) 0.45ms
+INFO:tornado.access:302 GET /management.html (::1) 0.41ms
+INFO:tornado.access:302 GET /management.html (::1) 0.58ms
+INFO:tornado.access:302 GET /management.html (::1) 0.38ms
+INFO:tornado.access:302 GET /management.html (::1) 0.43ms
+INFO:tornado.access:302 GET /management.html (::1) 0.38ms
+INFO:tornado.access:302 GET /management.html (::1) 0.37ms
+INFO:tornado.access:302 GET /management.html (::1) 0.54ms
+INFO:tornado.access:302 GET /management.html (::1) 0.37ms
+INFO:tornado.access:302 GET /management.html (::1) 0.42ms
+INFO:tornado.access:302 GET /management.html (::1) 0.37ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py modified; restarting server
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py modified; restarting server
+INFO:tornado.access:200 GET /management.html (::1) 2.25ms
+INFO:tornado.access:200 GET /static/js/admin.js (::1) 5.24ms
+INFO:tornado.access:200 GET /admin/exp/list.json (::1) 4.76ms
+INFO:tornado.access:200 GET /admin/exp/defaults.json (::1) 0.47ms
+INFO:tornado.access:302 GET /management.html (::1) 0.48ms
+INFO:tornado.access:200 GET /login.html (::1) 0.39ms
+INFO:tornado.access:302 POST /login.html (::1) 1.47ms
+WARNING:tornado.access:404 GET /favicon.ico (::1) 2.04ms
+INFO:tornado.access:200 GET /management.html (::1) 1.21ms
+INFO:tornado.access:200 GET /static/css/bootstrap.min.css (::1) 2.71ms
+INFO:tornado.access:200 GET /static/css/main.css (::1) 0.71ms
+INFO:tornado.access:200 GET /static/js/codemirror-compressed.js (::1) 1.30ms
+INFO:tornado.access:200 GET /static/css/codemirror.css (::1) 0.59ms
+INFO:tornado.access:200 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.55ms
+INFO:tornado.access:200 GET /static/js/main.js (::1) 0.50ms
+INFO:tornado.access:200 GET /static/js/admin.js (::1) 0.49ms
+INFO:tornado.access:200 GET /static/css/bootstrap-theme.min.css (::1) 0.55ms
+INFO:tornado.access:200 GET /static/js/vendor/bootstrap.min.js (::1) 0.58ms
+INFO:tornado.access:200 GET /admin/exp/list.json (::1) 3.38ms
+INFO:tornado.access:200 GET /admin/exp/defaults.json (::1) 0.41ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py modified; restarting server
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py modified; restarting server
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py modified; restarting server
+INFO:tornado.access:304 GET /management.html (::1) 1.95ms
+INFO:tornado.access:200 GET /admin/exp/list.json (::1) 3.85ms
+INFO:tornado.access:200 GET /admin/exp/defaults.json (::1) 0.48ms
+INFO:tornado.access:304 GET /management.html (::1) 1.26ms
+INFO:tornado.access:200 GET /admin/exp/list.json (::1) 3.70ms
+INFO:tornado.access:200 GET /admin/exp/defaults.json (::1) 0.47ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py modified; restarting server
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py modified; restarting server
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/adminhandlers.py modified; restarting server
+INFO:tornado.access:304 GET / (::1) 1.94ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.10ms
+INFO:tornado.access:304 GET / (::1) 1.13ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.32ms
+INFO:tornado.access:200 GET /admin/exp/defaults.json (::1) 0.56ms
+INFO:tornado.access:304 GET /admin/exp/defaults.json (::1) 0.50ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/adminhandlers.py modified; restarting server
+INFO:tornado.access:200 GET /management.html (::1) 2.27ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 7.08ms
+INFO:tornado.access:304 GET /static/css/main.css (::1) 0.72ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.59ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.57ms
+INFO:tornado.access:304 GET /static/css/codemirror.css (::1) 0.52ms
+INFO:tornado.access:304 GET /static/js/codemirror-compressed.js (::1) 0.82ms
+INFO:tornado.access:304 GET /static/js/admin.js (::1) 0.65ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.71ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.64ms
+INFO:tornado.access:200 GET /admin/exp/list.json (::1) 3.74ms
+INFO:tornado.access:200 GET /admin/exp/defaults.json (::1) 0.58ms
+INFO:tornado.access:200 GET /admin/exp/defaults.json (::1) 1.00ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/adminhandlers.py modified; restarting server
+INFO:tornado.access:200 GET /login.html (::1) 1.53ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.60ms
+INFO:tornado.access:304 GET /login.html (::1) 1.28ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.70ms
+INFO:tornado.access:200 GET /login.html (::1) 1.63ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 6.86ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.57ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.20ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.62ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.69ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.49ms
+INFO:tornado.access:304 GET /login.html (::1) 1.17ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.23ms
+INFO:tornado.access:304 GET /login.html (::1) 1.21ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.71ms
+INFO:tornado.access:304 GET /login.html (::1) 1.20ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.50ms
+INFO:tornado.access:304 GET /login.html (::1) 1.44ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.40ms
+WARNING:tornado.access:404 GET /login (::1) 0.76ms
+INFO:tornado.access:304 GET /login.html (::1) 1.27ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.61ms
+INFO:tornado.access:304 GET /login.html (::1) 1.39ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.47ms
+INFO:tornado.access:304 GET /login.html (::1) 1.17ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.69ms
+INFO:tornado.access:304 GET /login.html (::1) 1.21ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.41ms
+WARNING:tornado.access:404 GET /l (::1) 0.47ms
+INFO:tornado.access:304 GET / (::1) 1.48ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 0.96ms
+INFO:tornado.access:200 GET /login.html (::1) 1.59ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 1.60ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.69ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.47ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.53ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 0.87ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.48ms
+INFO:tornado.access:200 POST /login.html (::1) 1.48ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.23ms
+INFO:tornado.access:200 POST /login.html (::1) 1.46ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.21ms
+INFO:tornado.access:200 GET /admin/exp/defaults.json (::1) 0.98ms
+INFO:tornado.access:200 POST /login.html (::1) 1.63ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 2.18ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.71ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.67ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.69ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.57ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 0.99ms
+INFO:tornado.access:200 POST /login.html (::1) 1.45ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.19ms
+INFO:tornado.access:304 GET /admin/exp/defaults.json (::1) 0.58ms
+INFO:tornado.access:304 GET / (::1) 1.14ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.23ms
+INFO:tornado.access:304 GET /management.html (::1) 1.61ms
+INFO:tornado.access:200 GET /admin/exp/list.json (::1) 4.18ms
+INFO:tornado.access:304 GET /admin/exp/defaults.json (::1) 0.59ms
+INFO:tornado.access:200 GET /management.html (::1) 1.71ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 1.14ms
+INFO:tornado.access:304 GET /static/css/codemirror.css (::1) 0.66ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.56ms
+INFO:tornado.access:304 GET /static/js/codemirror-compressed.js (::1) 0.89ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.63ms
+INFO:tornado.access:304 GET /static/css/main.css (::1) 0.63ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.52ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.55ms
+INFO:tornado.access:304 GET /static/js/admin.js (::1) 0.57ms
+INFO:tornado.access:304 GET /admin/exp/list.json (::1) 3.60ms
+INFO:tornado.access:304 GET /admin/exp/defaults.json (::1) 0.49ms
+INFO:tornado.access:200 POST /login.html (::1) 1.61ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 0.99ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.62ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.52ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.63ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.52ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.03ms
+INFO:tornado.access:200 POST /login.html (::1) 1.46ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.37ms
+INFO:tornado.access:200 POST /login.html (::1) 1.26ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.66ms
+INFO:tornado.access:200 POST /login.html (::1) 1.33ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.17ms
+INFO:tornado.access:304 GET /index.html (::1) 2.07ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.99ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 1.10ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.54ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.92ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.95ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.74ms
+WARNING:tornado.access:404 GET /favicon.ico (::1) 1.74ms
+INFO:tornado.access:200 GET /management.html (::1) 1.44ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.89ms
+INFO:tornado.access:304 GET /management.html (::1) 1.19ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.02ms
+INFO:tornado.access:200 POST /login.html (::1) 2.16ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.57ms
+INFO:tornado.access:304 GET /management.html (::1) 1.30ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.09ms
+INFO:tornado.access:304 GET /management.html (::1) 1.40ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.04ms
+INFO:tornado.access:200 GET /management.html (::1) 1.82ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 1.48ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.85ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.69ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.54ms
+INFO:tornado.access:304 GET /static/css/main.css (::1) 0.53ms
+INFO:tornado.access:304 GET /static/js/codemirror-compressed.js (::1) 0.83ms
+INFO:tornado.access:304 GET /static/css/codemirror.css (::1) 0.69ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.87ms
+INFO:tornado.access:304 GET /static/js/admin.js (::1) 0.46ms
+INFO:tornado.access:304 GET /admin/exp/list.json (::1) 3.52ms
+INFO:tornado.access:304 GET /admin/exp/defaults.json (::1) 0.56ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py modified; restarting server
+INFO:tornado.access:304 GET /management.html (::1) 2.05ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 4.61ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 0.79ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.55ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.48ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.78ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.77ms
+INFO:tornado.access:200 POST /login.html (::1) 1.62ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.56ms
+INFO:tornado.access:200 POST /login.html (::1) 1.40ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.05ms
+INFO:tornado.access:200 POST /login.html (::1) 1.49ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.09ms
+INFO:tornado.access:304 GET /management.html (::1) 1.34ms
+INFO:tornado.access:200 GET /admin/exp/list.json (::1) 3.85ms
+INFO:tornado.access:200 GET /admin/exp/defaults.json (::1) 0.51ms
+INFO:tornado.access:200 POST /login.html (::1) 1.38ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.26ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py modified; restarting server
+INFO:tornado.access:200 POST /login.html (::1) 2.32ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.39ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py modified; restarting server
+INFO:tornado.access:200 POST /login.html (::1) 2.14ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 4.77ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.48ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.64ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.49ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.59ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.43ms
+INFO:tornado.access:200 POST /login.html (::1) 1.46ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.08ms
+INFO:tornado.access:200 POST /login.html (::1) 1.44ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.07ms
+INFO:tornado.access:302 POST /login.html (::1) 1.12ms
+INFO:tornado.access:200 GET /management.html (::1) 1.63ms
+INFO:tornado.access:304 GET /static/css/main.css (::1) 0.98ms
+INFO:tornado.access:304 GET /static/css/codemirror.css (::1) 0.55ms
+INFO:tornado.access:304 GET /static/js/codemirror-compressed.js (::1) 1.23ms
+INFO:tornado.access:200 GET /static/js/admin.js (::1) 0.70ms
+INFO:tornado.access:200 GET /admin/exp/list.json (::1) 4.07ms
+INFO:tornado.access:200 GET /admin/exp/defaults.json (::1) 0.93ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py modified; restarting server
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py modified; restarting server
+INFO:tornado.access:200 GET /management.html (::1) 1.84ms
+INFO:tornado.access:304 GET /static/js/admin.js (::1) 5.07ms
+INFO:tornado.access:200 GET /admin/exp/list.json (::1) 4.34ms
+INFO:tornado.access:200 GET /admin/exp/defaults.json (::1) 0.77ms
+ERROR:tornado.application:Uncaught exception GET /logout.html (::1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='GET', uri='/logout.html', version='HTTP/1.1', remote_ip='::1', headers={'Accept-Encoding': 'gzip, deflate', 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/600.7.12 (KHTML, like Gecko) Version/8.0.7 Safari/600.7.12', 'Connection': 'keep-alive', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Host': 'localhost:8080', 'Cookie': 'user=2|1:0|10:1439373624|4:user|8:ZmFzZmRh|56a6b6304fc100593f7842b4d6be263299e24b25837c28e39eda164211ef1ec7', 'Accept-Language': 'en-us', 'Referer': 'http://localhost:8080/management.html'})
+Traceback (most recent call last):
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 1346, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py", line 48, in get
+    self.set_secure_cookie("user", None)
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 577, in set_secure_cookie
+    version=version),
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 594, in create_signed_value
+    name, value, version=version)
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 2894, in create_signed_value
+    value = base64.b64encode(utf8(value))
+  File "/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/base64.py", line 62, in b64encode
+    encoded = binascii.b2a_base64(s)[:-1]
+TypeError: 'NoneType' does not support the buffer interface
+ERROR:tornado.access:500 GET /logout.html (::1) 3.45ms
+INFO:tornado.access:304 GET / (::1) 1.32ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 2.07ms
+INFO:tornado.access:200 GET /management.html (::1) 1.31ms
+INFO:tornado.access:304 GET /admin/exp/list.json (::1) 3.67ms
+INFO:tornado.access:304 GET /admin/exp/defaults.json (::1) 0.50ms
+ERROR:tornado.application:Uncaught exception GET /logout.html (::1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='GET', uri='/logout.html', version='HTTP/1.1', remote_ip='::1', headers={'Accept-Encoding': 'gzip, deflate', 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/600.7.12 (KHTML, like Gecko) Version/8.0.7 Safari/600.7.12', 'Connection': 'keep-alive', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Cache-Control': 'max-age=0', 'Host': 'localhost:8080', 'Cookie': 'user=2|1:0|10:1439373624|4:user|8:ZmFzZmRh|56a6b6304fc100593f7842b4d6be263299e24b25837c28e39eda164211ef1ec7', 'Accept-Language': 'en-us', 'Referer': 'http://localhost:8080/management.html'})
+Traceback (most recent call last):
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 1346, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py", line 48, in get
+    self.set_secure_cookie("user", None)
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 577, in set_secure_cookie
+    version=version),
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 594, in create_signed_value
+    name, value, version=version)
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 2894, in create_signed_value
+    value = base64.b64encode(utf8(value))
+  File "/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/base64.py", line 62, in b64encode
+    encoded = binascii.b2a_base64(s)[:-1]
+TypeError: 'NoneType' does not support the buffer interface
+ERROR:tornado.access:500 GET /logout.html (::1) 2.35ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py modified; restarting server
+INFO:tornado.access:200 GET /logout.html (::1) 2.30ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 6.64ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.67ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.47ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.02ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.66ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.55ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py modified; restarting server
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py modified; restarting server
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py modified; restarting server
+INFO:tornado.access:200 GET /logout.html (::1) 2.44ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 5.92ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.04ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.75ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.50ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.64ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.54ms
+INFO:tornado.access:200 GET /management.html (::1) 1.28ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.17ms
+INFO:tornado.access:200 POST /login.html (::1) 1.17ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 0.96ms
+INFO:tornado.access:302 POST /login.html (::1) 0.77ms
+INFO:tornado.access:200 GET /management.html (::1) 1.34ms
+INFO:tornado.access:200 GET /admin/exp/list.json (::1) 5.42ms
+INFO:tornado.access:200 GET /admin/exp/defaults.json (::1) 0.66ms
+INFO:tornado.access:304 GET /logout.html (::1) 1.66ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.21ms
+INFO:tornado.access:200 GET /management.html (::1) 1.27ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.39ms
+INFO:tornado.access:200 GET /management.html (::1) 1.47ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 0.90ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.65ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.67ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.04ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.53ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.61ms
+INFO:tornado.access:200 POST /login.html (::1) 1.15ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 0.96ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py modified; restarting server
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py modified; restarting server
+INFO:tornado.access:302 POST /login.html (::1) 1.08ms
+INFO:tornado.access:200 GET /management.html (::1) 1.51ms
+INFO:tornado.access:200 GET /admin/exp/list.json (::1) 3.67ms
+INFO:tornado.access:200 GET /admin/exp/defaults.json (::1) 0.61ms
+INFO:tornado.access:200 GET /admin/exp/2/get.json (::1) 3.68ms
+INFO:tornado.access:200 GET /2/getAction.json?key=4019998969795 (::1) 4.64ms
+INFO:tornado.access:304 GET / (::1) 1.49ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.61ms
+WARNING:tornado.access:404 GET //admin/exp/list.json (::1) 0.52ms
+INFO:tornado.access:304 GET /admin/exp/list.json (::1) 3.54ms
+INFO:tornado.access:200 GET /admin/exp/list.json (::1) 4.51ms
+INFO:tornado.access:200 GET /2/getAction.json?key=4019998969795 (::1) 5.80ms
+INFO:tornado.access:304 GET /logout.html (::1) 1.36ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.13ms
+INFO:tornado.access:200 GET /2/getAction.json?key=4019998969795 (::1) 5.46ms
+INFO:tornado.access:200 GET /admin/exp/list.json (::1) 0.49ms
+INFO:tornado.access:200 GET /2/getAction.json?key=4019998969795 (::1) 6.39ms
+INFO:tornado.access:304 GET /logout.html (::1) 1.71ms
+INFO:tornado.access:304 GET /logout.html (::1) 1.62ms
+INFO:tornado.access:200 GET /logout.html (::1) 1.37ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.27ms
+INFO:tornado.access:304 GET /management.html (::1) 1.34ms
+INFO:tornado.access:200 GET /admin/exp/list.json (::1) 0.62ms
+INFO:tornado.access:200 GET /admin/exp/defaults.json (::1) 0.34ms
+INFO:tornado.access:304 GET /management.html (::1) 1.31ms
+INFO:tornado.access:200 GET /management.html (::1) 1.10ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.11ms
+INFO:tornado.access:304 GET /management.html (::1) 1.17ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.36ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py modified; restarting server
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py modified; restarting server
+INFO:tornado.access:200 POST /login.html (::1) 3.20ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 2.32ms
+INFO:tornado.access:302 POST /login.html (::1) 2.43ms
+INFO:tornado.access:200 GET /management.html (::1) 1.44ms
+INFO:tornado.access:200 GET /admin/exp/list.json (::1) 4.07ms
+INFO:tornado.access:200 GET /admin/exp/defaults.json (::1) 0.80ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py modified; restarting server
+INFO:tornado.access:304 GET /logout.html (::1) 2.31ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.22ms
+INFO:tornado.access:200 GET /management.html (::1) 1.41ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.19ms
+ERROR:tornado.application:Uncaught exception GET /management.html (::1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='GET', uri='/management.html', version='HTTP/1.1', remote_ip='::1', headers={'Cache-Control': 'max-age=0', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/600.7.12 (KHTML, like Gecko) Version/8.0.7 Safari/600.7.12', 'Accept-Encoding': 'gzip, deflate', 'Connection': 'keep-alive', 'If-None-Match': '"fc1708e87f424ee22895cb30548c41dcbdbae8c6"', 'Accept-Language': 'en-us', 'Host': 'localhost:8080'})
+Traceback (most recent call last):
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 1346, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py", line 24, in get
+    self.render("login.html")
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 664, in render
+    html = self.render_string(template_name, **kwargs)
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 768, in render_string
+    t = loader.load(template_name)
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/template.py", line 343, in load
+    self.templates[name] = self._create_template(name)
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/template.py", line 371, in _create_template
+    template = Template(f.read(), name=name, loader=self)
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/template.py", line 236, in __init__
+    self.file = _File(self, _parse(reader, self))
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/template.py", line 755, in _parse
+    raise ParseError("Missing end expression }} on line %d" % line)
+tornado.template.ParseError: Missing end expression }} on line 57
+ERROR:tornado.access:500 GET /management.html (::1) 3.18ms
+ERROR:tornado.application:Uncaught exception GET /management.html (::1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='GET', uri='/management.html', version='HTTP/1.1', remote_ip='::1', headers={'Cache-Control': 'max-age=0', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/600.7.12 (KHTML, like Gecko) Version/8.0.7 Safari/600.7.12', 'Accept-Encoding': 'gzip, deflate', 'Connection': 'keep-alive', 'If-None-Match': '"fc1708e87f424ee22895cb30548c41dcbdbae8c6"', 'Accept-Language': 'en-us', 'Host': 'localhost:8080'})
+Traceback (most recent call last):
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 1346, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py", line 24, in get
+    self.render("login.html")
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 664, in render
+    html = self.render_string(template_name, **kwargs)
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 771, in render_string
+    return t.generate(**namespace)
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/template.py", line 278, in generate
+    return execute()
+  File "login_html.generated.py", line 5, in _tt_execute
+    _tt_tmp = warning  # login.html:57
+NameError: name 'warning' is not defined
+ERROR:tornado.access:500 GET /management.html (::1) 3.35ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py modified; restarting server
+ERROR:tornado.application:Uncaught exception GET /management.html (::1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='GET', uri='/management.html', version='HTTP/1.1', remote_ip='::1', headers={'Accept-Encoding': 'gzip, deflate', 'Connection': 'keep-alive', 'Accept-Language': 'en-us', 'Host': 'localhost:8080', 'If-None-Match': '"fc1708e87f424ee22895cb30548c41dcbdbae8c6"', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Cache-Control': 'max-age=0', 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/600.7.12 (KHTML, like Gecko) Version/8.0.7 Safari/600.7.12'})
+Traceback (most recent call last):
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 1346, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py", line 24, in get
+    self.render("login.html")
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 664, in render
+    html = self.render_string(template_name, **kwargs)
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 771, in render_string
+    return t.generate(**namespace)
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/template.py", line 278, in generate
+    return execute()
+  File "login_html.generated.py", line 5, in _tt_execute
+    _tt_tmp = warning  # login.html:57
+NameError: name 'warning' is not defined
+ERROR:tornado.access:500 GET /management.html (::1) 3.82ms
+ERROR:tornado.application:Uncaught exception GET /management.html (::1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='GET', uri='/management.html', version='HTTP/1.1', remote_ip='::1', headers={'Accept-Encoding': 'gzip, deflate', 'Connection': 'keep-alive', 'Accept-Language': 'en-us', 'Host': 'localhost:8080', 'If-None-Match': '"fc1708e87f424ee22895cb30548c41dcbdbae8c6"', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Cache-Control': 'max-age=0', 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/600.7.12 (KHTML, like Gecko) Version/8.0.7 Safari/600.7.12'})
+Traceback (most recent call last):
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 1346, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py", line 24, in get
+    self.render("login.html")
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 664, in render
+    html = self.render_string(template_name, **kwargs)
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 771, in render_string
+    return t.generate(**namespace)
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/template.py", line 278, in generate
+    return execute()
+  File "login_html.generated.py", line 5, in _tt_execute
+    _tt_tmp = warning  # login.html:57
+NameError: name 'warning' is not defined
+ERROR:tornado.access:500 GET /management.html (::1) 3.38ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py modified; restarting server
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py modified; restarting server
+ERROR:tornado.application:Uncaught exception GET /management.html (::1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='GET', uri='/management.html', version='HTTP/1.1', remote_ip='::1', headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/600.7.12 (KHTML, like Gecko) Version/8.0.7 Safari/600.7.12', 'Accept-Encoding': 'gzip, deflate', 'Accept-Language': 'en-us', 'If-None-Match': '"fc1708e87f424ee22895cb30548c41dcbdbae8c6"', 'Host': 'localhost:8080', 'Connection': 'keep-alive', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Cache-Control': 'max-age=0'})
+Traceback (most recent call last):
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 1346, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py", line 24, in get
+    self.render("login.html")
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 664, in render
+    html = self.render_string(template_name, **kwargs)
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 771, in render_string
+    return t.generate(**namespace)
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/template.py", line 278, in generate
+    return execute()
+  File "login_html.generated.py", line 5, in _tt_execute
+    _tt_tmp = warning  # login.html:57
+NameError: name 'warning' is not defined
+ERROR:tornado.access:500 GET /management.html (::1) 3.73ms
+INFO:tornado.access:200 GET /management.html (::1) 1.56ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 6.27ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 0.96ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.62ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.61ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.49ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.63ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py modified; restarting server
+INFO:tornado.access:200 GET /management.html (::1) 1.87ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 5.65ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.58ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.05ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.63ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.49ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.76ms
+INFO:tornado.access:200 GET /management.html (::1) 1.42ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 1.22ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.84ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.68ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.08ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.79ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.66ms
+ERROR:tornado.application:Uncaught exception GET /management.html (::1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='GET', uri='/management.html', version='HTTP/1.1', remote_ip='::1', headers={'Accept-Language': 'en-us', 'Accept-Encoding': 'gzip, deflate', 'If-None-Match': '"fc1708e87f424ee22895cb30548c41dcbdbae8c6"', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Cache-Control': 'max-age=0', 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/600.7.12 (KHTML, like Gecko) Version/8.0.7 Safari/600.7.12', 'Host': 'localhost:8080', 'Connection': 'keep-alive'})
+Traceback (most recent call last):
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 1346, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py", line 24, in get
+    self.render("login.html")
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 664, in render
+    html = self.render_string(template_name, **kwargs)
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 771, in render_string
+    return t.generate(**namespace)
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/template.py", line 278, in generate
+    return execute()
+  File "login_html.generated.py", line 5, in _tt_execute
+    _tt_tmp = warning  # login.html:57
+NameError: name 'warning' is not defined
+ERROR:tornado.access:500 GET /management.html (::1) 2.63ms
+INFO:tornado.access:200 GET /management.html (::1) 1.67ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 1.12ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.76ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.50ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.50ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.13ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.64ms
+INFO:tornado.access:200 GET /management.html (::1) 1.59ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 1.04ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 1.18ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.79ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.61ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.03ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.64ms
+INFO:tornado.access:200 POST /login.html (::1) 2.94ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.08ms
+INFO:tornado.access:200 POST /login.html (::1) 3.63ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 1.17ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.68ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.51ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.52ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.49ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 0.99ms
+INFO:tornado.access:200 POST /login.html (::1) 3.37ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 0.89ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.09ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.65ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.54ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.58ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.53ms
+INFO:tornado.access:200 POST /login.html (::1) 2.63ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.15ms
+ERROR:tornado.application:Uncaught exception GET /login.html (::1)
+HTTPServerRequest(protocol='http', host='localhost:8080', method='GET', uri='/login.html', version='HTTP/1.1', remote_ip='::1', headers={'Accept-Language': 'en-us', 'Accept-Encoding': 'gzip, deflate', 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/600.7.12 (KHTML, like Gecko) Version/8.0.7 Safari/600.7.12', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Host': 'localhost:8080', 'Connection': 'keep-alive'})
+Traceback (most recent call last):
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 1346, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py", line 35, in get
+    self.render("login.html")
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 664, in render
+    html = self.render_string(template_name, **kwargs)
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/web.py", line 771, in render_string
+    return t.generate(**namespace)
+  File "/Users/mauritskate/anaconda/lib/python3.4/site-packages/tornado/template.py", line 278, in generate
+    return execute()
+  File "login_html.generated.py", line 5, in _tt_execute
+    _tt_tmp = warning  # login.html:57
+NameError: name 'warning' is not defined
+ERROR:tornado.access:500 GET /login.html (::1) 2.92ms
+INFO:tornado.general:/Users/mauritskate/Documents/work/_GIT/STREAMPY_PUBIC/streamingbandit/app/handlers/managementhandlers.py modified; restarting server
+INFO:tornado.access:200 GET /login.html (::1) 2.13ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 6.13ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.55ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.54ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.53ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.51ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.03ms
+INFO:tornado.access:200 POST /login.html (::1) 3.01ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.15ms
+INFO:tornado.access:200 POST /login.html (::1) 3.61ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 0.96ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.51ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 1.10ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.77ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.85ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.67ms
+INFO:tornado.access:200 POST /login.html (::1) 2.44ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 1.24ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.55ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.72ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 0.90ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.65ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.58ms
+INFO:tornado.access:200 POST /login.html (::1) 3.27ms
+INFO:tornado.access:304 GET /static/css/bootstrap.min.css (::1) 0.99ms
+INFO:tornado.access:304 GET /static/js/main.js (::1) 0.49ms
+WARNING:tornado.access:404 GET /staticcss/main.css (::1) 0.86ms
+INFO:tornado.access:304 GET /static/js/vendor/bootstrap.min.js (::1) 0.68ms
+INFO:tornado.access:304 GET /static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js (::1) 0.60ms
+INFO:tornado.access:304 GET /static/css/bootstrap-theme.min.css (::1) 0.53ms
+INFO:tornado.access:302 POST /login.html (::1) 2.71ms
+INFO:tornado.access:200 GET /management.html (::1) 1.31ms
+INFO:tornado.access:304 GET /static/js/admin.js (::1) 0.73ms
+INFO:tornado.access:200 GET /admin/exp/list.json (::1) 3.81ms
+INFO:tornado.access:200 GET /admin/exp/defaults.json (::1) 0.63ms
+INFO:tornado.access:200 GET /2/getAction.json?key=4019998969795 (::1) 5.42ms

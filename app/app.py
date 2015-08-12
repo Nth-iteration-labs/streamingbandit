@@ -31,10 +31,16 @@ urls = [
     
     # management interface front-end
     (r"(?i)/management.html", managementhandlers.IndexHandler),
+    (r"(?i)/login.html", managementhandlers.LogInHandler),
+    (r"(?i)/logout.html", managementhandlers.LogOutHandler),
 
     # action and reward handler (core)
     (r"(?i)/([0-9]+)/getaction.json", corehandlers.ActionHandler),
     (r"(?i)/([0-9]+)/setreward.json", corehandlers.RewardHandler),
+    
+    # getting /setting theta (core: but obscure)
+    (r"(?i)/([0-9]+)/gettheta.json", corehandlers.ActionHandler),
+    (r"(?i)/([0-9]+)/settheta.json", corehandlers.RewardHandler),
      
     # admin / management REST api (REST api for administration of experiments)
     (r"(?i)/admin/exp/add.json", adminhandlers.AddExperiment),
@@ -55,7 +61,8 @@ urls = [
 settings = dict({
     "template_path": os.path.join(os.path.dirname(__file__),"templates"),
     "static_path": os.path.join(os.path.dirname(__file__),"static"),
-    "debug": True
+    "debug": True,   # Should get from config?
+    "cookie_secret":"12"
 })
 
 application = tornado.web.Application(urls,**settings)

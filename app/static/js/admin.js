@@ -50,13 +50,14 @@ $( "#EditButton").click(function() {
 function editExperiment(id){
 
     CURR_ID = id  
+    // Load the current experiment
     $.getJSON(BASE_URL+"admin/exp/"+id+"/get.json", function( data ){
         $("#nameOfExperiment").val(data.name)
         getAdviceCode.setValue(data.getAction);  
         setRewardCode.setValue(data.setReward);
+        $("#TestGetAdvice").html('(<a href="'+API_URL+'/'+id+'/getAction.json?key='+data.key+'" target="_blank">try out</a>)')
+        $("#TestSetReward").html('(<a href="'+API_URL+'/'+id+'/setReward.json?key='+data.key+'&reward='+1+'&action='+encodeURIComponent(JSON.stringify({choice:1}))+'" target="_blank">try out</a>)')
     }); 
-    $("#TestGetAdvice").html('(<a href="'+API_URL+'/'+id+'/getAction.json?key='+13+'" target="_blank">try out</a>)')
-    $("#TestSetReward").html('(<a href="'+API_URL+'/'+id+'/setReward.json?key='+13+'&reward='+1+'&action='+encodeURIComponent(JSON.stringify({choice:1}))+'" target="_blank">try out</a>)')
     $("#CreateButton").html("Store as new")
     $('#EditButton').show();
 }
@@ -75,7 +76,7 @@ $(document).ready(function() {
     $.getJSON( BASE_URL+"admin/exp/list.json", function( data ) {
         console.log(data)
         $.each(data, function(key, val){
-            $('#ExperimentsList > tbody:last-child').append('<tr><th scope="row">'+key+'</th><th>'+val.name+'</th><th>(<a href="#" onclick="editExperiment('+key+')">edit</a>)</th><th>(<a href="#" onclick="deleteExperiment('+key+')">delete</a>)</th></tr>');
+            $('#ExperimentsList > tbody:last-child').append('<tr><th scope="row">'+key+'</th><th>'+val.name+'</th><th>'+val.key+'</th><th>(<a href="#" onclick="editExperiment('+key+')">edit</a>)</th><th>(<a href="#" onclick="deleteExperiment('+key+')">delete</a>)</th></tr>');
         });          
     })
     .fail(function() {
