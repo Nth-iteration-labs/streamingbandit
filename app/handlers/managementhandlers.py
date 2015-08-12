@@ -53,4 +53,5 @@ class LogOutHandler(BaseHandler):
     
     def get(self):
         self.clear_cookie("user")
-        self.render("index.html")
+        self.redirect("/", 302)
+        
