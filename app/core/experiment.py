@@ -3,7 +3,6 @@ from db.database import Database
 from db.advicelog import Advice
 from math import sqrt; from itertools import count, islice
 import logging
-logging.basicConfig(filename="filename.log", level=logging.DEBUG)
 
 class Experiment():
     

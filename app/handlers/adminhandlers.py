@@ -4,13 +4,21 @@ import tornado.ioloop
 import tornado.web
 import json
 import random
+
+import logging
+logger = logging.getLogger("myLogger") 
+
 from db.database import Database
 
 
 class AddExperiment(tornado.web.RequestHandler):
     
     def get(self):
-        self.write("404 ERROR")   # we really need nicer error handling
+        raise tornado.web.HTTPError(status_code=404, log_message="invalid call")
+    
+    def delete(self):
+        raise tornado.web.HTTPError(status_code=404, log_message="invalid call")
+    
     
     def post(self):
         """ Create a new experiment
