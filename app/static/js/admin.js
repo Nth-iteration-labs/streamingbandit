@@ -1,6 +1,6 @@
-BASE_URL = "../"
-API_URL = "http://localhost:8080"
-CURR_ID = 0
+BASE_URL = "../";
+API_URL = "http://localhost:8080";
+CURR_ID = 0;
 
 var getAdviceCode = CodeMirror.fromTextArea($("#getAdviceText").get(0),{
     lineNumbers: true,
@@ -33,7 +33,7 @@ $( "#EditButton").click(function() {
     code1 = getAdviceCode.getValue(); 
     code2 = setRewardCode.getValue();
 
-    if(CURR_ID != 0){
+    if(CURR_ID !== 0){
     $.post( BASE_URL+"admin/exp/"+CURR_ID+"/edit.json", { 
         name: name, 
         getaction: code1,
@@ -49,16 +49,16 @@ $( "#EditButton").click(function() {
 // Edit experiment
 function editExperiment(id){
 
-    CURR_ID = id  
+    CURR_ID = id ; 
     // Load the current experiment
     $.getJSON(BASE_URL+"admin/exp/"+id+"/get.json", function( data ){
-        $("#nameOfExperiment").val(data.name)
+        $("#nameOfExperiment").val(data.name);
         getAdviceCode.setValue(data.getAction);  
         setRewardCode.setValue(data.setReward);
-        $("#TestGetAdvice").html('(<a href="'+API_URL+'/'+id+'/getAction.json?key='+data.key+'" target="_blank">try out</a>)')
-        $("#TestSetReward").html('(<a href="'+API_URL+'/'+id+'/setReward.json?key='+data.key+'&reward='+1+'&action='+encodeURIComponent(JSON.stringify({choice:1}))+'" target="_blank">try out</a>)')
+        $("#TestGetAdvice").html('(<a href="'+API_URL+'/'+id+'/getAction.json?key='+data.key+'" target="_blank">try out</a>)');
+        $("#TestSetReward").html('(<a href="'+API_URL+'/'+id+'/setReward.json?key='+data.key+'&reward='+1+'&action='+encodeURIComponent(JSON.stringify({choice:1}))+'" target="_blank">try out</a>)');
     }); 
-    $("#CreateButton").html("Store as new")
+    $("#CreateButton").html("Store as new");
     $('#EditButton').show();
 }
 
@@ -74,7 +74,7 @@ $(document).ready(function() {
 
     // Get the JSON blob with all experiments:
     $.getJSON( BASE_URL+"admin/exp/list.json", function( data ) {
-        console.log(data)
+        console.log(data);
         $.each(data, function(key, val){
             $('#ExperimentsList > tbody:last-child').append('<tr><th scope="row">'+key+'</th><th>'+val.name+'</th><th>'+val.key+'</th><th>(<a href="#" onclick="editExperiment('+key+')">edit</a>)</th><th>(<a href="#" onclick="deleteExperiment('+key+')">delete</a>)</th></tr>');
         });          
@@ -84,11 +84,12 @@ $(document).ready(function() {
       });
 
     $.getJSON( BASE_URL+"admin/exp/defaults.json", function( data ){
-        console.log(data)
-        $.each(data["defaults"], function(key, val){
-            $( '#DefaultList' ).append( '<button type="button" onclick="loadDefault('+key+')" class="btn btn-lg btn-primary">'+val.name+'</button> \n' )
-        })
-    })
+        console.log(data);
+        $.each(data.defaults, function(key, val){
+            $( '#DefaultList' )
+            .append( '<button type="button" onclick="loadDefault('+key+')" class="btn btn-lg btn-primary">'+val.name+'</button> \n' );
+        });
+    });
 
 });
 
@@ -97,8 +98,8 @@ $(document).ready(function() {
 // Load default experiments
 function loadDefault(id){
     $.getJSON( BASE_URL+"admin/exp/default/"+id+"/get.json", function( data ) {
-        $("#nameOfExperiment").val(data.name)
+        $("#nameOfExperiment").val(data.name);
         getAdviceCode.setValue(data.getAction);  
         setRewardCode.setValue(data.setReward);
-    })
+    });
 }
