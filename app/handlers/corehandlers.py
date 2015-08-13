@@ -20,13 +20,17 @@ class ActionHandler(tornado.web.RequestHandler):
         A JSON object containing "action": XX
         Or an object containing "error": ...
         """
-        context = json.loads(self.get_argument("context", default="{}"))
         key = self.get_argument("key", default = False)
+        
+        if not key:
+            self.set_status(401)
+            self.write("invalid key")
+            return
         
         __EXP__ = Experiment(exp_id, key)
         
         if __EXP__.is_valid():
-            
+            context = json.loads(self.get_argument("context", default="{}"))    
             response = __EXP__.run_action_code(context)
             
             if self.settings['debug']:
@@ -35,7 +39,9 @@ class ActionHandler(tornado.web.RequestHandler):
                 self.write(json.dumps({'action':response}))
                 
         else:
-            self.write_error(400)       # Needs proper error handling
+            self.set_status(401)       # Needs proper error handling
+            self.write("invalid key")
+            return
 
 class RewardHandler(tornado.web.RequestHandler):
 
