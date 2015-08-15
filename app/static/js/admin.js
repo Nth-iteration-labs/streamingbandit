@@ -2,14 +2,8 @@ BASE_URL = "../";
 API_URL = "http://localhost:8080";
 CURR_ID = 0;
 
-var getAdviceCode = CodeMirror.fromTextArea($("#getAdviceText").get(0),{
-    lineNumbers: true,
-    mode:"python"});
-
-var setRewardCode = CodeMirror.fromTextArea($("#setRewardText").get(0),{
-    lineNumbers: true,
-    mode:"python"});
-
+var getAdviceCode ;
+var setRewardCode;
 // Post a new experiment to the server:
 $( "#CreateButton").click(function() {
     name = $("#nameOfExperiment").val(); 
@@ -90,6 +84,17 @@ $(document).ready(function() {
             .append( '<button type="button" onclick="loadDefault('+key+')" class="btn btn-lg btn-primary">'+val.name+'</button> \n' );
         });
     });
+
+
+    getAdviceCode = CodeMirror.fromTextArea($("#getAdviceText").get(0),{
+    lineNumbers: true,
+    mode:"python"});
+
+    setRewardCode = CodeMirror.fromTextArea($("#setRewardText").get(0),{
+    lineNumbers: true,
+    mode:"python"});
+    console.log(setRewardCode);
+
 
 });
 
