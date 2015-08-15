@@ -69,6 +69,19 @@ Then, either browse to:
 # To-do list
 (see issues).
 
+# Developing javascript 
+We use some build tools to manage javascript. In order to generate your own, please use these steps:
+
+install npm on your computer
+
+```
+npm install grunt 
+npm install bower
+
+```
+after which you can run the command: ```grunt``` when present in the root folder
+
+This wil download all javascript libraries and minify our own.
 
 
 _Happy Streaming_

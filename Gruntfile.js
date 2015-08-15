@@ -70,7 +70,18 @@ module.exports = function(grunt) {
 		src: [jsPath + 'main.js']
 	  }
 	},
+
+bower: {
+    install: {
+	options: {
+		verbose:true,
+		copy: false
+}
+    }
+  }
   });
+ grunt.loadNpmTasks('grunt-bower-task');
+
   grunt.loadNpmTasks('grunt-contrib-cssmin');
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -80,6 +91,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
   // Default task(s).
-  grunt.registerTask('default', ['jshint', 'concat', 'uglify', 'cssmin']);
+  grunt.registerTask('default', ['bower', 'jshint', 'concat', 'uglify', 'cssmin']);
 
 };

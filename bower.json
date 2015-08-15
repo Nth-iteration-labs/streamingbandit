@@ -20,6 +20,9 @@
     "jquery": "~2.1.4",
     "codemirror": "~5.5.0",
     "bootstrap": "~3.3.5",
-    "modernizr": "~2.8.3"
+    "modernizr": "~2.8.3",
+    "react": "~0.13.3",
+    "chartjs": "~1.0.2",
+    "react-chartjs": "~0.6.0"
   }
 }
