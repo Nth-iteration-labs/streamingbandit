@@ -1,0 +1,25 @@
+{
+  "name": "streamingbandit",
+  "version": "0.0.1",
+  "homepage": "https://github.com/MKaptein/streamingbandit",
+  "authors": [
+    "Vincent Gijsen <vtj.gijsen@gmail.com>"
+  ],
+  "description": "Python application to setup and run streaming (contextual) bandit experiments",
+  "main": "app.py",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "codemirror": "~5.5.0",
+    "bootstrap": "~3.3.5",
+    "modernizr": "~2.8.3"
+  }
+}

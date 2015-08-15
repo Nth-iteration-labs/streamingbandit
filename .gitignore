@@ -5,6 +5,11 @@
 #MAC
 .DS_STORE
 
+#Bower
+bower_components/*
+node_modules/*
+
+#python
 *.egg-info
 filename.info
 
