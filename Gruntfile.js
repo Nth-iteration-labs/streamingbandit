@@ -16,10 +16,11 @@ module.exports = function(grunt) {
   		},
   		dist: {
   			src: [
-	  			'bower_components/jquery/dist/jquery.js',
-	  			'bower_components/bootstrap/dist/bootstrap.js',
-	  			'bower_components/modernizr/modernizer.js',
-	  			'bower_components/codemirror/lib/codemirror.js',
+  			'bower_components/jquery/dist/jquery.js',
+  			'bower_components/bootstrap/dist/bootstrap.js',
+  			'bower_components/codemirror/lib/codemirror.js',
+  			'bower_components/codemirror/mode/python/python.js',
+  			'bower_components/modernizr/modernizer.js' , 
   			],
   			dest: destOut+ '/js/vendors.js',
   		},
@@ -32,33 +33,33 @@ module.exports = function(grunt) {
   			banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
   			sourceMap: true,
 		//exceptionsFiles: ['admin.js', ''],
-			mangle: {
-				except : ['']
-			}
-		},
-		my_target:{
-			files: [{
-				expand: true,
-				cwd: jsPath,
-				src: '**/*.js',
-				dest: destOut + '/js/'
-			}]
-		},      
+		mangle: {
+			except : ['admin.js']
+		}
 	},
-	cssmin: {
-		options: {
-			shorthandCompacting: false,
-			roundingPrecision: -1
-		},
-		target: {
-			files: {
-				'app/static/dest/css/streamingbandid.css' :
-				['app/static/css/main.css',
+	my_target:{
+		files: [{
+			expand: true,
+			cwd: jsPath,
+			src: '**/*.js',
+			dest: destOut + '/js/'
+		}]
+	},      
+},
+cssmin: {
+	options: {
+		shorthandCompacting: false,
+		roundingPrecision: -1
+	},
+	target: {
+		files: {
+			'app/static/dest/css/streamingbandid.css' :
+			[
 				'bower_components/bootstrap/dist/css/bootstrap.css',
 				'bower_components/bootstrap/dist/css/bootstrap-theme.css',
 				'bower_components/codemirror/lib/codemirror.css',
-				//'bower_components/codemirror/lib/codemirror.css',
-				]
+					//'bower_components/codemirror/lib/codemirror.css',
+			]
 			}
 		}
 	},
@@ -79,9 +80,19 @@ module.exports = function(grunt) {
 				copy: false
 			}
 		}
-	}
+	},
+	watch: {
+		scripts: {
+			files: ['**/*.js'],
+			tasks: ['jshint'],
+			options: {
+				spawn: false,
+				livereload:true
+			},
+		},
+	},
 });
-
+grunt.loadNpmTasks('grunt-contrib-watch');
 grunt.loadNpmTasks('grunt-bower-task');
 grunt.loadNpmTasks('grunt-contrib-cssmin');
 grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -91,5 +102,6 @@ grunt.loadNpmTasks('grunt-contrib-uglify');
 
 // Default task(s).
 grunt.registerTask('default', ['bower', 'jshint', 'concat', 'uglify', 'cssmin']);
+//grunt.registerTask('watch', ['bower', 'jshint,'] 
 
 };
