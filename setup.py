@@ -1,13 +1,13 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
-# Author: Maurits Kaptein, et al.
+# Author: Maurits Kaptein, Jules Kruijswijk.
 # contributor: Vincent Gijsen
 # 
 #
 
 from setuptools import setup
 
-setup(name='StreamingBandid',
+setup(name='StreamingBandit',
       	version='0.1',
       	description='Python application to setup and run streaming (contextual) bandit experiments.',
       	author='Maurits Kaptein',
@@ -18,7 +18,6 @@ setup(name='StreamingBandid',
 		'tornado',
 		'redis',
 		'PyYAML',
-		'pymongo',
-		'json'
+		'pymongo'
 	]	
      )
