@@ -1,6 +1,6 @@
 # streamingbandit
 
-Provides a webser to quickly setup and evaluate possible solutions to contextual multi-armed bandit problems. Allows user to create new "experiments", each with their own policy, and disclose an API to evaluate the policy in applications.
+Provides a webserver to quickly setup and evaluate possible solutions to contextual multi-armed bandit problems. Allows user to create new "experiments", each with their own policy, and disclose an API to evaluate the policy in applications.
 
 # Pre-requisites
 
