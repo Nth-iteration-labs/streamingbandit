@@ -4,14 +4,34 @@ from scipy.optimize import minimize_scalar
 
 
 def update(func, args):
+    """ An update mapping function. Useful for using functions such as count
+    and mean.
+    
+    :param function func: The function to be computed.
+    :param args args: The arguments needed for the function.
+    :returns * out: Anything that the used functions outputs will be returned.
+    """
     out = func(*args)
     return out
     
 def count(theta, r):
+    """ Simply counts number of experiments.
+
+    :param dict theta: Includes the previous count N.
+    :param int r: The int for the number of experiments to be added.
+    :returns dict theta: New theta including new count.
+    """
     theta['N'] = theta['N'] + r
     return theta
     
 def mean(theta, r):
+    """ Computes the new mean of theta using reward r.
+
+    :param dict theta: Includes the previous mean.
+    :param int r: Reward to use for new mean.
+
+    :returns dict theta: New theta including new mean.
+    """
     theta['M'] = (theta['M'] + r) / theta['N']
     return theta
     

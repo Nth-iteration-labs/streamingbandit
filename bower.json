@@ -8,7 +8,6 @@
   "description": "Python application to setup and run streaming (contextual) bandit experiments",
   "main": "app.py",
   "license": "MIT",
-  "private": true,
   "ignore": [
     "**/.*",
     "node_modules",
