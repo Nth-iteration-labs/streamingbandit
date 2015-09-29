@@ -1,6 +1,0 @@
-redis
-pyyaml
-pymongo
-tornado
-scipy
-numpy

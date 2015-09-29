@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # Imports of external stuff
 import tornado.escape
@@ -8,6 +9,9 @@ import json,os,yaml
 import logging
 import logging.handlers
 
+# import scheduling ingredients
+#from apscheduler.schedulers.tornado import TornadoScheduler
+from core.jobs import log_theta
 # import Streampy classes
 from handlers import corehandlers
 from handlers import docshandlers
@@ -18,6 +22,9 @@ from handlers import managementhandlers
 f = open("config.cfg",'r')
 settings = yaml.load(f)
 f.close()
+
+# Set Tornado Scheduler
+#scheduler = TornadoScheduler()
         
 # Logging:
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -95,6 +102,14 @@ tornadoConfig = dict({
 application = tornado.web.Application(urls,**tornadoConfig)
 
 def main():
+    # Use the above instantiated scheduler
+    global scheduler
+    # Use the imported jobs, every 60 minutes
+    '''   
+    scheduler.add_job(tornado.ioloop.IOLoop.instance().add_callback,
+            'interval', minutes =1, 
+            args = [log_theta])
+    '''
     application.listen(settings["listen.port"])
     tornado.ioloop.IOLoop.instance().start()
 
