@@ -10,11 +10,38 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        {% include "_styles.html" %}
-        
+        <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+        <style>
+            body {
+                padding-top: 50px;
+                padding-bottom: 20px;
+            }
+        </style>
+        <link rel="stylesheet" href="../static/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="../staticcss/main.css">
+
+        <script src="../static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     </head>
     <body>
-       {% include "_navigation.html"%}
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="./index.html">Home</a>
+          <a class="navbar-brand" href="./reference.html">Docs</a>
+          <a class="navbar-brand" href="./management.html">Manage</a>
+          <a class="navbar-brand" href="https://github.com/MKaptein/streamingbandit">Download</a>
+        </div>
+      </div>
+    </nav>
 
     <!-- END OF HEADER -->
 
@@ -34,7 +61,14 @@
 
       <hr>
     <!-- END OF BODY -->
-      {% include "_footer.html" %}
-    </div> <!-- /container -->        
+      <footer>
+        <p>&copy; N-th Iteration Lab 2015 (<a href="http://www.nth-iteration.com">www.nth-iteration.com</a>)</p>
+      </footer>
+    </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+
+        <script src="../static/js/vendor/bootstrap.min.js"></script>
+
+        <script src="../static/js/main.js"></script>
     </body>
 </html>
