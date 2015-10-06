@@ -82,8 +82,8 @@ urls = [
     (r"(?i)/admin/exp/([0-9]+)/edit.json", adminhandlers.EditExperiment),
 
     # analytics REST api (REST api for stats / logs)
-    (r"(?i)/stats/([0-9]+)/getcurrenttheta.json", statshandlers.WorkInProgress),
-    (r"(?i)/stats/([0-9]+)/gethourlytheta.json", statshandlers.WorkInProgress),
+    (r"(?i)/stats/([0-9]+)/getcurrenttheta.json", statshandlers.GetCurrentTheta),
+    (r"(?i)/stats/([0-9]+)/gethourlytheta.json", statshandlers.GetHourlyTheta),
                
             
 ]

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from pymongo import MongoClient
+from pymongo import MongoClient, ASCENDING, DESCENDING
 import yaml
 
 class MongoLog:
@@ -37,3 +37,15 @@ class MongoLog:
         self.theta_logs = self.mongo_db['hourly_theta']
         self.theta_logs.insert_one(value)
         return True
+        
+    def get_hourly_theta(self, exp_id):
+        """ This function is for retrieving all the hourly thetas of an experiment
+        
+        :param int exp_id: The specified experiment
+        :returns list dict hourly: All the hourly thetas that belong to this experiment.
+        """
+        self.theta_logs = self.mongo_db['hourly_theta']
+        self.thetas = []
+        for theta in self.theta_logs.find({"exp_id" : %s} % (exp_id)).sort('_id', pymongo.ASCENDING):
+            self.thetas.append(theta)
+        return thetas
