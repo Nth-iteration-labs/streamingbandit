@@ -9,13 +9,13 @@ $( "#CreateButton").click(function() {
     name = $("#nameOfExperiment").val(); 
     code1 = getAdviceCode.getValue(); 
     code2 = setRewardCode.getValue();
-    hourly = document.getElementById("hourlyTheta").value;
+    hourly = $("#hourlyTheta").val();
 
     $.post( BASE_URL+"admin/exp/add.json", { 
         name: name, 
         getaction: code1,
         setreward: code2,
-	hourly: hourly
+    	  hourly: hourly
         })
         .done(function( data ) {
             // pretty ugly, but hey ;)
@@ -28,14 +28,14 @@ $( "#EditButton").click(function() {
     name = $("#nameOfExperiment").val(); 
     code1 = getAdviceCode.getValue(); 
     code2 = setRewardCode.getValue();
-    hourly = document.getElementById("hourlyTheta").value;
+    hourly = $("#hourlyTheta").val();
 
     if(CURR_ID !== 0){
     $.post( BASE_URL+"admin/exp/"+CURR_ID+"/edit.json", { 
         name: name, 
         getaction: code1,
         setreward: code2,
-	hourly: hourly
+	  hourly: hourly
     })
     .done(function( data ) {
         // pretty ugly, but hey ;)

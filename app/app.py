@@ -23,8 +23,7 @@ f = open("config.cfg",'r')
 settings = yaml.load(f)
 f.close()
 
-# Set Tornado Scheduler
-scheduler = TornadoScheduler()
+
         
 # Logging:
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -100,9 +99,10 @@ application = tornado.web.Application(urls,**tornadoConfig)
 
 def main():
     # Use the above instantiated scheduler
-    global scheduler
+    # Set Tornado Scheduler
+    scheduler = TornadoScheduler()
     # Use the imported jobs, every 60 minutes
-    scheduler.add_job(log_theta, 'interval', seconds=3)
+    scheduler.add_job(log_theta, 'interval', minutes=60)
     scheduler.start()
     application.listen(settings["listen.port"])
     tornado.ioloop.IOLoop.instance().start()
