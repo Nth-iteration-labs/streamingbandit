@@ -10,8 +10,8 @@ import logging
 import logging.handlers
 
 # import scheduling ingredients
-#from apscheduler.schedulers.tornado import TornadoScheduler
-from core.jobs import log_theta
+from apscheduler.schedulers.tornado import TornadoScheduler
+from core.jobs import log_theta, tick
 # import Streampy classes
 from handlers import corehandlers
 from handlers import docshandlers
@@ -24,7 +24,7 @@ settings = yaml.load(f)
 f.close()
 
 # Set Tornado Scheduler
-#scheduler = TornadoScheduler()
+scheduler = TornadoScheduler()
         
 # Logging:
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -49,11 +49,8 @@ access_log.addHandler(logHanderAccess)
 access_log.addHandler(ch)
 app_log.addHandler(logHanderApp)
 app_log.addHandler(ch)
-
-
    
 app_log.info("Starting application {0}".format( settings["listen.port"]))
-
 
 # urls handlers
 urls = [
@@ -105,11 +102,8 @@ def main():
     # Use the above instantiated scheduler
     global scheduler
     # Use the imported jobs, every 60 minutes
-    '''   
-    scheduler.add_job(tornado.ioloop.IOLoop.instance().add_callback,
-            'interval', minutes =1, 
-            args = [log_theta])
-    '''
+    scheduler.add_job(log_theta, 'interval', seconds=3)
+    scheduler.start()
     application.listen(settings["listen.port"])
     tornado.ioloop.IOLoop.instance().start()
 

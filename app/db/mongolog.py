@@ -15,7 +15,6 @@ class MongoLog:
         settings = yaml.load(f)
         self.mongo_client = MongoClient(settings['mongo_ip'], settings['mongo_port'])
         self.mongo_db = self.mongo_client['logs']
-        self.logs = self.mongo_db['logs']
 
         f.close()
             
@@ -24,6 +23,17 @@ class MongoLog:
 
         :param dict value: A dictionary that is to be saved.
         """
+        # Get collection that belongs to this function.
+        self.logs = self.mongo_db['logs']
         self.logs.insert_one(value)
         return True
         
+    def log_hourly_theta(self, value):
+        """ This function is for logging the hourly theta
+
+        :param dict value: The dictionary that needs to be added in MongoDB
+        """
+        # Get collection that belongs to this function
+        self.theta_logs = self.mongo_db['hourly_theta']
+        self.theta_logs.insert_one(value)
+        return True
