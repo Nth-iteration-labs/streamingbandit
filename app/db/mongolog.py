@@ -46,6 +46,6 @@ class MongoLog:
         """
         self.theta_logs = self.mongo_db['hourly_theta']
         self.thetas = []
-        for theta in self.theta_logs.find({"exp_id" : %s} % (exp_id)).sort('_id', pymongo.ASCENDING):
+        for theta in self.theta_logs.find({"exp_id" : exp_id}).sort('_id', pymongo.ASCENDING):
             self.thetas.append(theta)
         return thetas
