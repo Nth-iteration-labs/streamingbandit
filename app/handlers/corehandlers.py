@@ -65,7 +65,7 @@ class RewardHandler(tornado.web.RequestHandler):
         if __EXP__.is_valid():
             context = json.loads(self.get_argument("context", default="{}"))
             action = json.loads(self.get_argument("action", default="{}"))
-            reward = float(self.get_argument("reward", default=0))
+            reward = json.loads(self.get_argument("reward", default="{}"))
             
             __EXP__.run_reward_code(context, action, reward)
             
