@@ -19,7 +19,8 @@ from handlers import adminhandlers
 from handlers import statshandlers
 from handlers import managementhandlers
 
-f = open("config.cfg",'r')
+dir = os.path.dirname(__file__)
+f = open(os.path.join(dir,'config.cfg'),'r')
 settings = yaml.load(f)
 f.close()
 
