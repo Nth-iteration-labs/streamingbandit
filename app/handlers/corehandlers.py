@@ -30,7 +30,7 @@ class ActionHandler(tornado.web.RequestHandler):
         __EXP__ = Experiment(exp_id, key)
         
         if __EXP__.is_valid():
-            context = json.loads(self.get_argument("context", default="{}"))    
+            context = json.loads(self.get_argument("context", default="{}"))  
             response = __EXP__.run_action_code(context)
             
             if self.settings['debug']:

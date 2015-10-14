@@ -3,7 +3,26 @@ import json
 from scipy.optimize import minimize_scalar
 
 
-def update(func, args):
+
+
+### Data types and updates:
+def proportion(current, update=None, default={'p':.5,'n':2,'_t':"proportion"}):
+    # Initialize a proportion if the passed objects isn't a proprotion:    
+    if current.get('_t', None) != "proportion":
+        current = default
+    current['update'] = update
+    
+    # Update the proprotion
+    if not update is None:
+        current['n'] = int(current['n']) + 1
+        current['p'] = float(current['p']) + ( (update - float(current['p'])) / current['n'])
+    return(current)
+
+
+
+
+
+def update(func, current, value):
     """ An update mapping function. Useful for using functions such as count
     and mean.
     
@@ -11,7 +30,7 @@ def update(func, args):
     :param args args: The arguments needed for the function.
     :returns * out: Anything that the used functions outputs will be returned.
     """
-    out = func(*args)
+    out = func(current, value)
     return out
     
 def count(theta, r):

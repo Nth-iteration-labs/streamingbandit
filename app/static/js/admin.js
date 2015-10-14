@@ -54,7 +54,7 @@ function editExperiment(id){
         getAdviceCode.setValue(data.getAction);  
         setRewardCode.setValue(data.setReward);
         $("#TestGetAdvice").html('(<a href="'+API_URL+'/'+id+'/getAction.json?key='+data.key+'" target="_blank">try out</a>)');
-        $("#TestSetReward").html('(<a href="'+API_URL+'/'+id+'/setReward.json?key='+data.key+'&reward='+1+'&action='+encodeURIComponent(JSON.stringify({choice:1}))+'" target="_blank">try out</a>)');
+        $("#TestSetReward").html('(<a href="'+API_URL+'/'+id+'/setReward.json?key='+data.key+'&reward='+encodeURIComponent(JSON.stringify({click:1}))+'&action='+encodeURIComponent(JSON.stringify({choice:1}))+'" target="_blank">try out</a>)');
     }); 
     $("#CreateButton").html("Store as new");
     $('#EditButton').show();

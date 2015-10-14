@@ -70,7 +70,7 @@ class Database:
             B : 4.56
         }
         """
-        #result = {}
+        result = {}
         if not all_action and not all_context:
             key = key_prefix + self.object_to_key(context) + self.object_to_key(action) 
             result = self.r_server.hgetall(key)

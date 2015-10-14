@@ -122,6 +122,9 @@ class Experiment():
     def get_hourly_theta(self):
         return self.mongo_db.get_hourly_theta(self.exp_id)
         
+    def debug(self, obj):
+        self.context['_debug'] = obj
+        
     def is_prime(self, n):
         """ Checks if given number is a prima.
 
