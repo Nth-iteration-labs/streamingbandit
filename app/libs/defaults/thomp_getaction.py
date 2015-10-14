@@ -1,28 +1,22 @@
 # -*- coding: utf-8 -*-
-import numpy as np
+# Imort tools (for updates, etc.) and time (for logging):
+import libs.tools as tls
 import time
+import numpy as np
 
-# Options:
-k = 3           # Number of versions
-log = True      # Log data to mognodb
+# Settings:
+k = 3       # Number of versions
 
-################################################################
+# Tetrieve objects:
+Theta = self.get_theta(all_action=True)
 
-# Select the winner using Thompson sampling:
-winner = 0
-value = 0
-for i in range(1,(k+1)):
-    d = self.get_theta(action={'choice':i})
-    est = np.random.beta(d.get("s",1), (d.get("n",2)-d.get("s",1)))
-    if est > value:
-        value = est
-        winner = i
-self.action['choice'] = winner
-            
-# Logging current action, time, and context JSON (Optional)
-if log:
-    self.log_data({
-        'choice' : self.action["choice"],
+# Assign random or to the highest proportion:
+self.action["choice"] = tls.bernbandit_thompson(Theta, k)
+
+# (Optional): Log the data
+self.log_data({
+        'type' : "getaction",
+        'action' : self.action["choice"],
         'time' : int(time.time()),
         'context' : self.context
       })

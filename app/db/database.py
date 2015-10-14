@@ -49,7 +49,7 @@ class Database:
         # should contain error checking:
         return True
 
-    def get_theta(self, key_prefix, context = None, action=None, all_action=False, all_context=False, all_float=True):
+    def get_theta(self, key_prefix, context = None, action=None, all_action=False, all_context=False, all_float=False):
         """ Retrieve theta's from the database
 
         :param string key_prefix: The key prefix for the stored theta.
@@ -89,7 +89,7 @@ class Database:
                 result[member] = self.r_server.hgetall(key_prefix + ":" + member)
                 i += 1
         
-        if all_float:
+        if all_float: #check
             for i in result.keys():
                 if(type(result[i])==dict):
                     for j in result[i].keys():

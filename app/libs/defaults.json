@@ -10,14 +10,14 @@
         "setRewardCode":"ab_setreward.py"
         },
     "3":{
-        "name": "Thompson sampling K-arm",
+        "name": "Thompson sampling K-arm bernoulli bandit",
         "getActionCode":"thomp_getaction.py",
-        "setRewardCode":"thomp_setreward.py"
+        "setRewardCode":"ab_setreward.py"
         },
     "4":{
-        "name": "LockIn Amplifier (1d)",
-        "getActionCode":"LiA_getaction.py",
-        "setRewardCode":"LiA_setreward.py"
+        "name": "Persuasive2016_Sample",
+        "getActionCode":"persuasive2016_getaction.py",
+        "setRewardCode":"persuasive2016_setreward.py"
         }
     }
 }

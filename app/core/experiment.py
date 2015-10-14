@@ -100,7 +100,7 @@ class Experiment():
         key = "exp:%s:" % (self.exp_id) +name
         return self.db.set_theta(values, key, context, action, all_action, all_context)
     
-    def get_theta(self, context = None, action=None, all_action=False, all_context=False, all_float=True, name="theta"):
+    def get_theta(self, context = None, action=None, all_action=False, all_context=False, all_float=False, name="theta"):
         """ Get the theta (parameters) from the database.
 
         :param dict context: Context that the theta is saved with.
