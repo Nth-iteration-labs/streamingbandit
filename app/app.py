@@ -66,25 +66,25 @@ urls = [
     (r"(?i)/logout.html", managementhandlers.LogOutHandler),
 
     # action and reward handler (core)
-    (r"(?i)/([0-9]+)/getaction.json", corehandlers.ActionHandler),
-    (r"(?i)/([0-9]+)/setreward.json", corehandlers.RewardHandler),
+    (r"(?i)/(?P<exp_id>[0-9]+)/getaction.json", corehandlers.ActionHandler),
+    (r"(?i)/(?P<exp_id>[[0-9]+)/setreward.json", corehandlers.RewardHandler),
     
     # getting /setting theta (core: but obscure)
-    (r"(?i)/([0-9]+)/gettheta.json", corehandlers.ActionHandler),
-    (r"(?i)/([0-9]+)/settheta.json", corehandlers.RewardHandler),
+    #(r"(?i)/(?P<exp_id>[0-9]+)/gettheta.json", corehandlers.ActionHandler),
+    #(r"(?i)/(?P<exp_id>[0-9]+)/settheta.json", corehandlers.RewardHandler),
      
     # admin / management REST api (REST api for administration of experiments)
     (r"(?i)/admin/exp/add.json", adminhandlers.AddExperiment),
     (r"(?i)/admin/exp/list.json", adminhandlers.GetListOfExperiments),
     (r"(?i)/admin/exp/defaults.json", adminhandlers.ListDefaults),
-    (r"(?i)/admin/exp/default/([0-9]+)/get.json", adminhandlers.GetDefault),
-    (r"(?i)/admin/exp/([0-9]+)/get.json", adminhandlers.GetExperiment),
-    (r"(?i)/admin/exp/([0-9]+)/delete.json", adminhandlers.DeleteExperiment),
-    (r"(?i)/admin/exp/([0-9]+)/edit.json", adminhandlers.EditExperiment),
+    (r"(?i)/admin/exp/default/(?P<default_id>[0-9]+)/get.json", adminhandlers.GetDefault),
+    (r"(?i)/admin/exp/(?P<exp_id>[0-9]+)/get.json", adminhandlers.GetExperiment),
+    (r"(?i)/admin/exp/(?P<exp_id>[0-9]+)/delete.json", adminhandlers.DeleteExperiment),
+    (r"(?i)/admin/exp/(?P<exp_id>[0-9]+)/edit.json", adminhandlers.EditExperiment),
 
     # analytics REST api (REST api for stats / logs)
-    (r"(?i)/stats/([0-9]+)/getcurrenttheta.json", statshandlers.GetCurrentTheta),
-    (r"(?i)/stats/([0-9]+)/gethourlytheta.json", statshandlers.GetHourlyTheta),
+    (r"(?i)/stats/(?P<exp_id>[0-9]+)/getcurrenttheta.json", statshandlers.GetCurrentTheta),
+    (r"(?i)/stats/(?P<exp_id>[0-9]+)/gethourlytheta.json", statshandlers.GetHourlyTheta),
                
             
 ]

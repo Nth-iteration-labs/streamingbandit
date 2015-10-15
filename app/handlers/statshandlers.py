@@ -10,10 +10,17 @@ class GetHourlyTheta(tornado.web.RequestHandler):
     
     def get(self, exp_id):
         """ Get a dict of all logged thetas
+
+        +--------------------------------------------------------------------+
+        | Example                                                            |
+        +====================================================================+
+        | http://example.com/stats/1/getHourlyTheta.json                     |
+        +--------------------------------------------------------------------+
         
+        :requires: A secure cookie, obtained by logging in.
         :param int exp_id: The experiment ID for the thetas that are to be retrieved.
-        
-        :returns dict dict hourly: Returns a dict of dicts of hourly thetas.
+        :returns: A JSON of JSONs of hourly logged thetas.
+        :raises: AUTH_ERROR if there is no secure cookie available.
         """
         if self.get_secure_cookie("user"):
             exp = Experiment(exp_id)
@@ -27,8 +34,15 @@ class GetCurrentTheta(tornado.web.RequestHandler):
     def get(self, exp_id):
         """ Get the current theta for experiment id exp_id
         
-        :param int exp_id: The specific experiment id
-        :returns dict theta: The current theta
+        +--------------------------------------------------------------------+
+        | Example                                                            |
+        +====================================================================+
+        | http://example.com/stats/1/getHourlyTheta.json                     |
+        +--------------------------------------------------------------------+
+        :requires: A secure cookie, obtained by logging in.
+        :param int exp_id: The experiment ID for the theta that is to be retrieved.
+        :returns: A JSON of current theta.
+        :raises: AUTH_ERROR if there is no secure cookie available.
         """
         if self.get_secure_cookie("user"):
             exp = Experiment(exp_id)

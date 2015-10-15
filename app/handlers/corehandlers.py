@@ -11,14 +11,19 @@ class ActionHandler(tornado.web.RequestHandler):
     def get(self, exp_id):
         """ Get an action given a context for a specific exp_id
         
-        Input arguments:
-        exp_id: Experiment ID as specified in the url
-        context: string of JSON object which obtains the context. This is assumed to be passed in the query string 
-        key: part of the JSON object        
+        +----------------------------------------------------------------+
+        | Example                                                        |
+        +================================================================+
+        |http://example.com/1/getAction.json?key=XXXX&context={'age': 25}|
+        +----------------------------------------------------------------+
         
-        Returns:
-        A JSON object containing "action": XX
-        Or an object containing "error": ...
+        
+        :param int exp_id: Experiment ID as specified in the url
+        :param JSON context: The context to be evaluated. 
+        :param string key: The key corresponding to the experiment.
+        
+        :returns: A JSON of the form: {"action": XX}
+        :raises AuthErorr: 401 Invalid key
         """
         key = self.get_argument("key", default = False)
         
@@ -48,16 +53,21 @@ class RewardHandler(tornado.web.RequestHandler):
     def get(self, exp_id):
         """ Update the parameters for a given experiment
 
-        Input arguments:
-        exp_id: Experiment ID as specified in the url
-        context: in JSON get
-        action: in JSON get
-        reward: in JSON get
-        key: in JSON get
+        +----------------------------------------------------------------+
+        | Example                                                        |
+        +================================================================+
+        |http://example.com/1/setReward.json?key=XXXX&context={'age': 25}|
+        |&action={'action':'A'}&reward={'click':1}                       |
+        +----------------------------------------------------------------+
 
-        Returns:
-        A JSON object containing "status":true
-        Or an object containing "error": ...
+        :param int exp_id: Experiment ID as specified in the url
+        :param JSON context: The context to train on.
+        :param JSON action: The action to train on.
+        :param JSON reward: The reward for the experiment.
+        :param string key: The key corresponding to the experiment.
+
+        :returns: A JSON of the form: {"status":true}
+        :raises KeyError: 400 Error if Key is not valid.
         """
         key = self.get_argument("key", default = False)
         __EXP__ = Experiment(exp_id, key)
