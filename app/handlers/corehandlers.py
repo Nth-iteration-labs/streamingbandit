@@ -73,6 +73,5 @@ class RewardHandler(tornado.web.RequestHandler):
                 self.write(json.dumps({'status':'success', 'action':action,'context':context, 'reward':reward}))
             else: 
                 self.write(json.dumps({'status':'success'}))
-                
         else:
             self.write_error(400)       # Needs proper error handling

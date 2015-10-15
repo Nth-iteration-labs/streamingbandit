@@ -1,6 +1,6 @@
 import numpy as np
 import json
-from scipy.optimize import minimize_scalar
+#from scipy.optimize import minimize_scalar
 
 
 
