@@ -3,6 +3,8 @@ import numpy as np
 #from scipy.optimize import minimize_scalar
 
 
+### WILL BE REMOVED!!!!!
+
 ### Basic data types and updates:
 def count(current, update=None, default={'n':0,'_t':"count"}):
     """ A function to update or create data of type count
