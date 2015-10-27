@@ -46,7 +46,7 @@ class GetCurrentTheta(tornado.web.RequestHandler):
         """
         if self.get_secure_cookie("user"):
             exp = Experiment(exp_id)
-            response = exp.get_theta(exp_id)
+            response = exp.get_theta()
             self.write(json.dumps(response))
         else:
             self.write("AUTH_ERROR")

@@ -97,8 +97,8 @@ class Experiment():
         based on the context given.
         :param string name: The name of the parameter set.
         """
-		if isinstance(values, __strmBase):
-			values = values.get_value()		# Not yet tested!
+	#if isinstance(values, __strmBase):
+        #    values = values.get_value()	# Not yet tested!
         key = "exp:%s:" % (self.exp_id) +name
         return self.db.set_theta(values, key, context, action, all_action, all_context)
     
