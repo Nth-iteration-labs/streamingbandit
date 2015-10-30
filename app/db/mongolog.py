@@ -27,6 +27,18 @@ class MongoLog:
         self.logs = self.mongo_db['logs']
         self.logs.insert_one(value)
         return True
+
+    def get_log_row(self, exp_id):
+        """ Retrieve all the logged rows for a certain experiment.
+
+        :param int exp_id: The specified experiment.
+        :returns list dict logs: All the logs for that belong to the experiment.
+        """
+        self.logs = self.mongo_db['logs']
+        self.log_rows = []
+        for row in self.logs.find({"exp_id" : exp_id}, {'_id': False}).sort('_id', ASCENDING):
+            self.log_rows.append(row)
+        return self.log_rows
         
     def log_hourly_theta(self, value):
         """ This function is for logging the hourly theta

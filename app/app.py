@@ -85,6 +85,7 @@ urls = [
     # analytics REST api (REST api for stats / logs)
     (r"(?i)/stats/(?P<exp_id>[0-9]+)/getcurrenttheta.json", statshandlers.GetCurrentTheta),
     (r"(?i)/stats/(?P<exp_id>[0-9]+)/gethourlytheta.json", statshandlers.GetHourlyTheta),
+    (r"(?i)/stats/(?P<exp_id>[0-9]+)/getlog.json", statshandlers.GetLog),
                
             
 ]

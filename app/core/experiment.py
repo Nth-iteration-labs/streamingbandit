@@ -5,7 +5,6 @@ from math import sqrt; from itertools import count, islice
 import logging
 
 class Experiment():
-         
     
     def __init__(self, exp_id, key = "notUsedForLoopBack"):
         self.db = Database()
@@ -18,11 +17,7 @@ class Experiment():
     def is_valid(self):
         """Checks wheter the exp_id and key match for the current experiment.
         
-        Input arguments:
-        none
-            
-        Returns:
-        A boolean: true if a valid key is provided (a prime), false otherwise.
+        :returns: A boolean: true if a valid key is provided, false otherwise.
         """
         key = self.db.experiment_properties("exp:%s:properties" % (self.exp_id), "key")
         if key == self.key:
@@ -56,10 +51,6 @@ class Experiment():
         actually free of type, but generally a string is used.
         :param int reward: Generally an int, in 0 or 1. Can be of other type,
         but must be specified by used algorithm.
-
-        :raises Python error. Currently the error handling is still in
-        development.
-
         :returns true: If executed correctly.
         """
         self.context = context
@@ -78,9 +69,9 @@ class Experiment():
 
         :param dict value: The value that needs to be logged. Since MongoDB is
         used, a dictionary is needed.
-
         :returns true: If executed correctly.
         """
+        value["exp_id"] = self.exp_id
         self.mongo_db.log_row(value)
         return True
         
@@ -120,8 +111,19 @@ class Experiment():
         """
         key = "exp:%s:" % (self.exp_id) +name    
         return self.db.get_theta(key, context, action, all_action, all_context, all_float)
+
+    def get_log_data(self):
+        """ Get all the logged data from the experiment
+
+        :returns dict of dict logs: All the manual logs
+        """
+        return self.mongo_db.get_log_rows(self.exp_id)
         
     def get_hourly_theta(self):
+        """ Get all the hourly logged thetas (if flag is set)
+
+        :returns dict of dict hourly: All the hourly logged thetas
+        """
         return self.mongo_db.get_hourly_theta(self.exp_id)
         
     def debug(self, obj):
