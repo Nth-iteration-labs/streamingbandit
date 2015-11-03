@@ -28,7 +28,7 @@ class MongoLog:
         self.logs.insert_one(value)
         return True
 
-    def get_log_row(self, exp_id):
+    def get_log_rows(self, exp_id):
         """ Retrieve all the logged rows for a certain experiment.
 
         :param int exp_id: The specified experiment.

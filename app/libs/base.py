@@ -57,10 +57,11 @@ class Mean(Count):
     def get_count(self):
         return self.value['n']
 
+
 class Variance(__strmBase):
 
     def __init__(self, default={'n':0, 'x_bar':0, 's':0}):
-        self.main = "p"
+        self.main = "s"
         self.value = default.copy()
 
     def update(self, value):
