@@ -60,18 +60,19 @@ class Mean(Count):
 
 class Variance(__strmBase):
 
-    def __init__(self, default={'n':0, 'x_bar':0, 's':0}):
-        self.main = "s"
+    def __init__(self, default={'n':0, 'x_bar':0, 's':0, 'v':0}):
+        self.main = 'v'
         self.value = default.copy()
 
     def update(self, value):
-        old_n = int(self.value['n'])
+        d = value - float(self.value['x_bar'])
         self.value['n'] = int(self.value['n']) + 1
-        self.value['x_bar'] = value + ( (value - float(self.value['x_bar'])) / (old_n + 1) )
-        self.value['s'] = float(self.value['s']) + ( (value - float(self.value['x_bar'])) * (value - float(self.value['x_bar'])) )
+        self.value['x_bar'] = float(self.value['x_bar']) + ((value - float(self.value['x_bar'])) / (int(self.value['n'])))
+        self.value['s'] = float(self.value['s']) + ( d * (value - float(self.value['x_bar'])) )
+        self.value['v'] = float(self.value['s'])/(int(self.value['n']) - 1)
 
     def get_value(self):
-        return float(self.value['s'])/(int(self.value['n']) - 1)
+        return float(self.value['v'])
 
     def __add__(self, other):
         new_value = float(self.value[self.main]) + float(other)
@@ -149,11 +150,10 @@ class Covariance(__strmBase):
         # Value must be a dict of x and y as
         # {'x' : 0, 'y' : 0} since we compute covariance of two datapoints
         self.value['n'] = int(self.value['n']) + 1
-        old_x_bar = self.value['x_bar']
         self.value['x_bar'] = self.value['x_bar'] + ( (value['x'] - self.value['x_bar']) / n )
+        self.value['cov'] = self.value['cov'] + ((value['y'] - self.value['y_bar']) * (value['x'] - self.value['x_bar'])) 
         self.value['y_bar'] = self.value['y_bar'] + ( (value['y'] - self.value['y_bar']) / n )
-        self.value['cov'] = (self.value['cov'] + ((value['y'] - self.value['y_bar']) * (value['x'] - old_x_bar))) / self.value['n']
-    
+   
     def __add__(self, other):
         new_value = float(self.value[self.main]) + float(other)
         if new_value >= 0:
@@ -182,10 +182,53 @@ class Covariance(__strmBase):
         else:
             raise ValueError("Co-Variance can not be less than zero!")
     
-# Correlation still to be implemented. Should be Pearson's?
-#class Correlation(__strmBase):
-#
-#    def __init__(self):
+class Correlation(__strmBase):
+
+    def __init__(self, default = {'n':0, 'x_bar':0, 'y_bar':0, 'x_s':0, 'y_s':0, 'x_v':0, 'y_v':0, 'cov':0, 'c':0}):
+        self.main = 'c'
+        self.value = default.copy()
+
+    def update(self, value):
+        self.value['n'] = int(self.value['n']) + 1
+        d_x = value['x'] - float(self.value['x_bar'])
+        d_y = value['y'] - float(self.value['y_bar'])
+        self.value['x_bar'] = float(self.value['x_bar']) + ((value['x'] - float(self.value['x_bar'])) / int(self.value['n']))
+        self.value['x_s'] = float(self.value['x_s']) + (d_x * (value['x'] - self.value['x_bar']))
+        self.value['x_v'] = float(self.value['x_s']) / (int(self.value['n'] - 1))
+        self.value['cov'] = float(self.value['cov']) + ((value['y'] - float(self.value['y'])) * (value['x'] - float(self.value['x_bar'])))
+        self.value['y_bar'] = float(self.value['y_bar']) + ((value['y'] - float(self.value['y_bar'])) / int(self.value['n']))
+        self.value['y_s'] = float(self.value['y_s']) + (d_x * (value['y'] - self.value['y_bar']))
+        self.value['y_v'] = float(self.value['y_s']) / (int(self.value['n'] - 1))
+        self.value['c'] = float(self.value['cov']) / (math.sqrt(float(self.value['x_v'])) * math.sqrt(float(self.value['y_v'])))
+
+    def __add__(self, other):
+        new_value = float(self.value[self.main]) + float(other)
+        if -1 <= new_value <= 1:
+            self.value[self.main] = new_value
+        else:
+            raise ValueError("Correlation should be between -1 and +1!") 
+
+    def __sub__(self, other):
+        new_value = float(self.value[self.main]) - float(other)
+        if -1 <= new_value <= 1:
+            self.value[self.main] = new_value
+        else:
+            raise ValueError("Correlation should be between -1 and +1!")
+
+    def __truediv__(self, other):
+        new_value = float(self.value[self.main]) / float(other)
+        if -1 <= new_value <= 1:
+            self.value[self.main] = new_value
+        else:
+            raise ValueError("Correlation should be between -1 and +1!")
+
+    def __mul__(self, other):
+        new_value = float(self.value[self.main]) * float(other)
+        if -1 <= new_value <= 1:
+            self.value[self.main] = new_value
+        else:
+            raise ValueError("Correlation should be between -1 and +1!")
+
 
 def list_of_base(objects, _t):
     """ Transform a dictionary of keys and thetas into a dictionary of keys and
@@ -203,21 +246,31 @@ def list_of_base(objects, _t):
         base_list[key] = _t(obj)
     return base_list
 
-# List (of objects)
-#class ListOfBase():
-#
-#    def __init__(self, objects, _t):
-#        self.base_list = {}
-#        for key, obj in objects:
-#            self.base_list[key] = _t(obj)
-#        self.size = len(self.base_list)
-#    
-#    def __iter__(self):
-#        self.count = 0
-#        return self
-#
-#    def __next__(self):
-#        if self.count == self.size:
-#            return StopIteration
+class List():
+
+    def __init__(self, objects, _t, value_names):
+        self.base_list = {}
+        self.value_names = value_names
+        self.num_values = len(self.value_names)
+        for key, obj in objects.items():
+            self.base_list[key] = _t(default=obj)
+        self.size = len(self.base_list)
+    
+    def dict(self):
+        return self.base_list
+
+    def max(self):
+        for key, value in self.base_list.items():
+            max_val = 0
+            max_key = ""
+            if value.get_value() > max_val:
+                max_key = key
+        return key
+
+    def count(self):
+        for key, value in self.base_list.items():
+            values = value.get_dict()
+            count = count + values['n']
+        return count
 
 
