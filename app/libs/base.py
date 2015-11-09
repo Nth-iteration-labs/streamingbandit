@@ -1,4 +1,5 @@
 import numpy as np
+import random
 #import json
 #from scipy.optimize import minimize_scalar
 
@@ -272,5 +273,8 @@ class List():
             values = value.get_dict()
             count = count + values['n']
         return count
+
+    def random(self):
+        return random.choice(self.value_names)
 
 
