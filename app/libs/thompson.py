@@ -15,11 +15,14 @@ class ThompsonList(List):
     # Summary is done with AB setrewards
 
     def thompson(self):
+        
+        # MOVE THIS TO LIST INIT
         for val in self.value_names:
             if val not in self.base_list:
                 self.base_list[val] = Proportion()
                 choice = val
                 return val
+        # END MOVE
 
         min_prob = 0
         choice = None

@@ -231,21 +231,21 @@ class Correlation(__strmBase):
             raise ValueError("Correlation should be between -1 and +1!")
 
 
-def list_of_base(objects, _t):
-    """ Transform a dictionary of keys and thetas into a dictionary of keys and
-    classes of the corresponding types
-
-    ... note: Perhaps here it is wished to have a distinction between a dict of
-    dict of thetas and only a dict of thetas?
-    
-    :param dict objects: This is typically a dictionary of dicts of thetas
-    :param type _t: The class type that is wished to have.
-    :returns dict: A dict of dicts with classes _t
-    """
-    base_list = {}
-    for key, obj in objects.items():
-        base_list[key] = _t(obj)
-    return base_list
+#def list_of_base(objects, _t):
+#    """ Transform a dictionary of keys and thetas into a dictionary of keys and
+#    classes of the corresponding types
+#
+#    ... note: Perhaps here it is wished to have a distinction between a dict of
+#    dict of thetas and only a dict of thetas?
+#    
+#    :param dict objects: This is typically a dictionary of dicts of thetas
+#    :param type _t: The class type that is wished to have.
+#    :returns dict: A dict of dicts with classes _t
+#    """
+#    base_list = {}
+#    for key, obj in objects.items():
+#        base_list[key] = _t(obj)
+#    return base_list
 
 class List():
 
@@ -266,15 +266,16 @@ class List():
             max_key = ""
             if value.get_value() > max_val:
                 max_key = key
-        return key
+        return max_key
 
     def count(self):
         for key, value in self.base_list.items():
             values = value.get_dict()
+            # error als geen n?
             count = count + values['n']
         return count
 
     def random(self):
-        return random.choice(self.value_names)
+        return random.choice(self.value_names)  # Check key:value 
 
 
