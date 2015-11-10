@@ -1,22 +1,14 @@
 # -*- coding: utf-8 -*-
-# Imort tools (for updates, etc.) and time (for logging):
-import libs.tools as tls
+# Import tools (for updates, etc.) and time (for logging):
+import libs.thompson as thmp
 import time
-import numpy as np
-
-# Settings:
-k = 3       # Number of versions
-
-# Tetrieve objects:
-Theta = self.get_theta(all_action=True)
-
-# Assign random or to the highest proportion:
-self.action["choice"] = tls.bernbandit_thompson(Theta, k)
+propl = thmp.ThompsonList(self.get_theta(all_action=True), ["A","B"])
+self.action["version"] = propl.thompson()
 
 # (Optional): Log the data
 self.log_data({
         'type' : "getaction",
-        'action' : self.action["choice"],
+        'action' : self.action["version"],
         'time' : int(time.time()),
         'context' : self.context
       })
