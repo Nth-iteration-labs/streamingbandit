@@ -2,7 +2,7 @@
 # See "old" tools.py
 from libs.base import *
 
-class ThompsonList(List):
+class BBThompsonList(List):
     """ Class to draw decisions using a Bernoulli Bandit Thompson sampler.
 
     :variable dict objects: A dict of dict of thetas (which should be proportions)
