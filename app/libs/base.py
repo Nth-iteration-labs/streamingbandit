@@ -271,6 +271,8 @@ class List():
     def count(self):
         for key, value in self.base_list.items():
             values = value.get_dict()
+            if 'n' not in values:
+                break
             # error als geen n?
             count = count + values['n']
         return count
