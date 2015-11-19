@@ -2,7 +2,7 @@
 # Import tools (for updates, etc.) and time (for logging):
 import libs.thompson as thmp
 import time
-propl = thmp.BBThompsonList(self.get_theta(all_action=True), ["A","B"])
+propl = thmp.BBThompsonList(self.get_theta(key="version"), ["A","B"])
 self.action["version"] = propl.thompson()
 
 # (Optional): Log the data

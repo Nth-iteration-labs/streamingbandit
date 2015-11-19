@@ -90,12 +90,15 @@ class Experiment():
         """
 	#if isinstance(values, __strmBase):
         #    values = values.get_value()	# Not yet tested!
+        check_dict = getattr(thetas, "get_dict")
+        if check_dict and callable(check_dict):
+            thetas = thetas.get_dict()
         db_key = "exp:%s:" % (self.exp_id) + name
         if key is not None and value is not None:
             db_key = db_key + ":%s:%s" % (key, value)
         return self.db.set_theta(thetas, db_key)
     
-    def get_theta(self, key, value, name = "_theta", all_float = False):
+    def get_theta(self, key = None, value = None, name = "_theta", all_float = False):
         """ Get the theta (parameters) from the database.
 
         :param dict context: Context that the theta is saved with.
@@ -112,18 +115,18 @@ class Experiment():
         :returns dict theta: A dictionary with the parameter set.
         """
         db_key = "exp:%s:" % (self.exp_id) + name
+        all_values = False
         if key is not None and value is not None:
             db_key = db_key + ":%s:%s" % (key, value)
         if key is not None and value is None:
+            db_key = db_key + ":%s" % (key)
             all_values = True
-        else:
-            all_values = False
         return self.db.get_theta(db_key, all_values, all_float)
 
     def get_log_data(self):
         """ Get all the logged data from the experiment
 
-        :returns dict of dict logs: All the manual logs
+        :returns dict logs: Dict of dict of all the manual logs
         """
         return self.mongo_db.get_log_rows(self.exp_id)
         

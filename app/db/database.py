@@ -56,7 +56,7 @@ class Database:
         }
         """
         result = {}
-        if all_values = False:
+        if all_values == False:
             result = self.r_server.hgetall(key)
         else:
             for obj in self.r_server.scan_iter(key + "*"):

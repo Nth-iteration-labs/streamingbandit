@@ -10,20 +10,11 @@ class BBThompsonList(List):
     actions
     """
     def __init__(self, objects, value_names):
-        super(ThompsonList, self).__init__(objects, Proportion, value_names)
+        super(BBThompsonList, self).__init__(objects, Proportion, value_names)
 
     # Summary is done with AB setrewards
 
     def thompson(self):
-        
-        # MOVE THIS TO LIST INIT
-        for val in self.value_names:
-            if val not in self.base_list:
-                self.base_list[val] = Proportion()
-                choice = val
-                return val
-        # END MOVE
-
         min_prob = 0
         choice = None
         for key, obj in self.base_list.items():
