@@ -12,13 +12,15 @@ class Model():
     there it has to add the intercept to the X vector itself.
     """
     def __init__(self, default = {'b': [0 0], 'A': [[1, 0],[0 1]], 'n':0}, p=None, add_intercept=True):  # p meegeven op een of andere manier (int)
+        """ Class to fit a linear model with a sequential solution for linear
+        regression.
+        """
         # Initialize vector $b=0$, and matrixs $A = aI$
         if default == {}:
             self.value = {'b': [0 0], 'A': [[1, 0],[0 1]], 'n':0}
         else:
             self.value = default.copy()
-        if p is None:
-            self.p = len(self.value['b'])
+        self.p = len(self.value['b'])
         self.value['A'] = np.array(self.value['A'])
         self.value['b'] = np.array(self.value['b'])
         # Possible extension: add ridge penalty.
@@ -45,21 +47,25 @@ class Model():
         """ Update the linear model.
 
         :param int y: The observation value.
-        :param list x: A list of ints of the independent variables. 
-        """
+        :param list x: A list of ints of the regressors. 
+        """ 
         y = np.array(y)
         x = np.array(x)
+        if self.intercept:
+            x = np.insert(x, 0, 1)
         self.value['A'] = self.value['A'] + (np.dot(x,np.transpose(x)))
         self.value['b'] = self.value['b'] + (np.dot(x,y))
         self.value['n'] = self.value['n'] + 1
         
     def predict(self,x):
         """ Predict the output/observation value based on values for
-        independent variables.
+        the regressors.
 
-        :param list x: A list of ints of the independent values.
+        :param list x: A list of ints of the regressors.
         :param numpy y: A numpy array of the predicted observation.
         """
         x = np.array(x)
+        if self.intercept:
+            x = np.insert(x, 0, 1)
         beta = np.dot(np.linalg.inv(self.value['A']), self.value['b'])
         return np.dot(beta, x)

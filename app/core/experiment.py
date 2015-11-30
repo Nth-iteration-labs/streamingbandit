@@ -78,18 +78,20 @@ class Experiment():
     def set_theta(self, thetas, key = None, value = None, name = "_theta"):
         """ Set the new theta (parameters) in the database.
 
-        :param dict values: The values of the parameters. Typically a
-        dictionary.
-        :param dict context: The context that belongs to the theta.
-        :param dict action: The action which belongs to the theta.
-        :param bool all_action: If true, the database will save the theta based
-        on the action given.
-        :param bool all_context: If true, the database will save the theta
-        based on the context given.
+        :param dict thetas: The thetas that will eb stored. Typically a
+        dictionary or a class of base.py. The function will check if it is a
+        class and whether it has a get_dict function. It is okay to give a
+        class with these conditions - it will call the get_dict function and
+        store the dictionary.
+        :param string key: The key with which the theta will be associated. If
+        only a key is given, all the thetas that belong to that key will be
+        returned. Typically a key distinguishes experiments from each other.
+        :param string value: The value with which the theta will be assiocated.
+        Typically the value distinguishes the different versions within an
+        experiment. If no value is given, all thetas belonging to the
+        key/experiment will be returned.
         :param string name: The name of the parameter set.
         """
-	#if isinstance(values, __strmBase):
-        #    values = values.get_value()	# Not yet tested!
         check_dict = getattr(thetas, "get_dict")
         if check_dict and callable(check_dict):
             thetas = thetas.get_dict()
@@ -101,16 +103,17 @@ class Experiment():
     def get_theta(self, key = None, value = None, name = "_theta", all_float = False):
         """ Get the theta (parameters) from the database.
 
-        :param dict context: Context that the theta is saved with.
-        :param dict action: Action that the theta is saved with.
-        :param bool all_action: Set to true if theta is saved depending on
-        action.
-        :param bool all_context: Set to true if theta is saved depending on
-        context.
-        :param bool all_float: Set to true if theta needs to be converted to
-        float.
+        :param string key: The key with which the theta will be associated. If
+        only a key is given, all the thetas that belong to that key will be
+        returned. Typically a key distinguishes experiments from each other.
+        :param string value: The value with which the theta will be assiocated.
+        Typically the value distinguishes the different versions within an
+        experiment. If no value is given, all thetas belonging to the
+        key/experiment will be returned.
         :param string name: The name of the parameters. Typically theta is
         okay.
+        :param bool all_float: If all_float is True, it will try to convert
+        every value within the theta to a float.
 
         :returns dict theta: A dictionary with the parameter set.
         """
@@ -140,14 +143,14 @@ class Experiment():
     def debug(self, obj):
         self.context['_debug'] = obj
         
-    def is_prime(self, n):
-        """ Checks if given number is a prima.
-
-        :params int n
-        """
-        if n < 2: return False
-        for number in islice(count(2), int(sqrt(n)-1)):
-            if not n%number:
-                return False
-        return True
+#    def is_prime(self, n):
+#        """ Checks if given number is a prima.
+#
+#        :params int n
+#        """
+#        if n < 2: return False
+#        for number in islice(count(2), int(sqrt(n)-1)):
+#            if not n%number:
+#                return False
+#        return True
         

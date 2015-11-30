@@ -4,12 +4,15 @@ from libs.base import *
 
 class BBThompsonList(List):
     """ Class to draw decisions using a Bernoulli Bandit Thompson sampler.
-
-    :variable dict objects: A dict of dict of thetas (which should be proportions)
-    :variable list value_names: A list with the possible value names for the
-    actions
     """
     def __init__(self, objects, value_names):
+        """ Create an instance of a BB Thompson Sampler.
+
+        :param dict objects: A dict of dict of thetas (which should be
+        proportions, see documentation of Proportions on how it should look like.)
+        :param list value_names: A list with the possible value names for the
+        actions
+        """
         super(BBThompsonList, self).__init__(objects, Proportion, value_names)
 
     # Summary is done with AB setrewards
