@@ -15,6 +15,10 @@ class BBThompsonList(List):
     # Summary is done with AB setrewards
 
     def thompson(self):
+        """ Draw decision using the Bernoulli Bandit Thompson sampler.
+
+        :returns string choice: The choice of action that's made.
+        """
         min_prob = 0
         choice = None
         for key, obj in self.base_list.items():

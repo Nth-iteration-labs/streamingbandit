@@ -50,7 +50,11 @@ class __strmBase(object):
 
 
 class Count(__strmBase):
-    
+    """ Class to represent a counter using an online estimator.
+
+    :variable dict default: A dictionary that consists of the counter n. Leave
+    empty to start a new counter.
+    """
     def __init__(self, default):
         self.main = 'n'
         if default == {}:
@@ -59,14 +63,22 @@ class Count(__strmBase):
             self.value = default.copy()
     
     def update(self, value=1):
+        """ Adds value to the counter.
+        """
         self.__add__(value)
         
     def increment(self):
+        """ Update the counter with value 1.
+        """
         self.value['n'] = int(self.value['n']) + 1
         
 
 class Mean(Count):
+    """ Class to represent a mean using an online estimator.
     
+    :variable dict default: A dictionary that consists of a counter n and mean
+    m. Leave empty to start a new mean.
+    """
     def __init__(self, default):
         self.main = 'm'
         if default == {}:
@@ -75,15 +87,25 @@ class Mean(Count):
             self.value = default.copy()
         
     def update(self, value):
+        """ Adds value to the mean.
+        :param int value: The value of x to update the mean.
+        """
         self.value['n'] = int(self.value['n']) + 1
         self.value['m'] = float(self.value['m']) + ( (float(value) - float(self.value['m'])) / float(self.value['n']))
    
     def get_count(self):
+        """ Returns the counter of the mean object.
+        """
         return int(self.value['n'])
 
 
 class Variance(__strmBase):
+    """ Class to represent a variance using an online estimator.
 
+    :variable dict default: A dictionary that consists of a counter n, mean
+    x_bar, standard deviation s and variance v. Leave empty to start a new
+    variance.
+    """
     def __init__(self, default):
         self.main = 'v'
         if default == {}:
@@ -92,6 +114,9 @@ class Variance(__strmBase):
             self.value = default.copy()
 
     def update(self, value):
+        """ Adds value to the variance.
+        :param int value: The value used for updating.
+        """
         d = float(value) - float(self.value['x_bar'])
         self.value['n'] = int(self.value['n']) + 1
         self.value['x_bar'] = float(self.value['x_bar']) + ((float(value) - float(self.value['x_bar'])) / (int(self.value['n'])))
@@ -127,7 +152,11 @@ class Variance(__strmBase):
             raise ValueError("Variance can not be less than zero!")
 
 class Proportion(__strmBase):
+    """ Class to represent a proportion using an online estimator.
 
+    :variable dict default: A dictionary that consists of a counter n, and
+    proportion p. Leave empty to start a new proportion.
+    """
     def __init__(self,default):
         self.main = 'p'
         if default == {}:
@@ -136,6 +165,9 @@ class Proportion(__strmBase):
             self.value = default.copy()
 
     def update(self, value):
+        """ Adds value to the proportion. 
+        :param int value: A value 0 or 1.
+        """
         self.value['n'] = int(self.value['n']) + 1
         self.value['p'] = float(self.value['p']) + ( (value - float(self.value['p'])) / int(self.value['n']))
 
@@ -168,7 +200,12 @@ class Proportion(__strmBase):
             raise ValueError("Proportion must be between 0 and 1!")
 
 class Covariance(__strmBase):
+    """ Class to represent a covariance using an online estimator.
 
+    :variable dict default: A dictionary that consists of a counter n, mean for
+    x x_bar, mean for y y_bar and covariance cov. Leave empty to start a new
+    covariance.
+    """
     def __init__(self,default):
         self.main = 'cov'
         if default == {}:
@@ -177,6 +214,9 @@ class Covariance(__strmBase):
             self.value = default.copy()
 
     def update(self, value):
+        """ Adds value to covariance. 
+        :param dict value: A dict of ints of x and y.
+        """
         # Value must be a dict of x and y as
         # {'x' : 0, 'y' : 0} since we compute covariance of two datapoints
         self.value['n'] = int(self.value['n']) + 1
@@ -213,7 +253,13 @@ class Covariance(__strmBase):
             raise ValueError("Co-Variance can not be less than zero!")
     
 class Correlation(__strmBase):
+    """ Class to represent a correlation using an online estimator.
 
+    :variable dict default: A dictionary that consists of a counter n, mean for
+    x x_bar, mean for y y_bar, standard deviation for x x_s, standard deviation
+    for y y_s, variance for x x_v, variance for y y_v, covariance cov and
+    correlation c. Leave empty to start a new correlation.
+    """
     def __init__(self, default):
         self.main = 'c'
         if default == {}:
@@ -222,6 +268,10 @@ class Correlation(__strmBase):
             self.value = default.copy()
 
     def update(self, value):
+        """ Adds value to correlation.
+        
+        :param dict value: A dict of ints of x and y.
+        """
         self.value['n'] = int(self.value['n']) + 1
         d_x = float(value['x']) - float(self.value['x_bar'])
         d_y = float(value['y']) - float(self.value['y_bar'])
@@ -263,7 +313,15 @@ class Correlation(__strmBase):
             raise ValueError("Correlation should be between -1 and +1!")
 
 class List():
+    """ Class to represent a list of Base classes. Here you can store multiple
+    Base classes to simplify your AB test and whatnot.
 
+    :variable dict objects: A dict of dicts with the objects in dictionary form
+    - so not a class instance!
+    :variable type _t: The type of Base class (e.g. Proportion, Count).
+    :variable list value_names: The different value names that are in the
+    objects dict. This is used for e.g. random picks.
+    """
     def __init__(self, objects, _t, value_names):
         self.base_list = {}
         self.value_names = value_names
@@ -283,12 +341,16 @@ class List():
         self.size = len(self.base_list)
     
     def get_dict(self):
+        """ Returns each Base class in the objects as a dict in a dict.
+        """
         dict_list = {}
         for key, val in self.base_list.items():
             dict_list[key] = val.get_dict()
         return dict_list
 
     def max(self):
+        """ Finds the max of the main value of a Base class.
+        """
         max_val = 0
         max_key = ""
         for key, value in self.base_list.items():
@@ -297,6 +359,9 @@ class List():
         return max_key
 
     def count(self):
+        """ Checks if the Base class has a counter. If that's the case, it will
+        add all the counters and return the total count.
+        """
         count = 0
         for key, value in self.base_list.items():
             values = value.get_dict()
@@ -306,4 +371,6 @@ class List():
         return count
 
     def random(self):
+        """ Return a random choice from the value_names list.
+        """
         return random.choice(self.value_names)
