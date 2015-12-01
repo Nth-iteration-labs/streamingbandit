@@ -12,7 +12,7 @@ class Database:
         self.r_server = redis.Redis(settings['redis_ip'], settings['redis_port'], decode_responses=True)
         f.close()
         
-    def set_theta(self, values, key_prefix, context = None, action=None, all_action=False, all_context=False):
+    def set_theta(self, thetas, key):
         """ Set theta's in the database
 
         :param dict values: The values of the theta to be stored.
@@ -30,26 +30,11 @@ class Database:
         :returns bool: True if succeeded (perhaps needs better error handling).
         """
         # Store the object fully nested:
-        key = key_prefix + self.object_to_key(context) + self.object_to_key(action)
-        self.r_server.hmset(key, values)  
-        
-        # Append to set of possible context and action combo's (basically create our own index)
-        if all_action:
-            key = key_prefix + self.object_to_key(context) + ":action:*"
-            self.r_server.sadd(key, self.object_to_key(action)[1:])
-        
-        if all_context:
-            key = key_prefix + self.object_to_key(action) + ":context:*"
-            self.r_server.sadd(key, self.object_to_key(context)[1:])
-        
-        if all_action & all_context:
-            key = key_prefix + ":context:*:action*"
-            self.r_server.sadd(key, (self.object_to_key(context)+self.object_to_key(context))[1:])
-        
+        self.r_server.hmset(key, thetas)  
         # should contain error checking:
         return True
 
-    def get_theta(self, key_prefix, context = None, action=None, all_action=False, all_context=False, all_float=True):
+    def get_theta(self, key, all_values = False, all_float = False):
         """ Retrieve theta's from the database
 
         :param string key_prefix: The key prefix for the stored theta.
@@ -70,26 +55,15 @@ class Database:
             B : 4.56
         }
         """
-        #result = {}
-        if not all_action and not all_context:
-            key = key_prefix + self.object_to_key(context) + self.object_to_key(action) 
+        result = {}
+        if all_values == False:
             result = self.r_server.hgetall(key)
-        
         else:
-            if all_action and not all_context:
-                key = key_prefix + self.object_to_key(context) + ":action:*"
-            if all_context and not all_action:
-                key = key_prefix + self.object_to_key(action) + ":context:*"
-            if all_action & all_context:
-                key = key_prefix + ":context:*:action*"
-            members = self.r_server.smembers(key)
-            i = 0
-            result = {}
-            for member in members:
-                result[member] = self.r_server.hgetall(key_prefix + ":" + member)
-                i += 1
+            for obj in self.r_server.scan_iter(key + "*"):
+                final_key = obj[len(key)+1:]
+                result[final_key] = self.r_server.hgetall(obj)
         
-        if all_float:
+        if all_float: #check
             for i in result.keys():
                 if(type(result[i])==dict):
                     for j in result[i].keys():

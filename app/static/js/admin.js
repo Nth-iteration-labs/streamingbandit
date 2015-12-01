@@ -9,11 +9,13 @@ $( "#CreateButton").click(function() {
     name = $("#nameOfExperiment").val(); 
     code1 = getAdviceCode.getValue(); 
     code2 = setRewardCode.getValue();
+    hourly = $("#hourlyTheta").val();
 
     $.post( BASE_URL+"admin/exp/add.json", { 
         name: name, 
         getaction: code1,
-        setreward: code2
+        setreward: code2,
+    	  hourly: hourly
         })
         .done(function( data ) {
             // pretty ugly, but hey ;)
@@ -26,12 +28,14 @@ $( "#EditButton").click(function() {
     name = $("#nameOfExperiment").val(); 
     code1 = getAdviceCode.getValue(); 
     code2 = setRewardCode.getValue();
+    hourly = $("#hourlyTheta").val();
 
     if(CURR_ID !== 0){
     $.post( BASE_URL+"admin/exp/"+CURR_ID+"/edit.json", { 
         name: name, 
         getaction: code1,
-        setreward: code2
+        setreward: code2,
+	  hourly: hourly
     })
     .done(function( data ) {
         // pretty ugly, but hey ;)
@@ -50,7 +54,7 @@ function editExperiment(id){
         getAdviceCode.setValue(data.getAction);  
         setRewardCode.setValue(data.setReward);
         $("#TestGetAdvice").html('(<a href="'+API_URL+'/'+id+'/getAction.json?key='+data.key+'" target="_blank">try out</a>)');
-        $("#TestSetReward").html('(<a href="'+API_URL+'/'+id+'/setReward.json?key='+data.key+'&reward='+1+'&action='+encodeURIComponent(JSON.stringify({choice:1}))+'" target="_blank">try out</a>)');
+        $("#TestSetReward").html('(<a href="'+API_URL+'/'+id+'/setReward.json?key='+data.key+'&reward='+encodeURIComponent(JSON.stringify({click:1}))+'&action='+encodeURIComponent(JSON.stringify({choice:1}))+'" target="_blank">try out</a>)');
     }); 
     $("#CreateButton").html("Store as new");
     $('#EditButton').show();
