@@ -5,19 +5,19 @@ from libs.base import *
 class Model():
     """ Class to interpet a linear model.
 
-    :variable dict default: The value of the model, consisting of a 1*p
+    :variable dict default: The value of the model, consisting of a 1*p \
     list of b, p*p list of lists A and counter n.
     :variable int p: Number of estimators.
-    :variable bool add_intercept: If True, the update function expects that
+    :variable bool add_intercept: If True, the update function expects that \
     there it has to add the intercept to the X vector itself.
     """
-    def __init__(self, default = {'b': [0 0], 'A': [[1, 0],[0 1]], 'n':0}, p=None, add_intercept=True):  # p meegeven op een of andere manier (int)
-        """ Class to fit a linear model with a sequential solution for linear
+    def __init__(self, default, p=None, add_intercept=True): 
+        """ Class to fit a linear model with a sequential solution for linear \
         regression.
         """
         # Initialize vector $b=0$, and matrixs $A = aI$
         if default == {}:
-            self.value = {'b': [0 0], 'A': [[1, 0],[0 1]], 'n':0}
+            self.value = {'b': [0, 0], 'A': [[1, 0],[0, 1]], 'n':0}
         else:
             self.value = default.copy()
         self.p = len(self.value['b'])
@@ -27,8 +27,8 @@ class Model():
         self.intercept = add_intercept # If true, add intecept to p (thus p=p+1, and standard add 1 to x)
 
     def get_dict(self):
-        """ Return all the variables that are needed to do an online estimation
-        in a dictionary.
+        """ Return all the variables that are needed to do an online \
+              estimation in a dictionary.
         """
         # A is p*p matrix ()
         # b is 1*p vector
@@ -58,7 +58,7 @@ class Model():
         self.value['n'] = self.value['n'] + 1
         
     def predict(self,x):
-        """ Predict the output/observation value based on values for
+        """ Predict the output/observation value based on values for \
         the regressors.
 
         :param list x: A list of ints of the regressors.

@@ -39,6 +39,7 @@ class GetCurrentTheta(tornado.web.RequestHandler):
         +====================================================================+
         | http://example.com/stats/1/getCurrentTheta.json                    |
         +--------------------------------------------------------------------+
+
         :requires: A secure cookie, obtained by logging in.
         :param int exp_id: The experiment ID for the theta that is to be retrieved.
         :returns: A JSON of current theta.

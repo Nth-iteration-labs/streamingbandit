@@ -7,9 +7,10 @@ class __strmBase(object):
     """ A streamingbandit base class. Use this skeleton to implement
         classes that represent online/sequential variants of estimators.
         
-    .. note:: Upon writing a new class, make sure that every function of this
+    .. note:: Upon writing a new class, make sure that every function of this \
     skeleton is implemented correctly for that type of estimator.
     """
+
     def __init__(self):
         """ Construct a new strmBase object.
         """
@@ -17,14 +18,14 @@ class __strmBase(object):
         self.main = ''
         
     def get_value(self):
-        """ Get the main value for the estimator. For example, for the
+        """ Get the main value for the estimator. For example, for the \
         estimator Mean this would be the mean itself.
         """
         return float(self.value[self.main])
 
     def get_dict(self):
-        """ Return all the variables that are needed to do an online estimation
-        in a dictionary.
+        """ Return all the vars that are needed to do an online \ 
+        estimation in a dictionary.
         """
         return self.value
         
@@ -52,9 +53,10 @@ class __strmBase(object):
 class Count(__strmBase):
     """ Class to represent a counter using an online estimator.
 
-    :variable dict default: A dictionary that consists of the counter n. Leave
+    :var dict default: A dictionary that consists of the counter n. Leave \
     empty to start a new counter.
     """
+
     def __init__(self, default):
         self.main = 'n'
         if default == {}:
@@ -76,9 +78,10 @@ class Count(__strmBase):
 class Mean(Count):
     """ Class to represent a mean using an online estimator.
     
-    :variable dict default: A dictionary that consists of a counter n and mean
+    :var dict default: A dictionary that consists of a counter n and mean \
     m. Leave empty to start a new mean.
     """
+
     def __init__(self, default):
         self.main = 'm'
         if default == {}:
@@ -88,6 +91,7 @@ class Mean(Count):
         
     def update(self, value):
         """ Adds value to the mean.
+
         :param int value: The value of x to update the mean.
         """
         self.value['n'] = int(self.value['n']) + 1
@@ -102,10 +106,11 @@ class Mean(Count):
 class Variance(__strmBase):
     """ Class to represent a variance using an online estimator.
 
-    :variable dict default: A dictionary that consists of a counter n, mean
-    x_bar, standard deviation s and variance v. Leave empty to start a new
+    :var dict default: A dictionary that consists of a counter n, mean \
+    x_bar, standard deviation s and variance v. Leave empty to start a new \
     variance.
     """
+
     def __init__(self, default):
         self.main = 'v'
         if default == {}:
@@ -115,6 +120,7 @@ class Variance(__strmBase):
 
     def update(self, value):
         """ Adds value to the variance.
+
         :param int value: The value used for updating.
         """
         d = float(value) - float(self.value['x_bar'])
@@ -154,9 +160,10 @@ class Variance(__strmBase):
 class Proportion(__strmBase):
     """ Class to represent a proportion using an online estimator.
 
-    :variable dict default: A dictionary that consists of a counter n, and
+    :var dict default: A dictionary that consists of a counter n, and \
     proportion p. Leave empty to start a new proportion.
     """
+
     def __init__(self,default):
         self.main = 'p'
         if default == {}:
@@ -166,6 +173,7 @@ class Proportion(__strmBase):
 
     def update(self, value):
         """ Adds value to the proportion. 
+
         :param int value: A value 0 or 1.
         """
         self.value['n'] = int(self.value['n']) + 1
@@ -202,10 +210,11 @@ class Proportion(__strmBase):
 class Covariance(__strmBase):
     """ Class to represent a covariance using an online estimator.
 
-    :variable dict default: A dictionary that consists of a counter n, mean for
-    x x_bar, mean for y y_bar and covariance cov. Leave empty to start a new
-    covariance.
+    :var dict default: A dictionary that consists of a counter n, mean \
+            for x x_bar, mean for y y_bar and covariance cov. Leave empty to \
+            start a new covariance.
     """
+
     def __init__(self,default):
         self.main = 'cov'
         if default == {}:
@@ -215,6 +224,7 @@ class Covariance(__strmBase):
 
     def update(self, value):
         """ Adds value to covariance. 
+
         :param dict value: A dict of ints of x and y.
         """
         # Value must be a dict of x and y as
@@ -255,11 +265,12 @@ class Covariance(__strmBase):
 class Correlation(__strmBase):
     """ Class to represent a correlation using an online estimator.
 
-    :variable dict default: A dictionary that consists of a counter n, mean for
-    x x_bar, mean for y y_bar, standard deviation for x x_s, standard deviation
-    for y y_s, variance for x x_v, variance for y y_v, covariance cov and
-    correlation c. Leave empty to start a new correlation.
+    :var dict default: A dictionary that consists of a counter n, mean \
+            for x x_bar, mean for y y_bar, standard deviation for x x_s, \
+            standard deviation for y y_s, variance for x x_v, variance for y \
+            y_v, covariance cov and correlation c. Leave empty to start a new correlation.
     """
+
     def __init__(self, default):
         self.main = 'c'
         if default == {}:
@@ -313,15 +324,16 @@ class Correlation(__strmBase):
             raise ValueError("Correlation should be between -1 and +1!")
 
 class List():
-    """ Class to represent a list of Base classes. Here you can store multiple
+    """ Class to represent a list of Base classes. Here you can store multiple \
     Base classes to simplify your AB test and whatnot.
 
-    :variable dict objects: A dict of dicts with the objects in dictionary form
-    - so not a class instance!
-    :variable type _t: The type of Base class (e.g. Proportion, Count).
-    :variable list value_names: The different value names that are in the
-    objects dict. This is used for e.g. random picks.
+    :var dict objects: A dict of dicts with the objects in dictionary \
+            form - so not a class instance!
+    :var type _t: The type of Base class (e.g. Proportion, Count).
+    :var list value_names: The different value names that are in the \
+            objects dict. This is used for e.g. random picks.
     """
+
     def __init__(self, objects, _t, value_names):
         self.base_list = {}
         self.value_names = value_names
