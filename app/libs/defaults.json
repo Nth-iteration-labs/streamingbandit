@@ -19,5 +19,10 @@
         "getActionCode":"persuasive2016_getaction.py",
         "setRewardCode":"persuasive2016_setreward.py"
         }
+    "5":{
+        "name": "Lock in Feedback",
+        "getActionCode":"lif_getaction.py",
+        "setRewardCode":"lif_setreward.py"
+        }
     }
 }
