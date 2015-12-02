@@ -16,7 +16,7 @@ self.log_data({
     "t" : self.action["t"],
     "x" : self.action["x"],
     "y" : self.reward,
-    "x0" : Lif.get_x0(),
+    "x0" : theta['x0'],
     "time" : int(time.time()),
     "context" : self.context,
     "q" : self.context['question']

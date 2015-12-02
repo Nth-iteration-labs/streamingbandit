@@ -31,9 +31,6 @@ class Lif:
         theta_dict = {'Yw': json.dumps(self.theta['Yw'].tolist()), 't':self.theta['t'], 'x0':self.theta['x0']}
         return theta_dict
 
-    def get_x0(self):
-        return self.theta['x0']
-
     def suggest(self):
         self.theta['t'] = self.theta['t'] + 1
         x = self.theta['x0'] + self.A*np.cos(self.omega * self.theta['t'])
