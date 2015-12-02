@@ -13,8 +13,9 @@ def getobs( x, max = 5, err=0 ):
         obsr = -1*pow((x-max),2) + np.random.normal(0,err,1)
     return obsr;
 
+BASE_URL = "http://localhost:8080"    # Server location
 key = "69cd74c53"    
-question_nr = 12345          
+question_nr = 123456          
 
 stream = 200                                         
 p_return = 0.80                         
@@ -26,7 +27,7 @@ y = 0.0
 
 for i in range(0,stream):
 
-   request =  "http://78.46.212.194:8080/2/getAction.json?key="+key
+   request =  BASE_URL + "/2/getAction.json?key="+key
    request += "&context={\"question\":"+str(question_nr)+"}"
    response = urllib.request.urlopen(request)
    reader = codecs.getreader("utf-8") 
@@ -39,7 +40,7 @@ for i in range(0,stream):
        
        y = getobs(x,5,variance)
        
-       request =  "http://78.46.212.194:8080/2/setReward.json"
+       request =  BASE_URL + "/2/setReward.json"
        request += "?key="+key
        request += "&context={\"question\":"+str(question_nr)+"}"
        request += "&action={\"x\":" + str(float(x)) 
@@ -58,7 +59,7 @@ plt.show()
 
 #change the following to pymongo for greater compatibility
 
-adapter = iopro.MongoAdapter('78.46.212.194', 27017, 'logs', 'logs')
+adapter = iopro.MongoAdapter('localhost', 27017, 'logs', 'logs')
 results = adapter[['type','q','t', 'x','y','x0']][:]
 results = np.sort(results, order='t')
 selection_setreward = np.where(results['type'][:] == 'setreward')
