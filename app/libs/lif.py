@@ -19,19 +19,17 @@ class Lif:
         self.lifversion = lifversion
 
     def _set_theta(self,theta):
-        if theta == None:
+        if theta == {}:
             self.theta = {'Yw': self._np_nan_fill(self.T, 3), 't':0, 'x0':self.x0}
         else:
-            self.theta = json.loads(str(theta))
-            self.theta['Yw'] = np.array(self.theta['Yw'])
+            self.theta = theta.copy()
+            self.theta['Yw'] = np.array(json.loads(str(self.theta['Yw'])))
             self.theta['t']  = int(self.theta['t'])
             self.theta['x0']  = float(self.theta['x0'])
 
-    def get_theta(self):
-        theta_serial = self.theta
-        theta_serial['Yw'] = theta_serial['Yw'].tolist()
-        theta_serial = json.dumps(theta_serial)
-        return theta_serial
+    def get_dict(self):
+        theta_dict = {'Yw': json.dumps(self.theta['Yw'].tolist()), 't':self.theta['t'], 'x0':self.theta['x0']}
+        return theta_dict
 
     def get_x0(self):
         return self.theta['x0']
@@ -40,7 +38,7 @@ class Lif:
         self.theta['t'] = self.theta['t'] + 1
         x = self.theta['x0'] + self.A*np.cos(self.omega * self.theta['t'])
         suggestion = {'x': x, 't':self.theta['t'], 'x0': self.theta['x0']}
-
+        
         if np.all(np.isfinite(self.theta['Yw'][:,0])):
             self.theta['x0'] = np.mean(self.theta['Yw'][:,1])
             self.theta['x0'] = self.theta['x0'] + self.gamma * sum( self.theta['Yw'][:,2] )

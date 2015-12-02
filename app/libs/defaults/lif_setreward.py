@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
 import libs.lif as lf
 
-theta = self.get_theta(all_float=False,context={'question':self.context['question']}).get("theta",None)
+key = "question"
+value = self.context['question']
+theta = self.get_theta(all_float=False,name="theta", key=key, value=value)
 Lif = lf.Lif(theta, x0=1.0, A=1.4 , T=100, gamma=.004, omega=.8, lifversion=2)
 Lif.update(self.action["t"],self.action["x"], self.reward)
-self.set_theta({"theta": Lif.get_theta()},context={'question':self.context['question']})
+self.set_theta(Lif.get_dict(), name="theta", key=key, value=value)
 
 import time
+
 self.log_data({
     "type" : "setreward",
     "t" : self.action["t"],
