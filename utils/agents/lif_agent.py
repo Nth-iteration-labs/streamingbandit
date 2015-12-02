@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import urllib,json,codecs
 
-#change this to pymongo for greater compatibility
+#change to pymongo for greater compatibility
 import iopro 
 
 def getobs( x, max = 5, err=0 ):
@@ -12,8 +12,10 @@ def getobs( x, max = 5, err=0 ):
     else:
         obsr = -1*pow((x-max),2) + np.random.normal(0,err,1)
     return obsr;
-    
-q = 99          
+
+key = "69cd74c53"    
+question_nr = 12345          
+
 stream = 200                                         
 p_return = 0.80                         
 variance = 1
@@ -24,7 +26,8 @@ y = 0.0
 
 for i in range(0,stream):
 
-   request = "http://78.46.212.194:8080/2/getAction.json?key=24ff7bb26&context={\"question\":"+str(q)+"}"
+   request =  "http://78.46.212.194:8080/2/getAction.json?key="+key
+   request += "&context={\"question\":"+str(question_nr)+"}"
    response = urllib.request.urlopen(request)
    reader = codecs.getreader("utf-8") 
    obj = json.load(reader(response))
@@ -37,9 +40,10 @@ for i in range(0,stream):
        y = getobs(x,5,variance)
        
        request =  "http://78.46.212.194:8080/2/setReward.json"
-       request += "?key=24ff7bb26"
-       request += "&context={\"question\":"+str(q)+"}"
-       request += "&action={\"x\":" + str(float(x)) +",\"t\":" + str(float(t)) + "}"
+       request += "?key="+key
+       request += "&context={\"question\":"+str(question_nr)+"}"
+       request += "&action={\"x\":" + str(float(x)) 
+       request += ",\"t\":" + str(float(t)) + "}"
        request += "&reward=" + str(float(y))
                     
        response = urllib.request.urlopen(request)
@@ -57,6 +61,9 @@ plt.show()
 adapter = iopro.MongoAdapter('78.46.212.194', 27017, 'logs', 'logs')
 results = adapter[['type','q','t', 'x','y','x0']][:]
 results = np.sort(results, order='t')
-t_x = results[['t','x0']][np.intersect1d(np.where(results['type'][:] == 'setreward'),np.where(results['q'][:]==q))]
+selection_setreward = np.where(results['type'][:] == 'setreward')
+selection_question =  np.where(results['q'][:]==question_nr)
+intersect = np.intersect1d(selection_setreward,selection_question)
+t_x = results[['t','x0']][intersect]
 plt.plot(t_x[['t']], t_x[['x0']])
 plt.show()
