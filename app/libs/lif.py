@@ -8,7 +8,7 @@ class Lif:
 
     def __init__(self, theta, x0=1.0, A=1.4, T=100, gamma=.004, omega=0.8, lifversion=2):
         self._set_parameters(x0, A, T, gamma, omega, lifversion)
-        self._set_theta(theta)
+        self._set_dict(theta)
 
     def _set_parameters(self, x0, A, T, gamma, omega, lifversion):
         self.x0 = x0
@@ -18,7 +18,7 @@ class Lif:
         self.omega = omega
         self.lifversion = lifversion
 
-    def _set_theta(self,theta):
+    def _set_dict(self,theta):
         if theta == {}:
             self.theta = {'Yw': self._np_nan_fill(self.T, 3), 't':0, 'x0':self.x0}
         else:
