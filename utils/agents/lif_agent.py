@@ -13,21 +13,22 @@ def getobs( x, max = 5, err=0 ):
         obsr = -1*pow((x-max),2) + np.random.normal(0,err,1)
     return obsr;
 
-BASE_URL = "http://localhost:8080"    # Server location
+BASE_URL = "http://localhost:8080"
 key = "69cd74c53"    
-question_nr = 123456          
+exp_id = 1
+question_nr = 123456        
 
-stream = 200                                         
+stream = 200                           
 p_return = 0.80                         
 variance = 1
 track_x  = []
 x = 0.0
 t = 0.0
-y = 0.0
+y = 1.0
 
 for i in range(0,stream):
 
-   request =  BASE_URL + "/2/getAction.json?key="+key
+   request =  BASE_URL + "/" + str(exp_id) +"/getAction.json?key="+key
    request += "&context={\"question\":"+str(question_nr)+"}"
    response = urllib.request.urlopen(request)
    reader = codecs.getreader("utf-8") 
@@ -37,10 +38,10 @@ for i in range(0,stream):
    x =  (obj["action"]["x"])
    
    if np.random.binomial(1, p_return, 1)==1: 
-       
+  
        y = getobs(x,5,variance)
        
-       request =  BASE_URL + "/2/setReward.json"
+       request =  BASE_URL + "/" + str(exp_id) + "/setReward.json"
        request += "?key="+key
        request += "&context={\"question\":"+str(question_nr)+"}"
        request += "&action={\"x\":" + str(float(x)) 
