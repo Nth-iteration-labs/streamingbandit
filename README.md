@@ -2,6 +2,8 @@
 
 Provides a webserver to quickly setup and evaluate possible solutions to contextual multi-armed bandit problems. Allows user to create new "experiments", each with their own policy, and disclose an API to evaluate the policy in applications.
 
+For the documentation see http://mkaptein.github.io/streamingbandit
+
 # Pre-requisites
 
 Python 3.x+ (although 2.7 seems to work) with the following packages:
