@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# Imports of external stuff
+# Imports of external stuff that is needed
 import tornado.escape
 import tornado.ioloop
 import tornado.web
