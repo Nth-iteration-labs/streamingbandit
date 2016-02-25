@@ -10,8 +10,8 @@ import logging
 import logging.handlers
 
 # import scheduling ingredients
-#from apscheduler.schedulers.tornado import TornadoScheduler
-from core.jobs import log_theta
+from apscheduler.schedulers.tornado import TornadoScheduler
+from core.jobs import log_theta, tick
 # import Streampy classes
 from handlers import corehandlers
 from handlers import docshandlers
@@ -19,12 +19,12 @@ from handlers import adminhandlers
 from handlers import statshandlers
 from handlers import managementhandlers
 
-f = open("config.cfg",'r')
+dir = os.path.dirname(__file__)
+f = open(os.path.join(dir,'config.cfg'),'r')
 settings = yaml.load(f)
 f.close()
 
-# Set Tornado Scheduler
-#scheduler = TornadoScheduler()
+
         
 # Logging:
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -49,11 +49,8 @@ access_log.addHandler(logHanderAccess)
 access_log.addHandler(ch)
 app_log.addHandler(logHanderApp)
 app_log.addHandler(ch)
-
-
    
 app_log.info("Starting application {0}".format( settings["listen.port"]))
-
 
 # urls handlers
 urls = [
@@ -69,25 +66,26 @@ urls = [
     (r"(?i)/logout.html", managementhandlers.LogOutHandler),
 
     # action and reward handler (core)
-    (r"(?i)/([0-9]+)/getaction.json", corehandlers.ActionHandler),
-    (r"(?i)/([0-9]+)/setreward.json", corehandlers.RewardHandler),
+    (r"(?i)/(?P<exp_id>[0-9]+)/getaction.json", corehandlers.ActionHandler),
+    (r"(?i)/(?P<exp_id>[[0-9]+)/setreward.json", corehandlers.RewardHandler),
     
     # getting /setting theta (core: but obscure)
-    (r"(?i)/([0-9]+)/gettheta.json", corehandlers.ActionHandler),
-    (r"(?i)/([0-9]+)/settheta.json", corehandlers.RewardHandler),
+    #(r"(?i)/(?P<exp_id>[0-9]+)/gettheta.json", corehandlers.ActionHandler),
+    #(r"(?i)/(?P<exp_id>[0-9]+)/settheta.json", corehandlers.RewardHandler),
      
     # admin / management REST api (REST api for administration of experiments)
     (r"(?i)/admin/exp/add.json", adminhandlers.AddExperiment),
     (r"(?i)/admin/exp/list.json", adminhandlers.GetListOfExperiments),
     (r"(?i)/admin/exp/defaults.json", adminhandlers.ListDefaults),
-    (r"(?i)/admin/exp/default/([0-9]+)/get.json", adminhandlers.GetDefault),
-    (r"(?i)/admin/exp/([0-9]+)/get.json", adminhandlers.GetExperiment),
-    (r"(?i)/admin/exp/([0-9]+)/delete.json", adminhandlers.DeleteExperiment),
-    (r"(?i)/admin/exp/([0-9]+)/edit.json", adminhandlers.EditExperiment),
+    (r"(?i)/admin/exp/default/(?P<default_id>[0-9]+)/get.json", adminhandlers.GetDefault),
+    (r"(?i)/admin/exp/(?P<exp_id>[0-9]+)/get.json", adminhandlers.GetExperiment),
+    (r"(?i)/admin/exp/(?P<exp_id>[0-9]+)/delete.json", adminhandlers.DeleteExperiment),
+    (r"(?i)/admin/exp/(?P<exp_id>[0-9]+)/edit.json", adminhandlers.EditExperiment),
 
     # analytics REST api (REST api for stats / logs)
-    (r"(?i)/stats/([0-9]+)/getcurrenttheta.json", statshandlers.WorkInProgress),
-    (r"(?i)/stats/([0-9]+)/gethourlytheta.json", statshandlers.WorkInProgress),
+    (r"(?i)/stats/(?P<exp_id>[0-9]+)/getcurrenttheta.json", statshandlers.GetCurrentTheta),
+    (r"(?i)/stats/(?P<exp_id>[0-9]+)/gethourlytheta.json", statshandlers.GetHourlyTheta),
+    (r"(?i)/stats/(?P<exp_id>[0-9]+)/getlog.json", statshandlers.GetLog),
                
             
 ]
@@ -103,13 +101,11 @@ application = tornado.web.Application(urls,**tornadoConfig)
 
 def main():
     # Use the above instantiated scheduler
-    global scheduler
+    # Set Tornado Scheduler
+    scheduler = TornadoScheduler()
     # Use the imported jobs, every 60 minutes
-    '''   
-    scheduler.add_job(tornado.ioloop.IOLoop.instance().add_callback,
-            'interval', minutes =1, 
-            args = [log_theta])
-    '''
+    scheduler.add_job(log_theta, 'interval', minutes=60)
+    scheduler.start()
     application.listen(settings["listen.port"])
     tornado.ioloop.IOLoop.instance().start()
 

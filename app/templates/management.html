@@ -10,9 +10,7 @@
   <title></title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   {% include "_styles.html" %}
-
 </head>
 
 
@@ -58,12 +56,15 @@
     <input type="text" class="form-control" id="nameOfExperiment"></input></p>
   </div>
   <div class="form-group">
-    <label>The getAdvice() code: <span id="TestGetAdvice"></span></label>
+    <label>The <em>decision</em> step (getAction): <span id="TestGetAdvice"></span></label>
     <textarea class="form-control" id="getAdviceText" rows=2></textarea>
   </div>
   <div class="form-group">
-    <label>The setReward() code: <span id="TestSetReward"></span></label>
+    <label>The <em>summary</em> step (setReward): <span id="TestSetReward"></span></label>
     <textarea class="form-control" id="setRewardText" rows=3></textarea>
+  </div>
+  <div class="form-group">
+    <input id="hourlyTheta" name="hourlyTheta" value="hourly" type="checkbox"/>Log theta hourly.</br>
   </div>
   <div class="form-group">
     <a class="btn btn-default" id="CreateButton" role="button">Create new experiment!</a>
@@ -97,8 +98,9 @@
 </div> <!-- /container -->
 
 
-<script src="../static/dest/js/vendors.js" ></script>
-<script src="../static/dest/js/admin.js"></script>
+<script src="../static/js/jquery-1.11.2.min.js" ></script>
+<script src="../static/js/codemirror-compressed.js" ></script>
+<script src="../static/js/admin.js"></script>
 </body>
 </html>
 
