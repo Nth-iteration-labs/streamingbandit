@@ -1,49 +1,67 @@
 # Implementation of Lock in Feedback.
-import random as rand
-import math as math
+# -*- coding: utf-8 -*-
+from libs.base import *
+import numpy as np
+import json
 
+class Lif:
 
-##### WARNING: TOTALLY UNTESTED AND UNSURE WHETHER THIS WORKS
-##### AND, LITTERED WITH SYNTAX ERRORS ;)
+    def __init__(self, theta, x0=1.0, A=1.4, T=100, gamma=.004, omega=0.8, lifversion=2):
+        self._set_parameters(x0, A, T, gamma, omega, lifversion)
+        self._set_dict(theta)
 
-class Lif():
-    
-    def __init__(self, values, x0=0, inttime = 20, amplitude = 1, learnrate = .1, omega=.5):
-         """ Initialize a new Lock in Feedback process for scalar optimizaiton 
-         of an unknown function y = f(x). Lif sequentially finds xmax = arg max x f(x)
-
-        :param dict values: 
-        :param ....
-        
-        :returns: ....
-        """
-        self.values = values   # Make a 3 (t,x,y) * inttime (1:intime) matrix of the values (dict)
+    def _set_parameters(self, x0, A, T, gamma, omega, lifversion):
         self.x0 = x0
-        self.inttime =inttime
-        self.amplitude = amplitude
-        self.learnrate = learnrate
-        self.omega=omega
-        
-        
-    def suggest(self):
-        
-        # If the integration time is exceeded:
-        if dim(self.values)[1] > self.inttime:
-            # determine x0 as mean of stream: the mean of the x's in the integration time
-            self.x0 = mean(self.values[,2])
-            # move according to LiF: (see also R code)
-            self.x0 = self.x0 + self.learnrate * sum ( math.cos(self.omega * self.values[,1])*self.values[,3])
-        
-        # Increment t
-        t = incremental t based on values.   
-        self.x0 + self.amplitude * math.cos(self.omega * t)
-        # Should return an X and a T!!!
-    
-    
-    def update(self, t,x,y):
-        self.values push/pop (t,x,y)     # just add to the value matrix
-   
-     
+        self.A = A
+        self.T = T
+        self.gamma = gamma
+        self.omega = omega
+        self.lifversion = lifversion
+
+    def _set_dict(self,theta):
+        if theta == {}:
+            self.theta = {'Yw': self._np_nan_fill(self.T, 3), 't':0, 'x0':self.x0}
+        else:
+            self.theta = theta.copy()
+            self.theta['Yw'] = np.array(json.loads(str(self.theta['Yw'])))
+            self.theta['t']  = int(self.theta['t'])
+            self.theta['x0']  = float(self.theta['x0'])
+
     def get_dict(self):
-        return # dict of values for storage in Redis
+        theta_dict = {'Yw': json.dumps(self.theta['Yw'].tolist()), 't':self.theta['t'], 'x0':self.theta['x0']}
+        return theta_dict
+
+    def suggest(self):
+
+        if np.all(np.isfinite(self.theta['Yw'][:,0])):
+            self.theta['x0'] = np.mean(self.theta['Yw'][:,1])
+            self.theta['x0'] = self.theta['x0'] + self.gamma * sum( self.theta['Yw'][:,2] )
+            if self.lifversion==1: self.theta['Yw'].fill(np.nan)
+
+        self.theta['t'] = self.theta['t'] + 1
+        x = self.theta['x0'] + self.A*np.cos(self.omega * self.theta['t'])
+        suggestion = {'x': x, 't':self.theta['t'], 'x0': self.theta['x0']}
         
+        return suggestion
+
+    def update(self, t, x, y):
+
+        y = self.A*np.cos(self.omega * t)*y
+        row_to_add = np.array([t,x,y])
+        self.theta['Yw'] = self._matrixpush(self.theta['Yw'], row_to_add)
+
+        return True
+
+    def _matrixpush(self, m, row):
+        if not np.all(np.isfinite(self.theta['Yw'][:,0])):
+            i = np.count_nonzero(np.logical_not(np.isnan(self.theta['Yw'][:,0])))
+            m[i,] = row
+        else:
+            m = np.vstack([m,row])
+            m = m[1:,]
+        return(m)
+
+    def _np_nan_fill(self,rows,columns):
+        nan_values = np.zeros((rows,columns))
+        nan_values.fill(np.nan)
+        return nan_values

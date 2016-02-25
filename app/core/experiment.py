@@ -96,7 +96,10 @@ class Experiment():
         key/experiment will be returned.
         :param string name: The name of the parameter set.
         """
-        check_dict = getattr(thetas, "get_dict")
+        try:
+           check_dict = getattr(thetas, "get_dict")
+        except AttributeError:
+           check_dict = False
         if check_dict and callable(check_dict):
             thetas = thetas.get_dict()
         db_key = "exp:%s:" % (self.exp_id) + name
