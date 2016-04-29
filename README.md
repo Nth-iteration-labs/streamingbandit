@@ -63,7 +63,7 @@ When everything is configured, do the following:
 
 Then you can start streamingbandit web-server via the terminal (using python app.py). (note that this would be the simple local testing process, for actual deployment one would need a different approach).
 
-On you local machine browse to: http://localhost:8080 (which is the default port where Tornado will run)
+On your local machine browse to: http://localhost:8080 (which is the default port where Tornado will run)
 Then, either browse to:
 * http://localhost:8080/reference.html to see the docs or,
 * http://localhost:8080/management.html to manage the experiments running on the server.
