@@ -18,6 +18,7 @@ from handlers import docshandlers
 from handlers import adminhandlers
 from handlers import statshandlers
 from handlers import managementhandlers
+#from handlers import evalhandlers
 
 dir = os.path.dirname(__file__)
 f = open(os.path.join(dir,'config.cfg'),'r')
@@ -87,6 +88,9 @@ urls = [
     (r"(?i)/stats/(?P<exp_id>[0-9]+)/gethourlytheta.json", statshandlers.GetHourlyTheta),
     (r"(?i)/stats/(?P<exp_id>[0-9]+)/getlog.json", statshandlers.GetLog),
                
+    # Offline and Simulated evaluation
+    #(r"(?i)/eval/(?P<exp_id>[0-9]+)/simulate", evalhandlers.Simulate),
+    #(r"(?i)/eval/(?P<exp_id>[0-9]+)/offline", evalhandlers.Offline),
             
 ]
 
