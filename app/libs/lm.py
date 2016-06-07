@@ -1,6 +1,5 @@
 # Linear regression
 from libs.base import *
-# See lecture notes AI webscale
 
 class Model():
     """ Class to interpet a linear model.
