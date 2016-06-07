@@ -6,7 +6,7 @@ from libs.base import *
 import libs.lm as lm
 import numpy as np
 
-class Model():
+class BTS():
     """ Class to implement BTS.
 
     """
@@ -16,7 +16,7 @@ class Model():
             self.params = [params[0].copy() for i in range(0,m)]
         elif isinstance(params,dict):
             self.params = [params.copy() for i in range(0,m)]
-        else 
+        else:
             raise ValueError("Parameters should be a list of dicts or a dict")
 
         if update_method = None:
@@ -31,8 +31,9 @@ class Model():
         return params[select]
 
     def update(self, y, x, *args):
+        draws = np.random.binomial(1,.5,len(self.params))
         for i in range(0, len(self.params)):
-            if np.random.binomial(1,.5,1) == 1:
+            if draws[i] == 1:
                 model = self.update_method(self.params[i], *args)
                 model.update(y,x)
                 self.params[i] = model.get_dict()
