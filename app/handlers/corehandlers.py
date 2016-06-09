@@ -87,3 +87,18 @@ class RewardHandler(tornado.web.RequestHandler):
             self.write_error(400) # Needs proper error handling
 
             
+class ResetHandler(tornado.web.RequestHandler):
+    def get(self, exp_id):
+
+        key = self.get_argument("key", default = False)
+        theta_key = self.get_argument("theta_key", default = False)
+        theta_value = self.get_argument("theta_value", default = False)
+        __EXP__ = Experiment(exp_id, key)
+
+        if __EXP__.is_valid():
+            __EXP__.delete_theta(key = theta_key, value = theta_value)
+
+            self.write(json.dumps({'status':'success'}))
+        else:
+            self.write_error(400)
+

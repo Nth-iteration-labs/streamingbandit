@@ -93,7 +93,7 @@ class Simulate(tornado.web.RequestHandler):
                 rewards = np.append(rewards, y)
                 tmp_rot = (rewards[-1] + y) / (i+1)
                 reward_over_time = np.append(reward_over_time, tmp_rot)
-                regret = np.append(regret, (regret[-1] + (5 - y)))
+                regret = np.append(regret, (regret[-1] + (10 - y)))
 
                 #self.write("n = {}, Regret is: {}, reward = {} <br>".format(i,regret[-1], rewards[-1]))
 
@@ -108,6 +108,7 @@ class Simulate(tornado.web.RequestHandler):
                 __EXP__.log_data({
                     "type" : "evaluation",
                     "time" : int(time.time()),
+                    "experiment" : exp_id,
                     "N" : N,
                     "c" : c,
                     "c2" : c2,
@@ -116,7 +117,7 @@ class Simulate(tornado.web.RequestHandler):
                     "regret" : Binary(_pickle.dumps(regret, protocol = 2), subtype = 128)
                     })
 
-            self.write(json.dumps({'simulate':'success'}))
+                self.write(json.dumps({'simulate':'success','experiment':exp_id}))
         else:
             self.set_status(401)
             self.write("Key is not valid for this experiment")

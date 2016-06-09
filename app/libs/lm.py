@@ -1,5 +1,6 @@
 # Linear regression
 from libs.base import *
+import ast
 
 class LM():
     """ Class to interpet a linear model.
@@ -20,6 +21,12 @@ class LM():
         else:
             self.value = default.copy()
         self.p = len(self.value['b'])
+        if isinstance(self.value['A'],str) == True:
+            self.value['A'] = ast.literal_eval(self.value['A'])
+        if isinstance(self.value['b'],str) == True:
+            self.value['b'] = ast.literal_eval(self.value['b'])
+        if isinstance(self.value['n'],str) == True:
+            self.value['n'] = ast.literal_eval(self.value['n'])
         self.value['A'] = np.matrix(self.value['A'])
         self.value['b'] = np.matrix(self.value['b'])
         # Possible extension: add ridge penalty.
