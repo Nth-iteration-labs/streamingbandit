@@ -30,17 +30,19 @@ class ThompsonBayesianLinear():
         # Update J and P
         y = np.array(y)
         x = np.array(x)
-        self.value['J'] = self.value['J'] + ((y*x.T)/self.value['err'])
-        self.value['P'] = self.value['P'] + ((x.T*x)/self.value['err'])
+        self.value['J'] = ((x*y)/self.value['err']) + self.value['J']
+        print(self.value['J'])
+        self.value['P'] = ((x.T*x)/self.value['err']) + self.value['P']
+        print(self.value['P'])
     
     def sample(self):
         # Transform J = Sigma^-1 * mu to mu
-        # Not sure if this is right?
-        print(self.value['P'])
-        mu = np.linalg.inv(self.value['P']) * self.value['J'].T
-        mu = np.squeeze(np.asarray(mu))
         # Transform P = Sigma^-1 to Sigma
+        # Not sure if this is right?
+        #print(self.value['J'])
         sigma = np.linalg.inv(self.value['P'])
+        mu = sigma * self.value['J'].T
+        mu = np.squeeze(np.asarray(mu))
         # Random draw from np.random.multivariate_normal
         betas = np.random.multivariate_normal(mu,sigma)
         # Prediction is y_t ~ N(betas.T * x, sigma^2)

@@ -6,7 +6,7 @@ from pymongo import MongoClient, ASCENDING, DESCENDING
 mongo_client = MongoClient('localhost',27017)
 mongo_db = mongo_client['logs']
 
-exp_id = "1"
+exp_id = "8"
 
 results = mongo_db.logs.find_one({"type":"evaluation","experiment":exp_id},sort=[("time", DESCENDING)])
 

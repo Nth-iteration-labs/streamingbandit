@@ -50,7 +50,7 @@ class Simulate(tornado.web.RequestHandler):
         key = self.get_argument("key", default = False)
         
         # Number of draws
-        N = self.get_argument("N", default = 1000)
+        N = int(self.get_argument("N", default = 1000))
 
         log_stats = self.get_argument("log_stats", default = True)
 
@@ -83,6 +83,7 @@ class Simulate(tornado.web.RequestHandler):
                 # Generate reward
 
                 y = -(action["x"] - c)**2 + c2 + np.random.normal(mu, var)
+                #y = 15 + 8*action["x"] + 10*action["x"]**2 + np.random.normal(mu, var)
 
                 reward = {"y" : y}
 
