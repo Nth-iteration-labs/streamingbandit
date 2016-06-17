@@ -26,8 +26,8 @@ for row in logs:
     tmp = np.squeeze(np.asarray(tmp))
     mu.append(tmp.tolist())
 
-plt.plot(mu)
-plt.show()
+#plt.plot(mu)
+#plt.show()
 
 #plt.plot(betas)
 #plt.show()

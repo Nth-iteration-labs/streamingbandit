@@ -13,7 +13,7 @@ class BTS():
     """ Class to implement BTS.
 
     """
-    def __init__(self, params, update_method = None,  m = 10):
+    def __init__(self, params, update_method = None,  m = 100):
 
         if isinstance(params,dict):
             if len(params) != m:
@@ -22,7 +22,6 @@ class BTS():
             else:
                 self.params = {int(k) : ast.literal_eval(v).copy() for k,v in params.copy().items()}
                 self.params = collections.OrderedDict(self.params)
-                print(self.params)
         else:
             raise ValueError("Parameters should be a dict or a dict of dicts")
 
@@ -40,7 +39,6 @@ class BTS():
 
     def update(self, y, x, *args):
         draws = np.random.binomial(1,.5,len(self.params))
-        print(draws)
         for i in range(0, len(self.params)):
             if draws[i] == 1:
                 model = self.update_method(self.params[i], *args)

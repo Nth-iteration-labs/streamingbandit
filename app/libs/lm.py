@@ -38,15 +38,16 @@ class LM():
         """
         # A is p*p matrix ()
         # b is 1*p vector
-        self.value['A'] = self.value['A'].tolist()
-        self.value['b'] = self.value['b'].tolist()
+        to_dict = self.value.copy()
+        to_dict['A'] = to_dict['A'].tolist()
+        to_dict['b'] = to_dict['b'].tolist()
         # Add n (counter): later use for Standard errors of Beta.
-        return self.value
+        return to_dict
 
     def get_coefs(self):
         """ Returns the coefficients beta as a numpy array.
         """
-        beta = np.dot(np.linalg.inv(self.value['A']), self.value['b'].T)
+        beta = np.linalg.inv(self.value['A']) * self.value['b'].T
         return beta
 
     def update(self,y,x):
@@ -55,8 +56,8 @@ class LM():
         :param int y: The observation value.
         :param list x: A list of ints of the regressors. 
         """ 
-        y = np.array(y)
-        x = np.array(x)
+        y = y
+        x = np.matrix(x)
         if self.intercept:
             x = np.insert(x, 0, 1)
         self.value['A'] = self.value['A'] + (x.T*x)

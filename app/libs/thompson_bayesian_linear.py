@@ -22,18 +22,17 @@ class ThompsonBayesianLinear():
         self.value['P'] = np.matrix(self.value['P'])
 
     def get_dict(self):
-        self.value['J'] = self.value['J'].tolist()
-        self.value['P'] = self.value['P'].tolist()
-        return self.value
+        to_dict = self.value.copy()
+        to_dict['J'] = to_dict['J'].tolist()
+        to_dict['P'] = to_dict['P'].tolist()
+        return to_dict
 
     def update(self, y, x):
         # Update J and P
-        y = np.array(y)
-        x = np.array(x)
+        y = y
+        x = np.matrix(x)
         self.value['J'] = ((x*y)/self.value['err']) + self.value['J']
-        print(self.value['J'])
         self.value['P'] = ((x.T*x)/self.value['err']) + self.value['P']
-        print(self.value['P'])
     
     def sample(self):
         # Transform J = Sigma^-1 * mu to mu
