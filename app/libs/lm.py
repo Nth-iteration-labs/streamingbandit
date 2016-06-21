@@ -50,7 +50,7 @@ class LM():
         beta = np.linalg.inv(self.value['A']) * self.value['b'].T
         return beta
 
-    def update(self,y,x):
+    def update(self,y,x,discount = 1):
         """ Update the linear model.
 
         :param int y: The observation value.
@@ -60,8 +60,8 @@ class LM():
         x = np.matrix(x)
         if self.intercept:
             x = np.insert(x, 0, 1)
-        self.value['A'] = self.value['A'] + (x.T*x)
-        self.value['b'] = self.value['b'] + (x*y)
+        self.value['A'] = self.value['A'] + discount*(x.T*x)
+        self.value['b'] = self.value['b'] + discount*(x*y)
         self.value['n'] = self.value['n'] + 1
         
     def predict(self,x):

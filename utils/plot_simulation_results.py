@@ -6,7 +6,7 @@ from pymongo import MongoClient, ASCENDING, DESCENDING
 mongo_client = MongoClient('localhost',27017)
 mongo_db = mongo_client['logs']
 
-exp_id = "8"
+exp_id = "10"
 
 results = mongo_db.logs.find_one({"type":"evaluation","experiment":exp_id},sort=[("time", DESCENDING)])
 
@@ -26,8 +26,8 @@ for row in logs:
     tmp = np.squeeze(np.asarray(tmp))
     mu.append(tmp.tolist())
 
-#plt.plot(mu)
-#plt.show()
+plt.plot(mu)
+plt.show()
 
 #plt.plot(betas)
 #plt.show()
