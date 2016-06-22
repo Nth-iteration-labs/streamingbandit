@@ -8,16 +8,26 @@ BASE_URL = "http://localhost:8080"
 exp_id = 11
 key = "384dc6a03a"
 
-N = 1000
+N = 10000
+
+np.random.seed(10)
+
+x = np.random.uniform(0,10,N)
+c = 5
+c2 = 10
+mu = 0
+var = 0.1
+
+y = -(x - c)**2 + c2 + np.random.normal(mu,var,N)
 
 for i in range(N):
-    url = "{}/{}/getaction.json?key={}".format(BASE_URL,exp_id,key)
-    result = get(url)
-    jsonobj = json.loads(result.text)
+    #url = "{}/{}/getaction.json?key={}".format(BASE_URL,exp_id,key)
+    #result = get(url)
+    #jsonobj = json.loads(result.text)
     
-    y = jsonobj["action"]["y"]
-    x = jsonobj["action"]["x"]
-    url = "{}/{}/setreward.json?key={}&reward={}&action={}".format(BASE_URL,exp_id,key,json.dumps({"y":y}),json.dumps({"x":x}))
+    y_send = y[i]
+    x_send = x[i]
+    url = "{}/{}/setreward.json?key={}&reward={}&action={}".format(BASE_URL,exp_id,key,json.dumps({"y":y_send}),json.dumps({"x":x_send}))
     result = get(url)
     print(result.text)
 

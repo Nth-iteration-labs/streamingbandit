@@ -14,15 +14,23 @@ theta_key = "simulation"
 theta_value = "simulation"
 
 lensim = 100
-N = 1001
+N = 10000
 
-experiments = { "6" : { 'key' : "121accf5ca", 'label' : 'Linear' },
+experiments = { 
                 "5" : { 'key' : "281804239f" , 'label' : 'Random'},
                 "7" : { 'key' : "29ffa7bc43" , 'label' : 'LiF'},
                 "8" : { 'key' : "1e14243bd5" , 'label' : 'TBL'},
                 "9" : { 'key' : "16f451a9d6" , 'label' : 'BTS'},
                "10" : { 'key' : "384ea03749" , 'label' : 'Epsilon-first'}
         }
+
+np.random.seed(10)
+
+# Randomize the model
+# c's are the position on the x-axis
+cs = np.round(np.random.uniform(2,8,lensim))
+# c2's are the height
+c2s = np.round(np.random.uniform(0,10,lensim))
 
 for k,v in experiments.items():
     exp_id = k
@@ -40,7 +48,7 @@ for k,v in experiments.items():
     key = v['key']
     for i in range(0,lensim):
         print("Simulation {} for experiment {}".format(i, v['label']))
-        url = "{}/eval/{}/simulate?key={}".format(BASE_URL,exp_id,key)
+        url = "{}/eval/{}/simulate?key={}&N={}&c={}&c2={}".format(BASE_URL,exp_id,key,N,cs[i],c2s[i])
         result = get(url)
         print(result.text)
         url = "{}/{}/resetexperiment?key={}&theta_key={}&theta_value={}".format(BASE_URL, exp_id, key, theta_key, theta_value)
@@ -57,8 +65,9 @@ ax = fig.add_subplot(111)
 for k,v in experiments.items():
     exp_id = k
     results = mongo_db.logs.find({"type":"evaluation","experiment":exp_id}, sort=[("time", DESCENDING)])
+    results.batch_size(50)
 
-    regret = np.zeros(N)
+    regret = np.zeros(N+1)
 
     for cur in results:
         tmp_regret = pickle.loads(cur["regret"])
@@ -85,7 +94,7 @@ for k,v in experiments.items():
     exp_id = k
     results = mongo_db.logs.find({"type":"evaluation","experiment":exp_id}, sort=[("time", DESCENDING)])
 
-    rewards = np.zeros(N)
+    rewards = np.zeros(N+1)
 
     for cur in results:
         tmp_rewards = pickle.loads(cur["rewards"])

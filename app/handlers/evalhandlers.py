@@ -55,10 +55,10 @@ class Simulate(tornado.web.RequestHandler):
         log_stats = self.get_argument("log_stats", default = True)
 
         # Parameterset for the simulator
-        c = self.get_argument("c", default = 5)
-        c2 = self.get_argument("c2", default = 10)
-        mu = self.get_argument("mu", default = 0)
-        var = self.get_argument("var", default = .1)
+        c = float(self.get_argument("c", default = 5))
+        c2 = float(self.get_argument("c2", default = 10))
+        mu = float(self.get_argument("mu", default = 0))
+        var = float(self.get_argument("var", default = .1))
 
         if not key:
             self.set_status(401)
@@ -94,7 +94,7 @@ class Simulate(tornado.web.RequestHandler):
                 rewards = np.append(rewards, y)
                 tmp_rot = (rewards[-1] + y) / (i+1)
                 reward_over_time = np.append(reward_over_time, tmp_rot)
-                regret = np.append(regret, (regret[-1] + (10 - y)))
+                regret = np.append(regret, (regret[-1] + (c2 - y)))
 
                 #self.write("n = {}, Regret is: {}, reward = {} <br>".format(i,regret[-1], rewards[-1]))
 
