@@ -2,11 +2,12 @@ import json
 from requests import put,get
 import numpy as np
 import matplotlib.pyplot as  plt
-from pymongo import MongoClient, ASCENDING, DESCENDING
 
 BASE_URL = "http://localhost:8080"
-exp_id = 11
-key = "384dc6a03a"
+
+
+theta_key = "simulation"
+theta_value = "simulation"
 
 N = 10000
 
@@ -16,49 +17,43 @@ x = np.random.uniform(0,10,N)
 c = 5
 c2 = 10
 mu = 0
-var = 0.1
+var = 1
+
+iterations = 100
 
 y = -(x - c)**2 + c2 + np.random.normal(mu,var,N)
 
-for i in range(N):
-    #url = "{}/{}/getaction.json?key={}".format(BASE_URL,exp_id,key)
-    #result = get(url)
-    #jsonobj = json.loads(result.text)
-    
-    y_send = y[i]
-    x_send = x[i]
-    url = "{}/{}/setreward.json?key={}&reward={}&action={}".format(BASE_URL,exp_id,key,json.dumps({"y":y_send}),json.dumps({"x":x_send}))
-    result = get(url)
-    print(result.text)
+experiments = { 
+                "5" : { 'key' : "281804239f" , 'label' : 'Random'},
+                "7" : { 'key' : "29ffa7bc43" , 'label' : 'LiF'},
+                "8" : { 'key' : "1e14243bd5" , 'label' : 'TBL'},
+                "9" : { 'key' : "16f451a9d6" , 'label' : 'BTS'},
+               "10" : { 'key' : "384ea03749" , 'label' : 'Epsilon-first'}
+        }
+for j in range(iterations):
 
+    for k,v in experiments.items():
+        exp_id = k
+        key = v['key']
+        url = "{}/{}/resetexperiment?key={}&theta_key={}&theta_value={}".format(BASE_URL, exp_id, key, theta_key, theta_value)
+        result = get(url)
+        print(result.text)
+        if v['label'] == 'Epsilon-first':
+            url = "{}/{}/resetexperiment?key={}&theta_key={}&theta_value={}".format(BASE_URL, exp_id, key, "count", "count" )
+            result = get(url)
+            print(result.text)
 
-mongo_client = MongoClient('localhost',27017)
-mongo_db = mongo_client['logs']
+    exp_id = 11
+    key = "384dc6a03a"
 
-exp_id_off = 6
-
-results = mongo_db.logs.find({"type":"offline_evaluation","experiment":exp_id_off},sort=[("time",DESCENDING)])
-
-suggestion = np.array([0])
-#action = np.array([0])
-regret = np.array([0])
-
-for row in results:
-    print(row["suggestion"])
-    suggestion = np.append(suggestion, row["suggestion"])
-#    action = np.append(action, row["action"])
-    regret = np.append(regret, (regret[-1] + (10 - row["reward"])))
-
-#threshold = action - suggestion
-
-#plt.plot(threshold)
-plt.plot(regret)
-plt.ylabel("Regret")
-plt.xlabel("Time")
-plt.show()
-
-plt.plot(suggestion)
-plt.title("Suggestions")
-plt.xlabel("Time")
-plt.ylabel("x")
-plt.show()
+    for i in range(N):
+        #url = "{}/{}/getaction.json?key={}".format(BASE_URL,exp_id,key)
+        #result = get(url)
+        #jsonobj = json.loads(result.text)
+        
+        y_send = y[i]
+        x_send = x[i]
+        url = "{}/{}/setreward.json?key={}&reward={}&action={}&context={}".format(BASE_URL,exp_id,key,json.dumps({"y":y_send}),json.dumps({"x":x_send}),json.dumps({"iter":j,"var":var,"inter":i}))
+        result = get(url)
+        print("Interaction {}, iteration {}".format(i,j))
+        print(result.text)

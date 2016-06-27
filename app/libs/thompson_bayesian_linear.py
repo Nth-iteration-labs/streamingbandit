@@ -27,12 +27,12 @@ class ThompsonBayesianLinear():
         to_dict['P'] = to_dict['P'].tolist()
         return to_dict
 
-    def update(self, y, x):
+    def update(self, y, x, discount = 1):
         # Update J and P
         y = y
         x = np.matrix(x)
-        self.value['J'] = ((x*y)/self.value['err']) + self.value['J']
-        self.value['P'] = ((x.T*x)/self.value['err']) + self.value['P']
+        self.value['J'] = (discount*(x*y)/self.value['err']) + self.value['J']
+        self.value['P'] = (discount*(x.T*x)/self.value['err']) + self.value['P']
     
     def sample(self):
         # Transform J = Sigma^-1 * mu to mu

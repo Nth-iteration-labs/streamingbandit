@@ -13,15 +13,15 @@ BASE_URL = "http://localhost:8080"
 theta_key = "simulation"
 theta_value = "simulation"
 
-lensim = 100
-N = 10000
+lensim = 10
+N = 1000
 
 experiments = { 
-                "5" : { 'key' : "281804239f" , 'label' : 'Random'},
-                "7" : { 'key' : "29ffa7bc43" , 'label' : 'LiF'},
-                "8" : { 'key' : "1e14243bd5" , 'label' : 'TBL'},
+                #"5" : { 'key' : "281804239f" , 'label' : 'Random'},
+                #"7" : { 'key' : "29ffa7bc43" , 'label' : 'LiF'},
+                #"8" : { 'key' : "1e14243bd5" , 'label' : 'TBL'},
                 "9" : { 'key' : "16f451a9d6" , 'label' : 'BTS'},
-               "10" : { 'key' : "384ea03749" , 'label' : 'Epsilon-first'}
+               #"10" : { 'key' : "384ea03749" , 'label' : 'Epsilon-first'}
         }
 
 np.random.seed(10)

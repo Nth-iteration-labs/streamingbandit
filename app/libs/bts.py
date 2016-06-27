@@ -37,12 +37,12 @@ class BTS():
         select = np.random.choice(len(self.params))
         return self.params[select]
 
-    def update(self, y, x, *args):
+    def update(self, y, x, *args, **kwargs):
         draws = np.random.binomial(1,.5,len(self.params))
         for i in range(0, len(self.params)):
             if draws[i] == 1:
                 model = self.update_method(self.params[i], *args)
-                model.update(y,x)
+                model.update(y,x, **kwargs)
                 self.params[i] = model.get_dict()
 
     def get_dict(self):

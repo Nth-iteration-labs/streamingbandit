@@ -17,11 +17,11 @@ lensim = 100
 N = 10000
 
 experiments = { 
-                "5" : { 'key' : "281804239f" , 'label' : 'Random'},
-                "7" : { 'key' : "29ffa7bc43" , 'label' : 'LiF'},
-                "8" : { 'key' : "1e14243bd5" , 'label' : 'TBL'},
-                #"9" : { 'key' : "16f451a9d6" , 'label' : 'BTS'},
-               "10" : { 'key' : "384ea03749" , 'label' : 'Epsilon-first'}
+                "5" : { 'key' : "281804239f" , 'label' : 'Random', 'color' : 'black'},
+                "7" : { 'key' : "29ffa7bc43" , 'label' : 'LiF', 'color' : 'brown' },
+                "8" : { 'key' : "1e14243bd5" , 'label' : 'TBL', 'color' : 'blue'},
+                #"9" : { 'key' : "16f451a9d6" , 'label' : 'BTS', 'color' : 'red'},
+               "10" : { 'key' : "384ea03749" , 'label' : 'Epsilon-first', 'color' : 'green'}
         }
 
 fig = plt.figure(1)
@@ -40,7 +40,7 @@ for k,v in experiments.items():
 
     regret = regret / lensim
 
-    ax.plot(regret, label = v['label'])
+    ax.plot(regret, label = v['label'], color = v['color'])
 
 box = ax.get_position()
 ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])
