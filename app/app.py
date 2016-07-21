@@ -69,6 +69,8 @@ urls = [
     # action and reward handler (core)
     (r"(?i)/(?P<exp_id>[0-9]+)/getaction.json", corehandlers.ActionHandler),
     (r"(?i)/(?P<exp_id>[[0-9]+)/setreward.json", corehandlers.RewardHandler),
+    # Reset theta handler
+    (r"(?i)/(?P<exp_id>[0-9]+)/resetexperiment", corehandlers.ResetHandler),
     
     # getting /setting theta (core: but obscure)
     #(r"(?i)/(?P<exp_id>[0-9]+)/gettheta.json", corehandlers.ActionHandler),

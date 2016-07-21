@@ -23,6 +23,16 @@
         "name": "Lock in Feedback",
         "getActionCode":"lif_getaction.py",
         "setRewardCode":"lif_setreward.py"
+        },
+    "6":{
+	"name": "Bootstrapped Thompson Sampling",
+	"getActionCode":"bts_getaction.py",
+	"setRewardCode":"bts_setreward.py"
+        },
+    "7":{
+	"name": "Thompson Bayesian Linear Regression",
+	"getActionCode":"tbl_getaction.py",
+	"setRewardCode":"tbl_setreward.py"
         }
     }
 }

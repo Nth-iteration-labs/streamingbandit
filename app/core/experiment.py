@@ -133,6 +133,13 @@ class Experiment():
             all_values = True
         return self.db.get_theta(db_key, all_values, all_float)
 
+    def delete_theta(self, key = None, value = None, name = "_theta"):
+            
+        db_key = "exp:%s:" % (self.exp_id) + name
+        if key is not None and value is not None:
+            db_key = db_key + ":%s:%s" % (key, value)
+        return self.db.delete_theta(db_key)
+
     def get_log_data(self):
         """ Get all the logged data from the experiment
 

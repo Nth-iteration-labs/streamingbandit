@@ -50,15 +50,15 @@ class Simulate(tornado.web.RequestHandler):
         key = self.get_argument("key", default = False)
         
         # Number of draws
-        N = self.get_argument("N", default = 1000)
+        N = int(self.get_argument("N", default = 1000))
 
         log_stats = self.get_argument("log_stats", default = True)
 
         # Parameterset for the simulator
-        c = self.get_argument("c", default = 5)
-        c2 = self.get_argument("c2", default = 10)
-        mu = self.get_argument("mu", default = 0)
-        var = self.get_argument("var", default = .1)
+        c = float(self.get_argument("c", default = 5))
+        c2 = float(self.get_argument("c2", default = 10))
+        mu = float(self.get_argument("mu", default = 0))
+        var = float(self.get_argument("var", default = .1))
 
         if not key:
             self.set_status(401)
@@ -83,6 +83,7 @@ class Simulate(tornado.web.RequestHandler):
                 # Generate reward
 
                 y = -(action["x"] - c)**2 + c2 + np.random.normal(mu, var)
+                #y = 15 + 8*action["x"] + 10*action["x"]**2 + np.random.normal(mu, var)
 
                 reward = {"y" : y}
 
@@ -93,7 +94,7 @@ class Simulate(tornado.web.RequestHandler):
                 rewards = np.append(rewards, y)
                 tmp_rot = (rewards[-1] + y) / (i+1)
                 reward_over_time = np.append(reward_over_time, tmp_rot)
-                regret = np.append(regret, (regret[-1] + (5 - y)))
+                regret = np.append(regret, (regret[-1] + (c2 - y)))
 
                 #self.write("n = {}, Regret is: {}, reward = {} <br>".format(i,regret[-1], rewards[-1]))
 
@@ -108,6 +109,7 @@ class Simulate(tornado.web.RequestHandler):
                 __EXP__.log_data({
                     "type" : "evaluation",
                     "time" : int(time.time()),
+                    "experiment" : exp_id,
                     "N" : N,
                     "c" : c,
                     "c2" : c2,
@@ -116,7 +118,7 @@ class Simulate(tornado.web.RequestHandler):
                     "regret" : Binary(_pickle.dumps(regret, protocol = 2), subtype = 128)
                     })
 
-            self.write(json.dumps({'simulate':'success'}))
+                self.write(json.dumps({'simulate':'success','experiment':exp_id}))
         else:
             self.set_status(401)
             self.write("Key is not valid for this experiment")

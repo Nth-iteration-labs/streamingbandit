@@ -32,12 +32,6 @@ class Lif:
         return theta_dict
 
     def suggest(self):
-
-        if np.all(np.isfinite(self.theta['Yw'][:,0])):
-            self.theta['x0'] = np.mean(self.theta['Yw'][:,1])
-            self.theta['x0'] = self.theta['x0'] + self.gamma * sum( self.theta['Yw'][:,2] )
-            if self.lifversion==1: self.theta['Yw'].fill(np.nan)
-
         self.theta['t'] = self.theta['t'] + 1
         x = self.theta['x0'] + self.A*np.cos(self.omega * self.theta['t'])
         suggestion = {'x': x, 't':self.theta['t'], 'x0': self.theta['x0']}
@@ -45,6 +39,10 @@ class Lif:
         return suggestion
 
     def update(self, t, x, y):
+        if np.all(np.isfinite(self.theta['Yw'][:,0])):
+            self.theta['x0'] = np.mean(self.theta['Yw'][:,1])
+            self.theta['x0'] = self.theta['x0'] + self.gamma * sum( self.theta['Yw'][:,2] )
+            if self.lifversion==1: self.theta['Yw'].fill(np.nan)
 
         y = self.A*np.cos(self.omega * t)*y
         row_to_add = np.array([t,x,y])
