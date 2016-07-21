@@ -2,6 +2,7 @@ import json
 from requests import put,get
 import numpy as np
 import matplotlib.pyplot as  plt
+import pandas as pd
 
 BASE_URL = "http://localhost:8080"
 
@@ -9,19 +10,27 @@ BASE_URL = "http://localhost:8080"
 theta_key = "simulation"
 theta_value = "simulation"
 
-N = 10000
+#N = 10000
 
-np.random.seed(10)
+#np.random.seed(10)
 
-x = np.random.uniform(0,10,N)
-c = 5
-c2 = 10
-mu = 0
-var = 1
+#x = np.random.uniform(0,10,N)
+#c = 5
+#c2 = 10
+#mu = 0
+#var = 1
 
 iterations = 100
 
-y = -(x - c)**2 + c2 + np.random.normal(mu,var,N)
+#y = -(x - c)**2 + c2 + np.random.normal(mu,var,N)
+
+data = pd.read_csv('results_bonusbay_filtered.csv')
+
+df1 = data[data['context.StoreID'] == 15337][['split','revenue']]
+df1 = np.asarray(df1)
+N = len(df1)
+
+df1[:,1] = (1 - df1[:,0])*df1[:,1]
 
 experiments = { 
                 "5" : { 'key' : "281804239f" , 'label' : 'Random'},
@@ -51,9 +60,9 @@ for j in range(iterations):
         #result = get(url)
         #jsonobj = json.loads(result.text)
         
-        y_send = y[i]
-        x_send = x[i]
-        url = "{}/{}/setreward.json?key={}&reward={}&action={}&context={}".format(BASE_URL,exp_id,key,json.dumps({"y":y_send}),json.dumps({"x":x_send}),json.dumps({"iter":j,"var":var,"inter":i}))
+        y_send = df1[i,1]
+        x_send = df1[i,0]*10
+        url = "{}/{}/setreward.json?key={}&reward={}&action={}&context={}".format(BASE_URL,exp_id,key,json.dumps({"y":y_send}),json.dumps({"x":x_send}),json.dumps({"iter":j,"inter":i}))
         result = get(url)
         print("Interaction {}, iteration {}".format(i,j))
         print(result.text)
