@@ -34,8 +34,7 @@ class Lif:
     def suggest(self):
 
         if np.all(np.isfinite(self.theta['Yw'][:,0])):
-            self.theta['x0'] = np.mean(self.theta['Yw'][:,1])
-            self.theta['x0'] = self.theta['x0'] + self.gamma * sum( self.theta['Yw'][:,2] )
+            self.theta['x0'] = self.theta['x0'] + self.gamma * sum( self.theta['Yw'][:,2] ) / self.T
             if self.lifversion==1: self.theta['Yw'].fill(np.nan)
 
         self.theta['t'] = self.theta['t'] + 1
