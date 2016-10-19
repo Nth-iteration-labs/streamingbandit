@@ -17,6 +17,7 @@ Python 3.x+ (untested on Python 2.7) with the following packages:
 * [APScheduler](http://apscheduler.readthedocs.io/)
 
 [Redis](http://redis.io)
+
 [MongoDB](http://www.mongodb.com)
 
 # Installation & Configuration
