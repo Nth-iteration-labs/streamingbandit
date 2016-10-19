@@ -36,7 +36,6 @@ class BTS():
                                 tmp_params[k] = v
                         self.params[i] = tmp_params.copy()
                     self.params = collections.OrderedDict(self.params)
-                    print(self.params)
                 else:
                     self.params = {i : params.copy() for i in range(0,m)}
                     self.params = collections.OrderedDict(self.params)
