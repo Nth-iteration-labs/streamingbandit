@@ -1,18 +1,23 @@
-# streamingbandit
+# StreamingBandit
 
-Provides a webserver to quickly setup and evaluate possible solutions to contextual multi-armed bandit problems. Allows user to create new "experiments", each with their own policy, and disclose an API to evaluate the policy in applications.
+Provides a webserver to quickly setup and evaluate possible solutions to contextual multi-armed bandit (cMAB) problems. Allows user to create new "experiments", each with their own policy, and disclose an API to evaluate the policy in applications.
 
 For the documentation see http://mkaptein.github.io/streamingbandit
 
 # Pre-requisites
 
-Python 3.x+ (although 2.7 seems to work) with the following packages:
-* Tornado
-* json
-* redis
-* yaml (PYYamel)
-* mongo
-* Redis 2.8+
+Python 3.x+ (untested on Python 2.7) with the following packages:
+* [Tornado](http://www.tornadoweb.org)
+* [Redis-Py](http://redis-py.readthedocs.io/en/latest/)
+* [YAML](http://pyyaml.org)
+* [PyMongo](http://api.mongodb.com/python/current/)
+* [NumPy](http://www.numpy.org)
+* [SciPy](http://www.scipy.org)
+* [scikit-learn](http://scikit-learn.org/stable/)
+* [APScheduler](http://apscheduler.readthedocs.io/)
+
+[Redis](http://redis.io)
+[MongoDB](http://www.mongodb.com)
 
 # Installation & Configuration
 
@@ -22,18 +27,12 @@ Python 3.x+ (although 2.7 seems to work) with the following packages:
 To install all dependencies:
 
 ```
-sudo python setup.py install
+sudo python3 setup.py install
 ```
-### Windows
-run (as administrator?):
-```
-python setup.py install
-``` 
-
 
 ## Redis
 ### Mac
-to install redis on Mac via _Brew_
+To install redis on Mac via _Brew_:
 ```
 brew install redis
 ```
@@ -43,7 +42,7 @@ You could look at this tutorial: https://www.digitalocean.com/community/tutorial
 
 ## MongoDB
 ### Mac
-To install Brew via _Brew_
+To install MongoDB via _Brew_:
 ```
 brew install mongodb
 ```
@@ -51,40 +50,26 @@ brew install mongodb
 ### Linux (ubuntu/debian)
 see http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/
 
-Configuration file (<root>/app/config.cfg) contains both Redis-server IP and Port as well as the mongo server IP and port. If you run all three on the same host, your good to go with the default settings, otherwise change them to your environment
+Configuration file (<root>/app/config.cfg) contains both Redis-server IP and Port as well as the mongo server IP and port. If you run all three on the same host, your good to go with the default settings, otherwise change them to your environment.
 
 # Running streamingbandit 
 
 When everything is configured, do the following:
-* Start redis (using redis-server command)
-* Start mongodb (using mongod command)
+* Start Redis 
+* Start MongoDB 
 
-(idealy they are automagically started, as they are usally used in a server-context)
+(Ideally they are automatically started, as they are usally used in a server-context. Look at the links above to find how-to's on starting Redis and MongoDB automatically.)
 
-Then you can start streamingbandit web-server via the terminal (using python app.py). (note that this would be the simple local testing process, for actual deployment one would need a different approach).
+Then you can start streamingbandit web-server via the terminal:
+```
+python3 app.py
+```
+(Note that this would be the simple local testing process, for actual deployment one would need a different approach.)
 
-On you local machine browse to: http://localhost:8080 (which is the default port where Tornado will run)
+On your local machine browse to: http://localhost:8080 (which is the default port where Tornado will run)
 Then, either browse to:
 * http://localhost:8080/reference.html to see the docs or,
 * http://localhost:8080/management.html to manage the experiments running on the server.
-
-# To-do list
-(see issues).
-
-# Developing javascript 
-We use some build tools to manage javascript. In order to generate your own, please use these steps:
-
-install npm on your computer
-
-```
-npm install grunt 
-npm install bower
-
-```
-after which you can run the command: ```grunt``` when present in the root folder
-
-This wil download all javascript libraries and minify our own.
-
 
 _Happy Streaming_
 
