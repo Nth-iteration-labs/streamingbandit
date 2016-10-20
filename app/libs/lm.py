@@ -5,10 +5,10 @@ import ast
 class LM():
     """ Class to interpet a linear model.
 
-    :variable dict default: The value of the model, consisting of a 1*p \
+    :var dict default: The value of the model, consisting of a 1*p \
     list of b, p*p list of lists A and counter n.
-    :variable int p: Number of estimators.
-    :variable bool add_intercept: If True, the update function expects that \
+    :var int p: Number of estimators.
+    :var bool add_intercept: If True, the update function expects that \
     there it has to add the intercept to the X vector itself.
     """
     def __init__(self, default, p=None, add_intercept=True): 

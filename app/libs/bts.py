@@ -11,17 +11,17 @@ import ast
 class BTS():
     """ Class to implement BTS.
 
-    :variable dict params: If initialized, a dict of dicts, containing m samples of \
+    :var dict params: If initialized, a dict of dicts, containing m samples of \
     parameters for the update_method/model that is being used. If not initialized \
     this will be made into a dict of dicts using the given params or default_params.
-    :variable Class update_method: A class reference containing the update method. \
+    :var Class update_method: A class reference containing the update method. \
     This will be checked and if it is a class, it will be used to update the parameters.
-    :variable int m: The number of bootstraps that BTS uses.
-    :variable dict default_params: A dictionary containing the default parameters. \
+    :var int m: The number of bootstraps that BTS uses.
+    :var dict default_params: A dictionary containing the default parameters. \
     If the params variable is empty/not long enough, this will be used.
-    :variable bool param_noise: If True, BTS will add parameter noise to all the lists \
+    :var bool param_noise: If True, BTS will add parameter noise to all the lists \
     in the default_params dictionary when initializing the bootstraps.
-    :variable double noisesd: If param_noise is used, this is the standard deviation \
+    :var double noisesd: If param_noise is used, this is the standard deviation \
     used for adding noise using a Normal distribution.
     """
     def __init__(self, params, update_method = None,  m = 100, default_params = None, param_noise = True, noisesd = .1):

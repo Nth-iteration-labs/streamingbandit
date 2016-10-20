@@ -6,7 +6,7 @@ import ast
 class ThompsonBayesianLinear():
     """ Class for Thompson sampling for Bayesian Linear Regression
     
-    :variable dict default: The value of the model, consisting of a 1*p \
+    :var dict default: The value of the model, consisting of a 1*p \
     list of J, p*p list of P and an error rate.
     """
     def __init__(self, default):
