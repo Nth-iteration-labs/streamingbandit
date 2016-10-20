@@ -1,20 +1,18 @@
 # -*- coding: utf-8 -*-
 import libs.bts as bts
 import libs.lm as lm
-import scipy.optimize
 
-# Extract values
-customer = self.context["Type"]
 
-BTS = bts.model(get_theta(), lm.Model, m = 100)
+BTS = bts.model(self.get_theta(), lm.Model, m = 100, default_parameters = {'b' : [1,1,1], 'A' : [[1,0,0],[0,1,0],[0,0,1]], 'n' : 0})
 
 # Return one of the m samples
-betas = BTS.sample()
+model = lm.LM(default = BTS.sample()
+betas = model.get_coefs()
 
-def model(x, betas, customer):
-    X = [1, x, x**2, customer, customer*x, customer*x**2]
-    return -1*x*betas
+if betas[2,0] == 0
+    x = 0
+else:
+    x = - (betas[1,0] / 2*betas[2,0])
+    x = np.asscalar(x)
 
-ymax = minimize(model, x0=10, bound[0,200])
-
-self.action["price"] = ymax
+self.action["Price"] = x
