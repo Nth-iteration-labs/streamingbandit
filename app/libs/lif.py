@@ -10,13 +10,14 @@ class Lif:
     Implementation of Lock in Feedback, \
     following the definition of Maurits Kaptein and \
     Davide Iannuzzi in https://arxiv.org/abs/1502.00598.
-    :variable dict theta:  Theta, consisting of Yw, t, and x0.
-    :variable float x0: Start value of X.
-    :variable float A: Amplitude.
-    :variable int T: Integration time.
-    :variable float gamma: Learnrate.
-    :variable float omega: Omega.
-    :lifversion: Either version 1 or 2.
+
+    :var dict theta:  Theta, consisting of Yw, t, and x0.
+    :var float x0: Start value of X.
+    :var float A: Amplitude.
+    :var int T: Integration time.
+    :var float gamma: Learnrate.
+    :var float omega: Omega.
+    :var int lifversion: Either version 1 or 2.
     """
 
     def __init__(self, theta, x0=1.0, a=1.4, t=100, gamma=.004, omega=0.8, lifversion=2):
@@ -28,12 +29,13 @@ class Lif:
 
     def _set_parameters(self, x0, a, t, gamma, omega, lifversion):
         """ Set the parameters.
+
         :param float x0: Start value of X.
         :param float A: Amplitude.
         :param int T: Integration time.
         :param float gamma: Learnrate.
         :param float omega: Omega.
-        :lifversion: Apply LiF version 1 or 2.
+        :param lifversion: Apply LiF version 1 or 2.
         """
         self.x0 = x0
         self.A = a
@@ -44,6 +46,7 @@ class Lif:
 
     def _set_dict(self, theta):
         """ Initialize or set theta.
+
         :param dict theta: Dict theta, consisting of Yw, t, and x0.
         """
         if theta == {}:
@@ -56,17 +59,19 @@ class Lif:
 
     def get_dict(self):
         """  Return dict theta.
-        :return:  Theta, consisting of Yw, t, and x0.
+
+        :returns:  Theta, consisting of Yw, t, and x0.
         """
         theta_dict = {'Yw': json.dumps(self.theta['Yw'].tolist()), 't': self.theta['t'], 'x0': self.theta['x0']}
         return theta_dict
 
     def suggest(self):
 
-        """  Return dict containing controlled variable x \
+        """  Returns dict containing controlled variable x \
         oscillating with time t, the value of t itself and \
         the current x0.
-        :return:  Suggestion {x,t,x0}
+
+        :returns:  Suggestion {x,t,x0}
         """
         if np.all(np.isfinite(self.theta['Yw'][:, 0])):
             self.theta['x0'] = self.theta['x0'] + self.gamma * sum(self.theta['Yw'][:, 2]) / self.T
@@ -82,10 +87,11 @@ class Lif:
     def update(self, t, x, y):
         """  Update LiF with outcome y at time t and at value x \
         integrating yω over a time T = 2πN.
+
         :param int t: time t.
         :param float x: controlled variable x.
         :param float y: outcome variable y.
-        :return:  True
+        :returns: True
         """
 
         y = self.A * np.cos(self.omega * t) * y
@@ -98,6 +104,7 @@ class Lif:
         """  Numpy FIFO helper function, \
         pushes a row onto a matrix \
         and removes the oldest value if full.
+
         :param numpy.ndarray m: matrix.
         :param np.array row: row to be added to matrix.
         """
@@ -113,6 +120,7 @@ class Lif:
         """  Numpy helper function, \
         returns an nan-filled numpy.ndarray \
         matrix of rows x columns.
+
         :param int rows: matrix
         :param int columns: columns to be added to matrix
         """
