@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import libs.bts as bts
-import libs.lm as ls
+import libs.lm as lm
 
 # Extract values:
 customer = self.context["Type"]
@@ -10,9 +10,12 @@ price = self.action["Price"]
 X = [1, price, price**2, customer, customer*price, customer*price**2]
 y = self.reward["Revenue"]
 
-# Update the lm.model, specifically the default, and
-# specify the number of replicates
-BTS = bts.model(self.get_theta(), lm.Model, m = 100, default_parameters = {'b' : [1,1,1], 'A' : [[1,0,0],[0,1,0],[0,0,1]], 'n' : 0})
+# Update the lm.model, specifically the default, 
+# the number of replicates and the default parameters
+BTS = bts.BTS(self.get_theta(), lm.LM, m = 100, default_params =  \
+                {'b' : [0,0,0,0,0,0], 'A' : [[1,0,0,0,0,0],[0,1,0,0,0,0], \
+                                             [0,0,1,0,0,0],[0,0,0,1,0,0], \
+                                             [0,0,0,0,1,0],[0,0,0,0,0,1]], 'n' : 0})
 
 BTS.update(y, X)
 
