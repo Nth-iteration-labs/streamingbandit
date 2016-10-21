@@ -14,9 +14,11 @@ import numpy as np
 
 # SETUP:
 BASE_URL = "http://localhost:8080" # Server location
-exp_id = 1                         # Experiment ID, change this accordingly
-key = "e0bc219a3"                  # Experiment key, change this accordingly
+exp_id = 12                         # Experiment ID, change this accordingly
+key = "3876e55172"                  # Experiment key, change this accordingly
 N = 1200                           # Length of experiment
+
+context = {}
 
 for i in range(N):
     # Random customer type:
@@ -28,7 +30,7 @@ for i in range(N):
     url = "{}/{}/getAction.json?key={}&context={}".format(BASE_URL,exp_id,key,json.dumps(context))
     result = get(url)
     jsonobj = json.loads(result.text)
-    action = int(jsonobj["action"]["Price"])
+    price = int(jsonobj["action"]["Price"])
     print(result.text)
 
     # Set the decision logic
@@ -38,7 +40,7 @@ for i in range(N):
     y = 5 + 3*price + 2*price**2 + 5*customer + 1.5*customer*price + -.25*customer*price**2 + np.random.normal(0,.1)
 
     # Set the reward
-    url = "{}/{}/setReward.json?key={}&reward={}&action={}&context={}".format(BASE_URL,exp_id,key,json.dumps({"Revenue":y}),json.dumps({"Price":action}),json.dumps(context))
+    url = "{}/{}/setReward.json?key={}&reward={}&action={}&context={}".format(BASE_URL,exp_id,key,json.dumps({"Revenue":y}),json.dumps({"Price":price}),json.dumps(context))
     result = get(url)
     print(result.text)
 

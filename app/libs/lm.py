@@ -11,7 +11,7 @@ class LM():
     :var bool add_intercept: If True, the update function expects that \
     there it has to add the intercept to the X vector itself.
     """
-    def __init__(self, default, p=None, add_intercept=True): 
+    def __init__(self, default, p=None, add_intercept=False): 
         """ Class to fit a linear model with a sequential solution for linear \
         regression.
         """
