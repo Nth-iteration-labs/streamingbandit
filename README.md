@@ -22,7 +22,7 @@ Python 3.x+ (untested on Python 2.7) with the following packages:
 
 # Installation & Configuration
 
-## Python dependencies for StreamingBandit:
+## Python dependencies for StreamingBandit
 
 ### Mac/Linux
 To install all dependencies:
