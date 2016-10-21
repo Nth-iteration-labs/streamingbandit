@@ -5,10 +5,11 @@ key = "question"
 value = self.context['question']
 
 theta = self.get_theta(all_float=False, key=key, value=value)
-Lif = lf.Lif(theta, x0=1.0, A=1.4 , T=100, gamma=.004, omega=.8, lifversion=2)
+Lif = lf.Lif(theta, x0=1.0, A=7 , T=150, gamma=.06, omega=1.0, lifversion=1)
 Lif.update(self.action["t"],self.action["x"], self.reward)
 self.set_theta(Lif, key=key, value=value)
 
+# An example of how to log the data
 import time
 
 self.log_data({
@@ -21,6 +22,3 @@ self.log_data({
     "context" : self.context,
     "q" : self.context['question']
 })
-
-# Example URL
-# /2/setReward.json?key=24ff7bb26&action={"x":7.8,"t":2.0}&reward=6.8&context={"question":2}

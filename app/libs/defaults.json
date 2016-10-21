@@ -10,21 +10,56 @@
         "setRewardCode":"ab_setreward.py"
         },
     "3":{
-        "name": "Thompson sampling K-arm bernoulli bandit",
-        "getActionCode":"thomp_getaction.py",
-        "setRewardCode":"ab_setreward.py"
-        },
-    "4":{
         "name": "Persuasive2016_Sample",
         "getActionCode":"persuasive2016_getaction.py",
         "setRewardCode":"persuasive2016_setreward.py"
         },
+    "4":{
+	"name": "Thompson Bayesian Linear Regression",
+	"getActionCode":"tbl_getaction.py",
+	"setRewardCode":"tbl_setreward.py"
+        },
     "5":{
+        "name": "JSS Introduction Example",
+        "getActionCode":"jss_getaction.py",
+        "setRewardCode":"jss_setreward.py"
+        },
+    "6":{
+        "name": "Thompson sampling K-arm bernoulli bandit",
+        "getActionCode":"thomp_getaction.py",
+        "setRewardCode":"ab_setreward.py"
+        },
+    "7":{
+        "name": "Thompson sampling for optimal design",
+        "getActionCode":"thomp_opt_getaction.py",
+        "setRewardCode":"thomp_opt_setreward.py"
+        },
+    "8":{
+	"name": "Bootstrapped Thompson Sampling",
+	"getActionCode":"bts_getaction.py",
+	"setRewardCode":"bts_setreward.py"
+        },
+    "9":{
         "name": "Lock in Feedback",
         "getActionCode":"lif_getaction.py",
         "setRewardCode":"lif_setreward.py"
         },
-    "6":{
+   "10":{
+        "name": "Nesting of policies",
+        "getActionCode":"nest_getaction.py",
+        "setRewardCode":"nest_setreward.py"
+        },
+   "11":{
+        "name": "Parallel evaluation of multiple policies",
+        "getActionCode":"eval_getaction.py",
+        "setRewardCode":"eval_setreward.py"
+        },
+   "12":{
+        "name": "Random data gathering in field experiment",
+        "getActionCode":"rand_getaction.py",
+        "setRewardCode":"rand_setreward.py"
+        },
+    "13":{
         "name": "SciKit Learn",
         "getActionCode":"scikit_getaction.py",
         "setRewardCode":"scikit_setreward.py"

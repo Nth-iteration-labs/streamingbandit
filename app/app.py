@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# Imports of external stuff
+# Imports of external stuff that is needed
 import tornado.escape
 import tornado.ioloop
 import tornado.web
@@ -18,6 +18,7 @@ from handlers import docshandlers
 from handlers import adminhandlers
 from handlers import statshandlers
 from handlers import managementhandlers
+from handlers import evalhandlers
 
 dir = os.path.dirname(__file__)
 f = open(os.path.join(dir,'config.cfg'),'r')
@@ -68,6 +69,8 @@ urls = [
     # action and reward handler (core)
     (r"(?i)/(?P<exp_id>[0-9]+)/getaction.json", corehandlers.ActionHandler),
     (r"(?i)/(?P<exp_id>[[0-9]+)/setreward.json", corehandlers.RewardHandler),
+    # Reset theta handler
+    (r"(?i)/(?P<exp_id>[0-9]+)/resetexperiment", corehandlers.ResetHandler),
     
     # getting /setting theta (core: but obscure)
     #(r"(?i)/(?P<exp_id>[0-9]+)/gettheta.json", corehandlers.ActionHandler),
@@ -87,6 +90,9 @@ urls = [
     (r"(?i)/stats/(?P<exp_id>[0-9]+)/gethourlytheta.json", statshandlers.GetHourlyTheta),
     (r"(?i)/stats/(?P<exp_id>[0-9]+)/getlog.json", statshandlers.GetLog),
                
+    # Offline and Simulated evaluation
+    (r"(?i)/eval/(?P<exp_id>[0-9]+)/simulate", evalhandlers.Simulate),
+    #(r"(?i)/eval/(?P<exp_id>[0-9]+)/offline", evalhandlers.Offline),
             
 ]
 

@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
-# Import tools (for updates, etc.) and time (for logging):
 import libs.thompson as thmp
-import time
-propl = thmp.BBThompsonList(self.get_theta(key="version"), ["A","B"])
-self.action["version"] = propl.thompson()
+propl = thmp.BBThompsonList(self.get_theta(key="Treatment"), ["1","2","3","4"])
+self.action["Treatment"] = propl.thompson()
 
 # (Optional): Log the data
+import time
 self.log_data({
         'type' : "getaction",
-        'action' : self.action["version"],
+        'action' : self.action["Treatment"],
         'time' : int(time.time()),
         'context' : self.context
       })

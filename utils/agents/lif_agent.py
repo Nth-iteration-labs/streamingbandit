@@ -3,6 +3,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 import urllib,json,codecs
 
+########################################################################################
+# This is the agent for the Lock-in Feedback example
+# This agent is more complex to show how LiF can handle a bit more complex models
+# Before going through this, please read the README that is provided in the utils folder
+#######################################################################################
+
 #change to pymongo for greater compatibility
 import iopro 
 
