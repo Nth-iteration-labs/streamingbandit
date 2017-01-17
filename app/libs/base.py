@@ -368,6 +368,7 @@ class List():
         for key, value in self.base_list.items():
             if value.get_value() > max_val:
                 max_key = key
+                max_val = value.get_value()
         return max_key
 
     def count(self):
