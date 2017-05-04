@@ -8,7 +8,7 @@ import json
 class Lif:
     """ Class implementing the Lock in Feedback algorithm.
     Implementation of Lock in Feedback, \
-    following the definition of Maurits Kaptein and \
+    following the definition by Maurits Kaptein and \
     Davide Iannuzzi in https://arxiv.org/abs/1502.00598.
 
     :var dict theta:  Theta, consisting of Yw, t, and x0.
