@@ -74,8 +74,8 @@ class Database:
         return result
     
     def delete_theta(self, key):
-        self.r_server.delete(key)
-        return True
+        return self.r_server.delete(key)
+        #return True
 
     def object_to_key(self, obj):   
         """ Converts an object to a redis key-style string.

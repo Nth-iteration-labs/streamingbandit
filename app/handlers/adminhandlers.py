@@ -40,10 +40,8 @@ class AddExperiment(tornado.web.RequestHandler):
             exp_obj["name"] = self.get_body_argument("name")
             exp_obj["getAction"] = self.get_body_argument("getaction")
             exp_obj["setReward"] = self.get_body_argument("setreward")
-            if self.get_body_argument("hourly"):
-                exp_obj["hourlyTheta"] = True
-            else:
-                exp_obj["hourlyTheta"] = False
+            exp_obj["hourlyTheta"] = self.get_body_argument("hourly")
+            exp_obj["advice_id"] = self.get_body_argument("advice_id")
         
             # Generate key (also stored in REDIS)
             exp_obj["key"] = hex(random.getrandbits(42))[2:-1]
@@ -155,10 +153,8 @@ class EditExperiment(tornado.web.RequestHandler):
             exp_obj["name"] = self.get_body_argument("name")
             exp_obj["getAction"] = self.get_body_argument("getaction")
             exp_obj["setReward"] = self.get_body_argument("setreward")      
-            if self.get_body_argument("hourly"):
-                exp_obj["hourlyTheta"] = True
-            else:
-                exp_obj["hourlyTheta"] = False
+            exp_obj["hourlyTheta"] = self.get_body_argument("hourly")
+            exp_obj["advice_id"] = self.get_body_argument("advice_id")
         
             db = Database()
             response = {}

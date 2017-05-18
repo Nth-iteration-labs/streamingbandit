@@ -14,8 +14,7 @@ def log_theta():
     experiment_ids = redis_db.get_experiment_ids()
     for experiment_id in experiment_ids:
         exp = Experiment(experiment_id)
-        properties = redis_db.get_one_experiment(experiment_id)
-        if properties['hourlyTheta'] == "True":
+        if exp.properties['hourlyTheta'] == "True":
             theta = exp.get_theta()
             theta['exp_id'] = experiment_id
             mongo_db.log_hourly_theta(theta)
