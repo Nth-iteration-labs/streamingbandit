@@ -158,6 +158,9 @@ class EditExperiment(tornado.web.RequestHandler):
             exp_obj["setReward"] = self.get_body_argument("setreward")      
             exp_obj["hourlyTheta"] = self.get_body_argument("hourly")
             exp_obj["advice_id"] = self.get_body_argument("advice_id")
+            if exp_obj["advice_id"] is True:
+                exp_obj["delta_days"] = self.get_body_argument("delta_days")
+                exp_obj["default_reward"] = self.get_body_argument("default_reward")
         
             db = Database()
             response = {}
