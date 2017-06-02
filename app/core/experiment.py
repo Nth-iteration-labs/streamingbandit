@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from db.database import Database
 from db.mongolog import MongoLog 
+from db.advice import Advice
 from math import sqrt; from itertools import count, islice
 import logging
 
@@ -13,6 +14,7 @@ class Experiment():
     def __init__(self, exp_id, key = "notUsedForLoopBack"):
         self.db = Database()
         self.mongo_db = MongoLog()
+        self.advice_db = Advice()
         self.exp_id = exp_id   # sets the experimentID
         self.properties = self.db.get_one_experiment(self.exp_id)
         self.key = key
@@ -134,7 +136,6 @@ class Experiment():
         return self.db.get_theta(db_key, all_values, all_float)
 
     def delete_theta(self, key = None, value = None, name = "_theta"):
-            
         db_key = "exp:%s:" % (self.exp_id) + name
         if key is not None and value is not None:
             db_key = db_key + ":%s:%s" % (key, value)
@@ -153,7 +154,13 @@ class Experiment():
         :returns dict of dict hourly: All the hourly logged thetas
         """
         return self.mongo_db.get_hourly_theta(self.exp_id)
-        
+    
+    def gen_advice_id(self, action, context):
+        return self.advice_db.log_advice(action, context)
+    
+    def get_by_advice_id(self, _id):
+        return self.advice_db.get_advice(_id)
+
     def debug(self, obj):
         self.context['_debug'] = obj
         

@@ -11,7 +11,7 @@ import logging.handlers
 
 # import scheduling ingredients
 from apscheduler.schedulers.tornado import TornadoScheduler
-from core.jobs import log_theta, tick
+from core.jobs import *
 # import Streampy classes
 from handlers import corehandlers
 from handlers import docshandlers
@@ -111,6 +111,7 @@ def main():
     scheduler = TornadoScheduler()
     # Use the imported jobs, every 60 minutes
     scheduler.add_job(log_theta, 'interval', minutes=60)
+    scheduler.add_job(advice_time_out, 'interval', minutes=60)
     scheduler.start()
     application.listen(settings["listen.port"])
     tornado.ioloop.IOLoop.instance().start()

@@ -2,13 +2,14 @@
 import tornado.escape
 import tornado.ioloop
 import tornado.web
+from bson import json_util
 import json
 
 from core.experiment import Experiment
 
 class ActionHandler(tornado.web.RequestHandler):
            
-    def get(self, exp_id):
+    def get(self, exp_id): # Documentation needs update to advice_id
         """ Get an action given a context for a specific exp_id
         
         +----------------------------------------------------------------+
@@ -38,7 +39,15 @@ class ActionHandler(tornado.web.RequestHandler):
             context = json.loads(self.get_argument("context", default="{}"))  
             response = __EXP__.run_action_code(context)
             
-            if self.settings['debug']:
+            if __EXP__.properties['advice_id'] == "True":
+                advice_id = __EXP__.gen_advice_id(response.copy(), context.copy())
+
+            # If that is the case, generate an advice_id using the functions in db.advice
+            # Or make a function in the Experiment class who will do this for you
+            # Return the advice_id and action response
+            if self.settings['debug'] and __EXP__.properties['advice_id'] == "True":
+                self.write(json.dumps({'action':response, 'context':context, 'advice_id':advice_id}, default = json_util.default))
+            elif self.settings['debug']:
                 self.write(json.dumps({'action':response, 'context':context}))
             else:
                 self.write(json.dumps({'action':response}))
@@ -50,7 +59,7 @@ class ActionHandler(tornado.web.RequestHandler):
 
 class RewardHandler(tornado.web.RequestHandler):
 
-    def get(self, exp_id):
+    def get(self, exp_id): # Documentation needs update to advice_id
         """ Update the parameters for a given experiment
 
         +----------------------------------------------------------------+
@@ -73,14 +82,22 @@ class RewardHandler(tornado.web.RequestHandler):
         __EXP__ = Experiment(exp_id, key)
 
         if __EXP__.is_valid():
-            context = json.loads(self.get_argument("context", default="{}"))
-            action = json.loads(self.get_argument("action", default="{}"))
+            if self.get_argument("advice_id", default = "") == "":
+                context = json.loads(self.get_argument("context", default="{}"))
+                action = json.loads(self.get_argument("action", default="{}"))
+            else:
+                advice_id = self.get_argument("advice_id", default = "")
+                log = __EXP__.get_by_advice_id(advice_id)
+                if log == False:
+                    self.finish("Advice ID does not exist!")
+                else:
+                    context = log['context']
+                    action = log['action']
             reward = json.loads(self.get_argument("reward", default="{}"))
-            
             __EXP__.run_reward_code(context, action, reward)
             
             if self.settings['debug']:
-                self.write(json.dumps({'status':'success', 'action':action,'context':context, 'reward':reward}))
+                self.write(json.dumps({'status':'success', 'action':action, 'context':context, 'reward':reward}))
             else: 
                 self.write(json.dumps({'status':'success'}))
         else:
@@ -96,9 +113,11 @@ class ResetHandler(tornado.web.RequestHandler):
         __EXP__ = Experiment(exp_id, key)
 
         if __EXP__.is_valid():
-            __EXP__.delete_theta(key = theta_key, value = theta_value)
-
-            self.write(json.dumps({'status':'success'}))
+            status = __EXP__.delete_theta(key = theta_key, value = theta_value)
+            if status == True:
+                self.write(json.dumps({'status':'success'}))
+            else:
+                self.write(json.dumps({'status':'key does not exist'}))
         else:
             self.write_error(400)
 

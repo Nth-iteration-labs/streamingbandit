@@ -19,7 +19,6 @@ class AddExperiment(tornado.web.RequestHandler):
     def delete(self):
         raise tornado.web.HTTPError(status_code=404, log_message="invalid call")
     
-    
     def post(self):
         """ Create a new experiment
         
@@ -29,6 +28,9 @@ class AddExperiment(tornado.web.RequestHandler):
         :param string setreward: String of python code for set reward code
         :param bool adviceid: Bool indicating whether adviceIds are used
         :param bool hourly: Bool indicating whether the state of Theta should be stored hourly. 
+        :param bool advice_id: Bool indicating whether the getAdvice and setReward calls should return an advice_id
+        :param int delta_days: If advice_id is True, supply this to give the number of days that an advice_id should be stored
+        :param dict default_reward: If advice_id is True, supply this to give the default reward for advice_id's that are over their delta_days limit
         :returns: A JSON of the form:
             { id : the assigned experiment id, 
              name : the name of the experiment (checked for duplicates),
@@ -37,13 +39,16 @@ class AddExperiment(tornado.web.RequestHandler):
         """
         if self.get_secure_cookie("user"):
             exp_obj = {}
-            exp_obj["name"] = self.get_body_argument("name")
-            exp_obj["getAction"] = self.get_body_argument("getaction")
-            exp_obj["setReward"] = self.get_body_argument("setreward")
-            if self.get_body_argument("hourly"):
-                exp_obj["hourlyTheta"] = True
-            else:
-                exp_obj["hourlyTheta"] = False
+            exp_obj["name"] = self.get_argument("name")
+            exp_obj["getAction"] = self.get_argument("getaction")
+            exp_obj["setReward"] = self.get_argument("setreward")
+            exp_obj["hourlyTheta"] = self.get_argument("hourly")
+            exp_obj["advice_id"] = self.get_argument("advice_id")
+            if exp_obj["advice_id"] in ["true", "True", "y", "yes"]:
+                exp_obj["advice_id"] = True
+            if exp_obj["advice_id"] is True:
+                exp_obj["delta_days"] = self.get_argument("delta_days")
+                exp_obj["default_reward"] = self.get_argument("default_reward")
         
             # Generate key (also stored in REDIS)
             exp_obj["key"] = hex(random.getrandbits(42))[2:-1]
@@ -147,18 +152,24 @@ class EditExperiment(tornado.web.RequestHandler):
         :param string setreward: String of python code for set reward code
         :param bool adviceid: Bool indicating whether adviceIds are used
         :param bool hourly: Bool indicating whether the state of Theta should be stored hourly (apscheduler)
+        :param bool advice_id: Bool indicating whether the getAdvice and setReward calls should return an advice_id
+        :param int delta_days: If advice_id is True, supply this to give the number of days that an advice_id should be stored
+        :param dict default_reward: If advice_id is True, supply this to give the default reward for advice_id's that are over their delta_days limit
         :returns: A JSON containing error yes / no.
         :raises AUTH_ERROR: If no secure cookie avaiable.
         """
         if self.get_secure_cookie("user"):
             exp_obj = {}
-            exp_obj["name"] = self.get_body_argument("name")
-            exp_obj["getAction"] = self.get_body_argument("getaction")
-            exp_obj["setReward"] = self.get_body_argument("setreward")      
-            if self.get_body_argument("hourly"):
-                exp_obj["hourlyTheta"] = True
-            else:
-                exp_obj["hourlyTheta"] = False
+            exp_obj["name"] = self.get_argument("name")
+            exp_obj["getAction"] = self.get_argument("getaction")
+            exp_obj["setReward"] = self.get_argument("setreward")
+            exp_obj["hourlyTheta"] = self.get_argument("hourly")
+            exp_obj["advice_id"] = self.get_argument("advice_id")
+            if exp_obj["advice_id"] in ["true", "True", "y", "yes"]:
+                exp_obj["advice_id"] = True
+            if exp_obj["advice_id"] is True:
+                exp_obj["delta_days"] = self.get_body_argument("delta_days")
+                exp_obj["default_reward"] = self.get_body_argument("default_reward")
         
             db = Database()
             response = {}
