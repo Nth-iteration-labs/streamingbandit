@@ -6,7 +6,7 @@ For the documentation see http://nth-iteration-labs.github.io/streamingbandit/
 
 # Pre-requisites
 
-Python 3.x+ (untested on Python 2.7) with the following packages:
+Python 3.x+ with the following packages:
 * [Tornado](http://www.tornadoweb.org)
 * [Redis-Py](http://redis-py.readthedocs.io/en/latest/)
 * [YAML](http://pyyaml.org)
