@@ -34,7 +34,7 @@ def advice_time_out():
         if exp.properties["advice_id"] == "True":
             # Get all the advices for this experiment
             # Check whether or not the date has exceeded the time-out rate
-            delta_days = exp.properties["delta_days"]
+            delta_days = int(exp.properties["delta_days"])
             advices_retrieved = advice_db.advices.find({"date":{"$lt":datetime.utcnow()-timedelta(days=delta_days)}})
             for adv in advices_retrieved:
                 log = exp.get_by_advice_id(str(adv["_id"]))
