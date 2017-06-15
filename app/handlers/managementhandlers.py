@@ -4,12 +4,9 @@ import tornado.ioloop
 import tornado.web
 import yaml
 
+from handlers.basehandler import BaseHandler
 
-class BaseHandler(tornado.web.RequestHandler):
-    
-    def get_current_user(self):
-        return self.get_secure_cookie("user")
-
+from db.users import Users
 
 # Management.html (index)
 class IndexHandler(BaseHandler):
@@ -36,17 +33,18 @@ class LogInHandler(BaseHandler):
 
     def post(self):
         # Get config:
-        f = open("config.cfg",'r')
-        settings = yaml.load(f)
-        f.close()
+        users = Users()
         
         # Check:
-        if self.get_argument("name") == settings["admin_pass"]:
-            self.set_secure_cookie("user", "VALID")
+        username = self.get_argument("username")
+        password = self.get_argument("password")
+        user_id = users.get_user_info(username, password)
+        if user_id:
+            self.set_secure_cookie("user", str(user_id))
             self.redirect("management.html")
         else:
             # Add user feedback!
-            self.render("login.html", warning="Wrong username")
+            self.render("login.html", warning="Wrong username or password!")
        
 # Logout.html      
 class LogOutHandler(BaseHandler):

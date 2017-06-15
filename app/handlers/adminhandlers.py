@@ -8,6 +8,8 @@ import random
 import logging
 logger = logging.getLogger("myLogger") 
 
+from handlers.basehandler import BaseHandler
+
 from db.database import Database
 
 
@@ -37,8 +39,10 @@ class AddExperiment(tornado.web.RequestHandler):
              error : (optional) error message }
         :raises AUTH_ERROR: If no secure cookie available.
         """
-        if self.get_secure_cookie("user"):
+        user = self.get_current_user()
+        if user:
             exp_obj = {}
+            exp_obj["user_id"] = int(user)
             exp_obj["name"] = self.get_argument("name")
             exp_obj["getAction"] = self.get_argument("getaction")
             exp_obj["setReward"] = self.get_argument("setreward")
@@ -82,10 +86,13 @@ class DeleteExperiment(tornado.web.RequestHandler):
         :returns: A JSON showing the deleted experiment.
         :raises AUTH_ERROR: if no secure cookie available.
         """
-        if self.get_secure_cookie("user"):
-            db = Database()
-            response = db.delete_experiment(exp_id)
-            self.write(json.dumps(response))
+        if self.get_current_user():
+            if self.validate_user_experiment(exp_id):
+                db = Database()
+                response = db.delete_experiment(exp_id)
+                self.write(json.dumps(response))
+            else:
+                self.write("This experiment does not exist or does not belong to this user ID.")
         else:
             self.write("AUTH_ERROR")
         
@@ -106,7 +113,8 @@ class GetListOfExperiments(tornado.web.RequestHandler):
         :returns: A JSON containing a list of {expid : name} pairs
         :raises AUTH_ERROR: If not secure cookie available.
         """
-        if self.get_secure_cookie("user"):
+        name = self.get_secure_cookie("user")
+        if name: 
             db = Database()
             response = db.get_all_experiments()
             self.write(json.dumps(response))

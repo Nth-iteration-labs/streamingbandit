@@ -14,7 +14,7 @@ from core.experiment import Experiment
 class Simulate(tornado.web.RequestHandler):
 
     def get(self, exp_id):
-        """ Simulate your experiment on a simple model
+        """ ALPHA Simulate your experiment on a simple model
         The model that is drawn from is:
 
         y = -(x - c)**2 + c2 + rnorm(mu,var)

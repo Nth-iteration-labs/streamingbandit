@@ -1,5 +1,6 @@
 import redis
 import yaml
+import random
 
 class Database:
     """ This database is written in Redis. If other types of database are used,
@@ -120,7 +121,7 @@ class Database:
         experiment.
         """
         members = self.r_server.smembers(explistkey)
-        exp_id = len(members) + 1
+        exp_id = hex(random.getrandbits(42))[2:-1]
         self.r_server.sadd(explistkey, exp_id)
         self.r_server.hmset("exp:%s:properties" % exp_id, obj)
         return(exp_id)
