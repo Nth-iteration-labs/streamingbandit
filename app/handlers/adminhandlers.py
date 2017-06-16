@@ -13,7 +13,7 @@ from handlers.basehandler import BaseHandler
 from db.database import Database
 
 
-class AddExperiment(tornado.web.RequestHandler):
+class AddExperiment(BaseHandler):
     
     def get(self):
         raise tornado.web.HTTPError(status_code=404, log_message="invalid call")
@@ -70,7 +70,7 @@ class AddExperiment(tornado.web.RequestHandler):
             self.write("AUTH_ERROR")
 
 
-class DeleteExperiment(tornado.web.RequestHandler):
+class DeleteExperiment(BaseHandler):
     
     def get(self, exp_id):
         """ Delete an experiment given an experiment id
@@ -92,12 +92,12 @@ class DeleteExperiment(tornado.web.RequestHandler):
                 response = db.delete_experiment(exp_id)
                 self.write(json.dumps(response))
             else:
-                self.write("This experiment does not exist or does not belong to this user ID.")
+                self.write("This experiment does not exist or does not belong to this user ID.") # Better error message?
         else:
             self.write("AUTH_ERROR")
         
 
-class GetListOfExperiments(tornado.web.RequestHandler):
+class GetListOfExperiments(BaseHandler):
     
     def get(self):
         """ Retrieve a list of experiments running on this server
@@ -113,16 +113,16 @@ class GetListOfExperiments(tornado.web.RequestHandler):
         :returns: A JSON containing a list of {expid : name} pairs
         :raises AUTH_ERROR: If not secure cookie available.
         """
-        name = self.get_secure_cookie("user")
-        if name: 
+        user = self.get_current_user()
+        if user: 
             db = Database()
-            response = db.get_all_experiments()
+            response = db.get_all_experiments(int(user))
             self.write(json.dumps(response))
         else:
             self.write("AUTH_ERROR")
         
         
-class GetExperiment(tornado.web.RequestHandler):
+class GetExperiment(BaseHandler):
     
     def get(self, exp_id):
         """ Retrieve a specific experiment running on this server
@@ -138,15 +138,18 @@ class GetExperiment(tornado.web.RequestHandler):
         :returns: A JSON containing all the info for the expriment.
         :raises AUTH_ERROR: If no secure cookie available.
         """
-        if self.get_secure_cookie("user"):
-            db = Database()
-            response = db.get_one_experiment(exp_id)
-            self.write(json.dumps(response))
+        if self.get_current_user():
+            if self.validate_user_experiment(exp_id):
+                db = Database()
+                response = db.get_one_experiment(exp_id)
+                self.write(json.dumps(response))
+            else:
+                self.write("This experiment does not exist or does not belong to this user ID.") # Better error message?
         else:
             self.write("AUTH_ERROR")
 
         
-class EditExperiment(tornado.web.RequestHandler):
+class EditExperiment(BaseHandler):
     
     def get(self):
         self.write_error(400)   # we really need nicer error handling
@@ -166,23 +169,28 @@ class EditExperiment(tornado.web.RequestHandler):
         :returns: A JSON containing error yes / no.
         :raises AUTH_ERROR: If no secure cookie avaiable.
         """
-        if self.get_secure_cookie("user"):
-            exp_obj = {}
-            exp_obj["name"] = self.get_argument("name")
-            exp_obj["getAction"] = self.get_argument("getaction")
-            exp_obj["setReward"] = self.get_argument("setreward")
-            exp_obj["hourlyTheta"] = self.get_argument("hourly")
-            exp_obj["advice_id"] = self.get_argument("advice_id")
-            if exp_obj["advice_id"] in ["true", "True", "y", "yes"]:
-                exp_obj["advice_id"] = True
-            if exp_obj["advice_id"] is True:
-                exp_obj["delta_days"] = self.get_body_argument("delta_days")
-                exp_obj["default_reward"] = self.get_body_argument("default_reward")
-        
-            db = Database()
-            response = {}
-            response["id"] = db.edit_experiment(exp_obj, exp_id)
-            self.write(json.dumps(response))
+        user = self.get_current_user()
+        if user: 
+            if self.validate_user_experiment(exp_id):
+                exp_obj = {}
+                exp_obj["user_id"] = int(user)
+                exp_obj["name"] = self.get_argument("name")
+                exp_obj["getAction"] = self.get_argument("getaction")
+                exp_obj["setReward"] = self.get_argument("setreward")
+                exp_obj["hourlyTheta"] = self.get_argument("hourly")
+                exp_obj["advice_id"] = self.get_argument("advice_id")
+                if exp_obj["advice_id"] in ["true", "True", "y", "yes"]:
+                    exp_obj["advice_id"] = True
+                if exp_obj["advice_id"] is True:
+                    exp_obj["delta_days"] = self.get_argument("delta_days")
+                    exp_obj["default_reward"] = self.get_argument("default_reward")
+            
+                db = Database()
+                response = {}
+                response["id"] = db.edit_experiment(exp_obj, exp_id)
+                self.write(json.dumps(response))
+            else:
+                self.write("This experiment does not exist or does not belong to this user ID.") # Better error message?
         else:
             self.write("AUTH_ERROR")
 

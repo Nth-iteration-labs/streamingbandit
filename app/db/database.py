@@ -152,7 +152,7 @@ class Database:
         self.r_server.delete("exp:%s:properties" % exp_id)
         return(exp_id)
         
-    def get_all_experiments(self, explistkey="admin:experiments"):
+    def get_all_experiments(self, user_id, explistkey="admin:experiments"):
         """ Returns a dict of experiment properties, so a dict of dicts.
 
         :param string explistkey: Set to standard value. Typically redundant.
@@ -163,7 +163,9 @@ class Database:
         i = 0         
         result = {}
         for member in members:
-            result[member] = self.r_server.hgetall("exp:%s:properties" % (member))
+            tmp_result = self.r_server.hgetall("exp:%s:properties" % (member))
+            if int(tmp_result['user_id']) == user_id:
+                result[member] = tmp_result.copy()
             i += 1
         return result
         

@@ -67,10 +67,11 @@ urls = [
     (r"(?i)/logout.html", managementhandlers.LogOutHandler),
 
     # action and reward handler (core)
-    (r"(?i)/(?P<exp_id>[0-9]+)/getaction.json", corehandlers.ActionHandler),
-    (r"(?i)/(?P<exp_id>[[0-9]+)/setreward.json", corehandlers.RewardHandler),
+    (r"(?i)/(?P<exp_id>\w+)/getaction.json", corehandlers.ActionHandler),
+    (r"(?i)/(?P<exp_id>\w+)/setreward.json", corehandlers.RewardHandler),
+
     # Reset theta handler
-    (r"(?i)/(?P<exp_id>[0-9]+)/resetexperiment", corehandlers.ResetHandler),
+    (r"(?i)/(?P<exp_id>\w+)/resetexperiment", corehandlers.ResetHandler),
     
     # getting /setting theta (core: but obscure)
     #(r"(?i)/(?P<exp_id>[0-9]+)/gettheta.json", corehandlers.ActionHandler),
@@ -80,18 +81,18 @@ urls = [
     (r"(?i)/admin/exp/add.json", adminhandlers.AddExperiment),
     (r"(?i)/admin/exp/list.json", adminhandlers.GetListOfExperiments),
     (r"(?i)/admin/exp/defaults.json", adminhandlers.ListDefaults),
-    (r"(?i)/admin/exp/default/(?P<default_id>[0-9]+)/get.json", adminhandlers.GetDefault),
-    (r"(?i)/admin/exp/(?P<exp_id>[0-9]+)/get.json", adminhandlers.GetExperiment),
-    (r"(?i)/admin/exp/(?P<exp_id>[0-9]+)/delete.json", adminhandlers.DeleteExperiment),
-    (r"(?i)/admin/exp/(?P<exp_id>[0-9]+)/edit.json", adminhandlers.EditExperiment),
+    (r"(?i)/admin/exp/default/(?P<default_id>\w+)/get.json", adminhandlers.GetDefault),
+    (r"(?i)/admin/exp/(?P<exp_id>\w+)/get.json", adminhandlers.GetExperiment),
+    (r"(?i)/admin/exp/(?P<exp_id>\w+)/delete.json", adminhandlers.DeleteExperiment),
+    (r"(?i)/admin/exp/(?P<exp_id>\w+)/edit.json", adminhandlers.EditExperiment),
 
     # analytics REST api (REST api for stats / logs)
-    (r"(?i)/stats/(?P<exp_id>[0-9]+)/getcurrenttheta.json", statshandlers.GetCurrentTheta),
-    (r"(?i)/stats/(?P<exp_id>[0-9]+)/gethourlytheta.json", statshandlers.GetHourlyTheta),
-    (r"(?i)/stats/(?P<exp_id>[0-9]+)/getlog.json", statshandlers.GetLog),
+    (r"(?i)/stats/(?P<exp_id>\w+)/getcurrenttheta.json", statshandlers.GetCurrentTheta),
+    (r"(?i)/stats/(?P<exp_id>\w+)/gethourlytheta.json", statshandlers.GetHourlyTheta),
+    (r"(?i)/stats/(?P<exp_id>\w+)/getlog.json", statshandlers.GetLog),
                
     # Offline and Simulated evaluation
-    (r"(?i)/eval/(?P<exp_id>[0-9]+)/simulate", evalhandlers.Simulate),
+    #(r"(?i)/eval/(?P<exp_id>\w+)/simulate", evalhandlers.Simulate),
     #(r"(?i)/eval/(?P<exp_id>[0-9]+)/offline", evalhandlers.Offline),
             
 ]
