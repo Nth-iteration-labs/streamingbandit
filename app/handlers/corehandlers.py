@@ -95,6 +95,7 @@ class RewardHandler(tornado.web.RequestHandler):
                     action = log['action']
             reward = json.loads(self.get_argument("reward", default="{}"))
             __EXP__.run_reward_code(context, action, reward)
+            __EXP__.log_setreward_data(contex, action, reward)
             
             if self.settings['debug']:
                 self.write(json.dumps({'status':'success', 'action':action, 'context':context, 'reward':reward}))

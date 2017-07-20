@@ -80,6 +80,14 @@ class Experiment():
         value["exp_id"] = self.exp_id
         self.mongo_db.log_row(value)
         return True
+
+    def log_setreward_data(self, context, action, reward):
+        """ Logging for all the setReward calls
+
+        :param dict data: Dict that contains action, context and reward
+        :returns: True if executed correctly
+        """
+        self.mongo_db.log_setreward(self.exp_id, context, action, reward)
         
     def set_theta(self, thetas, key = None, value = None, name = "_theta"):
         """ Set the new theta (parameters) in the database.
@@ -147,6 +155,13 @@ class Experiment():
         :returns dict logs: Dict of dict of all the manual logs
         """
         return self.mongo_db.get_log_rows(self.exp_id)
+
+    def get_setreward_log_data(self):
+        """ Get all the automatically logged setReward data from the experiment
+
+        :returns dict logs: Dict of dict of all the setReward logs
+        """
+        return self.mongo_db.get_setreward_log(self.exp_id)
         
     def get_hourly_theta(self):
         """ Get all the hourly logged thetas (if flag is set)

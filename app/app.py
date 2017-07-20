@@ -90,6 +90,8 @@ urls = [
     (r"(?i)/stats/(?P<exp_id>\w+)/getcurrenttheta.json", statshandlers.GetCurrentTheta),
     (r"(?i)/stats/(?P<exp_id>\w+)/gethourlytheta.json", statshandlers.GetHourlyTheta),
     (r"(?i)/stats/(?P<exp_id>\w+)/getlog.json", statshandlers.GetLog),
+    (r"(?i)/stats/(?P<exp_id>\w+)/getrewardlog.json", statshandlers.GetRewardLog),
+    #(r"(?i)/stats/(?P<exp_id>\w+)/getcumulativereward.json", statshandlers.GetCumulativeReward)
                
     # Offline and Simulated evaluation
     #(r"(?i)/eval/(?P<exp_id>\w+)/simulate", evalhandlers.Simulate),
@@ -111,8 +113,8 @@ def main():
     # Set Tornado Scheduler
     scheduler = TornadoScheduler()
     # Use the imported jobs, every 60 minutes
-    scheduler.add_job(log_theta, 'interval', minutes=60)
-    scheduler.add_job(advice_time_out, 'interval', minutes=60)
+    scheduler.add_job(log_theta, 'interval', minutes=60, misfire_grace_time=3600)
+    scheduler.add_job(advice_time_out, 'interval', minutes=60, misfire_grace_time=3600)
     scheduler.start()
     application.listen(settings["listen.port"])
     tornado.ioloop.IOLoop.instance().start()
