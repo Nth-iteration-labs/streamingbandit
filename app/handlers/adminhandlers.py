@@ -4,6 +4,7 @@ import tornado.ioloop
 import tornado.web
 import json
 import random
+import os
 
 import logging
 logger = logging.getLogger("myLogger") 
@@ -11,6 +12,7 @@ logger = logging.getLogger("myLogger")
 from handlers.basehandler import BaseHandler
 
 from db.database import Database
+from db.users import Users
 
 
 class AddExperiment(BaseHandler):
@@ -26,7 +28,9 @@ class AddExperiment(BaseHandler):
         
         :requires: A secure cookie obtained by logging in.
         :param string name: Name of the experiment
+        :param string getcontext: String of python code for get context code
         :param string getaction: String of python code for get action code
+        :param string getreward: String of python code for get reward code
         :param string setreward: String of python code for set reward code
         :param bool adviceid: Bool indicating whether adviceIds are used
         :param bool hourly: Bool indicating whether the state of Theta should be stored hourly. 
@@ -44,7 +48,9 @@ class AddExperiment(BaseHandler):
             exp_obj = {}
             exp_obj["user_id"] = int(user)
             exp_obj["name"] = self.get_argument("name")
+            exp_obj["getContext"] = self.get_argument("getcontext")
             exp_obj["getAction"] = self.get_argument("getaction")
+            exp_obj["getReward"] = self.get_argument("getreward")
             exp_obj["setReward"] = self.get_argument("setreward")
             exp_obj["hourlyTheta"] = self.get_argument("hourly")
             exp_obj["advice_id"] = self.get_argument("advice_id")
@@ -159,7 +165,9 @@ class EditExperiment(BaseHandler):
        
         :requires: A secure cookie obtained by logging in.
         :param string name: Name of the experiment
+        :param string getcontext: String of python code for get context code
         :param string getaction: String of python code for get action code
+        :param string getreward: String of python code for get reward code
         :param string setreward: String of python code for set reward code
         :param bool adviceid: Bool indicating whether adviceIds are used
         :param bool hourly: Bool indicating whether the state of Theta should be stored hourly (apscheduler)
@@ -175,7 +183,9 @@ class EditExperiment(BaseHandler):
                 exp_obj = {}
                 exp_obj["user_id"] = int(user)
                 exp_obj["name"] = self.get_argument("name")
+                exp_obj["getContext"] = self.get_argument("getcontext")
                 exp_obj["getAction"] = self.get_argument("getaction")
+                exp_obj["getReward"] = self.get_argument("getreward")
                 exp_obj["setReward"] = self.get_argument("setreward")
                 exp_obj["hourlyTheta"] = self.get_argument("hourly")
                 exp_obj["advice_id"] = self.get_argument("advice_id")
@@ -211,9 +221,9 @@ class ListDefaults(tornado.web.RequestHandler):
         :raises AUTH_ERROR: If no secure cookie available.
         """
         if self.get_secure_cookie("user"):
-            json_data=open("./libs/defaults.json").read()
-            data = json.loads(json_data)
-            self.write(data)
+            folderdata=os.listdir("./defaults")
+            folders = dict(enumerate(folderdata))
+            self.write(folders)
         else:
             self.write("AUTH_ERROR")
  
@@ -236,12 +246,48 @@ class GetDefault(tornado.web.RequestHandler):
         """ 
         if self.get_secure_cookie("user"):
             # first the name of the experiment
-            json_data=open("./libs/defaults.json").read()
-            raw=json.loads(json_data)       
+            folderdata = os.listdir("./defaults")
+            folderdata = dict(enumerate(folderdata))
             data={}
-            data["name"] = raw["defaults"][default_id]["name"]
-            data["getAction"]=open("./libs/defaults/"+raw["defaults"][default_id]["getActionCode"]).read()
-            data["setReward"]=open("./libs/defaults/"+raw["defaults"][default_id]["setRewardCode"]).read()
+            data["name"] = folderdata[default_id]
+            data["getContext"] = open("./defaults/"+data["name"]+"/getContext.py").read()
+            data["getAction"] = open("./defaults/"+data["name"]+"/getAction.py").read()
+            data["getReward"] = open("./defaults/"+data["name"]+"/getReward.py").read()
+            data["setReward"] = open("./defaults/"+data["name"]+"/setReward.py").read()
             self.write(data)
         else:
             self.write("AUTH_ERROR")
+
+
+class ResetExperiment(BaseHandler):
+    # Update this such that we require secure_cookie
+    def get(self, exp_id):
+
+        if self.get_secure_cookie("user"):
+            key = self.get_argument("key", default = False)
+            theta_key = self.get_argument("theta_key", default = False)
+            theta_value = self.get_argument("theta_value", default = False)
+            __EXP__ = Experiment(exp_id, key)
+
+            if __EXP__.is_valid():
+                status = __EXP__.delete_theta(key = theta_key, value = theta_value)
+                if status == True:
+                    self.write(json.dumps({'status':'success'}))
+                else:
+                    self.write(json.dumps({'status':'key does not exist'}))
+            else:
+                self.write_error(400)
+        else:
+            self.write("AUTH_ERROR")
+
+class AddUser(BaseHandler):
+
+    def get(self):
+        users = Users()
+        username = self.get_argument("username")
+        password = self.get_argument("password")
+        user_id = users.create_user(username, password)
+        if user_id is False:
+            self.write("User already exists!")
+        else:
+            self.write(json.dumps({'status' : 'success'}))

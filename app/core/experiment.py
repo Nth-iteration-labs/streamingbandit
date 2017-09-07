@@ -29,8 +29,16 @@ class Experiment():
         if key == self.key:
             self.valid = True
         return self.valid
-    
-    def run_action_code(self, context, action={}):    
+
+    def run_context_code(self, context = {}):
+        """
+        """
+        self.context = context
+        code = self.db.experiment_properties("exp:%s:properties" % (self.exp_id), "getContext")
+        exec(code)
+        return self.context
+
+    def run_action_code(self, context, action = {}):    
         """ Takes getAction code from Redis and executes it
         
         :param dict context: Context is a dictionary with the context for the \
@@ -45,9 +53,18 @@ class Experiment():
         self.action = action
         self.context = context
         code = self.db.experiment_properties("exp:%s:properties" % (self.exp_id), "getAction")
-        #logging.debug(code)
         exec(code)
         return self.action
+
+    def run_get_reward_code(self, context, action):
+        """
+        """
+        self.action = action
+        self.context = context
+        self.reward = {}
+        code = self.db_experiment_properties("exp:%s:properties" % (self.exp_id), "getReward")
+        exec(code)
+        return self.reward
         
     def run_reward_code(self, context, action, reward):
         """ Takes setReward code from Redis and executes it

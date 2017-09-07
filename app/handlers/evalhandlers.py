@@ -54,12 +54,6 @@ class Simulate(tornado.web.RequestHandler):
 
         log_stats = self.get_argument("log_stats", default = True)
 
-        # Parameterset for the simulator
-        c = float(self.get_argument("c", default = 5))
-        c2 = float(self.get_argument("c2", default = 10))
-        mu = float(self.get_argument("mu", default = 0))
-        var = float(self.get_argument("var", default = .1))
-
         if not key:
             self.set_status(401)
             self.write("Key not given")
@@ -74,18 +68,13 @@ class Simulate(tornado.web.RequestHandler):
         if __EXP__.is_valid():
             for i in range(N):
                 # Generate context
-                context = {}
+                context = __EXP__.run_context_code()
 
                 # Get action
-
                 action = __EXP__.run_action_code(context)
 
                 # Generate reward
-
-                y = -(action["x"] - c)**2 + c2 + np.random.normal(mu, var)
-                #y = 15 + 8*action["x"] + 10*action["x"]**2 + np.random.normal(mu, var)
-
-                reward = {"y" : y}
+                reward = __EXP__.run_get_reward_code(context, action)
 
                 # Set reward
                 __EXP__.run_reward_code(context, action, reward)
@@ -123,7 +112,3 @@ class Simulate(tornado.web.RequestHandler):
             self.set_status(401)
             self.write("Key is not valid for this experiment")
             return
-
-
-
-#class Offline(tornado.web.Requesthandler):

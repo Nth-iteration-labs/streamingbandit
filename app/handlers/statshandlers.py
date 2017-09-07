@@ -111,9 +111,3 @@ class GetRewardLog(BaseHandler):
                 self.write("This experiment does not exist or does not belong to this ID.")
         else:
             self.write("AUTH_ERROR")
-
-#class GetCumulativeReward(BaseHandler)
-#    def get(self, exp_id):
-#
-#        if self.get_current_user():
-#            if self.validate_user_experiment(exp_id)

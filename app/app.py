@@ -14,7 +14,6 @@ from apscheduler.schedulers.tornado import TornadoScheduler
 from core.jobs import *
 # import Streampy classes
 from handlers import corehandlers
-from handlers import docshandlers
 from handlers import adminhandlers
 from handlers import statshandlers
 from handlers import managementhandlers
@@ -24,10 +23,8 @@ dir = os.path.dirname(__file__)
 f = open(os.path.join(dir,'config.cfg'),'r')
 settings = yaml.load(f)
 f.close()
-
-
         
-# Logging:
+########## Logging ##########
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
 access_log = logging.getLogger("tornado.access")
@@ -39,45 +36,26 @@ ch = logging.StreamHandler()
 ch.setLevel(settings["log.console.level"])
 ch.setFormatter(formatter)
 
+logHandlerAccess = logging.handlers.RotatingFileHandler(settings["log.access"], maxBytes=4096, backupCount=2)
+logHandlerApp = logging.handlers.RotatingFileHandler(settings["log.app"], maxBytes=4096, backupCount=2)
 
-logHanderAccess = logging.handlers.RotatingFileHandler(settings["log.access"], maxBytes=4096, backupCount=2)
-logHanderApp = logging.handlers.RotatingFileHandler(settings["log.app"], maxBytes=4096, backupCount=2)
+logHandlerAccess.setFormatter(formatter)
+logHandlerApp.setFormatter(formatter)
 
-logHanderAccess.setFormatter(formatter)
-logHanderApp.setFormatter(formatter)
-
-access_log.addHandler(logHanderAccess)
+access_log.addHandler(logHandlerAccess)
 access_log.addHandler(ch)
-app_log.addHandler(logHanderApp)
+app_log.addHandler(logHandlerApp)
 app_log.addHandler(ch)
    
 app_log.info("Starting application {0}".format( settings["listen.port"]))
 
-# urls handlers
+########## Handlers ##########
 urls = [
-
-    # static pages (index + API reference)
-    (r"/", docshandlers.IndexHandler),
-    (r"(?i)/index.html", docshandlers.IndexHandler),
-    (r"(?i)/reference.html", docshandlers.ReferenceHandler),
-    
-    # management interface front-end
-    (r"(?i)/management.html", managementhandlers.IndexHandler),
-    (r"(?i)/login.html", managementhandlers.LogInHandler),
-    (r"(?i)/logout.html", managementhandlers.LogOutHandler),
-
-    # action and reward handler (core)
+    # Core API
     (r"(?i)/(?P<exp_id>\w+)/getaction.json", corehandlers.ActionHandler),
     (r"(?i)/(?P<exp_id>\w+)/setreward.json", corehandlers.RewardHandler),
 
-    # Reset theta handler
-    (r"(?i)/(?P<exp_id>\w+)/resetexperiment", corehandlers.ResetHandler),
-    
-    # getting /setting theta (core: but obscure)
-    #(r"(?i)/(?P<exp_id>[0-9]+)/gettheta.json", corehandlers.ActionHandler),
-    #(r"(?i)/(?P<exp_id>[0-9]+)/settheta.json", corehandlers.RewardHandler),
-     
-    # admin / management REST api (REST api for administration of experiments)
+    # Adminstration API
     (r"(?i)/admin/exp/add.json", adminhandlers.AddExperiment),
     (r"(?i)/admin/exp/list.json", adminhandlers.GetListOfExperiments),
     (r"(?i)/admin/exp/defaults.json", adminhandlers.ListDefaults),
@@ -85,18 +63,22 @@ urls = [
     (r"(?i)/admin/exp/(?P<exp_id>\w+)/get.json", adminhandlers.GetExperiment),
     (r"(?i)/admin/exp/(?P<exp_id>\w+)/delete.json", adminhandlers.DeleteExperiment),
     (r"(?i)/admin/exp/(?P<exp_id>\w+)/edit.json", adminhandlers.EditExperiment),
+    (r"(?i)/admin/exp/(?P<exp_id>\w+)/resetexperiment", adminhandlers.ResetExperiment),
+    (r"(?i)/admin/user/add.json", adminhandlers.AddUser),
 
-    # analytics REST api (REST api for stats / logs)
-    (r"(?i)/stats/(?P<exp_id>\w+)/getcurrenttheta.json", statshandlers.GetCurrentTheta),
-    (r"(?i)/stats/(?P<exp_id>\w+)/gethourlytheta.json", statshandlers.GetHourlyTheta),
-    (r"(?i)/stats/(?P<exp_id>\w+)/getlog.json", statshandlers.GetLog),
-    (r"(?i)/stats/(?P<exp_id>\w+)/getrewardlog.json", statshandlers.GetRewardLog),
-    #(r"(?i)/stats/(?P<exp_id>\w+)/getcumulativereward.json", statshandlers.GetCumulativeReward)
+    # Statistics API
+    (r"(?i)/stats/(?P<exp_id>\w+)/currenttheta.json", statshandlers.GetCurrentTheta),
+    (r"(?i)/stats/(?P<exp_id>\w+)/hourlytheta.json", statshandlers.GetHourlyTheta),
+    (r"(?i)/stats/(?P<exp_id>\w+)/log.json", statshandlers.GetLog),
+    (r"(?i)/stats/(?P<exp_id>\w+)/rewardlog.json", statshandlers.GetRewardLog),
+    #(r"(?i)/stats/(?P<exp_id>\w+)/summary.json", statshandlers.GetSummary),
+
+    # Login API
+    (r"(?i)/login.secure", managementhandlers.LogInHandler),
+    (r"(?i)/logout", managementhandlers.LogOutHandler),
                
-    # Offline and Simulated evaluation
-    #(r"(?i)/eval/(?P<exp_id>\w+)/simulate", evalhandlers.Simulate),
-    #(r"(?i)/eval/(?P<exp_id>[0-9]+)/offline", evalhandlers.Offline),
-            
+    # Simulation API
+    (r"(?i)/eval/(?P<exp_id>\w+)/simulate", evalhandlers.Simulate),
 ]
 
 tornadoConfig = dict({
@@ -122,7 +104,3 @@ def main():
 # Starting Server:
 if __name__ == "__main__":
     main()
-
-# This one works:
-# http://localhost:8080/1/getAction.json?context={}&key=12321
-# http://localhost:8080/1/setReward.json?key=12321&reward=1&action={}
