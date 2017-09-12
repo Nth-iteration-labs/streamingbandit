@@ -14,18 +14,7 @@ from core.experiment import Experiment
 class Simulate(tornado.web.RequestHandler):
 
     def get(self, exp_id):
-        """ ALPHA Simulate your experiment on a simple model
-        The model that is drawn from is:
-
-        y = -(x - c)**2 + c2 + rnorm(mu,var)
-
-        Currently there is no context. Make sure that the action of your
-        experiment results in:
-
-        {"x" : x}
-
-        This is how the model currently expects your action to be formulated.
-        This might become more flexible later on.
+        """ Simulate your experiment based on four scripts, which create a closed feedback loop.
 
         +--------------------------------------------------------------------+
         | Example                                                            |

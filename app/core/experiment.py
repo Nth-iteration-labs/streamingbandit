@@ -98,6 +98,15 @@ class Experiment():
         self.mongo_db.log_row(value)
         return True
 
+    def log_getaction_data(self, context, action):
+        """ Logging for all the getAction calls
+
+        :param dict data: Dict that contains action, and context
+        :returns: True if executed correctly
+        """
+        self.mongo_db.log_getaction(self.exp_id, context, action, reward)
+        return True
+
     def log_setreward_data(self, context, action, reward):
         """ Logging for all the setReward calls
 
@@ -105,6 +114,7 @@ class Experiment():
         :returns: True if executed correctly
         """
         self.mongo_db.log_setreward(self.exp_id, context, action, reward)
+        return True
         
     def set_theta(self, thetas, key = None, value = None, name = "_theta"):
         """ Set the new theta (parameters) in the database.
@@ -173,12 +183,39 @@ class Experiment():
         """
         return self.mongo_db.get_log_rows(self.exp_id)
 
-    def get_setreward_log_data(self):
-        """ Get all the automatically logged setReward data from the experiment
+    def get_getaction_log_data(self):
+        """ Get all the automatically logged getAciton data from the experiment.
 
         :returns dict logs: Dict of dict of all the setReward logs
         """
         return self.mongo_db.get_setreward_log(self.exp_id)
+
+    def get_setreward_log_data(self):
+        """ Get all the automatically logged setReward data from the experiment.
+
+        :returns dict logs: Dict of dict of all the setReward logs
+        """
+        return self.mongo_db.get_setreward_log(self.exp_id)
+
+    def get_summary(self):
+        """ Get a summary, consisting of:
+            - The number of getAction calls
+            - The date of the last getAction call
+            - The number of setReward calls
+            - The date of the last setReward call
+        
+        :returns dict of dict summary: The complete summary.
+        """
+        summary = {}
+        getactioncalls = self.get_getaction_log_data()
+        seq = [x['date'] for x in getactioncalls]
+        summary['lastAddedGetAction'] = max(seq)
+        summary['getActionCalls'] = len(getactioncalls)
+        setrewardcalls = self.get_setreward_log_data()
+        seq = [x['date'] for x in setrewardcalls]
+        summary['lastAddedSetReward'] = max(seq)
+        summary['setRewardCalls'] = len(setrewardcalls)
+        return summary
         
     def get_hourly_theta(self):
         """ Get all the hourly logged thetas (if flag is set)

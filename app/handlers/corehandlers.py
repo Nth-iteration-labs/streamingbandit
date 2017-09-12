@@ -42,11 +42,12 @@ class ActionHandler(tornado.web.RequestHandler):
             if __EXP__.properties['advice_id'] == "True":
                 advice_id = __EXP__.gen_advice_id(response.copy(), context.copy())
 
-            # If that is the case, generate an advice_id using the functions in db.advice
-            # Or make a function in the Experiment class who will do this for you
-            # Return the advice_id and action response
+            __EXP__.log_getaction_data(context, response)
+
             if self.settings['debug'] and __EXP__.properties['advice_id'] == "True":
                 self.write(json.dumps({'action':response, 'context':context, 'advice_id':advice_id}, default = json_util.default))
+            elif __EXP__.properties['advice_id'] == "True":
+                self.write(json.dumps({'action':response, 'advice_id':advice_id}, default = json_util.default))
             elif self.settings['debug']:
                 self.write(json.dumps({'action':response, 'context':context}))
             else:
@@ -95,7 +96,7 @@ class RewardHandler(tornado.web.RequestHandler):
                     action = log['action']
             reward = json.loads(self.get_argument("reward", default="{}"))
             __EXP__.run_reward_code(context, action, reward)
-            __EXP__.log_setreward_data(contex, action, reward)
+            __EXP__.log_setreward_data(context, action, reward)
             
             if self.settings['debug']:
                 self.write(json.dumps({'status':'success', 'action':action, 'context':context, 'reward':reward}))

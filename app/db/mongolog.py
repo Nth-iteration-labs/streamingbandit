@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from pymongo import MongoClient, ASCENDING, DESCENDING
 import yaml
+from datetime import datetime
 
 class MongoLog:
     """ A class to simply log stuff to MongoDB.
@@ -62,11 +63,28 @@ class MongoLog:
             self.thetas.append(theta)
         return self.thetas
 
+    def log_getaction(self, exp_id, context, action):
+        # Use MongoDB database called getaction and per exp_id 1 collection
+        self.getaction_db = self.mongo_client['getaction']
+        self.getaction_logs = self.getaction_db[str(exp_id)]
+        self.getaction_logs.insert_one({"context":context,"action":action,"date":datetime.utcnow().isoformat()})
+        return True
+    
+    def get_getaction_log(self, exp_id):
+        # Use mongoDB database called getaction and per exp_id 1 collection
+        self.getaction_db = self.mongo_client['getaction']
+        self.getaction_logs = self.getaction_db[str(exp_id)]
+        self.getactions = []
+        cursor = self.getaction_logs.find({})
+        for document in cursor:
+            self.getactions.append(document)
+        return self.getactions
+
     def log_setreward(self, exp_id, context, action, reward):
         # Use MongoDB database called setreward and per exp_id 1 collection
         self.setreward_db = self.mongo_client['setreward']
         self.setreward_logs = self.setreward_db[str(exp_id)]
-        self.setreward_logs.insert_one({"context":context,"action":action,"reward":reward})
+        self.setreward_logs.insert_one({"context":context,"action":action,"reward":reward,"date":datetime.utcnow().isoformat()})
         return True
 
     def get_setreward_log(self, exp_id):
