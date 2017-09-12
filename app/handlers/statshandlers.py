@@ -86,6 +86,32 @@ class GetLog(BaseHandler):
         else:
             self.write("AUTH_ERROR")
 
+class GetActionLog(BaseHandler):
+
+    def get(self, exp_id):
+        """ Get all the (automatically) logged getAction data.
+
+        +--------------------------------------------------------------------+
+        | Example                                                            |
+        +====================================================================+
+        | http://example.com/stats/EXP_ID/actionlog.json                     |
+        +--------------------------------------------------------------------+
+
+        :requires: A secure cookie, obtained by logging in.
+        :param int exp_id: The experiment ID for the logs that are to be retrieved.
+        :returns: A JSON of JSONs of the logs.
+        :raises: AUTH_ERROR if there is no secure cookie available.
+        """
+        if self.get_current_user():
+            if self.validate_user_experiment(exp_id):
+                exp = Experiment(exp_id)
+                response = exp.get_getaction_log_data()
+                self.write(json.dumps(response))
+            else:
+                self.write("This experiment does not exist or does not belong to this ID.")
+        else:
+            self.write("AUTH_ERROR")
+
 class GetRewardLog(BaseHandler):
 
     def get(self, exp_id):

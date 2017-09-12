@@ -232,15 +232,3 @@ class Experiment():
 
     def debug(self, obj):
         self.context['_debug'] = obj
-        
-#    def is_prime(self, n):
-#        """ Checks if given number is a prima.
-#
-#        :params int n
-#        """
-#        if n < 2: return False
-#        for number in islice(count(2), int(sqrt(n)-1)):
-#            if not n%number:
-#                return False
-#        return True
-        

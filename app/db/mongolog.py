@@ -25,7 +25,8 @@ class MongoLog:
         :param dict value: A dictionary that is to be saved.
         """
         # Get collection that belongs to this function.
-        self.logs = self.mongo_db['logs']
+        self.logs_db = self.mongo_client['logs']
+        self.logs = self.logs_db[str(value['exp_id'])]
         self.logs.insert_one(value)
         return True
 
@@ -35,9 +36,10 @@ class MongoLog:
         :param int exp_id: The specified experiment.
         :returns list dict logs: All the logs for that belong to the experiment.
         """
-        self.logs = self.mongo_db['logs']
+        self.logs_db = self.mongo_client['logs']
+        self.logs = self.logs_db[str(exp_id)]
         self.log_rows = []
-        for row in self.logs.find({"exp_id" : exp_id}, {'_id': False}).sort('_id', ASCENDING):
+        for row in self.logs.find({}, {'_id': False}).sort('_id', ASCENDING):
             self.log_rows.append(row)
         return self.log_rows
         
@@ -47,7 +49,8 @@ class MongoLog:
         :param dict value: The dictionary that needs to be added in MongoDB
         """
         # Get collection that belongs to this function
-        self.theta_logs = self.mongo_db['hourly_theta']
+        self.theta_logs_db = self.mongo_client['hourly_theta']
+        self.theta_logs = self.theta_logs_db[str(value['exp_id'])]
         self.theta_logs.insert_one(value)
         return True
         
@@ -57,9 +60,10 @@ class MongoLog:
         :param int exp_id: The specified experiment
         :returns list dict hourly: All the hourly thetas that belong to this experiment.
         """
-        self.theta_logs = self.mongo_db['hourly_theta']
+        self.theta_logs_db = self.mongo_client['hourly_theta']
+        self.theta_logs = self.theta_logs_db[str('exp_id')]
         self.thetas = []
-        for theta in self.theta_logs.find({"exp_id" : exp_id}, {'_id': False}).sort('_id', ASCENDING):
+        for theta in self.theta_logs.find({}, {'_id': False}).sort('_id', ASCENDING):
             self.thetas.append(theta)
         return self.thetas
 
