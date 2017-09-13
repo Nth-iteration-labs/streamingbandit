@@ -3,8 +3,13 @@ import tornado.escape
 import tornado.ioloop
 import tornado.web
 import yaml
+import json
+import traceback
 
 from db.database import Database
+
+class ExceptionHandler(tornado.web.HTTPError):
+    pass
 
 class BaseHandler(tornado.web.RequestHandler):
     
@@ -19,3 +24,25 @@ class BaseHandler(tornado.web.RequestHandler):
             return True
         else:
             return False
+    
+    def write_error(self, status_code, **kwargs): 
+        self.set_header('Content-Type', 'application/json')
+        if self.settings.get("serve_traceback") and "exc_info" in kwargs:
+            # in debug mode, try to send a traceback
+            lines = []
+            for line in traceback.format_exception(*kwargs["exc_info"]):
+                lines.append(line)
+            self.finish(json.dumps({
+                'error': {
+                    'code': status_code,
+                    'message': self._reason,
+                    'traceback': lines,
+                }
+            }))
+        else:
+            self.finish(json.dumps({
+                'error': {
+                    'code': status_code,
+                    'message': self._reason,
+                }
+            }))

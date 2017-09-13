@@ -9,9 +9,10 @@ import time
 from bson.binary import Binary
 import _pickle
 
+from handlers.basehandler import BaseHandler
 from core.experiment import Experiment
 
-class Simulate(tornado.web.RequestHandler):
+class Simulate(BaseHandler):
 
     def get(self, exp_id):
         """ Simulate your experiment based on four scripts, which create a closed feedback loop.
@@ -19,85 +20,72 @@ class Simulate(tornado.web.RequestHandler):
         +--------------------------------------------------------------------+
         | Example                                                            |
         +====================================================================+
-        |http://example.com/eval/5/simulate?key=XXX&N=10&c=5&c2=10&mu=0&var=1|
+        |http://example.com/eval/EXP_ID/simulate?N=1000                      |
         +--------------------------------------------------------------------+
 
         :param int exp_id: Experiment ID as specified in the url
-        :param string key: The key corresponding to the experiment
         :param int N: The number of simulation draws
-        :param int c: The size of the parabola
-        :param int c2: The height of the parabola
-        :param int mu: The mean of the noise on the model
-        :param int var: The variance of the noise on the model
         :param string log_stats: Flag for logging the results in the database
         
         :returns: A JSON of the form: {"simulate":"success"}
-        :raises AuthError: 401 Invalid Key
+        :raises: AUTH_ERROR if there is no secure cookie available
 
         """
+        if self.get_current_user():
+            if self.validate_user_experiment(exp_id):
 
-        key = self.get_argument("key", default = False)
-        
-        # Number of draws
-        N = int(self.get_argument("N", default = 1000))
+                N = int(self.get_argument("N", default = 1000))
+                log_stats = self.get_argument("log_stats", default = True)
 
-        log_stats = self.get_argument("log_stats", default = True)
+                __EXP__ = Experiment(exp_id)
 
-        if not key:
-            self.set_status(401)
-            self.write("Key not given")
-            return
+                rewards = np.array([0])
+                reward_over_time = np.array([])
+                regret = np.array([0])
 
-        __EXP__ = Experiment(exp_id, key)
+                for i in range(N):
+                    # Generate context
+                    context = __EXP__.run_context_code()
 
-        rewards = np.array([0])
-        reward_over_time = np.array([])
-        regret = np.array([0])
+                    # Get action
+                    action = __EXP__.run_action_code(context)
 
-        if __EXP__.is_valid():
-            for i in range(N):
-                # Generate context
-                context = __EXP__.run_context_code()
+                    # Generate reward
+                    reward = __EXP__.run_get_reward_code(context, action)
 
-                # Get action
-                action = __EXP__.run_action_code(context)
+                    # Set reward
+                    __EXP__.run_reward_code(context, action, reward)
+                    
+                    # Save stats
+                    rewards = np.append(rewards, y)
+                    tmp_rot = (rewards[-1] + y) / (i+1)
+                    reward_over_time = np.append(reward_over_time, tmp_rot)
+                    regret = np.append(regret, (regret[-1] + (c2 - y)))
 
-                # Generate reward
-                reward = __EXP__.run_get_reward_code(context, action)
-
-                # Set reward
-                __EXP__.run_reward_code(context, action, reward)
-                
-                # Save stats
-                rewards = np.append(rewards, y)
-                tmp_rot = (rewards[-1] + y) / (i+1)
-                reward_over_time = np.append(reward_over_time, tmp_rot)
-                regret = np.append(regret, (regret[-1] + (c2 - y)))
-
-                #self.write("n = {}, Regret is: {}, reward = {} <br>".format(i,regret[-1], rewards[-1]))
+                    #self.write("n = {}, Regret is: {}, reward = {} <br>".format(i,regret[-1], rewards[-1]))
 
 
-            # Now save the data together with a timestamp in the logs
-            # To read out the Numpy array data out again, use array =
-            # pickle.loads(record['feature'])
+                # Now save the data together with a timestamp in the logs
+                # To read out the Numpy array data out again, use array =
+                # pickle.loads(record['feature'])
 
-            # FOR FUTURE, the json_tricks package might be interesting
-            if log_stats == True:
-                print("Logging data")
-                __EXP__.log_data({
-                    "type" : "evaluation",
-                    "time" : int(time.time()),
-                    "experiment" : exp_id,
-                    "N" : N,
-                    "c" : c,
-                    "c2" : c2,
-                    "rewards" : Binary(_pickle.dumps(rewards, protocol = 2), subtype = 128),
-                    "reward_over_time" : Binary(_pickle.dumps(reward_over_time, protocol = 2), subtype = 128),
-                    "regret" : Binary(_pickle.dumps(regret, protocol = 2), subtype = 128)
-                    })
+                # FOR FUTURE, the json_tricks package might be interesting
+                if log_stats == True:
+                    print("Logging data")
+                    __EXP__.log_data({
+                        "type" : "evaluation",
+                        "time" : int(time.time()),
+                        "experiment" : exp_id,
+                        "N" : N,
+                        "c" : c,
+                        "c2" : c2,
+                        "rewards" : Binary(_pickle.dumps(rewards, protocol = 2), subtype = 128),
+                        "reward_over_time" : Binary(_pickle.dumps(reward_over_time, protocol = 2), subtype = 128),
+                        "regret" : Binary(_pickle.dumps(regret, protocol = 2), subtype = 128)
+                        })
 
-                self.write(json.dumps({'simulate':'success','experiment':exp_id}))
+                    self.write(json.dumps({'simulate':'success','experiment':exp_id}))
+            else:
+                raise ExceptionHandler(reason="Experiment could not be validated.", status_code=401)
         else:
-            self.set_status(401)
-            self.write("Key is not valid for this experiment")
-            return
+            raise ExceptionHandler(reason="Could not validate user.", status_code=401)

@@ -7,6 +7,8 @@ import json
 
 from core.experiment import Experiment
 
+from handlers.basehandler import BaseHandler, ExceptionHandler
+
 class ActionHandler(tornado.web.RequestHandler):
            
     def get(self, exp_id): # Documentation needs update to advice_id
@@ -29,9 +31,7 @@ class ActionHandler(tornado.web.RequestHandler):
         key = self.get_argument("key", default = False)
         
         if not key:
-            self.set_status(401)
-            self.write("invalid key")
-            return
+            raise ExceptionHandler(reason="Key not supplied.", status_code=400)
         
         __EXP__ = Experiment(exp_id, key)
         
@@ -54,9 +54,7 @@ class ActionHandler(tornado.web.RequestHandler):
                 self.write(json.dumps({'action':response}))
                 
         else:
-            self.set_status(401)       # Needs proper error handling
-            self.write("invalid key")
-            return
+            raise ExceptionHandler(reason="Key is invalid.", status_code=401)
 
 class RewardHandler(tornado.web.RequestHandler):
 
@@ -80,6 +78,10 @@ class RewardHandler(tornado.web.RequestHandler):
         :raises KeyError: 400 Error if Key is not valid.
         """
         key = self.get_argument("key", default = False)
+
+        if not key:
+            raise ExceptionHandler(reason="Key not supplied.", status_code=400)
+
         __EXP__ = Experiment(exp_id, key)
 
         if __EXP__.is_valid():
@@ -103,4 +105,4 @@ class RewardHandler(tornado.web.RequestHandler):
             else: 
                 self.write(json.dumps({'status':'success'}))
         else:
-            self.write_error(400) # Needs proper error handling
+            raise ExceptionHandler(reason="Key is invalid.", status_code=401)

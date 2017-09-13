@@ -4,7 +4,7 @@ import tornado.ioloop
 import tornado.web
 import yaml
 
-from handlers.basehandler import BaseHandler
+from handlers.basehandler import BaseHandler, ExceptionHandler
 
 from db.users import Users
 
@@ -22,7 +22,7 @@ class LogInHandler(BaseHandler):
             self.set_secure_cookie("user", str(user_id))
         else:
             # Add user feedback!
-            self.write("Wrong username or password!")
+            raise ExceptionHandler(reason="Wrong username or password!", status_code=401)
        
 class LogOutHandler(BaseHandler):
     

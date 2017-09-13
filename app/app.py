@@ -18,6 +18,7 @@ from handlers import adminhandlers
 from handlers import statshandlers
 from handlers import managementhandlers
 from handlers import evalhandlers
+from handlers import basehandler
 
 dir = os.path.dirname(__file__)
 f = open(os.path.join(dir,'config.cfg'),'r')
@@ -86,7 +87,7 @@ tornadoConfig = dict({
     "template_path": os.path.join(os.path.dirname(__file__),"templates"),
     "static_path": os.path.join(os.path.dirname(__file__),"static"),
     "debug": True,   # Should get from config?
-    "cookie_secret":"12"
+    "cookie_secret":"12",
 })
 
 application = tornado.web.Application(urls,**tornadoConfig)

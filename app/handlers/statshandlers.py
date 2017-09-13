@@ -4,7 +4,7 @@ import tornado.ioloop
 import tornado.web
 import json
 
-from handlers.basehandler import BaseHandler
+from handlers.basehandler import BaseHandler, ExceptionHandler
 
 from core.experiment import Experiment
         
@@ -30,9 +30,9 @@ class GetHourlyTheta(BaseHandler):
                 response = exp.get_hourly_theta()
                 self.write(json.dumps(response))
             else:
-                self.write("This experiment does not exist or does not belong to this ID.") # Better error message
+                raise ExceptionHandler(reason="Experiment could not be validated.", status_code=401)
         else:
-            self.write("AUTH_ERROR")
+            raise ExceptionHandler(reason="Could not validate user.", status_code=401)
             
 class GetCurrentTheta(BaseHandler):
         
@@ -56,9 +56,9 @@ class GetCurrentTheta(BaseHandler):
                 response = exp.get_theta()
                 self.write(json.dumps(response))
             else:
-                self.write("This experiment does not exist or does not belong to this ID.")
+                raise ExceptionHandler(reason="Experiment could not be validated.", status_code=401)
         else:
-            self.write("AUTH_ERROR")
+            raise ExceptionHandler(reason="Could not validate user.", status_code=401)
 
 class GetLog(BaseHandler):
 
@@ -82,9 +82,9 @@ class GetLog(BaseHandler):
                 response = exp.get_log_data()
                 self.write(json.dumps(response))
             else:
-                self.write("This experiment does not exist or does not belong to this ID.")
+                raise ExceptionHandler(reason="Experiment could not be validated.", status_code=401)
         else:
-            self.write("AUTH_ERROR")
+            raise ExceptionHandler(reason="Could not validate user.", status_code=401)
 
 class GetActionLog(BaseHandler):
 
@@ -108,9 +108,9 @@ class GetActionLog(BaseHandler):
                 response = exp.get_getaction_log_data()
                 self.write(json.dumps(response))
             else:
-                self.write("This experiment does not exist or does not belong to this ID.")
+                raise ExceptionHandler(reason="Experiment could not be validated.", status_code=401)
         else:
-            self.write("AUTH_ERROR")
+            raise ExceptionHandler(reason="Could not validate user.", status_code=401)
 
 class GetRewardLog(BaseHandler):
 
@@ -134,9 +134,9 @@ class GetRewardLog(BaseHandler):
                 response = exp.get_setreward_log_data()
                 self.write(json.dumps(response))
             else:
-                self.write("This experiment does not exist or does not belong to this ID.")
+                raise ExceptionHandler(reason="Experiment could not be validated.", status_code=401)
         else:
-            self.write("AUTH_ERROR")
+            raise ExceptionHandler(reason="Could not validate user.", status_code=401)
 
 class GetSummary(BaseHandler):
 
@@ -164,6 +164,6 @@ class GetSummary(BaseHandler):
                 response = exp.get_summary()
                 self.write(json.dumps(response))
             else:
-                self.write("This experiment does not exist or does not belong to this ID.")
+                raise ExceptionHandler(reason="Experiment could not be validated.", status_code=401)
         else:
-            self.write("AUTH_ERROR")
+            raise ExceptionHandler(reason="Could not validate user.", status_code=401)

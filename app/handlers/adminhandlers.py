@@ -73,7 +73,7 @@ class AddExperiment(BaseHandler):
             response["error"] = False
             self.write(json.dumps(response))
         else:
-            self.write("AUTH_ERROR")
+            raise ExceptionHandler(reason="Could not validate user.", status_code=401)
 
 
 class DeleteExperiment(BaseHandler):
@@ -98,9 +98,9 @@ class DeleteExperiment(BaseHandler):
                 response = db.delete_experiment(exp_id)
                 self.write(json.dumps(response))
             else:
-                self.write("This experiment does not exist or does not belong to this user ID.") # Better error message?
+                raise ExceptionHandler(reason="Experiment could not be validated.", status_code=401)
         else:
-            self.write("AUTH_ERROR")
+            raise ExceptionHandler(reason="Could not validate user.", status_code=401)
         
 
 class GetListOfExperiments(BaseHandler):
@@ -125,7 +125,7 @@ class GetListOfExperiments(BaseHandler):
             response = db.get_all_experiments(int(user))
             self.write(json.dumps(response))
         else:
-            self.write("AUTH_ERROR")
+            raise ExceptionHandler(reason="Could not validate user.", status_code=401)
         
         
 class GetExperiment(BaseHandler):
@@ -150,9 +150,9 @@ class GetExperiment(BaseHandler):
                 response = db.get_one_experiment(exp_id)
                 self.write(json.dumps(response))
             else:
-                self.write("This experiment does not exist or does not belong to this user ID.") # Better error message?
+                raise ExceptionHandler(reason="Experiment could not be validated.", status_code=401)
         else:
-            self.write("AUTH_ERROR")
+            raise ExceptionHandler(reason="Could not validate user.", status_code=401)
 
         
 class EditExperiment(BaseHandler):
@@ -200,9 +200,9 @@ class EditExperiment(BaseHandler):
                 response["id"] = db.edit_experiment(exp_obj, exp_id)
                 self.write(json.dumps(response))
             else:
-                self.write("This experiment does not exist or does not belong to this user ID.") # Better error message?
+                raise ExceptionHandler(reason="Experiment could not be validated.", status_code=401)
         else:
-            self.write("AUTH_ERROR")
+            raise ExceptionHandler(reason="Could not validate user.", status_code=401)
 
 
 class ListDefaults(tornado.web.RequestHandler):
@@ -225,7 +225,7 @@ class ListDefaults(tornado.web.RequestHandler):
             folders = dict(enumerate(folderdata))
             self.write(folders)
         else:
-            self.write("AUTH_ERROR")
+            raise ExceptionHandler(reason="Could not validate user.", status_code=401)
  
        
 class GetDefault(tornado.web.RequestHandler):
@@ -256,7 +256,7 @@ class GetDefault(tornado.web.RequestHandler):
             data["setReward"] = open("./defaults/"+data["name"]+"/setReward.py").read()
             self.write(data)
         else:
-            self.write("AUTH_ERROR")
+            raise ExceptionHandler(reason="Could not validate user.", status_code=401)
 
 
 class ResetExperiment(BaseHandler):
@@ -264,21 +264,21 @@ class ResetExperiment(BaseHandler):
     def get(self, exp_id):
 
         if self.get_secure_cookie("user"):
-            key = self.get_argument("key", default = False)
-            theta_key = self.get_argument("theta_key", default = False)
-            theta_value = self.get_argument("theta_value", default = False)
-            __EXP__ = Experiment(exp_id, key)
+            if self.validate_user_experiment(exp_id):
+                key = self.get_argument("key", default = False)
+                theta_key = self.get_argument("theta_key", default = False)
+                theta_value = self.get_argument("theta_value", default = False)
+                __EXP__ = Experiment(exp_id, key)
 
-            if __EXP__.is_valid():
                 status = __EXP__.delete_theta(key = theta_key, value = theta_value)
                 if status == True:
                     self.write(json.dumps({'status':'success'}))
                 else:
                     self.write(json.dumps({'status':'key does not exist'}))
             else:
-                self.write_error(400)
+                raise ExceptionHandler(reason="Experiment could not be validated.", status_code=401)
         else:
-            self.write("AUTH_ERROR")
+            raise ExceptionHandler(reason="Could not validate user.", status_code=401)
 
 class AddUser(BaseHandler):
 
@@ -288,6 +288,6 @@ class AddUser(BaseHandler):
         password = self.get_argument("password")
         user_id = users.create_user(username, password)
         if user_id is False:
-            self.write("User already exists!")
+            raise ExceptionHandler(reason="User already exists.", status_code=400)
         else:
             self.write(json.dumps({'status' : 'success'}))
