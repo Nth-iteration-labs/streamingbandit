@@ -9,9 +9,25 @@ import traceback
 from db.database import Database
 
 class ExceptionHandler(tornado.web.HTTPError):
+
     pass
 
 class BaseHandler(tornado.web.RequestHandler):
+
+    def get(self):
+        raise ExceptionHandler(reason = "Invalid call.", status_code = 404)
+    
+    def delete(self):
+        raise ExceptionHandler(reason = "Invalid call.", status_code = 404)
+
+    def post(self):
+        raise ExceptionHandler(reason = "Invalid call.", status_code = 404)
+
+    def put(self):
+        raise ExceptionHandler(reason = "Invalid call.", status_code = 404)
+
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "*")
     
     def get_current_user(self):
         return self.get_secure_cookie("user")
@@ -20,6 +36,8 @@ class BaseHandler(tornado.web.RequestHandler):
         db = Database()
         user_id = int(self.get_current_user())
         properties = db.get_one_experiment(exp_id)
+        if not properties:
+            return False
         if int(properties['user_id']) == user_id:
             return True
         else:

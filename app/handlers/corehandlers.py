@@ -12,31 +12,32 @@ from handlers.basehandler import BaseHandler, ExceptionHandler
 class ActionHandler(tornado.web.RequestHandler):
            
     def get(self, exp_id): # Documentation needs update to advice_id
-        """ Get an action given a context for a specific exp_id
+        """ Get an action given a context for a specific exp_id.
         
         +----------------------------------------------------------------+
         | Example                                                        |
         +================================================================+
-        |http://example.com/1/getAction.json?key=XXXX&context={'age': 25}|
+        |http://example.com/EXP_ID/getAction.json?key=KEY&context=CONTEXT|
         +----------------------------------------------------------------+
         
-        
-        :param int exp_id: Experiment ID as specified in the url
-        :param JSON context: The context to be evaluated. 
+        :param int exp_id: Experiment ID as specified in the url.
         :param string key: The key corresponding to the experiment.
-        
-        :returns: A JSON of the form: {"action": XX}
-        :raises AuthErorr: 401 Invalid key
+        :param JSON context (optional): The context to be evaluated. 
+        :returns: A JSON that standard only includes action. When debug is toggled, \
+        it returns the context as well. When Advice ID is toggled, it will also return \
+        an Advice ID that can be used to set the reward later on.
+        :raises 400: If the key is not supplied.
+        :raises 401: If the key or exp_id is invalid.
         """
         key = self.get_argument("key", default = False)
-        
+        context = json.loads(self.get_argument("context", default = "{}"))  
+
         if not key:
-            raise ExceptionHandler(reason="Key not supplied.", status_code=400)
+            raise ExceptionHandler(reason = "Key not supplied.", status_code = 400)
         
         __EXP__ = Experiment(exp_id, key)
         
         if __EXP__.is_valid():
-            context = json.loads(self.get_argument("context", default="{}"))  
             response = __EXP__.run_action_code(context)
             
             if __EXP__.properties['advice_id'] == "True":
@@ -52,42 +53,64 @@ class ActionHandler(tornado.web.RequestHandler):
                 self.write(json.dumps({'action':response, 'context':context}))
             else:
                 self.write(json.dumps({'action':response}))
-                
         else:
-            raise ExceptionHandler(reason="Key is invalid.", status_code=401)
+            raise ExceptionHandler(reason = "Key or exp_id is invalid.", status_code = 401)
 
 class RewardHandler(tornado.web.RequestHandler):
 
     def get(self, exp_id): # Documentation needs update to advice_id
-        """ Update the parameters for a given experiment
+        """ Update the parameters and set a reward for a given experiment.
+
+        For parameters, there are two options (next to the mandatory key 
+        and exp_id). The first option is supplying all the information manually, 
+        meaning that you supply the following parameters:
+            -   Context
+            -   Action
+            -   Reward
 
         +----------------------------------------------------------------+
         | Example                                                        |
         +================================================================+
-        |http://example.com/1/setReward.json?key=XXXX&context={'age': 25}|
-        |&action={'action':'A'}&reward={'click':1}                       |
+        |http://example.com/EXP_ID/setReward.json?key=KEY&context=CONTEXT|
+        |&action=ACTION&reward=REWARD                                    |
         +----------------------------------------------------------------+
 
-        :param int exp_id: Experiment ID as specified in the url
-        :param JSON context: The context to train on.
-        :param JSON action: The action to train on.
-        :param JSON reward: The reward for the experiment.
+        When you have toggled the Advice ID in the experiment properties (second option), 
+        and have received an Advice ID from the getAction call, you only have
+        to supply the following parameters:
+            -   Advice ID
+            -   Reward
+
+        +----------------------------------------------------------------+
+        | Example                                                        |
+        +================================================================+
+        |http://example.com/EXP_ID/setReward.json?key=KEY                |
+        |&advice_id=ADVICE_ID&reward=REWARD                              |
+        +----------------------------------------------------------------+
+
+        :param int exp_id: Experiment ID as specified in the url.
         :param string key: The key corresponding to the experiment.
 
-        :returns: A JSON of the form: {"status":true}
-        :raises KeyError: 400 Error if Key is not valid.
+        :param JSON context (optional): The context for the current update.
+        :param JSON action (optional): The action for the current update.
+        :param string advice_id (optional): The advice_id for the current \
+        full update loop.
+        :param JSON reward: The reward for the current update.
+        :returns: A JSON indicating success.
+        :raises 400: If key is not supplied.
+        :raises 401: If the key or exp_id is invalid.
         """
         key = self.get_argument("key", default = False)
 
         if not key:
-            raise ExceptionHandler(reason="Key not supplied.", status_code=400)
+            raise ExceptionHandler(reason = "Key not supplied.", status_code = 400)
 
         __EXP__ = Experiment(exp_id, key)
 
         if __EXP__.is_valid():
             if self.get_argument("advice_id", default = "") == "":
-                context = json.loads(self.get_argument("context", default="{}"))
-                action = json.loads(self.get_argument("action", default="{}"))
+                context = json.loads(self.get_argument("context", default = "{}"))
+                action = json.loads(self.get_argument("action", default = "{}"))
             else:
                 advice_id = self.get_argument("advice_id", default = "")
                 log = __EXP__.get_by_advice_id(advice_id)
@@ -105,4 +128,4 @@ class RewardHandler(tornado.web.RequestHandler):
             else: 
                 self.write(json.dumps({'status':'success'}))
         else:
-            raise ExceptionHandler(reason="Key is invalid.", status_code=401)
+            raise ExceptionHandler(reason = "Key or exp_id is invalid.", status_code = 401)

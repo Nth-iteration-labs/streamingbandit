@@ -9,7 +9,7 @@ import time
 from bson.binary import Binary
 import _pickle
 
-from handlers.basehandler import BaseHandler
+from handlers.basehandler import BaseHandler, ExceptionHandler
 from core.experiment import Experiment
 
 class Simulate(BaseHandler):
@@ -23,25 +23,19 @@ class Simulate(BaseHandler):
         |http://example.com/eval/EXP_ID/simulate?N=1000                      |
         +--------------------------------------------------------------------+
 
-        :param int exp_id: Experiment ID as specified in the url
-        :param int N: The number of simulation draws
-        :param string log_stats: Flag for logging the results in the database
-        
-        :returns: A JSON of the form: {"simulate":"success"}
-        :raises: AUTH_ERROR if there is no secure cookie available
-
+        :requires: A secure cookie, obtained by logging in.
+        :param int exp_id: Experiment ID as specified in the url.
+        :param int N: The number of simulation draws.
+        :returns: A JSON indicating success.
+        :raises 400: If the experiment does not belong to this user or the exp_id is wrong.
+        :raises 401: If user is not logged in or if there is no secure cookie available.
         """
         if self.get_current_user():
             if self.validate_user_experiment(exp_id):
 
                 N = int(self.get_argument("N", default = 1000))
-                log_stats = self.get_argument("log_stats", default = True)
 
                 __EXP__ = Experiment(exp_id)
-
-                rewards = np.array([0])
-                reward_over_time = np.array([])
-                regret = np.array([0])
 
                 for i in range(N):
                     # Generate context

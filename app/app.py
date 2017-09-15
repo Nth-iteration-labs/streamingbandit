@@ -76,7 +76,7 @@ urls = [
     (r"(?i)/stats/(?P<exp_id>\w+)/summary.json", statshandlers.GetSummary),
 
     # Login API
-    (r"(?i)/login.secure", managementhandlers.LogInHandler),
+    (r"(?i)/login", managementhandlers.LogInHandler),
     (r"(?i)/logout", managementhandlers.LogOutHandler),
                
     # Simulation API

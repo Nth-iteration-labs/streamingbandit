@@ -21,8 +21,9 @@ class GetHourlyTheta(BaseHandler):
         
         :requires: A secure cookie, obtained by logging in.
         :param int exp_id: The experiment ID for the thetas that are to be retrieved.
-        :returns: A JSON of JSONs of hourly logged thetas.
-        :raises: AUTH_ERROR if there is no secure cookie available.
+        :returns: A list of JSONs of the hourly logged thetas.
+        :raises 401: If the experiment does not belong to this user or the exp_id is wrong.
+        :raises 401: If user is not logged in or if there is no secure cookie available.
         """
         if self.get_current_user():
             if self.validate_user_experiment(exp_id):
@@ -30,9 +31,9 @@ class GetHourlyTheta(BaseHandler):
                 response = exp.get_hourly_theta()
                 self.write(json.dumps(response))
             else:
-                raise ExceptionHandler(reason="Experiment could not be validated.", status_code=401)
+                raise ExceptionHandler(reason = "Experiment could not be validated.", status_code = 401)
         else:
-            raise ExceptionHandler(reason="Could not validate user.", status_code=401)
+            raise ExceptionHandler(reason = "Could not validate user.", status_code = 401)
             
 class GetCurrentTheta(BaseHandler):
         
@@ -47,8 +48,9 @@ class GetCurrentTheta(BaseHandler):
 
         :requires: A secure cookie, obtained by logging in.
         :param int exp_id: The experiment ID for the theta that is to be retrieved.
-        :returns: A JSON of current theta.
-        :raises: AUTH_ERROR if there is no secure cookie available.
+        :returns: A JSON of the current theta.
+        :raises 401: If the experiment does not belong to this user or the exp_id is wrong.
+        :raises 401: If user is not logged in or if there is no secure cookie available.
         """
         if self.get_current_user():
             if self.validate_user_experiment(exp_id):
@@ -56,9 +58,9 @@ class GetCurrentTheta(BaseHandler):
                 response = exp.get_theta()
                 self.write(json.dumps(response))
             else:
-                raise ExceptionHandler(reason="Experiment could not be validated.", status_code=401)
+                raise ExceptionHandler(reason = "Experiment could not be validated.", status_code = 401)
         else:
-            raise ExceptionHandler(reason="Could not validate user.", status_code=401)
+            raise ExceptionHandler(reason = "Could not validate user.", status_code = 401)
 
 class GetLog(BaseHandler):
 
@@ -73,8 +75,9 @@ class GetLog(BaseHandler):
 
         :requires: A secure cookie, obtained by logging in.
         :param int exp_id: The experiment ID for the logs that are to be retrieved.
-        :returns: A JSON of JSONs of the logs.
-        :raises: AUTH_ERROR if there is no secure cookie available.
+        :returns: A list of JSONs of the logs.
+        :raises 401: If the experiment does not belong to this user or the exp_id is wrong.
+        :raises 401: If user is not logged in or if there is no secure cookie available.
         """
         if self.get_current_user():
             if self.validate_user_experiment(exp_id):
@@ -82,9 +85,9 @@ class GetLog(BaseHandler):
                 response = exp.get_log_data()
                 self.write(json.dumps(response))
             else:
-                raise ExceptionHandler(reason="Experiment could not be validated.", status_code=401)
+                raise ExceptionHandler(reason = "Experiment could not be validated.", status_code = 401)
         else:
-            raise ExceptionHandler(reason="Could not validate user.", status_code=401)
+            raise ExceptionHandler(reason = "Could not validate user.", status_code = 401)
 
 class GetActionLog(BaseHandler):
 
@@ -99,8 +102,9 @@ class GetActionLog(BaseHandler):
 
         :requires: A secure cookie, obtained by logging in.
         :param int exp_id: The experiment ID for the logs that are to be retrieved.
-        :returns: A JSON of JSONs of the logs.
-        :raises: AUTH_ERROR if there is no secure cookie available.
+        :returns: A list of JSONs of the logs.
+        :raises 401: If the experiment does not belong to this user or the exp_id is wrong.
+        :raises 401: If user is not logged in or if there is no secure cookie available.
         """
         if self.get_current_user():
             if self.validate_user_experiment(exp_id):
@@ -108,9 +112,9 @@ class GetActionLog(BaseHandler):
                 response = exp.get_getaction_log_data()
                 self.write(json.dumps(response))
             else:
-                raise ExceptionHandler(reason="Experiment could not be validated.", status_code=401)
+                raise ExceptionHandler(reason = "Experiment could not be validated.", status_code = 401)
         else:
-            raise ExceptionHandler(reason="Could not validate user.", status_code=401)
+            raise ExceptionHandler(reason = "Could not validate user.", status_code = 401)
 
 class GetRewardLog(BaseHandler):
 
@@ -125,8 +129,9 @@ class GetRewardLog(BaseHandler):
 
         :requires: A secure cookie, obtained by logging in.
         :param int exp_id: The experiment ID for the logs that are to be retrieved.
-        :returns: A JSON of JSONs of the logs.
-        :raises: AUTH_ERROR if there is no secure cookie available.
+        :returns: A list of JSONs of the logs.
+        :raises 401: If the experiment does not belong to this user or the exp_id is wrong.
+        :raises 401: If user is not logged in or if there is no secure cookie available.
         """
         if self.get_current_user():
             if self.validate_user_experiment(exp_id):
@@ -134,9 +139,9 @@ class GetRewardLog(BaseHandler):
                 response = exp.get_setreward_log_data()
                 self.write(json.dumps(response))
             else:
-                raise ExceptionHandler(reason="Experiment could not be validated.", status_code=401)
+                raise ExceptionHandler(reason = "Experiment could not be validated.", status_code = 401)
         else:
-            raise ExceptionHandler(reason="Could not validate user.", status_code=401)
+            raise ExceptionHandler(reason = "Could not validate user.", status_code = 401)
 
 class GetSummary(BaseHandler):
 
@@ -154,9 +159,10 @@ class GetSummary(BaseHandler):
         +--------------------------------------------------------------------+
 
         :requires: A secure cookie, obtained by logging in.
-        :param int exp_id: The experiment ID.
+        :param int exp_id: The experiment ID for the summary that are to be retrieved.
         :returns: A JSON object consisting of the summary.
-        :raises: AUTH_ERROR if there is no secure cookie available.
+        :raises 401: If the experiment does not belong to this user or the exp_id is wrong.
+        :raises 401: If user is not logged in or if there is no secure cookie available.
         """
         if self.get_current_user():
             if self.validate_user_experiment(exp_id):
@@ -164,6 +170,6 @@ class GetSummary(BaseHandler):
                 response = exp.get_summary()
                 self.write(json.dumps(response))
             else:
-                raise ExceptionHandler(reason="Experiment could not be validated.", status_code=401)
+                raise ExceptionHandler(reason = "Experiment could not be validated.", status_code = 401)
         else:
-            raise ExceptionHandler(reason="Could not validate user.", status_code=401)
+            raise ExceptionHandler(reason = "Could not validate user.", status_code = 401)

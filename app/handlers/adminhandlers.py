@@ -6,10 +6,7 @@ import json
 import random
 import os
 
-import logging
-logger = logging.getLogger("myLogger") 
-
-from handlers.basehandler import BaseHandler
+from handlers.basehandler import BaseHandler, ExceptionHandler
 
 from db.database import Database
 from db.users import Users
@@ -17,31 +14,25 @@ from db.users import Users
 
 class AddExperiment(BaseHandler):
     
-    def get(self):
-        raise tornado.web.HTTPError(status_code=404, log_message="invalid call")
-    
-    def delete(self):
-        raise tornado.web.HTTPError(status_code=404, log_message="invalid call")
-    
     def post(self):
         """ Create a new experiment
         
         :requires: A secure cookie obtained by logging in.
-        :param string name: Name of the experiment
-        :param string getcontext: String of python code for get context code
-        :param string getaction: String of python code for get action code
-        :param string getreward: String of python code for get reward code
-        :param string setreward: String of python code for set reward code
-        :param bool adviceid: Bool indicating whether adviceIds are used
+        :param string name: Name of the experiment.
+        :param string getcontext: String of python code for get context code.
+        :param string getaction: String of python code for get action code.
+        :param string getreward: String of python code for get reward code.
+        :param string setreward: String of python code for set reward code.
+        :param bool advice_id: Bool indicating whether advice_id's are used.
         :param bool hourly: Bool indicating whether the state of Theta should be stored hourly. 
-        :param bool advice_id: Bool indicating whether the getAdvice and setReward calls should return an advice_id
-        :param int delta_days: If advice_id is True, supply this to give the number of days that an advice_id should be stored
-        :param dict default_reward: If advice_id is True, supply this to give the default reward for advice_id's that are over their delta_days limit
+        :param bool advice_id: Bool indicating whether the getAdvice and setReward calls should return an advice_id.
+        :param int delta_days: If advice_id is True, supply this to give the number of days that an advice_id should be stored.
+        :param dict default_reward: If advice_id is True, supply this to give the default reward for advice_id's that are over their delta_days limit.
         :returns: A JSON of the form:
             { id : the assigned experiment id, 
              name : the name of the experiment (checked for duplicates),
              error : (optional) error message }
-        :raises AUTH_ERROR: If no secure cookie available.
+        :raises 401: If user is not logged in or if there is no secure cookie available.
         """
         user = self.get_current_user()
         if user:
@@ -60,7 +51,6 @@ class AddExperiment(BaseHandler):
                 exp_obj["delta_days"] = self.get_argument("delta_days")
                 exp_obj["default_reward"] = self.get_argument("default_reward")
         
-            # Generate key (also stored in REDIS)
             exp_obj["key"] = hex(random.getrandbits(42))[2:-1]
 
             db = Database() 
@@ -73,7 +63,7 @@ class AddExperiment(BaseHandler):
             response["error"] = False
             self.write(json.dumps(response))
         else:
-            raise ExceptionHandler(reason="Could not validate user.", status_code=401)
+            raise ExceptionHandler(reason = "Could not validate user.", status_code = 401)
 
 
 class DeleteExperiment(BaseHandler):
@@ -84,13 +74,14 @@ class DeleteExperiment(BaseHandler):
         +--------------------------------------------------------------------+
         | Example                                                            |
         +====================================================================+
-        | http://example.com/admin/exp/1/delete.json                         |
+        | http://example.com/admin/exp/EXP_ID/delete.json                    |
         +--------------------------------------------------------------------+
         
         :requires: A secure cookie obtained by logging in.
         :param int exp_id: The ID of the experiment to be deleted.
         :returns: A JSON showing the deleted experiment.
-        :raises AUTH_ERROR: if no secure cookie available.
+        :raises 401: If the experiment does not belong to this user or the exp_id is wrong.
+        :raises 401: If user is not logged in or if there is no secure cookie available.
         """
         if self.get_current_user():
             if self.validate_user_experiment(exp_id):
@@ -98,9 +89,9 @@ class DeleteExperiment(BaseHandler):
                 response = db.delete_experiment(exp_id)
                 self.write(json.dumps(response))
             else:
-                raise ExceptionHandler(reason="Experiment could not be validated.", status_code=401)
+                raise ExceptionHandler(reason = "Experiment could not be validated.", status_code = 401)
         else:
-            raise ExceptionHandler(reason="Could not validate user.", status_code=401)
+            raise ExceptionHandler(reason = "Could not validate user.", status_code = 401)
         
 
 class GetListOfExperiments(BaseHandler):
@@ -111,13 +102,12 @@ class GetListOfExperiments(BaseHandler):
         +--------------------------------------------------------------------+
         | Example                                                            |
         +====================================================================+
-        | http://example.com/admin/exp/list.json?max=10                      |
+        | http://example.com/admin/exp/list.json                             |
         +--------------------------------------------------------------------+
 
         :requires: A secure cookie obtained by logging in.
-        :param int max: Indicating the max length of the list.
-        :returns: A JSON containing a list of {expid : name} pairs
-        :raises AUTH_ERROR: If not secure cookie available.
+        :returns: A JSON containing exp_id and name pairs.
+        :raises 401: If user is not logged in or if there is no secure cookie available.
         """
         user = self.get_current_user()
         if user: 
@@ -125,7 +115,7 @@ class GetListOfExperiments(BaseHandler):
             response = db.get_all_experiments(int(user))
             self.write(json.dumps(response))
         else:
-            raise ExceptionHandler(reason="Could not validate user.", status_code=401)
+            raise ExceptionHandler(reason = "Could not validate user.", status_code = 401)
         
         
 class GetExperiment(BaseHandler):
@@ -136,13 +126,14 @@ class GetExperiment(BaseHandler):
         +--------------------------------------------------------------------+
         | Example                                                            |
         +====================================================================+
-        | http://example.com/admin/exp/1/get.json                            |
+        | http://example.com/admin/exp/EXP_ID/get.json                       |
         +--------------------------------------------------------------------+
 
         :requires: A secure cookie obtained by logging in.
-        :param int exp_id: String experiment ID (in Query string)
+        :param int exp_id: Experiment ID for the experiment that is to be retrieved.
         :returns: A JSON containing all the info for the expriment.
-        :raises AUTH_ERROR: If no secure cookie available.
+        :raises 401: If the experiment does not belong to this user or the exp_id is wrong.
+        :raises 401: If user is not logged in or if there is no secure cookie available.
         """
         if self.get_current_user():
             if self.validate_user_experiment(exp_id):
@@ -150,32 +141,30 @@ class GetExperiment(BaseHandler):
                 response = db.get_one_experiment(exp_id)
                 self.write(json.dumps(response))
             else:
-                raise ExceptionHandler(reason="Experiment could not be validated.", status_code=401)
+                raise ExceptionHandler(reason = "Experiment could not be validated.", status_code = 401)
         else:
-            raise ExceptionHandler(reason="Could not validate user.", status_code=401)
+            raise ExceptionHandler(reason = "Could not validate user.", status_code = 401)
 
         
 class EditExperiment(BaseHandler):
-    
-    def get(self):
-        self.write_error(400)   # we really need nicer error handling
     
     def post(self, exp_id):
         """ Retrieve a list of experiments running on this server
        
         :requires: A secure cookie obtained by logging in.
-        :param string name: Name of the experiment
-        :param string getcontext: String of python code for get context code
-        :param string getaction: String of python code for get action code
-        :param string getreward: String of python code for get reward code
-        :param string setreward: String of python code for set reward code
-        :param bool adviceid: Bool indicating whether adviceIds are used
-        :param bool hourly: Bool indicating whether the state of Theta should be stored hourly (apscheduler)
-        :param bool advice_id: Bool indicating whether the getAdvice and setReward calls should return an advice_id
-        :param int delta_days: If advice_id is True, supply this to give the number of days that an advice_id should be stored
-        :param dict default_reward: If advice_id is True, supply this to give the default reward for advice_id's that are over their delta_days limit
-        :returns: A JSON containing error yes / no.
-        :raises AUTH_ERROR: If no secure cookie avaiable.
+        :param string name: Name of the experiment.
+        :param string getcontext: String of python code for get context code.
+        :param string getaction: String of python code for get action code.
+        :param string getreward: String of python code for get reward code.
+        :param string setreward: String of python code for set reward code.
+        :param bool adviceid: Bool indicating whether adviceIds are used.
+        :param bool hourly: Bool indicating whether the state of Theta should be stored hourly.
+        :param bool advice_id: Bool indicating whether the getAdvice and setReward calls should return an advice_id.
+        :param int delta_days: If advice_id is True, supply this to give the number of days that an advice_id should be stored.
+        :param dict default_reward: If advice_id is True, supply this to give the default reward for advice_id's that are over their delta_days limit.
+        :returns: A JSON indicating success.
+        :raises 401: If the experiment does not belong to this user or the exp_id is wrong.
+        :raises 401: If user is not logged in or if there is no secure cookie available.
         """
         user = self.get_current_user()
         if user: 
@@ -200,9 +189,9 @@ class EditExperiment(BaseHandler):
                 response["id"] = db.edit_experiment(exp_obj, exp_id)
                 self.write(json.dumps(response))
             else:
-                raise ExceptionHandler(reason="Experiment could not be validated.", status_code=401)
+                raise ExceptionHandler(reason = "Experiment could not be validated.", status_code = 401)
         else:
-            raise ExceptionHandler(reason="Could not validate user.", status_code=401)
+            raise ExceptionHandler(reason = "Could not validate user.", status_code = 401)
 
 
 class ListDefaults(tornado.web.RequestHandler):
@@ -218,14 +207,14 @@ class ListDefaults(tornado.web.RequestHandler):
 
         :requires: A secure cookie obtained by logging in.
         :returns: A JSON with the default experiments.
-        :raises AUTH_ERROR: If no secure cookie available.
+        :raises 401: If user is not logged in or if there is no secure cookie available.
         """
         if self.get_secure_cookie("user"):
             folderdata=os.listdir("./defaults")
             folders = dict(enumerate(folderdata))
             self.write(folders)
         else:
-            raise ExceptionHandler(reason="Could not validate user.", status_code=401)
+            raise ExceptionHandler(reason = "Could not validate user.", status_code = 401)
  
        
 class GetDefault(tornado.web.RequestHandler):
@@ -236,16 +225,15 @@ class GetDefault(tornado.web.RequestHandler):
         +--------------------------------------------------------------------+
         | Example                                                            |
         +====================================================================+
-        | http://example.com/admin/exp/default/1/get.json                    |
+        | http://example.com/admin/exp/default/EXP_ID/get.json               |
         +--------------------------------------------------------------------+
 
-        :requires: A secure cookie available by logging in.
+        :requires: A secure cookie obtained by logging in.
         :param int default_id: The ID of the default experiment.
         :returns: A JSON containing the experiment properties.
-        :raises AUTH_ERROR: If no secure cookie available.
+        :raises 401: If user is not logged in or if there is no secure cookie available.
         """ 
         if self.get_secure_cookie("user"):
-            # first the name of the experiment
             folderdata = os.listdir("./defaults")
             folderdata = dict(enumerate(folderdata))
             data={}
@@ -256,13 +244,32 @@ class GetDefault(tornado.web.RequestHandler):
             data["setReward"] = open("./defaults/"+data["name"]+"/setReward.py").read()
             self.write(data)
         else:
-            raise ExceptionHandler(reason="Could not validate user.", status_code=401)
+            raise ExceptionHandler(reason = "Could not validate user.", status_code = 401)
 
 
 class ResetExperiment(BaseHandler):
-    # Update this such that we require secure_cookie
-    def get(self, exp_id):
 
+    def get(self, exp_id):
+        """ Reset the theta of an experiment.
+
+        +--------------------------------------------------------------------+
+        | Example                                                            |
+        +====================================================================+
+        | http://example.com/admin/exp/EXP_ID/resetexperiment?key=KEY        |
+        | &theta_key=THETA_KEY&theta_value=THETA_VALUE                       |
+        +--------------------------------------------------------------------+
+
+        :requires: A secure cookie obtained by logging in.
+        :param int exp_id: The experiment ID.
+        :param string key: The key of the experiment.
+        :param string theta_key (optional): The key for theta used when setting \
+        theta in the setReward and getAction code.
+        :param string theta_value (optional): The value for theta used when \
+        setting theta in the setReward and getAction code.
+        :raises 401: If the theta_key or theta_value does not exist or is not valid.
+        :raises 401: If the experiment does not belong to this user or the exp_id is wrong.
+        :raises 401: If user is not logged in or if there is no secure cookie available.
+        """
         if self.get_secure_cookie("user"):
             if self.validate_user_experiment(exp_id):
                 key = self.get_argument("key", default = False)
@@ -274,20 +281,34 @@ class ResetExperiment(BaseHandler):
                 if status == True:
                     self.write(json.dumps({'status':'success'}))
                 else:
-                    self.write(json.dumps({'status':'key does not exist'}))
+                    raise ExceptionHandler(reason = "Theta_key or theta_value could not be validated.", status_code = 401)
             else:
-                raise ExceptionHandler(reason="Experiment could not be validated.", status_code=401)
+                raise ExceptionHandler(reason = "Experiment could not be validated.", status_code = 401)
         else:
-            raise ExceptionHandler(reason="Could not validate user.", status_code=401)
+            raise ExceptionHandler(reason = "Could not validate user.", status_code = 401)
 
 class AddUser(BaseHandler):
 
     def get(self):
+        """ Add a user to StreamingBandit.
+
+        +--------------------------------------------------------------------+
+        | Example                                                            |
+        +====================================================================+
+        | http://example.com/admin/user/add.json?username=USERNAME&password= |
+        | PASSWORD                                                           |
+        +--------------------------------------------------------------------+
+
+        :param string username: The preferred username.
+        :param string password: The preferred password.
+        :returns: JSON indicating success.
+        :raises 400: If user with username already exists.
+        """
         users = Users()
         username = self.get_argument("username")
         password = self.get_argument("password")
         user_id = users.create_user(username, password)
         if user_id is False:
-            raise ExceptionHandler(reason="User already exists.", status_code=400)
+            raise ExceptionHandler(reason = "User already exists.", status_code = 400)
         else:
             self.write(json.dumps({'status' : 'success'}))
