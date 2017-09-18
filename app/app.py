@@ -88,6 +88,7 @@ tornadoConfig = dict({
     "static_path": os.path.join(os.path.dirname(__file__),"static"),
     "debug": True,   # Should get from config?
     "cookie_secret":"12",
+    "default_handler_class":basehandler.BaseHandler
 })
 
 application = tornado.web.Application(urls,**tornadoConfig)

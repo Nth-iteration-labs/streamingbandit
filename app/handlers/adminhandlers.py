@@ -210,7 +210,8 @@ class ListDefaults(tornado.web.RequestHandler):
         :raises 401: If user is not logged in or if there is no secure cookie available.
         """
         if self.get_secure_cookie("user"):
-            folderdata=os.listdir("./defaults")
+            folderdata = os.listdir("./defaults")
+            folderdata = [x.replace("_"," ") for x in folderdata]
             folders = dict(enumerate(folderdata))
             self.write(folders)
         else:

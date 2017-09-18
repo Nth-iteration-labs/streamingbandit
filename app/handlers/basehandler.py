@@ -15,16 +15,16 @@ class ExceptionHandler(tornado.web.HTTPError):
 class BaseHandler(tornado.web.RequestHandler):
 
     def get(self):
-        raise ExceptionHandler(reason = "Invalid call.", status_code = 404)
+        raise ExceptionHandler(reason = "Not found.", status_code = 404)
     
     def delete(self):
-        raise ExceptionHandler(reason = "Invalid call.", status_code = 404)
+        raise ExceptionHandler(reason = "Not found.", status_code = 404)
 
     def post(self):
-        raise ExceptionHandler(reason = "Invalid call.", status_code = 404)
+        raise ExceptionHandler(reason = "Not found.", status_code = 404)
 
     def put(self):
-        raise ExceptionHandler(reason = "Invalid call.", status_code = 404)
+        raise ExceptionHandler(reason = "Not found.", status_code = 404)
 
     def set_default_headers(self):
         self.set_header("Access-Control-Allow-Origin", "*")
