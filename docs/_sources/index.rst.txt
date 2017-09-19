@@ -13,6 +13,7 @@ Documentation:
    Statistics API <stats>
    Evaluation API <eval>
    Admin API <admin>
+   Management API <management>
    Libs <libs>
    Experiment <exp>
 
@@ -37,6 +38,7 @@ Changelog
 | Date       | Version | Changelog                                            |
 +============+=========+======================================================+
 | 01-12-2015 | v1      | First version made available.                        |
++------------+---------+------------------------------------------------------+
 | 21-10-2016 | v2      | Second version made available.                       |
 |            |         | Added classes, such as LiF, BTS, TBL.                |
 +------------+---------+------------------------------------------------------+

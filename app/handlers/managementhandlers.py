@@ -16,7 +16,7 @@ class LogInHandler(BaseHandler):
         +--------------------------------------------------------------------+
         | Example                                                            |
         +====================================================================+
-        | http://example.com/login?username=USERNAME&password=PASSWORD       |
+        | http://example.com/login                                           |
         +--------------------------------------------------------------------+
 
         :param string username: Experiment ID as specified in the url.
@@ -27,8 +27,8 @@ class LogInHandler(BaseHandler):
         users = Users()
         
         # Check:
-        username = self.get_argument("username")
-        password = self.get_argument("password")
+        username = self.get_body_argument("username")
+        password = self.get_body_argument("password")
         user_id = users.get_user_info(username, password)
         if user_id:
             self.set_secure_cookie("user", str(user_id))

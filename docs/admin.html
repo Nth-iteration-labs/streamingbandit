@@ -36,7 +36,7 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="StreamingBandit 1 documentation" href="index.html"/>
-        <link rel="next" title="Documentation of the supplied Libraries" href="libs.html"/>
+        <link rel="next" title="Management API" href="management.html"/>
         <link rel="prev" title="Evaluation API" href="eval.html"/> 
 
   
@@ -95,6 +95,7 @@
 <li class="toctree-l1"><a class="reference internal" href="stats.html">Statistics API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="eval.html">Evaluation API</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Admin API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="management.html">Management API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libs.html">Libs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exp.html">Experiment</a></li>
 </ul>
@@ -425,6 +426,90 @@ error : (optional) error message }</p>
 </table>
 </dd></dl>
 
+<dl class="get">
+<dt id="get-(?i)-admin-exp-(?P-exp_id-w+)-resetexperiment">
+<code class="descname">GET </code><code class="descname">(?i)/admin/exp/(?P&lt;exp_id&gt;w+)/resetexperiment</code><a class="headerlink" href="#get-(?i)-admin-exp-(?P-exp_id-w+)-resetexperiment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the theta of an experiment.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Example</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference external" href="http://example.com/admin/exp/EXP_ID/resetexperiment?key=KEY">http://example.com/admin/exp/EXP_ID/resetexperiment?key=KEY</a>
+&amp;theta_key=THETA_KEY&amp;theta_value=THETA_VALUE</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Requires:</th><td class="field-body"><p class="first">A secure cookie obtained by logging in.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>exp_id</strong> (<em>int</em>) – The experiment ID.</li>
+<li><strong>key</strong> (<em>string</em>) – The key of the experiment.</li>
+<li><strong>theta_key (optional)</strong> (<em>string</em>) – The key for theta used when setting         theta in the setReward and getAction code.</li>
+<li><strong>theta_value (optional)</strong> (<em>string</em>) – The value for theta used when         setting theta in the setReward and getAction code.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first">If the theta_key or theta_value does not exist or is not valid.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first">If the experiment does not belong to this user or the exp_id is wrong.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first last">If user is not logged in or if there is no secure cookie available.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="get">
+<dt id="get-(?i)-admin-user-add.json">
+<code class="descname">GET </code><code class="descname">(?i)/admin/user/add.json</code><a class="headerlink" href="#get-(?i)-admin-user-add.json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a user to StreamingBandit.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Example</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference external" href="http://example.com/admin/user/add.json?username=USERNAME&amp;password=">http://example.com/admin/user/add.json?username=USERNAME&amp;password=</a>
+PASSWORD</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>username</strong> (<em>string</em>) – The preferred username.</li>
+<li><strong>password</strong> (<em>string</em>) – The preferred password.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">JSON indicating success.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises 400:</th><td class="field-body"><p class="first last">If user with username already exists.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </div>
 
 
@@ -437,7 +522,7 @@ error : (optional) error message }</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="libs.html" class="btn btn-neutral float-right" title="Documentation of the supplied Libraries" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="management.html" class="btn btn-neutral float-right" title="Management API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="eval.html" class="btn btn-neutral" title="Evaluation API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
