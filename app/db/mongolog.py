@@ -42,6 +42,31 @@ class MongoLog:
         for row in self.logs.find({}, {'_id': False}).sort('_id', ASCENDING):
             self.log_rows.append(row)
         return self.log_rows
+
+    def log_simulation(self, exp_id, sim_data):
+        """ Log all the interactions of one simulation run.
+
+        :param int exp_id: The specified experiment.
+        :param dict sim_data: The full simluation run as a dict of dicts.
+        :returns True: If executed correctly.
+        """
+        self.sim_db = self.mongo_client['simulations']
+        self.sim_logs = self.sim_db[str(exp_id)]
+        self.sim_logs.insert_one(sim_data)
+        return True
+
+    def get_log_simulation(self, exp_id):
+        """ Return all the logged simulation data
+        
+        :param int exp_id: The specified experiment.
+        :returns list of dicts logs: All the simulation runs for that experiment.
+        """
+        self.sim_db = self.mongo_client['simulations']
+        self.sim_logs = self.sim_db[str(exp_id)]
+        self.sim_log_rows = []
+        for row in self.sim_logs.find({}, {'_id': False}).sort('_id', ASCENDING):
+            self.sim_low_rows.append(row)
+        return self.sim_log_rows
         
     def log_hourly_theta(self, value):
         """ This function is for logging the hourly theta

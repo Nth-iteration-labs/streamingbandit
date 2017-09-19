@@ -56,12 +56,12 @@ class Experiment():
         exec(code)
         return self.action
 
-    def run_get_reward_code(self, context, action):
+    def run_get_reward_code(self, context, action, reward = {}):
         """
         """
         self.action = action
         self.context = context
-        self.reward = {}
+        self.reward = reward
         code = self.db_experiment_properties("exp:%s:properties" % (self.exp_id), "getReward")
         exec(code)
         return self.reward
@@ -74,7 +74,7 @@ class Experiment():
         actually free of type, but generally a string is used.
         :param int reward: Generally an int, in 0 or 1. Can be of other type, \
         but must be specified by used algorithm.
-        :returns: Boolean True if executed correctly.
+        :returns True: If executed correctly.
         """
         self.context = context
         self.action = action
@@ -84,18 +84,23 @@ class Experiment():
         return True
     
     def log_data(self, value):
-        """ Raw logging that is used in the getAction and setReward codes.
-        
-        .. note:: Needs less ambiguity when it comes to the use of the \
-                specific database. As we will use MongoDB for multiple \
-                different logging purposes.
+        """ Manual logging that is used in the getAction and setReward codes.
 
         :param dict value: The value that needs to be logged. Since MongoDB is \
                 used, a dictionary is needed.
-        :returns: True if executed correctly.
+        :returns True: If executed correctly.
         """
         value["exp_id"] = self.exp_id
         self.mongo_db.log_row(value)
+        return True
+
+    def log_simulation_data(self, data):
+        """ Log one simulation loop
+        
+        :param dict data: Dict of dicts with all interactions
+        :returns True: If executed correctly
+        """
+        self.mongo_db.log_simulation(exp_id, data)
         return True
 
     def log_getaction_data(self, context, action):
@@ -111,7 +116,7 @@ class Experiment():
         """ Logging for all the setReward calls
 
         :param dict data: Dict that contains action, context and reward
-        :returns: True if executed correctly
+        :returns True: If executed correctly
         """
         self.mongo_db.log_setreward(self.exp_id, context, action, reward)
         return True
@@ -182,6 +187,13 @@ class Experiment():
         :returns dict logs: Dict of dict of all the manual logs
         """
         return self.mongo_db.get_log_rows(self.exp_id)
+
+    def get_log_simulation_data(self):
+        """ Get all the logged data for the simulations of this experiment
+        
+        :returns dict logs: List of dict of dicts of the simulations
+        """
+        return self.mongo_db.get_log_simulation(exp_id)
 
     def get_getaction_log_data(self):
         """ Get all the automatically logged getAciton data from the experiment.
