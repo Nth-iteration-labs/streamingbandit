@@ -26,8 +26,13 @@ class BaseHandler(tornado.web.RequestHandler):
     def put(self):
         raise ExceptionHandler(reason = "Not found.", status_code = 404)
 
+    def options(self, *args, **kwargs):
+        self.set_status(204)
+
     def set_default_headers(self):
+        self.set_header('Access-Control-Allow-Headers', 'origin, content-type, accept, authorization, x-total-count, content-range')
         self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS')
     
     def get_current_user(self):
         return self.get_secure_cookie("user")
