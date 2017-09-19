@@ -56,9 +56,12 @@ class Simulate(BaseHandler):
 
                     # Set reward
                     __EXP__.run_reward_code(context, action, reward)
+
+                    # Get theta
+                    theta = __EXP__.get_theta()
                     
                     # Save stats
-                    data[i] = {'context' : context, 'action' : action, 'reward' : reward}
+                    data[i] = {'context' : context, 'action' : action, 'reward' : reward, 'theta' : theta}
 
                 if log_stats == True:
                     print("Logging data")
@@ -67,7 +70,7 @@ class Simulate(BaseHandler):
                 if verbose == True:
                     self.write(json.dumps({'simulate':'success', 'experiment':exp_id, 'data':data}))
                 else:
-                    self.write(json.dumps({'simulate':'success', 'experiment':exp_id}))
+                    self.write(json.dumps({'simulate':'success', 'experiment':exp_id, 'theta':theta}))
 
             else:
                 raise ExceptionHandler(reason="Experiment could not be validated.", status_code=401)

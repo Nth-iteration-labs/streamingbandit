@@ -160,13 +160,11 @@ class Database:
         """
         # This currently returns all the properties, we might change that:
         members = self.r_server.smembers(explistkey)
-        i = 0         
         result = {}
         for member in members:
             tmp_result = self.r_server.hgetall("exp:%s:properties" % (member))
             if int(tmp_result['user_id']) == user_id:
                 result[member] = tmp_result.copy()
-            i += 1
         return result
         
     def get_one_experiment(self, exp_id, explistkey="admin:experiments"):   
