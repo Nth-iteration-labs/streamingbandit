@@ -61,7 +61,7 @@ When everything is configured, do the following:
 
 (Ideally they are automatically started, as they are usally used in a server-context. Look at the links above to find how-to's on starting Redis and MongoDB automatically.)
 
-Then you can start streamingbandit web-server via the terminal:
+Then you can start streamingbandit web-server via the terminal by navigating to /app and starting the application:
 ```
 python3 app.py
 ```
