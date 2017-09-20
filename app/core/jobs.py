@@ -5,6 +5,8 @@ from datetime import datetime, timedelta
 from db.mongolog import MongoLog
 from db.advice import Advice
 
+import ast
+
 def log_theta():
     """ For every experiment, if Theta logging flag is set. Log theta from
     redis to mongodb.
@@ -38,5 +40,5 @@ def advice_time_out():
             advices_retrieved = advice_db.advices.find({"date":{"$lt":datetime.utcnow()-timedelta(days=delta_days)}})
             for adv in advices_retrieved:
                 log = exp.get_by_advice_id(str(adv["_id"]))
-                reward = exp.properties["default_reward"]
+                reward = ast.literal_eval(exp.properties["default_reward"])
                 exp.run_reward_code(adv["context"],adv["action"],reward)
