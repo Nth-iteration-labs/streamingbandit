@@ -19,10 +19,10 @@ setup(name='StreamingBandit',
 		'tornado',
 		'redis',
 		'pyyaml',
-		'pymongo',
-                'numpy',
-                'scipy',
-                'scikit-learn',
-                'apscheduler'
-	]	
-     )
+		'pymongo',            
+    'numpy',
+    'scipy',
+    'scikit-learn',
+    'apscheduler',
+    'bcrypt'
+	])
