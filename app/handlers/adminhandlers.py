@@ -20,7 +20,7 @@ class GenerateExperiments(BaseHandler):
         +--------------------------------------------------------------------+
         | Example                                                            |
         +====================================================================+
-        | http://example.com/admin/exp/list.json                             |
+        | http://example.com/exp                                             |
         +--------------------------------------------------------------------+
 
         :requires: A secure cookie obtained by logging in.
@@ -38,13 +38,22 @@ class GenerateExperiments(BaseHandler):
     def post(self):
         """ Create a new experiment
         
+        +--------------------------------------------------------------------+
+        | Example                                                            |
+        +====================================================================+
+        | http://example.com/exp                                             |
+        | {'name' : NAME, 'getcontext' : CODE, 'getaction' : CODE,           |
+        |   'getreward' : CODE, 'setreward' : CODE, 'advice_id' : True,      |
+        |   'hourly' : True, 'delta_days' : DELTA_DAYS,                      |
+        |   'default_reward' : DEFAULT_REWARD}                               |
+        +--------------------------------------------------------------------+
+
         :requires: A secure cookie obtained by logging in.
         :param string name: Name of the experiment.
         :param string getcontext: String of python code for get context code.
         :param string getaction: String of python code for get action code.
         :param string getreward: String of python code for get reward code.
         :param string setreward: String of python code for set reward code.
-        :param bool advice_id: Bool indicating whether advice_id's are used.
         :param bool hourly: Bool indicating whether the state of Theta should be stored hourly. 
         :param bool advice_id: Bool indicating whether the getAdvice and setReward calls should return an advice_id.
         :param int delta_days: If advice_id is True, supply this to give the number of days that an advice_id should be stored.
@@ -95,7 +104,7 @@ class UpdateExperiment(BaseHandler):
         +--------------------------------------------------------------------+
         | Example                                                            |
         +====================================================================+
-        | http://example.com/admin/exp/EXP_ID/get.json                       |
+        | http://example.com/exp/EXP_ID                                      |
         +--------------------------------------------------------------------+
 
         :requires: A secure cookie obtained by logging in.
@@ -115,12 +124,12 @@ class UpdateExperiment(BaseHandler):
             raise ExceptionHandler(reason = "Could not validate user.", status_code = 401)
 
     def delete(self, exp_id):
-        """ Delete an experiment given an experiment id
+        """ Delete an experiment
 
         +--------------------------------------------------------------------+
         | Example                                                            |
         +====================================================================+
-        | http://example.com/admin/exp/EXP_ID/delete.json                    |
+        | http://example.com/exp/EXP_ID                                      |
         +--------------------------------------------------------------------+
         
         :requires: A secure cookie obtained by logging in.
@@ -140,15 +149,24 @@ class UpdateExperiment(BaseHandler):
             raise ExceptionHandler(reason = "Could not validate user.", status_code = 401)
 
     def put(self, exp_id):
-        """ Retrieve a list of experiments running on this server
+        """ Edit an experiment
        
+        +--------------------------------------------------------------------+
+        | Example                                                            |
+        +====================================================================+
+        | http://example.com/exp/EXP_ID                                      |
+        | {'name' : NAME, 'getcontext' : CODE, 'getaction' : CODE,           |
+        |   'getreward' : CODE, 'setreward' : CODE, 'advice_id' : True,      |
+        |   'hourly' : True, 'delta_days' : DELTA_DAYS,                      |
+        |   'default_reward' : DEFAULT_REWARD}                               |
+        +--------------------------------------------------------------------+
+
         :requires: A secure cookie obtained by logging in.
         :param string name: Name of the experiment.
         :param string getcontext: String of python code for get context code.
         :param string getaction: String of python code for get action code.
         :param string getreward: String of python code for get reward code.
         :param string setreward: String of python code for set reward code.
-        :param bool adviceid: Bool indicating whether adviceIds are used.
         :param bool hourly: Bool indicating whether the state of Theta should be stored hourly.
         :param bool advice_id: Bool indicating whether the getAdvice and setReward calls should return an advice_id.
         :param int delta_days: If advice_id is True, supply this to give the number of days that an advice_id should be stored.
@@ -192,7 +210,7 @@ class ListDefaults(tornado.web.RequestHandler):
         +--------------------------------------------------------------------+
         | Example                                                            |
         +====================================================================+
-        | http://example.com/admin/exp/defaults.json                         |
+        | http://example.com/exp/defaults                                    |
         +--------------------------------------------------------------------+
 
         :requires: A secure cookie obtained by logging in.
@@ -216,7 +234,7 @@ class GetDefault(tornado.web.RequestHandler):
         +--------------------------------------------------------------------+
         | Example                                                            |
         +====================================================================+
-        | http://example.com/admin/exp/default/EXP_ID/get.json               |
+        | http://example.com/exp/defaults/DEFAULT_ID                         |
         +--------------------------------------------------------------------+
 
         :requires: A secure cookie obtained by logging in.
@@ -246,7 +264,7 @@ class ResetExperiment(BaseHandler):
         +--------------------------------------------------------------------+
         | Example                                                            |
         +====================================================================+
-        | http://example.com/admin/exp/EXP_ID/resetexperiment?key=KEY        |
+        | http://example.com/exp/EXP_ID/resetexperiment?key=KEY              |
         | &theta_key=THETA_KEY&theta_value=THETA_VALUE                       |
         +--------------------------------------------------------------------+
 
@@ -286,8 +304,8 @@ class AddUser(BaseHandler):
         +--------------------------------------------------------------------+
         | Example                                                            |
         +====================================================================+
-        | http://example.com/admin/user/add.json?username=USERNAME&password= |
-        | PASSWORD                                                           |
+        | http://example.com/user                                            |
+        | {'username' : USERNAME, 'password' : PASSWORD}                     |
         +--------------------------------------------------------------------+
 
         :param string username: The preferred username.
