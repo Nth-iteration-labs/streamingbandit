@@ -95,6 +95,7 @@
 <li class="toctree-l1"><a class="reference internal" href="stats.html">Statistics API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="eval.html">Evaluation API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="admin.html">Admin API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="management.html">Management API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libs.html">Libs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exp.html">Experiment</a></li>
 </ul>
@@ -163,8 +164,8 @@
   <div class="section" id="core-api">
 <h1>Core API<a class="headerlink" href="#core-api" title="Permalink to this headline">¶</a></h1>
 <dl class="get">
-<dt id="get-(?i)-(?P-exp_id-w+)-getaction.json">
-<code class="descname">GET </code><code class="descname">(?i)/(?P&lt;exp_id&gt;w+)/getaction.json</code><a class="headerlink" href="#get-(?i)-(?P-exp_id-w+)-getaction.json" title="Permalink to this definition">¶</a></dt>
+<dt id="get-(?i)-getaction-(?P-exp_id-w+)">
+<code class="descname">GET </code><code class="descname">(?i)/getaction/(?P&lt;exp_id&gt;w+)</code><a class="headerlink" href="#get-(?i)-getaction-(?P-exp_id-w+)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get an action given a context for a specific exp_id.</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -204,8 +205,8 @@
 </dd></dl>
 
 <dl class="get">
-<dt id="get-(?i)-(?P-exp_id-w+)-setreward.json">
-<code class="descname">GET </code><code class="descname">(?i)/(?P&lt;exp_id&gt;w+)/setreward.json</code><a class="headerlink" href="#get-(?i)-(?P-exp_id-w+)-setreward.json" title="Permalink to this definition">¶</a></dt>
+<dt id="get-(?i)-setreward-(?P-exp_id-w+)">
+<code class="descname">GET </code><code class="descname">(?i)/setreward/(?P&lt;exp_id&gt;w+)</code><a class="headerlink" href="#get-(?i)-setreward-(?P-exp_id-w+)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update the parameters and set a reward for a given experiment.</p>
 <p>For parameters, there are two options (next to the mandatory key 
 and exp_id). The first option is supplying all the information manually, 

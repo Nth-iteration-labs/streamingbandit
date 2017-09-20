@@ -15,6 +15,7 @@ Python 3.x+ (untested on Python 2.7) with the following packages:
 * [SciPy](http://www.scipy.org)
 * [scikit-learn](http://scikit-learn.org/stable/)
 * [APScheduler](http://apscheduler.readthedocs.io/)
+* [bcrypt](https://pypi.python.org/pypi/bcrypt/3.1.0)
 
 [Redis](http://redis.io)
 
@@ -28,7 +29,7 @@ Python 3.x+ (untested on Python 2.7) with the following packages:
 To install all dependencies:
 
 ```
-sudo python3 setup.py install
+sudo pip3 install .
 ```
 
 ## Redis

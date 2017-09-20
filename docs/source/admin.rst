@@ -2,4 +2,4 @@ Admin API
 =========
 
 .. autotornado:: app:application
-   :endpoints: AddExperiment.post, GetListOfExperiments.get, ListDefaults.get, GetDefault.get, GetExperiment.get, DeleteExperiment.get, EditExperiment.post, ResetExperiment.get, AddUser.get
+   :endpoints: GenerateExperiments.post, GenerateExperiments.get, ListDefaults.get, GetDefault.get, UpdateExperiment.get, UpdateExperiment.delete, UpdateExperiment.put, ResetExperiment.get, AddUser.get

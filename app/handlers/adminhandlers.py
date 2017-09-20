@@ -12,8 +12,29 @@ from db.database import Database
 from db.users import Users
 
 
-class AddExperiment(BaseHandler):
+class GenerateExperiments(BaseHandler):
     
+    def get(self):
+        """ Retrieve a list of experiments running on this server
+        
+        +--------------------------------------------------------------------+
+        | Example                                                            |
+        +====================================================================+
+        | http://example.com/admin/exp/list.json                             |
+        +--------------------------------------------------------------------+
+
+        :requires: A secure cookie obtained by logging in.
+        :returns: A JSON containing exp_id and name pairs.
+        :raises 401: If user is not logged in or if there is no secure cookie available.
+        """
+        user = self.get_current_user()
+        if user: 
+            db = Database()
+            response = db.get_all_experiments(int(user))
+            self.write(json.dumps(response))
+        else:
+            raise ExceptionHandler(reason = "Could not validate user.", status_code = 401)
+
     def post(self):
         """ Create a new experiment
         
@@ -38,18 +59,18 @@ class AddExperiment(BaseHandler):
         if user:
             exp_obj = {}
             exp_obj["user_id"] = int(user)
-            exp_obj["name"] = self.get_argument("name")
-            exp_obj["getContext"] = self.get_argument("getcontext")
-            exp_obj["getAction"] = self.get_argument("getaction")
-            exp_obj["getReward"] = self.get_argument("getreward")
-            exp_obj["setReward"] = self.get_argument("setreward")
-            exp_obj["hourlyTheta"] = self.get_argument("hourly")
-            exp_obj["advice_id"] = self.get_argument("advice_id")
+            exp_obj["name"] = self.get_body_argument("name")
+            exp_obj["getContext"] = self.get_body_argument("getcontext")
+            exp_obj["getAction"] = self.get_body_argument("getaction")
+            exp_obj["getReward"] = self.get_body_argument("getreward")
+            exp_obj["setReward"] = self.get_body_argument("setreward")
+            exp_obj["hourlyTheta"] = self.get_body_argument("hourly")
+            exp_obj["advice_id"] = self.get_body_argument("advice_id")
             if exp_obj["advice_id"] in ["true", "True", "y", "yes"]:
                 exp_obj["advice_id"] = True
             if exp_obj["advice_id"] is True:
-                exp_obj["delta_days"] = self.get_argument("delta_days")
-                exp_obj["default_reward"] = self.get_argument("default_reward")
+                exp_obj["delta_days"] = self.get_body_argument("delta_days")
+                exp_obj["default_reward"] = self.get_body_argument("default_reward")
         
             exp_obj["key"] = hex(random.getrandbits(42))[2:-1]
 
@@ -66,59 +87,7 @@ class AddExperiment(BaseHandler):
             raise ExceptionHandler(reason = "Could not validate user.", status_code = 401)
 
 
-class DeleteExperiment(BaseHandler):
-    
-    def get(self, exp_id):
-        """ Delete an experiment given an experiment id
-
-        +--------------------------------------------------------------------+
-        | Example                                                            |
-        +====================================================================+
-        | http://example.com/admin/exp/EXP_ID/delete.json                    |
-        +--------------------------------------------------------------------+
-        
-        :requires: A secure cookie obtained by logging in.
-        :param int exp_id: The ID of the experiment to be deleted.
-        :returns: A JSON showing the deleted experiment.
-        :raises 401: If the experiment does not belong to this user or the exp_id is wrong.
-        :raises 401: If user is not logged in or if there is no secure cookie available.
-        """
-        if self.get_current_user():
-            if self.validate_user_experiment(exp_id):
-                db = Database()
-                response = db.delete_experiment(exp_id)
-                self.write(json.dumps(response))
-            else:
-                raise ExceptionHandler(reason = "Experiment could not be validated.", status_code = 401)
-        else:
-            raise ExceptionHandler(reason = "Could not validate user.", status_code = 401)
-        
-
-class GetListOfExperiments(BaseHandler):
-    
-    def get(self):
-        """ Retrieve a list of experiments running on this server
-        
-        +--------------------------------------------------------------------+
-        | Example                                                            |
-        +====================================================================+
-        | http://example.com/admin/exp/list.json                             |
-        +--------------------------------------------------------------------+
-
-        :requires: A secure cookie obtained by logging in.
-        :returns: A JSON containing exp_id and name pairs.
-        :raises 401: If user is not logged in or if there is no secure cookie available.
-        """
-        user = self.get_current_user()
-        if user: 
-            db = Database()
-            response = db.get_all_experiments(int(user))
-            self.write(json.dumps(response))
-        else:
-            raise ExceptionHandler(reason = "Could not validate user.", status_code = 401)
-        
-        
-class GetExperiment(BaseHandler):
+class UpdateExperiment(BaseHandler):
     
     def get(self, exp_id):
         """ Retrieve a specific experiment running on this server
@@ -145,10 +114,32 @@ class GetExperiment(BaseHandler):
         else:
             raise ExceptionHandler(reason = "Could not validate user.", status_code = 401)
 
+    def delete(self, exp_id):
+        """ Delete an experiment given an experiment id
+
+        +--------------------------------------------------------------------+
+        | Example                                                            |
+        +====================================================================+
+        | http://example.com/admin/exp/EXP_ID/delete.json                    |
+        +--------------------------------------------------------------------+
         
-class EditExperiment(BaseHandler):
-    
-    def post(self, exp_id):
+        :requires: A secure cookie obtained by logging in.
+        :param int exp_id: The ID of the experiment to be deleted.
+        :returns: A JSON showing the deleted experiment.
+        :raises 401: If the experiment does not belong to this user or the exp_id is wrong.
+        :raises 401: If user is not logged in or if there is no secure cookie available.
+        """
+        if self.get_current_user():
+            if self.validate_user_experiment(exp_id):
+                db = Database()
+                response = db.delete_experiment(exp_id)
+                self.write(json.dumps(response))
+            else:
+                raise ExceptionHandler(reason = "Experiment could not be validated.", status_code = 401)
+        else:
+            raise ExceptionHandler(reason = "Could not validate user.", status_code = 401)
+
+    def put(self, exp_id):
         """ Retrieve a list of experiments running on this server
        
         :requires: A secure cookie obtained by logging in.
@@ -171,18 +162,18 @@ class EditExperiment(BaseHandler):
             if self.validate_user_experiment(exp_id):
                 exp_obj = {}
                 exp_obj["user_id"] = int(user)
-                exp_obj["name"] = self.get_argument("name")
-                exp_obj["getContext"] = self.get_argument("getcontext")
-                exp_obj["getAction"] = self.get_argument("getaction")
-                exp_obj["getReward"] = self.get_argument("getreward")
-                exp_obj["setReward"] = self.get_argument("setreward")
-                exp_obj["hourlyTheta"] = self.get_argument("hourly")
-                exp_obj["advice_id"] = self.get_argument("advice_id")
+                exp_obj["name"] = self.get_body_argument("name")
+                exp_obj["getContext"] = self.get_body_argument("getcontext")
+                exp_obj["getAction"] = self.get_body_argument("getaction")
+                exp_obj["getReward"] = self.get_body_argument("getreward")
+                exp_obj["setReward"] = self.get_body_argument("setreward")
+                exp_obj["hourlyTheta"] = self.get_body_argument("hourly")
+                exp_obj["advice_id"] = self.get_body_argument("advice_id")
                 if exp_obj["advice_id"] in ["true", "True", "y", "yes"]:
                     exp_obj["advice_id"] = True
                 if exp_obj["advice_id"] is True:
-                    exp_obj["delta_days"] = self.get_argument("delta_days")
-                    exp_obj["default_reward"] = self.get_argument("default_reward")
+                    exp_obj["delta_days"] = self.get_body_argument("delta_days")
+                    exp_obj["default_reward"] = self.get_body_argument("default_reward")
             
                 db = Database()
                 response = {}
@@ -192,8 +183,7 @@ class EditExperiment(BaseHandler):
                 raise ExceptionHandler(reason = "Experiment could not be validated.", status_code = 401)
         else:
             raise ExceptionHandler(reason = "Could not validate user.", status_code = 401)
-
-
+        
 class ListDefaults(tornado.web.RequestHandler):
     
     def get(self):
@@ -290,7 +280,7 @@ class ResetExperiment(BaseHandler):
 
 class AddUser(BaseHandler):
 
-    def get(self):
+    def post(self):
         """ Add a user to StreamingBandit.
 
         +--------------------------------------------------------------------+
@@ -306,8 +296,8 @@ class AddUser(BaseHandler):
         :raises 400: If user with username already exists.
         """
         users = Users()
-        username = self.get_argument("username")
-        password = self.get_argument("password")
+        username = self.get_body_argument("username")
+        password = self.get_body_argument("password")
         user_id = users.create_user(username, password)
         if user_id is False:
             raise ExceptionHandler(reason = "User already exists.", status_code = 400)

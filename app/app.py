@@ -53,19 +53,21 @@ app_log.info("Starting application {0}".format( settings["listen.port"]))
 ########## Handlers ##########
 urls = [
     # Core API
-    (r"(?i)/(?P<exp_id>\w+)/getaction.json", corehandlers.ActionHandler),
-    (r"(?i)/(?P<exp_id>\w+)/setreward.json", corehandlers.RewardHandler),
+    (r"(?i)/getaction/(?P<exp_id>\w+)", corehandlers.ActionHandler),
+    (r"(?i)/setreward/(?P<exp_id>\w+)", corehandlers.RewardHandler),
 
     # Adminstration API
-    (r"(?i)/admin/exp/add.json", adminhandlers.AddExperiment),
-    (r"(?i)/admin/exp/list.json", adminhandlers.GetListOfExperiments),
-    (r"(?i)/admin/exp/defaults.json", adminhandlers.ListDefaults),
-    (r"(?i)/admin/exp/default/(?P<default_id>\w+)/get.json", adminhandlers.GetDefault),
-    (r"(?i)/admin/exp/(?P<exp_id>\w+)/get.json", adminhandlers.GetExperiment),
-    (r"(?i)/admin/exp/(?P<exp_id>\w+)/delete.json", adminhandlers.DeleteExperiment),
-    (r"(?i)/admin/exp/(?P<exp_id>\w+)/edit.json", adminhandlers.EditExperiment),
-    (r"(?i)/admin/exp/(?P<exp_id>\w+)/resetexperiment", adminhandlers.ResetExperiment),
-    (r"(?i)/admin/user/add.json", adminhandlers.AddUser),
+    (r"(?i)/exp", adminhandlers.GenerateExperiments),
+
+    (r"(?i)/exp/defaults", adminhandlers.ListDefaults),
+
+    (r"(?i)/exp/defaults/(?P<default_id>\w+)", adminhandlers.GetDefault),
+
+    (r"(?i)/exp/(?P<exp_id>\w+)", adminhandlers.UpdateExperiment),
+
+    (r"(?i)/exp/(?P<exp_id>\w+)/resetexperiment", adminhandlers.ResetExperiment),
+
+    (r"(?i)/user", adminhandlers.AddUser),
 
     # Statistics API
     (r"(?i)/stats/(?P<exp_id>\w+)/currenttheta.json", statshandlers.GetCurrentTheta),
