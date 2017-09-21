@@ -50,8 +50,8 @@ class BaseHandler(tornado.web.RequestHandler):
             return False
 
     def valid_admin(self):
-        user_id = self.get_current_user()
-        if user_id == "admin"
+        user_id = self.get_current_user().decode('utf-8')
+        if user_id == "admin":
             return True
     
     def write_error(self, status_code, **kwargs): 

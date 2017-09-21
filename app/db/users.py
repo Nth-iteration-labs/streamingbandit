@@ -35,7 +35,7 @@ class Users:
         else:
             # Create user
             # Find user with highest user_id and increment
-            highest_user_id = self.userinfo.find_one(sort=[("user_id",DESCENDING)])
+            highest_user_id = self.userinfo.find_one(filter={"user_id":{"$ne":"admin"}},sort=[("user_id",DESCENDING)])
             if highest_user_id is None:
                 user_id = 1
             else:

@@ -17,7 +17,11 @@ class LogInHandler(BaseHandler):
         | Example                                                            |
         +====================================================================+
         | http://example.com/login                                           |
+        | {"username" : USERNAME, "password" : PASSWORD}                     |
         +--------------------------------------------------------------------+
+
+        .. note:: The parameters for the POST calls have to be posted in the \
+                    body as a JSON object.
 
         :param string username: Experiment ID as specified in the url.
         :param string password: The number of simulation draws.

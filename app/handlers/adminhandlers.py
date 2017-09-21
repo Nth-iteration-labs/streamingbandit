@@ -324,10 +324,11 @@ class AddUser(BaseHandler):
         :returns: JSON indicating success.
         :raises 400: If user with username already exists.
         """
-        if is valid_admin():
+        if self.valid_admin():
+            data = tornado.escape.json_decode(self.request.body)
             users = Users()
-            username = self.get_body_argument("username")
-            password = self.get_body_argument("password")
+            username = data["username"]
+            password = data["password"]
             user_id = users.create_user(username, password)
             if user_id is False:
                 raise ExceptionHandler(reason = "User already exists.", status_code = 400)
