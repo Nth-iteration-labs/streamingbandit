@@ -324,11 +324,14 @@ class AddUser(BaseHandler):
         :returns: JSON indicating success.
         :raises 400: If user with username already exists.
         """
-        users = Users()
-        username = self.get_body_argument("username")
-        password = self.get_body_argument("password")
-        user_id = users.create_user(username, password)
-        if user_id is False:
-            raise ExceptionHandler(reason = "User already exists.", status_code = 400)
+        if is valid_admin():
+            users = Users()
+            username = self.get_body_argument("username")
+            password = self.get_body_argument("password")
+            user_id = users.create_user(username, password)
+            if user_id is False:
+                raise ExceptionHandler(reason = "User already exists.", status_code = 400)
+            else:
+                self.write(json.dumps({'status' : 'success'}))
         else:
-            self.write(json.dumps({'status' : 'success'}))
+            raise ExceptionHandler(reason = "You are not an admin.", status_code = 401)
