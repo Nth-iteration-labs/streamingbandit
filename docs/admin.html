@@ -208,15 +208,19 @@
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><p class="first"><a class="reference external" href="http://example.com/exp">http://example.com/exp</a>
-{‘name’ : NAME, ‘getcontext’ : CODE, ‘getaction’ : CODE,</p>
+{“name” : NAME, “getcontext” : CODE, “getaction” : CODE,</p>
 <blockquote class="last">
-<div>‘getreward’ : CODE, ‘setreward’ : CODE, ‘advice_id’ : True,
-‘hourly’ : True, ‘delta_days’ : DELTA_DAYS,
-‘default_reward’ : DEFAULT_REWARD}</div></blockquote>
+<div>“getreward” : CODE, “setreward” : CODE, “advice_id” : True,
+“hourly” : True, “delta_days” : DELTA_DAYS,
+“default_reward” : DEFAULT_REWARD}</div></blockquote>
 </td>
 </tr>
 </tbody>
 </table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The parameters for the POST calls have to be posted in the                     body as a JSON object.</p>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -420,15 +424,19 @@ error : (optional) error message }</p>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><p class="first"><a class="reference external" href="http://example.com/exp/EXP_ID">http://example.com/exp/EXP_ID</a>
-{‘name’ : NAME, ‘getcontext’ : CODE, ‘getaction’ : CODE,</p>
+{“name” : NAME, “getcontext” : CODE, “getaction” : CODE,</p>
 <blockquote class="last">
-<div>‘getreward’ : CODE, ‘setreward’ : CODE, ‘advice_id’ : True,
-‘hourly’ : True, ‘delta_days’ : DELTA_DAYS,
-‘default_reward’ : DEFAULT_REWARD}</div></blockquote>
+<div>“getreward” : CODE, “setreward” : CODE, “advice_id” : True,
+“hourly” : True, “delta_days” : DELTA_DAYS,
+“default_reward” : DEFAULT_REWARD}</div></blockquote>
 </td>
 </tr>
 </tbody>
 </table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The parameters for the PUT calls have to be posted in the                     body as a JSON object.</p>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -502,6 +510,48 @@ error : (optional) error message }</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first last">If user is not logged in or if there is no secure cookie available.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="post">
+<dt id="post-(?i)-user">
+<code class="descname">POST </code><code class="descname">(?i)/user</code><a class="headerlink" href="#post-(?i)-user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a user to StreamingBandit.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Example</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference external" href="http://example.com/user">http://example.com/user</a>
+{“username” : USERNAME, “password” : PASSWORD}</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The parameters for the POST calls have to be posted in the                     body as a JSON object.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>username</strong> (<em>string</em>) – The preferred username.</li>
+<li><strong>password</strong> (<em>string</em>) – The preferred password.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">JSON indicating success.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises 400:</th><td class="field-body"><p class="first last">If user with username already exists.</p>
 </td>
 </tr>
 </tbody>

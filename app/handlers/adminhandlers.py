@@ -42,11 +42,14 @@ class GenerateExperiments(BaseHandler):
         | Example                                                            |
         +====================================================================+
         | http://example.com/exp                                             |
-        | {'name' : NAME, 'getcontext' : CODE, 'getaction' : CODE,           |
-        |   'getreward' : CODE, 'setreward' : CODE, 'advice_id' : True,      |
-        |   'hourly' : True, 'delta_days' : DELTA_DAYS,                      |
-        |   'default_reward' : DEFAULT_REWARD}                               |
+        | {"name" : NAME, "getcontext" : CODE, "getaction" : CODE,           |
+        |   "getreward" : CODE, "setreward" : CODE, "advice_id" : True,      |
+        |   "hourly" : True, "delta_days" : DELTA_DAYS,                      |
+        |   "default_reward" : DEFAULT_REWARD}                               |
         +--------------------------------------------------------------------+
+
+        .. note:: The parameters for the POST calls have to be posted in the \
+                    body as a JSON object.
 
         :requires: A secure cookie obtained by logging in.
         :param string name: Name of the experiment.
@@ -156,11 +159,14 @@ class UpdateExperiment(BaseHandler):
         | Example                                                            |
         +====================================================================+
         | http://example.com/exp/EXP_ID                                      |
-        | {'name' : NAME, 'getcontext' : CODE, 'getaction' : CODE,           |
-        |   'getreward' : CODE, 'setreward' : CODE, 'advice_id' : True,      |
-        |   'hourly' : True, 'delta_days' : DELTA_DAYS,                      |
-        |   'default_reward' : DEFAULT_REWARD}                               |
+        | {"name" : NAME, "getcontext" : CODE, "getaction" : CODE,           |
+        |   "getreward" : CODE, "setreward" : CODE, "advice_id" : True,      |
+        |   "hourly" : True, "delta_days" : DELTA_DAYS,                      |
+        |   "default_reward" : DEFAULT_REWARD}                               |
         +--------------------------------------------------------------------+
+
+        .. note:: The parameters for the PUT calls have to be posted in the \
+                    body as a JSON object.
 
         :requires: A secure cookie obtained by logging in.
         :param string name: Name of the experiment.
@@ -307,8 +313,11 @@ class AddUser(BaseHandler):
         | Example                                                            |
         +====================================================================+
         | http://example.com/user                                            |
-        | {'username' : USERNAME, 'password' : PASSWORD}                     |
+        | {"username" : USERNAME, "password" : PASSWORD}                     |
         +--------------------------------------------------------------------+
+
+        .. note:: The parameters for the POST calls have to be posted in the \
+                    body as a JSON object.
 
         :param string username: The preferred username.
         :param string password: The preferred password.
