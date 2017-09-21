@@ -44,7 +44,7 @@ class GenerateExperiments(BaseHandler):
         | http://example.com/exp                                             |
         | {"name" : NAME, "getcontext" : CODE, "getaction" : CODE,           |
         |   "getreward" : CODE, "setreward" : CODE, "advice_id" : True,      |
-        |   "hourly" : True, "delta_days" : DELTA_DAYS,                      |
+        |   "hourly" : True, "delta_hours" : DELTA_HOURS,                    |
         |   "default_reward" : DEFAULT_REWARD}                               |
         +--------------------------------------------------------------------+
 
@@ -59,8 +59,8 @@ class GenerateExperiments(BaseHandler):
         :param string setreward: String of python code for set reward code.
         :param bool hourly: Bool indicating whether the state of Theta should be stored hourly. 
         :param bool advice_id: Bool indicating whether the getAdvice and setReward calls should return an advice_id.
-        :param int delta_days: If advice_id is True, supply this to give the number of days that an advice_id should be stored.
-        :param dict default_reward: If advice_id is True, supply this to give the default reward for advice_id's that are over their delta_days limit.
+        :param int delta_hours: If advice_id is True, supply this to give the number of hours that an advice_id should be stored.
+        :param dict default_reward: If advice_id is True, supply this to give the default reward for advice_id's that are over their delta_hours limit.
         :returns: A JSON of the form:
             { id : the assigned experiment id, 
              name : the name of the experiment (checked for duplicates),
@@ -82,7 +82,7 @@ class GenerateExperiments(BaseHandler):
             if exp_obj["advice_id"] in ["true", "True", "y", "yes"]:
                 exp_obj["advice_id"] = True
             if exp_obj["advice_id"] is True:
-                exp_obj["delta_days"] = data["delta_days"]
+                exp_obj["delta_hours"] = data["delta_hours"]
                 exp_obj["default_reward"] = data["default_reward"]
         
             exp_obj["key"] = hex(random.getrandbits(42))[2:-1]
@@ -161,7 +161,7 @@ class UpdateExperiment(BaseHandler):
         | http://example.com/exp/EXP_ID                                      |
         | {"name" : NAME, "getcontext" : CODE, "getaction" : CODE,           |
         |   "getreward" : CODE, "setreward" : CODE, "advice_id" : True,      |
-        |   "hourly" : True, "delta_days" : DELTA_DAYS,                      |
+        |   "hourly" : True, "delta_hours" : DELTA_HOURS,                    |
         |   "default_reward" : DEFAULT_REWARD}                               |
         +--------------------------------------------------------------------+
 
@@ -176,8 +176,8 @@ class UpdateExperiment(BaseHandler):
         :param string setreward: String of python code for set reward code.
         :param bool hourly: Bool indicating whether the state of Theta should be stored hourly.
         :param bool advice_id: Bool indicating whether the getAdvice and setReward calls should return an advice_id.
-        :param int delta_days: If advice_id is True, supply this to give the number of days that an advice_id should be stored.
-        :param dict default_reward: If advice_id is True, supply this to give the default reward for advice_id's that are over their delta_days limit.
+        :param int delta_hours: If advice_id is True, supply this to give the number of hours that an advice_id should be stored.
+        :param dict default_reward: If advice_id is True, supply this to give the default reward for advice_id's that are over their delta_hours limit.
         :returns: A JSON indicating success.
         :raises 401: If the experiment does not belong to this user or the exp_id is wrong.
         :raises 401: If user is not logged in or if there is no secure cookie available.
@@ -198,7 +198,7 @@ class UpdateExperiment(BaseHandler):
                 if exp_obj["advice_id"] in ["true", "True", "y", "yes"]:
                     exp_obj["advice_id"] = True
                 if exp_obj["advice_id"] is True:
-                    exp_obj["delta_days"] = data["delta_days"]
+                    exp_obj["delta_hours"] = data["delta_hours"]
                     exp_obj["default_reward"] = data["default_reward"]
             
                 db = Database()
