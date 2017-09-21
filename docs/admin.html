@@ -207,12 +207,16 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><p class="first"><a class="reference external" href="http://example.com/exp">http://example.com/exp</a>
-{“name” : NAME, “getcontext” : CODE, “getaction” : CODE,</p>
-<blockquote class="last">
-<div>“getreward” : CODE, “setreward” : CODE, “advice_id” : True,
+<tr class="row-even"><td><dl class="first last docutils">
+<dt><a class="reference external" href="http://example.com/exp">http://example.com/exp</a></dt>
+<dd><dl class="first last docutils">
+<dt>{“name” <span class="classifier-delimiter">:</span> <span class="classifier">NAME, “getcontext”</span> <span class="classifier-delimiter">:</span> <span class="classifier">CODE, “getaction”</span> <span class="classifier-delimiter">:</span> <span class="classifier">CODE,</span></dt>
+<dd>“getreward” : CODE, “setreward” : CODE, “advice_id” : True,
 “hourly” : True, “delta_hours” : DELTA_HOURS,
-“default_reward” : DEFAULT_REWARD}</div></blockquote>
+“default_reward” : DEFAULT_REWARD}</dd>
+</dl>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -241,16 +245,24 @@
 </ul>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A JSON of the form:
-{ id : the assigned experiment id,</p>
-<blockquote>
-<div><p>name : the name of the experiment (checked for duplicates),
-error : (optional) error message }</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A JSON of the form:</p>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first last">If user is not logged in or if there is no secure cookie available.</p>
-</td>
+</tbody>
+</table>
+<div class="highlight-json"><div class="highlight"><pre><span></span>{ 
+    &quot;id&quot; : The assigned experiment id, 
+    &quot;name&quot; : The name of the experiment (checked for duplicates), 
+    &quot;error&quot; : (Optional) error message 
+    &quot;key&quot; : The key for the experiment 
+} 
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises 401:</th><td class="field-body">If user is not logged in or if there is no secure cookie available.</td>
 </tr>
 </tbody>
 </table>

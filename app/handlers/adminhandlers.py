@@ -42,7 +42,7 @@ class GenerateExperiments(BaseHandler):
         | Example                                                            |
         +====================================================================+
         | http://example.com/exp                                             |
-        | {"name" : NAME, "getcontext" : CODE, "getaction" : CODE,           |
+        |  {"name" : NAME, "getcontext" : CODE, "getaction" : CODE,          |
         |   "getreward" : CODE, "setreward" : CODE, "advice_id" : True,      |
         |   "hourly" : True, "delta_hours" : DELTA_HOURS,                    |
         |   "default_reward" : DEFAULT_REWARD}                               |
@@ -61,10 +61,15 @@ class GenerateExperiments(BaseHandler):
         :param bool advice_id: Bool indicating whether the getAdvice and setReward calls should return an advice_id.
         :param int delta_hours: If advice_id is True, supply this to give the number of hours that an advice_id should be stored.
         :param dict default_reward: If advice_id is True, supply this to give the default reward for advice_id's that are over their delta_hours limit.
-        :returns: A JSON of the form:
-            { id : the assigned experiment id, 
-             name : the name of the experiment (checked for duplicates),
-             error : (optional) error message }
+        :returns: A JSON of the form: 
+        .. code-block:: json
+    
+            { 
+                "id" : The assigned experiment id, 
+                "name" : The name of the experiment (checked for duplicates), 
+                "error" : (Optional) error message 
+                "key" : The key for the experiment 
+            } 
         :raises 401: If user is not logged in or if there is no secure cookie available.
         """
         user = self.get_current_user()
