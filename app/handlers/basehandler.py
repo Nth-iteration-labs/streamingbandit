@@ -33,6 +33,7 @@ class BaseHandler(tornado.web.RequestHandler):
         self.set_header('Access-Control-Allow-Headers', 'origin, content-type, accept, authorization, x-total-count, content-range')
         self.set_header("Access-Control-Allow-Origin", "*")
         self.set_header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS')
+        self.set_header('Content-Type', 'application/json')
     
     def get_current_user(self):
         return self.get_secure_cookie("user")
@@ -70,6 +71,7 @@ class BaseHandler(tornado.web.RequestHandler):
                 }
             }))
 
-class IndexHandler(BaseHandler):
+class IndexHandler(tornado.web.RequestHandler):
+
     def get(self):
         self.render("index.html")
