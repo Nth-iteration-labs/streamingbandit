@@ -16,7 +16,7 @@ from core.jobs import *
 from handlers import corehandlers
 from handlers import adminhandlers
 from handlers import statshandlers
-from handlers import managementhandlers
+from handlers import loginhandlers
 from handlers import evalhandlers
 from handlers import basehandler
 
@@ -78,8 +78,8 @@ urls = [
     (r"(?i)/stats/(?P<exp_id>\w+)/summary.json", statshandlers.GetSummary),
 
     # Login API
-    (r"(?i)/login", managementhandlers.LogInHandler),
-    (r"(?i)/logout", managementhandlers.LogOutHandler),
+    (r"(?i)/login", loginhandlers.LogInHandler),
+    (r"(?i)/logout", loginhandlers.LogOutHandler),
                
     # Simulation API
     (r"(?i)/eval/(?P<exp_id>\w+)/simulate", evalhandlers.Simulate),

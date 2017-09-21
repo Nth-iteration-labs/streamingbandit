@@ -13,7 +13,7 @@ Documentation:
    Statistics API <stats>
    Evaluation API <eval>
    Admin API <admin>
-   Management API <management>
+   Login API <login>
    Libs <libs>
    Experiment <exp>
 

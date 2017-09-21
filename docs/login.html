@@ -95,7 +95,7 @@
 <li class="toctree-l1"><a class="reference internal" href="stats.html">Statistics API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="eval.html">Evaluation API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="admin.html">Admin API</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Management API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Login API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libs.html">Libs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exp.html">Experiment</a></li>
 </ul>
@@ -148,7 +148,7 @@
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/management.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/login.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -176,10 +176,15 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><a class="reference external" href="http://example.com/login">http://example.com/login</a></td>
+<tr class="row-even"><td><a class="reference external" href="http://example.com/login">http://example.com/login</a>
+{“username” : USERNAME, “password” : PASSWORD}</td>
 </tr>
 </tbody>
 </table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The parameters for the POST calls have to be posted in the                     body as a JSON object.</p>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />

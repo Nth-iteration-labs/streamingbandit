@@ -36,7 +36,7 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="StreamingBandit 1 documentation" href="index.html"/>
-        <link rel="next" title="Management API" href="management.html"/>
+        <link rel="next" title="Management API" href="login.html"/>
         <link rel="prev" title="Evaluation API" href="eval.html"/> 
 
   
@@ -95,7 +95,7 @@
 <li class="toctree-l1"><a class="reference internal" href="stats.html">Statistics API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="eval.html">Evaluation API</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Admin API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="management.html">Management API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="login.html">Login API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libs.html">Libs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exp.html">Experiment</a></li>
 </ul>
@@ -211,7 +211,7 @@
 {“name” : NAME, “getcontext” : CODE, “getaction” : CODE,</p>
 <blockquote class="last">
 <div>“getreward” : CODE, “setreward” : CODE, “advice_id” : True,
-“hourly” : True, “delta_days” : DELTA_DAYS,
+“hourly” : True, “delta_hours” : DELTA_HOURS,
 “default_reward” : DEFAULT_REWARD}</div></blockquote>
 </td>
 </tr>
@@ -236,8 +236,8 @@
 <li><strong>setreward</strong> (<em>string</em>) – String of python code for set reward code.</li>
 <li><strong>hourly</strong> (<em>bool</em>) – Bool indicating whether the state of Theta should be stored hourly.</li>
 <li><strong>advice_id</strong> (<em>bool</em>) – Bool indicating whether the getAdvice and setReward calls should return an advice_id.</li>
-<li><strong>delta_days</strong> (<em>int</em>) – If advice_id is True, supply this to give the number of days that an advice_id should be stored.</li>
-<li><strong>default_reward</strong> (<em>dict</em>) – If advice_id is True, supply this to give the default reward for advice_id’s that are over their delta_days limit.</li>
+<li><strong>delta_hours</strong> (<em>int</em>) – If advice_id is True, supply this to give the number of hours that an advice_id should be stored.</li>
+<li><strong>default_reward</strong> (<em>dict</em>) – If advice_id is True, supply this to give the default reward for advice_id’s that are over their delta_hours limit.</li>
 </ul>
 </td>
 </tr>
@@ -427,7 +427,7 @@ error : (optional) error message }</p>
 {“name” : NAME, “getcontext” : CODE, “getaction” : CODE,</p>
 <blockquote class="last">
 <div>“getreward” : CODE, “setreward” : CODE, “advice_id” : True,
-“hourly” : True, “delta_days” : DELTA_DAYS,
+“hourly” : True, “delta_hours” : DELTA_HOURS,
 “default_reward” : DEFAULT_REWARD}</div></blockquote>
 </td>
 </tr>
@@ -452,8 +452,8 @@ error : (optional) error message }</p>
 <li><strong>setreward</strong> (<em>string</em>) – String of python code for set reward code.</li>
 <li><strong>hourly</strong> (<em>bool</em>) – Bool indicating whether the state of Theta should be stored hourly.</li>
 <li><strong>advice_id</strong> (<em>bool</em>) – Bool indicating whether the getAdvice and setReward calls should return an advice_id.</li>
-<li><strong>delta_days</strong> (<em>int</em>) – If advice_id is True, supply this to give the number of days that an advice_id should be stored.</li>
-<li><strong>default_reward</strong> (<em>dict</em>) – If advice_id is True, supply this to give the default reward for advice_id’s that are over their delta_days limit.</li>
+<li><strong>delta_hours</strong> (<em>int</em>) – If advice_id is True, supply this to give the number of hours that an advice_id should be stored.</li>
+<li><strong>default_reward</strong> (<em>dict</em>) – If advice_id is True, supply this to give the default reward for advice_id’s that are over their delta_hours limit.</li>
 </ul>
 </td>
 </tr>
@@ -570,7 +570,7 @@ error : (optional) error message }</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="management.html" class="btn btn-neutral float-right" title="Management API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="login.html" class="btn btn-neutral float-right" title="Management API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="eval.html" class="btn btn-neutral" title="Evaluation API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
