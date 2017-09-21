@@ -83,11 +83,13 @@ urls = [
                
     # Simulation API
     (r"(?i)/eval/(?P<exp_id>\w+)/simulate", evalhandlers.Simulate),
+
+    # Index
+    (r"(?i)/", basehandler.IndexHandler)
 ]
 
 tornadoConfig = dict({
     "template_path": os.path.join(os.path.dirname(__file__),"templates"),
-    "static_path": os.path.join(os.path.dirname(__file__),"static"),
     "debug": True,   # Should get from config?
     "cookie_secret":"12",
     "default_handler_class":basehandler.BaseHandler

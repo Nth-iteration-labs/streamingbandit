@@ -26,9 +26,11 @@ class LogInHandler(BaseHandler):
         # Get config:
         users = Users()
         
+        data = tornado.escape.json_decode(self.request.body)
+
         # Check:
-        username = self.get_body_argument("username")
-        password = self.get_body_argument("password")
+        username = data["username"]
+        password = data["password"]
         user_id = users.get_user_info(username, password)
         if user_id:
             self.set_secure_cookie("user", str(user_id))

@@ -66,20 +66,21 @@ class GenerateExperiments(BaseHandler):
         """
         user = self.get_current_user()
         if user:
+            data = tornado.escape.json_decode(self.request.body)
             exp_obj = {}
             exp_obj["user_id"] = int(user)
-            exp_obj["name"] = self.get_body_argument("name")
-            exp_obj["getContext"] = self.get_body_argument("getcontext")
-            exp_obj["getAction"] = self.get_body_argument("getaction")
-            exp_obj["getReward"] = self.get_body_argument("getreward")
-            exp_obj["setReward"] = self.get_body_argument("setreward")
-            exp_obj["hourlyTheta"] = self.get_body_argument("hourly")
-            exp_obj["advice_id"] = self.get_body_argument("advice_id")
+            exp_obj["name"] = data["name"]
+            exp_obj["getContext"] = data["getcontext"]
+            exp_obj["getAction"] = data["getaction"]
+            exp_obj["getReward"] = data["getreward"]
+            exp_obj["setReward"] = data["setreward"]
+            exp_obj["hourlyTheta"] = data["hourly"]
+            exp_obj["advice_id"] = data["advice_id"]
             if exp_obj["advice_id"] in ["true", "True", "y", "yes"]:
                 exp_obj["advice_id"] = True
             if exp_obj["advice_id"] is True:
-                exp_obj["delta_days"] = self.get_body_argument("delta_days")
-                exp_obj["default_reward"] = self.get_body_argument("default_reward")
+                exp_obj["delta_days"] = data["delta_days"]
+                exp_obj["default_reward"] = data["default_reward"]
         
             exp_obj["key"] = hex(random.getrandbits(42))[2:-1]
 
@@ -178,20 +179,21 @@ class UpdateExperiment(BaseHandler):
         user = self.get_current_user()
         if user: 
             if self.validate_user_experiment(exp_id):
+                data = tornado.escape.json_decode(self.request.body)
                 exp_obj = {}
                 exp_obj["user_id"] = int(user)
-                exp_obj["name"] = self.get_body_argument("name")
-                exp_obj["getContext"] = self.get_body_argument("getcontext")
-                exp_obj["getAction"] = self.get_body_argument("getaction")
-                exp_obj["getReward"] = self.get_body_argument("getreward")
-                exp_obj["setReward"] = self.get_body_argument("setreward")
-                exp_obj["hourlyTheta"] = self.get_body_argument("hourly")
-                exp_obj["advice_id"] = self.get_body_argument("advice_id")
+                exp_obj["name"] = data["name"]
+                exp_obj["getContext"] = data["getcontext"]
+                exp_obj["getAction"] = data["getaction"]
+                exp_obj["getReward"] = data["getreward"]
+                exp_obj["setReward"] = data["setreward"]
+                exp_obj["hourlyTheta"] = data["hourly"]
+                exp_obj["advice_id"] = data["advice_id"]
                 if exp_obj["advice_id"] in ["true", "True", "y", "yes"]:
                     exp_obj["advice_id"] = True
                 if exp_obj["advice_id"] is True:
-                    exp_obj["delta_days"] = self.get_body_argument("delta_days")
-                    exp_obj["default_reward"] = self.get_body_argument("default_reward")
+                    exp_obj["delta_days"] = data["delta_days"]
+                    exp_obj["default_reward"] = data["default_reward"]
             
                 db = Database()
                 response = {}

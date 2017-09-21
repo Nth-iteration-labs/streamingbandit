@@ -69,3 +69,7 @@ class BaseHandler(tornado.web.RequestHandler):
                     'message': self._reason,
                 }
             }))
+
+class IndexHandler(BaseHandler):
+    def get(self):
+        self.render("index.html")
