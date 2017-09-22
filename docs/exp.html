@@ -183,13 +183,13 @@
 <dl class="method">
 <dt id="core.experiment.Experiment.get_getaction_log_data">
 <code class="descname">get_getaction_log_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.experiment.Experiment.get_getaction_log_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get all the automatically logged getAciton data from the experiment.</p>
+<dd><p>Get all the automatically logged get_action data from the experiment.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name" colspan="2">Returns dict logs:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body">Dict of dict of all the setReward logs</td>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">Dict of dict of all the get_action logs</td>
 </tr>
 </tbody>
 </table>
@@ -243,13 +243,13 @@
 <dl class="method">
 <dt id="core.experiment.Experiment.get_setreward_log_data">
 <code class="descname">get_setreward_log_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.experiment.Experiment.get_setreward_log_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get all the automatically logged setReward data from the experiment.</p>
+<dd><p>Get all the automatically logged set_reward data from the experiment.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name" colspan="2">Returns dict logs:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body">Dict of dict of all the setReward logs</td>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">Dict of dict of all the set_reward logs</td>
 </tr>
 </tbody>
 </table>
@@ -261,10 +261,10 @@
 <dd><dl class="docutils">
 <dt>Get a summary, consisting of:</dt>
 <dd><ul class="first last simple">
-<li>The number of getAction calls</li>
-<li>The date of the last getAction call</li>
-<li>The number of setReward calls</li>
-<li>The date of the last setReward call</li>
+<li>The number of get_action calls</li>
+<li>The date of the last get_action call</li>
+<li>The number of set_reward calls</li>
+<li>The date of the last set_reward call</li>
 </ul>
 </dd>
 </dl>
@@ -318,7 +318,7 @@
 <dl class="method">
 <dt id="core.experiment.Experiment.log_data">
 <code class="descname">log_data</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#core.experiment.Experiment.log_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Manual logging that is used in the getAction and setReward codes.</p>
+<dd><p>Manual logging that is used in the get_action and set_reward codes.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -334,7 +334,7 @@
 <dl class="method">
 <dt id="core.experiment.Experiment.log_getaction_data">
 <code class="descname">log_getaction_data</code><span class="sig-paren">(</span><em>context</em>, <em>action</em><span class="sig-paren">)</span><a class="headerlink" href="#core.experiment.Experiment.log_getaction_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Logging for all the getAction calls</p>
+<dd><p>Logging for all the get_action calls</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -350,7 +350,7 @@
 <dl class="method">
 <dt id="core.experiment.Experiment.log_setreward_data">
 <code class="descname">log_setreward_data</code><span class="sig-paren">(</span><em>context</em>, <em>action</em>, <em>reward</em><span class="sig-paren">)</span><a class="headerlink" href="#core.experiment.Experiment.log_setreward_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Logging for all the setReward calls</p>
+<dd><p>Logging for all the set_reward calls</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -382,7 +382,7 @@
 <dl class="method">
 <dt id="core.experiment.Experiment.run_action_code">
 <code class="descname">run_action_code</code><span class="sig-paren">(</span><em>context</em>, <em>action={}</em><span class="sig-paren">)</span><a class="headerlink" href="#core.experiment.Experiment.run_action_code" title="Permalink to this definition">¶</a></dt>
-<dd><p>Takes getAction code from Redis and executes it</p>
+<dd><p>Takes get_action code from Redis and executes it</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -393,7 +393,7 @@
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A dict of action of which the content is         determined by the getAction code.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A dict of action of which the content is         determined by the get_action code.</p>
 </td>
 </tr>
 </tbody>
@@ -413,7 +413,7 @@
 <dl class="method">
 <dt id="core.experiment.Experiment.run_reward_code">
 <code class="descname">run_reward_code</code><span class="sig-paren">(</span><em>context</em>, <em>action</em>, <em>reward</em><span class="sig-paren">)</span><a class="headerlink" href="#core.experiment.Experiment.run_reward_code" title="Permalink to this definition">¶</a></dt>
-<dd><p>Takes setReward code from Redis and executes it</p>
+<dd><p>Takes set_reward code from Redis and executes it</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
