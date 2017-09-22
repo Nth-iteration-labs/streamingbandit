@@ -17,7 +17,7 @@ class ActionHandler(tornado.web.RequestHandler):
         +----------------------------------------------------------------+
         | Example                                                        |
         +================================================================+
-        |http://example.com/EXP_ID/getAction.json?key=KEY&context=CONTEXT|
+        |http://example.com/EXP_ID/getaction.json?key=KEY&context=CONTEXT|
         +----------------------------------------------------------------+
         
         :param int exp_id: Experiment ID as specified in the url.
@@ -71,12 +71,12 @@ class RewardHandler(tornado.web.RequestHandler):
         +----------------------------------------------------------------+
         | Example                                                        |
         +================================================================+
-        |http://example.com/EXP_ID/setReward.json?key=KEY&context=CONTEXT|
+        |http://example.com/EXP_ID/setreward.json?key=KEY&context=CONTEXT|
         |&action=ACTION&reward=REWARD                                    |
         +----------------------------------------------------------------+
 
         When you have toggled the Advice ID in the experiment properties (second option), 
-        and have received an Advice ID from the getAction call, you only have
+        and have received an Advice ID from the getaction call, you only have
         to supply the following parameters:
             -   Advice ID
             -   Reward
@@ -84,7 +84,7 @@ class RewardHandler(tornado.web.RequestHandler):
         +----------------------------------------------------------------+
         | Example                                                        |
         +================================================================+
-        |http://example.com/EXP_ID/setReward.json?key=KEY                |
+        |http://example.com/EXP_ID/setreward.json?key=KEY                |
         |&advice_id=ADVICE_ID&reward=REWARD                              |
         +----------------------------------------------------------------+
 

@@ -42,8 +42,8 @@ class GenerateExperiments(BaseHandler):
         | Example                                                            |
         +====================================================================+
         | http://example.com/exp                                             |
-        |  {"name" : NAME, "getcontext" : CODE, "getaction" : CODE,          |
-        |   "getreward" : CODE, "setreward" : CODE, "advice_id" : True,      |
+        |  {"name" : NAME, "get_context" : CODE, "get_action" : CODE,        |
+        |   "get_reward" : CODE, "set_reward" : CODE, "advice_id" : True,    |
         |   "hourly" : True, "delta_hours" : DELTA_HOURS,                    |
         |   "default_reward" : DEFAULT_REWARD}                               |
         +--------------------------------------------------------------------+
@@ -53,12 +53,12 @@ class GenerateExperiments(BaseHandler):
 
         :requires: A secure cookie obtained by logging in.
         :param string name: Name of the experiment.
-        :param string getcontext: String of python code for get context code.
-        :param string getaction: String of python code for get action code.
-        :param string getreward: String of python code for get reward code.
-        :param string setreward: String of python code for set reward code.
+        :param string get_context: String of python code for get context code.
+        :param string get_action: String of python code for get action code.
+        :param string get_reward: String of python code for get reward code.
+        :param string set_reward: String of python code for set reward code.
         :param bool hourly: Bool indicating whether the state of Theta should be stored hourly. 
-        :param bool advice_id: Bool indicating whether the getAdvice and setReward calls should return an advice_id.
+        :param bool advice_id: Bool indicating whether the getadvice and setreward calls should return an advice_id.
         :param int delta_hours: If advice_id is True, supply this to give the number of hours that an advice_id should be stored.
         :param dict default_reward: If advice_id is True, supply this to give the default reward for advice_id's that are over their delta_hours limit.
         :returns: A JSON of the form: 
@@ -78,11 +78,11 @@ class GenerateExperiments(BaseHandler):
             exp_obj = {}
             exp_obj["user_id"] = int(user)
             exp_obj["name"] = data["name"]
-            exp_obj["getContext"] = data["getcontext"]
-            exp_obj["getAction"] = data["getaction"]
-            exp_obj["getReward"] = data["getreward"]
-            exp_obj["setReward"] = data["setreward"]
-            exp_obj["hourlyTheta"] = data["hourly"]
+            exp_obj["get_context"] = data["get_context"]
+            exp_obj["get_action"] = data["get_action"]
+            exp_obj["get_reward"] = data["get_reward"]
+            exp_obj["set_reward"] = data["set_reward"]
+            exp_obj["hourly_theta"] = data["hourly"]
             exp_obj["advice_id"] = data["advice_id"]
             if exp_obj["advice_id"] in ["true", "True", "y", "yes"]:
                 exp_obj["advice_id"] = True
@@ -175,10 +175,10 @@ class UpdateExperiment(BaseHandler):
 
         :requires: A secure cookie obtained by logging in.
         :param string name: Name of the experiment.
-        :param string getcontext: String of python code for get context code.
-        :param string getaction: String of python code for get action code.
-        :param string getreward: String of python code for get reward code.
-        :param string setreward: String of python code for set reward code.
+        :param string get_context: String of python code for get context code.
+        :param string get_action: String of python code for get action code.
+        :param string get_reward: String of python code for get reward code.
+        :param string set_reward: String of python code for set reward code.
         :param bool hourly: Bool indicating whether the state of Theta should be stored hourly.
         :param bool advice_id: Bool indicating whether the getAdvice and setReward calls should return an advice_id.
         :param int delta_hours: If advice_id is True, supply this to give the number of hours that an advice_id should be stored.
@@ -194,11 +194,11 @@ class UpdateExperiment(BaseHandler):
                 exp_obj = {}
                 exp_obj["user_id"] = int(user)
                 exp_obj["name"] = data["name"]
-                exp_obj["getContext"] = data["getcontext"]
-                exp_obj["getAction"] = data["getaction"]
-                exp_obj["getReward"] = data["getreward"]
-                exp_obj["setReward"] = data["setreward"]
-                exp_obj["hourlyTheta"] = data["hourly"]
+                exp_obj["get_context"] = data["get_context"]
+                exp_obj["get_action"] = data["get_action"]
+                exp_obj["get_reward"] = data["get_reward"]
+                exp_obj["set_reward"] = data["set_reward"]
+                exp_obj["hourly_theta"] = data["hourly"]
                 exp_obj["advice_id"] = data["advice_id"]
                 if exp_obj["advice_id"] in ["true", "True", "y", "yes"]:
                     exp_obj["advice_id"] = True
@@ -260,10 +260,10 @@ class GetDefault(tornado.web.RequestHandler):
             folderdata = dict(enumerate(folderdata))
             data={}
             data["name"] = folderdata[default_id]
-            data["getContext"] = open("./defaults/"+data["name"]+"/getContext.py").read()
-            data["getAction"] = open("./defaults/"+data["name"]+"/getAction.py").read()
-            data["getReward"] = open("./defaults/"+data["name"]+"/getReward.py").read()
-            data["setReward"] = open("./defaults/"+data["name"]+"/setReward.py").read()
+            data["get_context"] = open("./defaults/"+data["name"]+"/get_context.py").read()
+            data["get_action"] = open("./defaults/"+data["name"]+"/get_action.py").read()
+            data["get_reward"] = open("./defaults/"+data["name"]+"/get_reward.py").read()
+            data["set_reward"] = open("./defaults/"+data["name"]+"/set_reward.py").read()
             self.write(data)
         else:
             raise ExceptionHandler(reason = "Could not validate user.", status_code = 401)

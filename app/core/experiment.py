@@ -34,12 +34,12 @@ class Experiment():
         """
         """
         self.context = context
-        code = self.db.experiment_properties("exp:%s:properties" % (self.exp_id), "getContext")
+        code = self.db.experiment_properties("exp:%s:properties" % (self.exp_id), "get_context")
         exec(code)
         return self.context
 
     def run_action_code(self, context, action = {}):    
-        """ Takes getAction code from Redis and executes it
+        """ Takes get_action code from Redis and executes it
         
         :param dict context: Context is a dictionary with the context for the \
         getAction algorithm
@@ -48,11 +48,11 @@ class Experiment():
         of the behavior of Python.).
 
         :returns: A dict of action of which the content is \
-        determined by the getAction code.
+        determined by the get_action code.
         """
         self.action = action
         self.context = context
-        code = self.db.experiment_properties("exp:%s:properties" % (self.exp_id), "getAction")
+        code = self.db.experiment_properties("exp:%s:properties" % (self.exp_id), "get_action")
         exec(code)
         return self.action
 
@@ -67,7 +67,7 @@ class Experiment():
         return self.reward
         
     def run_reward_code(self, context, action, reward):
-        """ Takes setReward code from Redis and executes it
+        """ Takes set_reward code from Redis and executes it
 
         :param dict context: The context that may be needed for the algorithm.
         :param string action: The action that is needed for the algorith. Is \
@@ -79,12 +79,12 @@ class Experiment():
         self.context = context
         self.action = action
         self.reward = reward
-        code = self.db.experiment_properties("exp:%s:properties" % (self.exp_id), "setReward")
+        code = self.db.experiment_properties("exp:%s:properties" % (self.exp_id), "set_reward")
         exec(code)
         return True
     
     def log_data(self, value):
-        """ Manual logging that is used in the getAction and setReward codes.
+        """ Manual logging that is used in the get_action and set_reward codes.
 
         :param dict value: The value that needs to be logged. Since MongoDB is \
                 used, a dictionary is needed.
@@ -104,7 +104,7 @@ class Experiment():
         return True
 
     def log_getaction_data(self, context, action):
-        """ Logging for all the getAction calls
+        """ Logging for all the get_action calls
 
         :param dict data: Dict that contains action, and context
         :returns: True if executed correctly
@@ -113,7 +113,7 @@ class Experiment():
         return True
 
     def log_setreward_data(self, context, action, reward):
-        """ Logging for all the setReward calls
+        """ Logging for all the set_reward calls
 
         :param dict data: Dict that contains action, context and reward
         :returns True: If executed correctly
@@ -196,37 +196,37 @@ class Experiment():
         return self.mongo_db.get_log_simulation(exp_id)
 
     def get_getaction_log_data(self):
-        """ Get all the automatically logged getAciton data from the experiment.
+        """ Get all the automatically logged get_action data from the experiment.
 
-        :returns dict logs: Dict of dict of all the setReward logs
+        :returns dict logs: Dict of dict of all the get_action logs
         """
-        return self.mongo_db.get_setreward_log(self.exp_id)
+        return self.mongo_db.get_getaction_log(self.exp_id)
 
     def get_setreward_log_data(self):
-        """ Get all the automatically logged setReward data from the experiment.
+        """ Get all the automatically logged set_reward data from the experiment.
 
-        :returns dict logs: Dict of dict of all the setReward logs
+        :returns dict logs: Dict of dict of all the set_reward logs
         """
         return self.mongo_db.get_setreward_log(self.exp_id)
 
     def get_summary(self):
         """ Get a summary, consisting of:
-            - The number of getAction calls
-            - The date of the last getAction call
-            - The number of setReward calls
-            - The date of the last setReward call
+            - The number of get_action calls
+            - The date of the last get_action call
+            - The number of set_reward calls
+            - The date of the last set_reward call
         
         :returns dict of dict summary: The complete summary.
         """
         summary = {}
         getactioncalls = self.get_getaction_log_data()
         seq = [x['date'] for x in getactioncalls]
-        summary['lastAddedGetAction'] = max(seq)
-        summary['getActionCalls'] = len(getactioncalls)
+        summary['last_added_get_action'] = max(seq)
+        summary['get_action_calls'] = len(getactioncalls)
         setrewardcalls = self.get_setreward_log_data()
         seq = [x['date'] for x in setrewardcalls]
-        summary['lastAddedSetReward'] = max(seq)
-        summary['setRewardCalls'] = len(setrewardcalls)
+        summary['last_added_set_reward'] = max(seq)
+        summary['set_reward_calls'] = len(setrewardcalls)
         return summary
         
     def get_hourly_theta(self):

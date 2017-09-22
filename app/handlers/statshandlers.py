@@ -92,7 +92,7 @@ class GetLog(BaseHandler):
 class GetActionLog(BaseHandler):
 
     def get(self, exp_id):
-        """ Get all the (automatically) logged getAction data.
+        """ Get all the (automatically) logged get_action data.
 
         +--------------------------------------------------------------------+
         | Example                                                            |
@@ -119,7 +119,7 @@ class GetActionLog(BaseHandler):
 class GetRewardLog(BaseHandler):
 
     def get(self, exp_id):
-        """ Get all the (automatically) logged setReward data.
+        """ Get all the (automatically) logged set_reward data.
 
         +--------------------------------------------------------------------+
         | Example                                                            |
@@ -147,10 +147,10 @@ class GetSummary(BaseHandler):
 
     def get(self, exp_id):
         """ Get a summary, consisting of:
-            - The number of getAction calls
-            - The date of the last getAction call
-            - The number of setReward calls
-            - The date of the last setReward call
+            - The number of get_action calls
+            - The date of the last get_action call
+            - The number of set_reward calls
+            - The date of the last set_reward call
 
         +--------------------------------------------------------------------+
         | Example                                                            |
