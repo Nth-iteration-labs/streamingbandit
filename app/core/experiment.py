@@ -221,11 +221,11 @@ class Experiment():
         :returns dict of dict summary: The complete summary.
         """
         summary = {}
-        getactioncalls = self.get_getaction_log_data()
+        getactioncalls = self.get_getaction_log_data(limit = 0)
         seq = [x['date'] for x in getactioncalls]
         summary['last_added_get_action'] = max(seq)
         summary['get_action_calls'] = len(getactioncalls)
-        setrewardcalls = self.get_setreward_log_data()
+        setrewardcalls = self.get_setreward_log_data(limit = 0)
         seq = [x['date'] for x in setrewardcalls]
         summary['last_added_set_reward'] = max(seq)
         summary['set_reward_calls'] = len(setrewardcalls)
