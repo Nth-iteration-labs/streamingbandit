@@ -100,7 +100,7 @@ class Experiment():
         :param dict data: Dict of dicts with all interactions
         :returns True: If executed correctly
         """
-        self.mongo_db.log_simulation(exp_id, data)
+        self.mongo_db.log_simulation(self.exp_id, data)
         return True
 
     def log_getaction_data(self, context, action):
