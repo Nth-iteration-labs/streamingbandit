@@ -223,11 +223,17 @@ class Experiment():
         summary = {}
         getactioncalls = self.get_getaction_log_data(limit = 0)
         seq = [x['date'] for x in getactioncalls]
-        summary['last_added_get_action'] = max(seq)
+        if len(seq) > 0:
+            summary['last_added_get_action'] = max(seq)
+        else:
+            summary['last_added_get_action'] = "No get_action calls yet."
         summary['get_action_calls'] = len(getactioncalls)
         setrewardcalls = self.get_setreward_log_data(limit = 0)
         seq = [x['date'] for x in setrewardcalls]
-        summary['last_added_set_reward'] = max(seq)
+        if len(seq) > 0:
+            summary['last_added_set_reward'] = max(seq)
+        else:
+            summary['last_added_set_reward'] = "No set_reward calls yet."
         summary['set_reward_calls'] = len(setrewardcalls)
         return summary
         
