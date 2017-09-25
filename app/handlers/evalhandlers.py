@@ -38,7 +38,15 @@ class Simulate(BaseHandler):
 
                 N = int(self.get_argument("N", default = 1000))
                 log_stats = self.get_argument("log_stats", default = False)
-                verbose = self.get_arugment("verbose", default = True)
+                verbose = self.get_argument("verbose", default = True)
+                if verbose == "True":
+                    verbose = True
+                else:
+                    verbose = False
+                if log_stats == "True":
+                    log_stats = True
+                else:
+                    log_stats = False
 
                 __EXP__ = Experiment(exp_id)
 
@@ -61,7 +69,7 @@ class Simulate(BaseHandler):
                     theta = __EXP__.get_theta()
                     
                     # Save stats
-                    data[i] = {'context' : context, 'action' : action, 'reward' : reward, 'theta' : theta}
+                    data[i] = {'context' : context.copy(), 'action' : action.copy(), 'reward' : reward.copy(), 'theta' : theta.copy()}
 
                 if log_stats == True:
                     print("Logging data")

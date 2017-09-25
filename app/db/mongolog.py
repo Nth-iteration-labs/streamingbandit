@@ -104,7 +104,7 @@ class MongoLog:
         self.getaction_db = self.mongo_client['getaction']
         self.getaction_logs = self.getaction_db[str(exp_id)]
         self.getactions = []
-        cursor = self.getaction_logs.find({})
+        cursor = self.getaction_logs.find({}, {'_id': False})
         for document in cursor:
             self.getactions.append(document)
         return self.getactions
@@ -121,7 +121,7 @@ class MongoLog:
         self.setreward_db = self.mongo_client['setreward']
         self.setreward_logs = self.setreward_db[str(exp_id)]
         self.setrewards = []
-        cursor = self.setreward_logs.find({})
+        cursor = self.setreward_logs.find({}, {'_id': False})
         for document in cursor:
             self.setrewards.append(document)
         return self.setrewards

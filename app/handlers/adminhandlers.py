@@ -8,6 +8,8 @@ import os
 
 from handlers.basehandler import BaseHandler, ExceptionHandler
 
+from core.experiment import Experiment
+
 from db.database import Database
 from db.users import Users
 
@@ -219,7 +221,7 @@ class UpdateExperiment(BaseHandler):
         else:
             raise ExceptionHandler(reason = "Could not validate user.", status_code = 401)
         
-class ListDefaults(tornado.web.RequestHandler):
+class ListDefaults(BaseHandler):
     
     def get(self):
         """ Get the list with default available experiments.
@@ -243,7 +245,7 @@ class ListDefaults(tornado.web.RequestHandler):
             raise ExceptionHandler(reason = "Could not validate user.", status_code = 401)
  
        
-class GetDefault(tornado.web.RequestHandler):
+class GetDefault(BaseHandler):
     
     def get(self, default_id):
         """ Retrieve properties of a default experiment.
@@ -263,7 +265,7 @@ class GetDefault(tornado.web.RequestHandler):
             folderdata = os.listdir("./defaults")
             folderdata = dict(enumerate(folderdata))
             data={}
-            data["name"] = folderdata[default_id]
+            data["name"] = folderdata[int(default_id)]
             data["get_context"] = open("./defaults/"+data["name"]+"/get_context.py").read()
             data["get_action"] = open("./defaults/"+data["name"]+"/get_action.py").read()
             data["get_reward"] = open("./defaults/"+data["name"]+"/get_reward.py").read()
@@ -299,12 +301,12 @@ class ResetExperiment(BaseHandler):
         if self.get_secure_cookie("user"):
             if self.validate_user_experiment(exp_id):
                 key = self.get_argument("key", default = False)
-                theta_key = self.get_argument("theta_key", default = False)
-                theta_value = self.get_argument("theta_value", default = False)
+                theta_key = self.get_argument("theta_key", default = None)
+                theta_value = self.get_argument("theta_value", default = None)
                 __EXP__ = Experiment(exp_id, key)
 
                 status = __EXP__.delete_theta(key = theta_key, value = theta_value)
-                if status == True:
+                if status >= 1:
                     self.write(json.dumps({'status':'success'}))
                 else:
                     raise ExceptionHandler(reason = "Theta_key or theta_value could not be validated.", status_code = 401)

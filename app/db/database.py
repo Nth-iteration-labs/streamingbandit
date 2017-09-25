@@ -75,7 +75,12 @@ class Database:
         return result
     
     def delete_theta(self, key):
-        return self.r_server.delete(key)
+        count = 0
+        key = key + '*'
+        for k in self.r_server.scan_iter(key):
+            self.r_server.delete(k)
+            count += 1
+        return count
         #return True
 
     def object_to_key(self, obj):   

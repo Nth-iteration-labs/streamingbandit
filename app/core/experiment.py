@@ -62,7 +62,7 @@ class Experiment():
         self.action = action
         self.context = context
         self.reward = reward
-        code = self.db_experiment_properties("exp:%s:properties" % (self.exp_id), "getReward")
+        code = self.db.experiment_properties("exp:%s:properties" % (self.exp_id), "get_reward")
         exec(code)
         return self.reward
         
@@ -109,7 +109,7 @@ class Experiment():
         :param dict data: Dict that contains action, and context
         :returns: True if executed correctly
         """
-        self.mongo_db.log_getaction(self.exp_id, context, action, reward)
+        self.mongo_db.log_getaction(self.exp_id, context, action)
         return True
 
     def log_setreward_data(self, context, action, reward):
@@ -170,8 +170,10 @@ class Experiment():
         all_values = False
         if key is not None and value is not None:
             db_key = db_key + ":%s:%s" % (key, value)
-        if key is not None and value is None:
+        elif key is not None and value is None:
             db_key = db_key + ":%s" % (key)
+            all_values = True
+        elif key is None and value is None:
             all_values = True
         return self.db.get_theta(db_key, all_values, all_float)
 
