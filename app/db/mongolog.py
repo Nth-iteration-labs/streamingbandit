@@ -30,7 +30,7 @@ class MongoLog:
         self.logs.insert_one(value)
         return True
 
-    def get_log_rows(self, exp_id):
+    def get_log_rows(self, exp_id, limit):
         """ Retrieve all the logged rows for a certain experiment.
 
         :param int exp_id: The specified experiment.
@@ -39,7 +39,7 @@ class MongoLog:
         self.logs_db = self.mongo_client['logs']
         self.logs = self.logs_db[str(exp_id)]
         self.log_rows = []
-        for row in self.logs.find({}, {'_id': False}).sort('_id', ASCENDING):
+        for row in self.logs.find({}, {'_id': False}).sort('_id', DESCENDING).limit(limit):
             self.log_rows.append(row)
         return self.log_rows
 
@@ -79,7 +79,7 @@ class MongoLog:
         self.theta_logs.insert_one(value)
         return True
         
-    def get_hourly_theta(self, exp_id):
+    def get_hourly_theta(self, exp_id, limit):
         """ This function is for retrieving all the hourly thetas of an experiment
         
         :param int exp_id: The specified experiment
@@ -88,7 +88,7 @@ class MongoLog:
         self.theta_logs_db = self.mongo_client['hourly_theta']
         self.theta_logs = self.theta_logs_db[str('exp_id')]
         self.thetas = []
-        for theta in self.theta_logs.find({}, {'_id': False}).sort('_id', ASCENDING):
+        for theta in self.theta_logs.find({}, {'_id': False}).sort('_id', DESCENDING).limit(limit):
             self.thetas.append(theta)
         return self.thetas
 

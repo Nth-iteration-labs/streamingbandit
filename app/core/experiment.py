@@ -183,12 +183,12 @@ class Experiment():
             db_key = db_key + ":%s:%s" % (key, value)
         return self.db.delete_theta(db_key)
 
-    def get_log_data(self):
+    def get_log_data(self, limit):
         """ Get all the logged data from the experiment
 
         :returns dict logs: Dict of dict of all the manual logs
         """
-        return self.mongo_db.get_log_rows(self.exp_id)
+        return self.mongo_db.get_log_rows(self.exp_id, limit)
 
     def get_log_simulation_data(self):
         """ Get all the logged data for the simulations of this experiment
@@ -237,12 +237,12 @@ class Experiment():
         summary['set_reward_calls'] = len(setrewardcalls)
         return summary
         
-    def get_hourly_theta(self):
+    def get_hourly_theta(self, limit):
         """ Get all the hourly logged thetas (if flag is set)
 
         :returns dict of dict hourly: All the hourly logged thetas
         """
-        return self.mongo_db.get_hourly_theta(self.exp_id)
+        return self.mongo_db.get_hourly_theta(self.exp_id, limit)
     
     def gen_advice_id(self, action, context):
         return self.advice_db.log_advice(action, context)
