@@ -99,12 +99,12 @@ class MongoLog:
         self.getaction_logs.insert_one({"context":context,"action":action,"date":datetime.utcnow().isoformat()})
         return True
     
-    def get_getaction_log(self, exp_id):
+    def get_getaction_log(self, exp_id, limit):
         # Use mongoDB database called getaction and per exp_id 1 collection
         self.getaction_db = self.mongo_client['getaction']
         self.getaction_logs = self.getaction_db[str(exp_id)]
         self.getactions = []
-        cursor = self.getaction_logs.find({}, {'_id': False})
+        cursor = self.getaction_logs.find({}, {'_id': False}).sort('_id', DESCENDING).limit(limit)
         for document in cursor:
             self.getactions.append(document)
         return self.getactions
@@ -116,12 +116,12 @@ class MongoLog:
         self.setreward_logs.insert_one({"context":context,"action":action,"reward":reward,"date":datetime.utcnow().isoformat()})
         return True
 
-    def get_setreward_log(self, exp_id):
+    def get_setreward_log(self, exp_id, limit):
         # Use mongoDB database called setreward and per exp_id 1 collection
         self.setreward_db = self.mongo_client['setreward']
         self.setreward_logs = self.setreward_db[str(exp_id)]
         self.setrewards = []
-        cursor = self.setreward_logs.find({}, {'_id': False})
+        cursor = self.setreward_logs.find({}, {'_id': False}).sort('_id', DESCENDING).limit(limit)
         for document in cursor:
             self.setrewards.append(document)
         return self.setrewards

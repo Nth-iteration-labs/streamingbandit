@@ -197,19 +197,19 @@ class Experiment():
         """
         return self.mongo_db.get_log_simulation(exp_id)
 
-    def get_getaction_log_data(self):
+    def get_getaction_log_data(self, limit):
         """ Get all the automatically logged get_action data from the experiment.
 
         :returns dict logs: Dict of dict of all the get_action logs
         """
-        return self.mongo_db.get_getaction_log(self.exp_id)
+        return self.mongo_db.get_getaction_log(self.exp_id, limit)
 
-    def get_setreward_log_data(self):
+    def get_setreward_log_data(self, limit):
         """ Get all the automatically logged set_reward data from the experiment.
 
         :returns dict logs: Dict of dict of all the set_reward logs
         """
-        return self.mongo_db.get_setreward_log(self.exp_id)
+        return self.mongo_db.get_setreward_log(self.exp_id, limit)
 
     def get_summary(self):
         """ Get a summary, consisting of:
