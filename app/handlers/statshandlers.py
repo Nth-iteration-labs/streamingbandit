@@ -16,7 +16,7 @@ class GetHourlyTheta(BaseHandler):
         +--------------------------------------------------------------------+
         | Example                                                            |
         +====================================================================+
-        | http://example.com/stats/EXP_ID/hourlytheta.json?limit=10          |
+        | http://example.com/stats/EXP_ID/hourlytheta?limit=10               |
         +--------------------------------------------------------------------+
         
         :requires: A secure cookie, obtained by logging in.
@@ -45,7 +45,7 @@ class GetCurrentTheta(BaseHandler):
         +--------------------------------------------------------------------+
         | Example                                                            |
         +====================================================================+
-        | http://example.com/stats/EXP_ID/currenttheta.json                  |
+        | http://example.com/stats/EXP_ID/currenttheta                       |
         +--------------------------------------------------------------------+
 
         :requires: A secure cookie, obtained by logging in.
@@ -72,7 +72,7 @@ class GetLog(BaseHandler):
         +--------------------------------------------------------------------+
         | Example                                                            |
         +====================================================================+
-        | http://example.com/stats/EXP_ID/log.json?limit=10                  |
+        | http://example.com/stats/EXP_ID/log?limit=10                       |
         +--------------------------------------------------------------------+
 
         :requires: A secure cookie, obtained by logging in.
@@ -101,7 +101,7 @@ class GetActionLog(BaseHandler):
         +--------------------------------------------------------------------+
         | Example                                                            |
         +====================================================================+
-        | http://example.com/stats/EXP_ID/actionlog.json?limit=10            |
+        | http://example.com/stats/EXP_ID/actionlog?limit=10                 |
         +--------------------------------------------------------------------+
 
         :requires: A secure cookie, obtained by logging in.
@@ -130,7 +130,7 @@ class GetRewardLog(BaseHandler):
         +--------------------------------------------------------------------+
         | Example                                                            |
         +====================================================================+
-        | http://example.com/stats/EXP_ID/rewardlog.json?limit=10            |
+        | http://example.com/stats/EXP_ID/rewardlog?limit=10                 |
         +--------------------------------------------------------------------+
 
         :requires: A secure cookie, obtained by logging in.
@@ -163,7 +163,7 @@ class GetSummary(BaseHandler):
         +--------------------------------------------------------------------+
         | Example                                                            |
         +====================================================================+
-        | http://example.com/stats/EXP_ID/summary.json                       |
+        | http://example.com/stats/EXP_ID/summary                            |
         +--------------------------------------------------------------------+
 
         :requires: A secure cookie, obtained by logging in.

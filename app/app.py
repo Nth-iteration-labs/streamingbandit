@@ -70,12 +70,12 @@ urls = [
     (r"(?i)/user", adminhandlers.AddUser),
 
     # Statistics API
-    (r"(?i)/stats/(?P<exp_id>\w+)/currenttheta.json", statshandlers.GetCurrentTheta),
-    (r"(?i)/stats/(?P<exp_id>\w+)/hourlytheta.json", statshandlers.GetHourlyTheta),
-    (r"(?i)/stats/(?P<exp_id>\w+)/log.json", statshandlers.GetLog),
-    (r"(?i)/stats/(?P<exp_id>\w+)/actionlog.json", statshandlers.GetActionLog),
-    (r"(?i)/stats/(?P<exp_id>\w+)/rewardlog.json", statshandlers.GetRewardLog),
-    (r"(?i)/stats/(?P<exp_id>\w+)/summary.json", statshandlers.GetSummary),
+    (r"(?i)/stats/(?P<exp_id>\w+)/currenttheta", statshandlers.GetCurrentTheta),
+    (r"(?i)/stats/(?P<exp_id>\w+)/hourlytheta", statshandlers.GetHourlyTheta),
+    (r"(?i)/stats/(?P<exp_id>\w+)/log", statshandlers.GetLog),
+    (r"(?i)/stats/(?P<exp_id>\w+)/actionlog", statshandlers.GetActionLog),
+    (r"(?i)/stats/(?P<exp_id>\w+)/rewardlog", statshandlers.GetRewardLog),
+    (r"(?i)/stats/(?P<exp_id>\w+)/summary", statshandlers.GetSummary),
 
     # Login API
     (r"(?i)/login", loginhandlers.LogInHandler),

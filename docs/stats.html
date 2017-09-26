@@ -164,8 +164,8 @@
   <div class="section" id="statistics-api">
 <h1>Statistics API<a class="headerlink" href="#statistics-api" title="Permalink to this headline">¶</a></h1>
 <dl class="get">
-<dt id="get-(?i)-stats-(?P-exp_id-w+)-currenttheta.json">
-<code class="descname">GET </code><code class="descname">(?i)/stats/(?P&lt;exp_id&gt;w+)/currenttheta.json</code><a class="headerlink" href="#get-(?i)-stats-(?P-exp_id-w+)-currenttheta.json" title="Permalink to this definition">¶</a></dt>
+<dt id="get-(?i)-stats-(?P-exp_id-w+)-currenttheta">
+<code class="descname">GET </code><code class="descname">(?i)/stats/(?P&lt;exp_id&gt;w+)/currenttheta</code><a class="headerlink" href="#get-(?i)-stats-(?P-exp_id-w+)-currenttheta" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the current theta.</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -176,7 +176,7 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><a class="reference external" href="http://example.com/stats/EXP_ID/currenttheta.json">http://example.com/stats/EXP_ID/currenttheta.json</a></td>
+<tr class="row-even"><td><a class="reference external" href="http://example.com/stats/EXP_ID/currenttheta">http://example.com/stats/EXP_ID/currenttheta</a></td>
 </tr>
 </tbody>
 </table>
@@ -206,8 +206,8 @@
 </dd></dl>
 
 <dl class="get">
-<dt id="get-(?i)-stats-(?P-exp_id-w+)-hourlytheta.json">
-<code class="descname">GET </code><code class="descname">(?i)/stats/(?P&lt;exp_id&gt;w+)/hourlytheta.json</code><a class="headerlink" href="#get-(?i)-stats-(?P-exp_id-w+)-hourlytheta.json" title="Permalink to this definition">¶</a></dt>
+<dt id="get-(?i)-stats-(?P-exp_id-w+)-hourlytheta">
+<code class="descname">GET </code><code class="descname">(?i)/stats/(?P&lt;exp_id&gt;w+)/hourlytheta</code><a class="headerlink" href="#get-(?i)-stats-(?P-exp_id-w+)-hourlytheta" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a dict of all logged thetas.</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -218,7 +218,7 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><a class="reference external" href="http://example.com/stats/EXP_ID/hourlytheta.json?limit=10">http://example.com/stats/EXP_ID/hourlytheta.json?limit=10</a></td>
+<tr class="row-even"><td><a class="reference external" href="http://example.com/stats/EXP_ID/hourlytheta?limit=10">http://example.com/stats/EXP_ID/hourlytheta?limit=10</a></td>
 </tr>
 </tbody>
 </table>
@@ -249,8 +249,8 @@
 </dd></dl>
 
 <dl class="get">
-<dt id="get-(?i)-stats-(?P-exp_id-w+)-log.json">
-<code class="descname">GET </code><code class="descname">(?i)/stats/(?P&lt;exp_id&gt;w+)/log.json</code><a class="headerlink" href="#get-(?i)-stats-(?P-exp_id-w+)-log.json" title="Permalink to this definition">¶</a></dt>
+<dt id="get-(?i)-stats-(?P-exp_id-w+)-log">
+<code class="descname">GET </code><code class="descname">(?i)/stats/(?P&lt;exp_id&gt;w+)/log</code><a class="headerlink" href="#get-(?i)-stats-(?P-exp_id-w+)-log" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get all the (manually) logged data.</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -261,7 +261,7 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><a class="reference external" href="http://example.com/stats/EXP_ID/log.json?limit=10">http://example.com/stats/EXP_ID/log.json?limit=10</a></td>
+<tr class="row-even"><td><a class="reference external" href="http://example.com/stats/EXP_ID/log?limit=10">http://example.com/stats/EXP_ID/log?limit=10</a></td>
 </tr>
 </tbody>
 </table>
@@ -292,8 +292,8 @@
 </dd></dl>
 
 <dl class="get">
-<dt id="get-(?i)-stats-(?P-exp_id-w+)-actionlog.json">
-<code class="descname">GET </code><code class="descname">(?i)/stats/(?P&lt;exp_id&gt;w+)/actionlog.json</code><a class="headerlink" href="#get-(?i)-stats-(?P-exp_id-w+)-actionlog.json" title="Permalink to this definition">¶</a></dt>
+<dt id="get-(?i)-stats-(?P-exp_id-w+)-actionlog">
+<code class="descname">GET </code><code class="descname">(?i)/stats/(?P&lt;exp_id&gt;w+)/actionlog</code><a class="headerlink" href="#get-(?i)-stats-(?P-exp_id-w+)-actionlog" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get all the (automatically) logged get_action data.</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -304,7 +304,7 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><a class="reference external" href="http://example.com/stats/EXP_ID/actionlog.json?limit=10">http://example.com/stats/EXP_ID/actionlog.json?limit=10</a></td>
+<tr class="row-even"><td><a class="reference external" href="http://example.com/stats/EXP_ID/actionlog?limit=10">http://example.com/stats/EXP_ID/actionlog?limit=10</a></td>
 </tr>
 </tbody>
 </table>
@@ -335,8 +335,8 @@
 </dd></dl>
 
 <dl class="get">
-<dt id="get-(?i)-stats-(?P-exp_id-w+)-rewardlog.json">
-<code class="descname">GET </code><code class="descname">(?i)/stats/(?P&lt;exp_id&gt;w+)/rewardlog.json</code><a class="headerlink" href="#get-(?i)-stats-(?P-exp_id-w+)-rewardlog.json" title="Permalink to this definition">¶</a></dt>
+<dt id="get-(?i)-stats-(?P-exp_id-w+)-rewardlog">
+<code class="descname">GET </code><code class="descname">(?i)/stats/(?P&lt;exp_id&gt;w+)/rewardlog</code><a class="headerlink" href="#get-(?i)-stats-(?P-exp_id-w+)-rewardlog" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get all the (automatically) logged set_reward data.</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -347,7 +347,7 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><a class="reference external" href="http://example.com/stats/EXP_ID/rewardlog.json?limit=10">http://example.com/stats/EXP_ID/rewardlog.json?limit=10</a></td>
+<tr class="row-even"><td><a class="reference external" href="http://example.com/stats/EXP_ID/rewardlog?limit=10">http://example.com/stats/EXP_ID/rewardlog?limit=10</a></td>
 </tr>
 </tbody>
 </table>
@@ -378,8 +378,8 @@
 </dd></dl>
 
 <dl class="get">
-<dt id="get-(?i)-stats-(?P-exp_id-w+)-summary.json">
-<code class="descname">GET </code><code class="descname">(?i)/stats/(?P&lt;exp_id&gt;w+)/summary.json</code><a class="headerlink" href="#get-(?i)-stats-(?P-exp_id-w+)-summary.json" title="Permalink to this definition">¶</a></dt>
+<dt id="get-(?i)-stats-(?P-exp_id-w+)-summary">
+<code class="descname">GET </code><code class="descname">(?i)/stats/(?P&lt;exp_id&gt;w+)/summary</code><a class="headerlink" href="#get-(?i)-stats-(?P-exp_id-w+)-summary" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt>Get a summary, consisting of:</dt>
 <dd><ul class="first last simple">
@@ -399,7 +399,7 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><a class="reference external" href="http://example.com/stats/EXP_ID/summary.json">http://example.com/stats/EXP_ID/summary.json</a></td>
+<tr class="row-even"><td><a class="reference external" href="http://example.com/stats/EXP_ID/summary">http://example.com/stats/EXP_ID/summary</a></td>
 </tr>
 </tbody>
 </table>
