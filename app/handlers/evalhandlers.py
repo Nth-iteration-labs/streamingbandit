@@ -21,7 +21,7 @@ class Simulate(BaseHandler):
         | Example                                                            |
         +====================================================================+
         |http://example.com/eval/EXP_ID/simulate?N=1000&log_stats=True       |
-        |&verbose=True                                                       |
+        |&verbose=True&seed=10                                               |
         +--------------------------------------------------------------------+
 
         :requires: A secure cookie, obtained by logging in.
@@ -29,6 +29,7 @@ class Simulate(BaseHandler):
         :param int N: The number of simulation draws.
         :param bool log_stats: Flag for logging the results in the database (default is False)
         :param bool verbose: Flag for displaying the results in the returning JSON object (default is True)
+        :param int seed (optional): Set numpy seed.
         :returns: A JSON indicating success when verbose flag is False, and a JSON with all the data when verbose flag is True.
         :raises 400: If the experiment does not belong to this user or the exp_id is wrong.
         :raises 401: If user is not logged in or if there is no secure cookie available.
@@ -39,6 +40,9 @@ class Simulate(BaseHandler):
                 N = int(self.get_argument("N", default = 1000))
                 log_stats = self.get_argument("log_stats", default = False)
                 verbose = self.get_argument("verbose", default = True)
+                seed = int(self.get_argument("seed", default = None))
+                if seed is not None:
+                    np.random.seed(seed)
                 if verbose == "True":
                     verbose = True
                 else:
@@ -70,6 +74,9 @@ class Simulate(BaseHandler):
                     
                     # Save stats
                     data[str(i)] = {'context' : context.copy(), 'action' : action.copy(), 'reward' : reward.copy(), 'theta' : theta.copy()}
+
+                if seed is not None:
+                    np.random.seed()
 
                 if log_stats == True:
                     __EXP__.log_simulation_data(data.copy())
