@@ -69,11 +69,10 @@ class Simulate(BaseHandler):
                     theta = __EXP__.get_theta()
                     
                     # Save stats
-                    data[i] = {'context' : context.copy(), 'action' : action.copy(), 'reward' : reward.copy(), 'theta' : theta.copy()}
+                    data[str(i)] = {'context' : context.copy(), 'action' : action.copy(), 'reward' : reward.copy(), 'theta' : theta.copy()}
 
                 if log_stats == True:
-                    print("Logging data")
-                    __EXP__.log_simulation_data(data)
+                    __EXP__.log_simulation_data(data.copy())
 
                 if verbose == True:
                     self.write(json.dumps({'simulate':'success', 'experiment':exp_id, 'data':data}))
