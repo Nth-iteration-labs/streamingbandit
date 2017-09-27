@@ -1,2 +1,3 @@
-k = 10
-self.action["action"] = rand.unif(1:k)
+import numpy as np
+k = 4
+self.action["action"] = np.random.randint(1,k+1)
