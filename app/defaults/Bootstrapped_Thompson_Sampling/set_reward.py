@@ -3,11 +3,11 @@ import libs.bts as bts
 import libs.lm as lm
 
 # Extract values:
-customer = self.context["Type"]
+device = self.context["Device"]
 price = self.action["Price"]
 
 # Create feature vector and response:
-X = [1, price, price**2, customer, customer*price, customer*price**2]
+X = [1, price, price**2, device, device*price, device*price**2]
 y = self.reward["Revenue"]
 
 # Update the lm.model, specifically the default, 

@@ -1,2 +1,2 @@
 import random
-self.context["Type"] = random.randint(1,10)
+self.context["Device"] = random.randint(1,2)

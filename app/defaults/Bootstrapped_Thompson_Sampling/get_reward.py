@@ -1,6 +1,6 @@
-if self.context["Type"] <= 5 and self.action["Price"] < 5:
-    self.reward["Revenue"] = abs(np.random.normal(1, 0.1))
-elif self.context["Type"] <= 5 and self.action["Price"] >= 5:
-    self.reward["Revenue"] = abs(np.random.normal(0, 0.01))
-elif self.context["Type"] > 5:
-    self.reward["Revenue"] = abs(np.random.normal(5, 1))
+import numpy as np
+device = self.context["Device"]
+price = self.action["Price"]
+logit = lambda x: np.log(x) - np.log(1 - x)
+buy = np.random.binomial(1, logit(0.1 * ((price + (device * 4))-10)^2))
+self.reward["Revenue"] = buy * price
