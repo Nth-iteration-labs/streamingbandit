@@ -35,4 +35,21 @@ class BBThompsonList(List):
                 # Do we return 
                 choice = key
         return choice
+
+    def propensity(self, value, n = 1000):
+        """ Calculate propensity of given arm using n draws.
         
+        :returns int propensity: The propensity of the arm.
+        """
+        index = self.value_names.index(value)
+        
+        stacked_draws = np.zeros((self.num_values, n))
+        for i in self.value_names:
+            theta = self.base_list[i].get_dict()
+            a = float(theta['p']) * int(theta['n'])
+            b = int(theta['n']) - a
+            draws = np.random.beta(a,b,n)
+            stacked_draws[self.value_names.index(i),:] = draws
+        maxes = np.argmax(stacked_draws, axis = 0)
+        propensity = sum(maxes == index) / n
+        return propensity 
