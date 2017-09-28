@@ -38,6 +38,8 @@ class Users:
             highest_user_id = self.userinfo.find_one(filter={"user_id":{"$ne":"admin"}},sort=[("user_id",DESCENDING)])
             if highest_user_id is None:
                 user_id = 1
+            elif highest_user_id is 0:
+                user_id = 1
             else:
                 user_id = highest_user_id["user_id"] + 1
             # Hash password

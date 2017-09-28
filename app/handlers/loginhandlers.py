@@ -36,7 +36,7 @@ class LogInHandler(BaseHandler):
         username = data["username"]
         password = data["password"]
         user_id = users.get_user_info(username, password)
-        if user_id:
+        if user_id is not None and user_id is not False:
             self.set_secure_cookie("user", str(user_id))
             self.finish()
         else:
