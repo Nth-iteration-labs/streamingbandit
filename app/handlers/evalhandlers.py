@@ -40,9 +40,9 @@ class Simulate(BaseHandler):
                 N = int(self.get_argument("N", default = 1000))
                 log_stats = self.get_argument("log_stats", default = False)
                 verbose = self.get_argument("verbose", default = True)
-                seed = int(self.get_argument("seed", default = None))
+                seed = self.get_argument("seed", default = None)
                 if seed is not None:
-                    np.random.seed(seed)
+                    np.random.seed(int(seed))
                 if verbose == "True":
                     verbose = True
                 else:
