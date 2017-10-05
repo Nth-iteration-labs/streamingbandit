@@ -8,7 +8,7 @@ value = "simulation"
 default = self.get_theta(key=key, value=value)
 
 if default == {}:
-    default = {'J' : [1, 1, 1], 'P' : [[1,0,0],[0,1,0],[0,0,1]], 'cov' : 1}
+    default = {'J' : [1, 1, 1], 'P' : [[1,0,0],[0,1,0],[0,0,1]], 'err' : 1}
 
 model = tbl.ThompsonBayesianLinear(default)
 
