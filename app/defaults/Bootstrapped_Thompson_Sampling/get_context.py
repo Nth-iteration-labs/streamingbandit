@@ -1,2 +1,2 @@
 import numpy as np
-self.context["Device"] = np.random.randint(0,2)
+self.context["device"] = np.random.randint(0,2)

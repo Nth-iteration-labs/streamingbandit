@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
 import libs.thompson as thmp
-propl = thmp.BBThompsonList(self.get_theta(key="Treatment"), ["1","2","3","4"])
-self.action["Treatment"] = propl.thompson()
-self.action["Propensity"] = propl.propensity(self.action["Treatment"], n = 1000)
+propl = thmp.BBThompsonList(self.get_theta(key="treatment"), ["1","2","3","4"])
+self.action["treatment"] = propl.thompson()
+self.action["propensity"] = propl.propensity(self.action["treatment"], n = 1000)

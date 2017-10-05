@@ -3,12 +3,12 @@ import libs.bts as bts
 import libs.lm as lm
 
 # Extract values:
-device = self.context["Device"]
-price = self.action["Price"]
+device = self.context["device"]
+price = self.action["price"]
 
 # Create feature vector and response:
 X = [1, price, price**2, device, device*price, device*price**2]
-y = self.reward["Revenue"]
+y = self.reward["revenue"]
 
 # Update the lm.model, specifically the default, 
 # the number of replicates and the default parameters

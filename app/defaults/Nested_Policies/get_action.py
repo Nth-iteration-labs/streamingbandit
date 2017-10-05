@@ -13,11 +13,11 @@ if choice == 0:
     exp_nested = Experiment(exp_id = id1)
     self.action = exp_nested.run_action_code(context = {})
     # We feed the experiment number for later use
-    self.action["Experiment"] = id1
+    self.action["experiment"] = id1
     # We control the propensity for playing two experiments
-    self.action["Propensity"] = self.action["Propensity"] * 0.5
+    self.action["propensity"] = self.action["propensity"] * 0.5
 else: 
     exp_nested = Experiment(exp_id = id2)
     self.action = exp_nested.run_action_code(context = {})
-    self.action["Experiment"] = id2
-    self.action["Propensity"] = self.action["Propensity"] * 0.5
+    self.action["experiment"] = id2
+    self.action["propensity"] = self.action["propensity"] * 0.5
