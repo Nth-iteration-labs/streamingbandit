@@ -4,6 +4,7 @@ import tornado.ioloop
 import tornado.web
 import json
 import numpy as np
+import random
 import time
 
 from bson.binary import Binary
@@ -43,6 +44,7 @@ class Simulate(BaseHandler):
                 seed = self.get_argument("seed", default = None)
                 if seed is not None:
                     np.random.seed(int(seed))
+                    random.seed(int(seed))
                 if verbose == "True":
                     verbose = True
                 else:
@@ -81,6 +83,7 @@ class Simulate(BaseHandler):
 
                 if seed is not None:
                     np.random.seed()
+                    random.seed()
 
                 if log_stats == True:
                     __EXP__.log_simulation_data(data.copy())
