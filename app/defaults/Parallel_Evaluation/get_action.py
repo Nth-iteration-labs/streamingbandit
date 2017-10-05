@@ -1,3 +1,3 @@
 # This example works with E-First and E-Greedy
-import numpy as np
+import random
 self.action["treatment"] = random.choice(["C","T"])
