@@ -1,2 +1,5 @@
 import numpy as np
-self.reward["reward"] = np.random.binomial(1,self.action["action"]*0.2)
+if self.action["treatment"] == "C":
+    self.reward["value"] = np.random.binomial(1,0.2)
+else:
+    self.reward["value"] = np.random.binomial(1,0.5)

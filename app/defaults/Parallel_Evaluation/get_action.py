@@ -1,3 +1,3 @@
+# This example works with E-First and E-Greedy
 import numpy as np
-k = 4
-self.action["action"] = np.random.randint(1,k+1)
+self.action["treatment"] = random.choice(["C","T"])
