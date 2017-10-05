@@ -362,6 +362,7 @@ class List():
 
     def max(self):
         """ Finds the max of the main value of a Base class.
+        If no max is available yet (because the values are empty), it will return a random max.
         """
         max_val = 0
         max_key = ""
@@ -369,6 +370,8 @@ class List():
             if value.get_value() > max_val:
                 max_key = key
                 max_val = value.get_value()
+        if max_key == "":
+            max_key = self.random()
         return max_key
 
     def count(self):
