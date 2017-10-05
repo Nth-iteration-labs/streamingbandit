@@ -75,6 +75,10 @@ class Simulate(BaseHandler):
                     # Save stats
                     data[str(i)] = {'context' : context.copy(), 'action' : action.copy(), 'reward' : reward.copy(), 'theta' : theta.copy()}
 
+                    context.clear()
+                    action.clear()
+                    reward.clear()
+
                 if seed is not None:
                     np.random.seed()
 
