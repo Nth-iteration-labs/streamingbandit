@@ -30,8 +30,9 @@ class BaseHandler(tornado.web.RequestHandler):
         self.set_status(204)
 
     def set_default_headers(self):
+        origin = self.request.headers.get('Origin') 
         self.set_header('Access-Control-Allow-Headers', 'origin, content-type, accept, authorization, x-total-count, content-range')
-        self.set_header("Access-Control-Allow-Origin", self.request.headers.get('Origin'))
+        self.set_header("Access-Control-Allow-Origin", "" if (origin==None) else origin)
         self.set_header("Access-Control-Allow-Credentials", 'true')
         self.set_header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS')
         self.set_header('Content-Type', 'application/json')
