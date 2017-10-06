@@ -294,7 +294,8 @@ add all the counters and return the total count.</p>
 <dl class="method">
 <dt id="libs.base.List.max">
 <code class="descname">max</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.List.max" title="Permalink to this definition">¶</a></dt>
-<dd><p>Finds the max of the main value of a Base class.</p>
+<dd><p>Finds the max of the main value of a Base class.
+If no max is available yet (because the values are empty), it will return a random max.</p>
 </dd></dl>
 
 <dl class="method">
@@ -421,6 +422,21 @@ add all the counters and return the total count.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="libs.thompson.BBThompsonList.propensity">
+<code class="descname">propensity</code><span class="sig-paren">(</span><em>value</em>, <em>n=1000</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.thompson.BBThompsonList.propensity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate propensity of given arm using n draws.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Returns int propensity:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">The propensity of the arm.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="libs.thompson.BBThompsonList.thompson">
 <code class="descname">thompson</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libs.thompson.BBThompsonList.thompson" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw decision using the Bernoulli Bandit Thompson sampler.</p>
@@ -433,6 +449,27 @@ add all the counters and return the total count.</p>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="libs.thompson.ThompsonVarList">
+<em class="property">class </em><code class="descclassname">libs.thompson.</code><code class="descname">ThompsonVarList</code><span class="sig-paren">(</span><em>objects</em>, <em>value_names</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.thompson.ThompsonVarList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to allocate observations in 2 group a within subjects desing
+such as to maximize the precision of the estimated effect size 
+(assuming unequal variance of the two groups)</p>
+<dl class="method">
+<dt id="libs.thompson.ThompsonVarList.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>objects</em>, <em>value_names</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.thompson.ThompsonVarList.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create instance of a BB Thompson Variance Sampler
+by creating a variance list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.thompson.ThompsonVarList.experimentThompson">
+<code class="descname">experimentThompson</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libs.thompson.ThompsonVarList.experimentThompson" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtain draw and allocate to minimize estimation precision</p>
 </dd></dl>
 
 </dd></dl>

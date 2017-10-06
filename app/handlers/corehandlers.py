@@ -17,7 +17,7 @@ class ActionHandler(tornado.web.RequestHandler):
         +----------------------------------------------------------------+
         | Example                                                        |
         +================================================================+
-        |http://example.com/EXP_ID/getaction.json?key=KEY&context=CONTEXT|
+        |http://example.com/getaction/EXP_ID?key=KEY&context=CONTEXT     |
         +----------------------------------------------------------------+
         
         :param int exp_id: Experiment ID as specified in the url.
@@ -71,7 +71,7 @@ class RewardHandler(tornado.web.RequestHandler):
         +----------------------------------------------------------------+
         | Example                                                        |
         +================================================================+
-        |http://example.com/EXP_ID/setreward.json?key=KEY&context=CONTEXT|
+        |http://example.com/setreward/EXP_ID?key=KEY&context=CONTEXT     |
         |&action=ACTION&reward=REWARD                                    |
         +----------------------------------------------------------------+
 
@@ -84,7 +84,7 @@ class RewardHandler(tornado.web.RequestHandler):
         +----------------------------------------------------------------+
         | Example                                                        |
         +================================================================+
-        |http://example.com/EXP_ID/setreward.json?key=KEY                |
+        |http://example.com/setreward/EXP_ID?key=KEY                     |
         |&advice_id=ADVICE_ID&reward=REWARD                              |
         +----------------------------------------------------------------+
 

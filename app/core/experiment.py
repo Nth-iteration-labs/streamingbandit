@@ -10,6 +10,8 @@ class Experiment():
     
     :var int exp_id: The exp_id that is tied to the experiment and the \
     database.
+    :var string key: The key that is tied to the experiment, to validate \
+    the user.
     """
     def __init__(self, exp_id, key = "notUsedForLoopBack"):
         self.db = Database()
@@ -23,7 +25,7 @@ class Experiment():
     def is_valid(self):
         """Checks wheter the exp_id and key match for the current experiment.
         
-        :returns: A boolean: true if a valid key is provided, false otherwise.
+        :returns: True if a valid key is provided, False otherwise.
         """
         key = self.db.experiment_properties("exp:%s:properties" % (self.exp_id), "key")
         if key == self.key:
@@ -31,7 +33,13 @@ class Experiment():
         return self.valid
 
     def run_context_code(self, context = {}):
-        """
+        """ Takes get_context code from Redis and executes it.
+        
+        :param dict context: Context is pre-created such that the exec(code) \
+        function can return an context dict for this function (this is because \
+        of the behavior of Python).
+        :returns: A dict of context of which the content is \
+        determined by the get_context code.
         """
         self.context = context
         code = self.db.experiment_properties("exp:%s:properties" % (self.exp_id), "get_context")
@@ -39,13 +47,13 @@ class Experiment():
         return self.context
 
     def run_action_code(self, context, action = {}):    
-        """ Takes get_action code from Redis and executes it
+        """ Takes get_action code from Redis and executes it.
         
         :param dict context: Context is a dictionary with the context for the \
         getAction algorithm
         :param dict action: Action is pre-created such that the exec(code) \
-        function can return an action dict for this function (This is because \
-        of the behavior of Python.).
+        function can return an action dict for this function (this is because \
+        of the behavior of Python).
 
         :returns: A dict of action of which the content is \
         determined by the get_action code.
@@ -57,7 +65,16 @@ class Experiment():
         return self.action
 
     def run_get_reward_code(self, context, action, reward = {}):
-        """
+        """ Takes get_reward code from Redis and executes it.
+
+        :param dict context: The context that may be needed for the algorithm.
+        :param string action: The action that is needed for the algorithm. Is \
+        actually free of type, but generally a string is used. \
+        but must be specified by used algorithm.
+        :param dict reward: Reward is pre-created such that the exec(code) \
+        function can return an reward dict for this function (this is because \
+        of the behavior of Python).
+        :returns: True if executed correctly.
         """
         self.action = action
         self.context = context
@@ -67,14 +84,14 @@ class Experiment():
         return self.reward
         
     def run_reward_code(self, context, action, reward):
-        """ Takes set_reward code from Redis and executes it
+        """ Takes set_reward code from Redis and executes it.
 
         :param dict context: The context that may be needed for the algorithm.
-        :param string action: The action that is needed for the algorith. Is \
+        :param string action: The action that is needed for the algorithm. Is \
         actually free of type, but generally a string is used.
         :param int reward: Generally an int, in 0 or 1. Can be of other type, \
         but must be specified by used algorithm.
-        :returns True: If executed correctly.
+        :returns: True if executed correctly.
         """
         self.context = context
         self.action = action
@@ -88,23 +105,23 @@ class Experiment():
 
         :param dict value: The value that needs to be logged. Since MongoDB is \
                 used, a dictionary is needed.
-        :returns True: If executed correctly.
+        :returns: True if executed correctly.
         """
         value["exp_id"] = self.exp_id
         self.mongo_db.log_row(value)
         return True
 
     def log_simulation_data(self, data):
-        """ Log one simulation loop
+        """ Log one simulation loop.
         
         :param dict data: Dict of dicts with all interactions
-        :returns True: If executed correctly
+        :returns: True if executed correctly
         """
         self.mongo_db.log_simulation(self.exp_id, data)
         return True
 
     def log_getaction_data(self, context, action):
-        """ Logging for all the get_action calls
+        """ Logging for all the get_action calls.
 
         :param dict data: Dict that contains action, and context
         :returns: True if executed correctly
@@ -113,10 +130,10 @@ class Experiment():
         return True
 
     def log_setreward_data(self, context, action, reward):
-        """ Logging for all the set_reward calls
+        """ Logging for all the set_reward calls.
 
         :param dict data: Dict that contains action, context and reward
-        :returns True: If executed correctly
+        :returns: True if executed correctly
         """
         self.mongo_db.log_setreward(self.exp_id, context, action, reward)
         return True
@@ -154,7 +171,7 @@ class Experiment():
 
         :param string key: The key with which the theta will be associated. If \
         only a key is given, all the thetas that belong to that key will be \
-        returned. Typically a key distinguishes experiments from each other. \
+        returned. Typically a key distinguishes experiments from each other. 
         :param string value: The value with which the theta will be assiocated. \
         Typically the value distinguishes the different versions within an \
         experiment. If no value is given, all thetas belonging to the \
@@ -184,30 +201,33 @@ class Experiment():
         return self.db.delete_theta(db_key)
 
     def get_log_data(self, limit):
-        """ Get all the logged data from the experiment
+        """ Get all the logged data from the experiment.
 
-        :returns dict logs: Dict of dict of all the manual logs
+        :param int limit: Limit the amount of logs returned
+        :returns: Dict of dict of all the manual logs
         """
         return self.mongo_db.get_log_rows(self.exp_id, limit)
 
     def get_log_simulation_data(self):
-        """ Get all the logged data for the simulations of this experiment
+        """ Get all the logged data for the simulations of this experiment.
         
-        :returns dict logs: List of dict of dicts of the simulations
+        :returns: List of dict of dicts of the simulations
         """
         return self.mongo_db.get_log_simulation(exp_id)
 
     def get_getaction_log_data(self, limit):
         """ Get all the automatically logged get_action data from the experiment.
 
-        :returns dict logs: Dict of dict of all the get_action logs
+        :param int limit: Limit the amount of logs returned
+        :returns: Dict of dict of all the get_action logs
         """
         return self.mongo_db.get_getaction_log(self.exp_id, limit)
 
     def get_setreward_log_data(self, limit):
         """ Get all the automatically logged set_reward data from the experiment.
 
-        :returns dict logs: Dict of dict of all the set_reward logs
+        :param int limit: Limit the amount of logs returned
+        :returns: Dict of dict of all the set_reward logs
         """
         return self.mongo_db.get_setreward_log(self.exp_id, limit)
 
@@ -218,7 +238,7 @@ class Experiment():
             - The number of set_reward calls
             - The date of the last set_reward call
         
-        :returns dict of dict summary: The complete summary.
+        :returns: A dict of dict with the complete summary.
         """
         summary = {}
         getactioncalls = self.get_getaction_log_data(limit = 0)
@@ -238,9 +258,10 @@ class Experiment():
         return summary
         
     def get_hourly_theta(self, limit):
-        """ Get all the hourly logged thetas (if flag is set)
+        """ Get all the hourly logged thetas (if flag is set).
 
-        :returns dict of dict hourly: All the hourly logged thetas
+        :param int limit: Limit the amount of logs returned
+        :returns: A dict of dict with all the hourly logged thetas (or limited).
         """
         return self.mongo_db.get_hourly_theta(self.exp_id, limit)
     
