@@ -233,20 +233,6 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="core.experiment.Experiment.get_log_simulation_data">
-<code class="descname">get_log_simulation_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.experiment.Experiment.get_log_simulation_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get all the logged data for the simulations of this experiment.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List of dict of dicts of the simulations</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
 <dt id="core.experiment.Experiment.get_setreward_log_data">
 <code class="descname">get_setreward_log_data</code><span class="sig-paren">(</span><em>limit</em><span class="sig-paren">)</span><a class="headerlink" href="#core.experiment.Experiment.get_setreward_log_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get all the automatically logged set_reward data from the experiment.</p>
@@ -257,6 +243,20 @@
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>limit</strong> (<em>int</em>) – Limit the amount of logs returned</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Dict of dict of all the set_reward logs</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.experiment.Experiment.get_simulation_log_data">
+<code class="descname">get_simulation_log_data</code><span class="sig-paren">(</span><em>limit</em><span class="sig-paren">)</span><a class="headerlink" href="#core.experiment.Experiment.get_simulation_log_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all the logged data for the simulations of this experiment.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List of dict of dicts of the simulations</td>
 </tr>
 </tbody>
 </table>

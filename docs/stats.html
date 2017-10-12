@@ -378,6 +378,49 @@
 </dd></dl>
 
 <dl class="get">
+<dt id="get-(?i)-stats-(?P-exp_id-w+)-simulationlog">
+<code class="descname">GET </code><code class="descname">(?i)/stats/(?P&lt;exp_id&gt;w+)/simulationlog</code><a class="headerlink" href="#get-(?i)-stats-(?P-exp_id-w+)-simulationlog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all the logged simulation data.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Example</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference external" href="http://example.com/stats/EXP_ID/simulationlog?limit=10">http://example.com/stats/EXP_ID/simulationlog?limit=10</a></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Requires:</th><td class="field-body"><p class="first">A secure cookie, obtained by logging in.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>exp_id</strong> (<em>int</em>) – The experiment ID for the logs that are to be retrieved.</li>
+<li><strong>limit (optional)</strong> (<em>int</em>) – Set an optional limit to the amount of logs returned.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A list of JSONs of the logs.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first">If the experiment does not belong to this user or the exp_id is wrong.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first last">If user is not logged in or if there is no secure cookie available.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="get">
 <dt id="get-(?i)-stats-(?P-exp_id-w+)-summary">
 <code class="descname">GET </code><code class="descname">(?i)/stats/(?P&lt;exp_id&gt;w+)/summary</code><a class="headerlink" href="#get-(?i)-stats-(?P-exp_id-w+)-summary" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">

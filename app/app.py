@@ -75,6 +75,7 @@ urls = [
     (r"(?i)/stats/(?P<exp_id>\w+)/log", statshandlers.GetLog),
     (r"(?i)/stats/(?P<exp_id>\w+)/actionlog", statshandlers.GetActionLog),
     (r"(?i)/stats/(?P<exp_id>\w+)/rewardlog", statshandlers.GetRewardLog),
+    (r"(?i)/stats/(?P<exp_id>\w+)/simulationlog", statshandlers.GetSimulationLog),
     (r"(?i)/stats/(?P<exp_id>\w+)/summary", statshandlers.GetSummary),
 
     # Login API

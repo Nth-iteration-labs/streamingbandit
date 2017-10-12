@@ -55,7 +55,7 @@ class MongoLog:
         self.sim_logs.insert_one(sim_data)
         return True
 
-    def get_log_simulation(self, exp_id):
+    def get_simulation_log(self, exp_id, limit):
         """ Return all the logged simulation data
         
         :param int exp_id: The specified experiment.
@@ -64,7 +64,7 @@ class MongoLog:
         self.sim_db = self.mongo_client['simulations']
         self.sim_logs = self.sim_db[str(exp_id)]
         self.sim_log_rows = []
-        for row in self.sim_logs.find({}, {'_id': False}).sort('_id', ASCENDING):
+        for row in self.sim_logs.find({}, {'_id': False}).sort('_id', DESCENDING).limit(limit):
             self.sim_low_rows.append(row)
         return self.sim_log_rows
         

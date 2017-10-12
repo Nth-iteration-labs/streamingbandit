@@ -208,12 +208,12 @@ class Experiment():
         """
         return self.mongo_db.get_log_rows(self.exp_id, limit)
 
-    def get_log_simulation_data(self):
+    def get_simulation_log_data(self, limit):
         """ Get all the logged data for the simulations of this experiment.
         
         :returns: List of dict of dicts of the simulations
         """
-        return self.mongo_db.get_log_simulation(exp_id)
+        return self.mongo_db.get_simulation_log(self.exp_id, limit)
 
     def get_getaction_log_data(self, limit):
         """ Get all the automatically logged get_action data from the experiment.
