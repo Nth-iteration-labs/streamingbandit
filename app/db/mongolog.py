@@ -65,7 +65,7 @@ class MongoLog:
         self.sim_logs = self.sim_db[str(exp_id)]
         self.sim_log_rows = []
         for row in self.sim_logs.find({}, {'_id': False}).sort('_id', DESCENDING).limit(limit):
-            self.sim_low_rows.append(row)
+            self.sim_log_rows.append(row)
         return self.sim_log_rows
         
     def log_hourly_theta(self, value):
