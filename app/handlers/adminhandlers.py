@@ -55,10 +55,10 @@ class GenerateExperiments(BaseHandler):
 
         :requires: A secure cookie obtained by logging in.
         :param string name: Name of the experiment.
-        :param string get_context: String of python code for get context code.
-        :param string get_action: String of python code for get action code.
-        :param string get_reward: String of python code for get reward code.
-        :param string set_reward: String of python code for set reward code.
+        :param string get_context (optional): String of python code for get context code.
+        :param string get_action (optional): String of python code for get action code.
+        :param string get_reward (optional): String of python code for get reward code.
+        :param string set_reward (optional): String of python code for set reward code.
         :param bool hourly_theta: Bool indicating whether the state of Theta should be stored hourly. 
         :param bool advice_id: Bool indicating whether the getadvice and setreward calls should return an advice_id.
         :param int delta_hours: If advice_id is True, supply this to give the number of hours that an advice_id should be stored.
@@ -80,10 +80,22 @@ class GenerateExperiments(BaseHandler):
             exp_obj = {}
             exp_obj["user_id"] = int(user)
             exp_obj["name"] = data["name"]
-            exp_obj["get_context"] = data["get_context"]
-            exp_obj["get_action"] = data["get_action"]
-            exp_obj["get_reward"] = data["get_reward"]
-            exp_obj["set_reward"] = data["set_reward"]
+            if "get_context" in data:
+                exp_obj["get_context"] = data["get_context"]
+            else:
+                exp_obj["get_context"] = ""
+            if "get_action" in data:
+                exp_obj["get_action"] = data["get_action"]
+            else:
+                exp_obj["get_action"] = ""
+            if "get_reward" in data:
+                exp_obj["get_reward"] = data["get_reward"]
+            else:
+                exp_obj["get_reward"] = ""
+            if "set_reward" in data:
+                exp_obj["set_reward"] = data["set_reward"]
+            else:
+                exp_obj["set_reward"] = ""
             exp_obj["hourly_theta"] = data["hourly_theta"]
             exp_obj["advice_id"] = data["advice_id"]
             if exp_obj["advice_id"] in ["true", "True", "y", "yes"]:
@@ -179,10 +191,10 @@ class UpdateExperiment(BaseHandler):
 
         :requires: A secure cookie obtained by logging in.
         :param string name: Name of the experiment.
-        :param string get_context: String of python code for get context code.
-        :param string get_action: String of python code for get action code.
-        :param string get_reward: String of python code for get reward code.
-        :param string set_reward: String of python code for set reward code.
+        :param string get_context (optional): String of python code for get context code.
+        :param string get_action (optional): String of python code for get action code.
+        :param string get_reward (optional): String of python code for get reward code.
+        :param string set_reward (optional): String of python code for set reward code.
         :param bool hourly_theta: Bool indicating whether the state of Theta should be stored hourly.
         :param bool advice_id: Bool indicating whether the getAdvice and setReward calls should return an advice_id.
         :param int delta_hours: If advice_id is True, supply this to give the number of hours that an advice_id should be stored.
@@ -198,10 +210,22 @@ class UpdateExperiment(BaseHandler):
                 exp_obj = {}
                 exp_obj["user_id"] = int(user)
                 exp_obj["name"] = data["name"]
-                exp_obj["get_context"] = data["get_context"]
-                exp_obj["get_action"] = data["get_action"]
-                exp_obj["get_reward"] = data["get_reward"]
-                exp_obj["set_reward"] = data["set_reward"]
+                if "get_context" in data:
+                    exp_obj["get_context"] = data["get_context"]
+                else:
+                    exp_obj["get_context"] = ""
+                if "get_action" in data:
+                    exp_obj["get_action"] = data["get_action"]
+                else:
+                    exp_obj["get_action"] = ""
+                if "get_reward" in data:
+                    exp_obj["get_reward"] = data["get_reward"]
+                else:
+                    exp_obj["get_reward"] = ""
+                if "set_reward" in data:
+                    exp_obj["set_reward"] = data["set_reward"]
+                else:
+                    exp_obj["set_reward"] = ""
                 exp_obj["hourly_theta"] = data["hourly_theta"]
                 exp_obj["advice_id"] = data["advice_id"]
                 if exp_obj["advice_id"] in ["true", "True", "y", "yes"]:
