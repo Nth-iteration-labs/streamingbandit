@@ -1,3 +1,3 @@
 import libs.thompson as thmp
-varList = thmp.ThompsonVarList(self.get_theta(key="treatment"), ["1","2"])
+varList = thmp.ThompsonVarList(self.get_theta(key="treatment"), ["control","treatment"])
 self.action["treatment"] = varList.experimentThompson()

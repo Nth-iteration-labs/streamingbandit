@@ -1,5 +1,5 @@
 import numpy as np
-if self.action["treatment"] == "C":
-    self.reward["value"] = np.random.binomial(1,0.2)
+if self.action["treatment"] == "control":
+    self.reward["value"] = np.random.normal(4, 1)
 else:
-    self.reward["value"] = np.random.binomial(1,0.5)
+    self.reward["value"] = np.random.normal(6, 2)

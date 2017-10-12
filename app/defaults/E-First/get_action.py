@@ -1,6 +1,8 @@
 import libs.base as base
-meanList = base.List(self.get_theta(key="treatment"), base.Mean, ["C", "T"])
-if meanList.count() > 1000:
+
+n = 100
+meanList = base.List(self.get_theta(key="treatment"), base.Mean, ["control", "treatment"])
+if meanList.count() >= n:
     self.action["treatment"] = meanList.max()
     self.action["propensity"] = 1
 else:
