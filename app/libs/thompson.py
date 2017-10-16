@@ -80,13 +80,16 @@ class ThompsonVarList(List):
             # Get sum of squares and N
             SS = float(theta['s'])            
             n = int(theta['n']) 
+            if n < 2:
+                choice = key
+                break
             
             # Computer criterion based on posterior variance
             criterion = self._postVariance(SS,n) / n
             
             # Return condition with hightest criterion
             if criterion > max_criterion:
-                max_criterion = draw
+                max_criterion = criterion
                 choice = key
         return choice
   
@@ -96,7 +99,7 @@ class ThompsonVarList(List):
         the sum of squares (SS) and the sample size n
         """ 
         s2 = SS / np.random.chisquare(n-1)
-        return(math.sqrt(s2))
+        return(np.sqrt(s2))
     
     
     def _postMean(self, m, SS, n):
@@ -104,5 +107,5 @@ class ThompsonVarList(List):
         model (CURRNTLY NOT USED)
         """
         s2 = self._postVariance(SS, n)
-        mean = np.random.normal(m, (math.sqrt(s2)/ math.sqrt(n)))
+        mean = np.random.normal(m, (np.sqrt(s2)/ np.sqrt(n)))
         return(mean)

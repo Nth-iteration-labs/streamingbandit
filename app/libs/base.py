@@ -127,7 +127,8 @@ class Variance(__strmBase):
         self.value['n'] = int(self.value['n']) + 1
         self.value['x_bar'] = float(self.value['x_bar']) + ((float(value) - float(self.value['x_bar'])) / (int(self.value['n'])))
         self.value['s'] = float(self.value['s']) + ( d * (float(value) - float(self.value['x_bar'])) )
-        self.value['v'] = float(self.value['s'])/(int(self.value['n']) - 1)
+        if self.value['n'] >= 2:
+            self.value['v'] = float(self.value['s'])/(int(self.value['n']) - 1)
 
     def __add__(self, other):
         new_value = float(self.value[self.main]) + float(other)
