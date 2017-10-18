@@ -60,9 +60,15 @@ class Database:
         if all_values == False:
             result = self.r_server.hgetall(key)
         else:
+            number_of_keys = 0
             for obj in self.r_server.scan_iter(key + "*"):
-                final_key = obj[len(key)+1:]
-                result[final_key] = self.r_server.hgetall(obj)
+                number_of_keys += 1
+            if number_of_keys > 1:
+                for obj in self.r_server.scan_iter(key + "*"):
+                    final_key = obj[len(key)+1:]
+                    result[final_key] = self.r_server.hgetall(obj)
+            else:
+                result = self.r_server.hgetall(key)
         
         if all_float: #check
             for i in result.keys():

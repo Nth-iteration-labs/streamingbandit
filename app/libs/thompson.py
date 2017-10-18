@@ -61,7 +61,7 @@ class ThompsonVarList(List):
     """
     
     def __init__(self, objects, value_names):
-        """ Create instance of a BB Thompson Variance Sampler
+        """ Create instance of a Thompson Variance Sampler
         by creating a variance list
         """
         super(ThompsonVarList, self).__init__(objects, Variance, value_names)

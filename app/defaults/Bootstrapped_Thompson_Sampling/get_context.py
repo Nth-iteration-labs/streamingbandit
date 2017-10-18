@@ -1,2 +1,2 @@
-import numpy as np
-self.context["device"] = np.random.randint(0,2)
+import random
+self.context["customer"] = random.sample(["new", "returning"],1)[0]

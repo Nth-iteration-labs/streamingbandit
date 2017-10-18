@@ -164,6 +164,8 @@ class Experiment():
         db_key = "exp:%s:" % (self.exp_id) + name
         if key is not None and value is not None:
             db_key = db_key + ":%s:%s" % (key, value)
+        elif key is not None and value is None:
+            db_key = db_key + ":%s" % (key)
         return self.db.set_theta(thetas, db_key)
     
     def get_theta(self, key = None, value = None, name = "_theta", all_float = False):
@@ -198,6 +200,8 @@ class Experiment():
         db_key = "exp:%s:" % (self.exp_id) + name
         if key is not None and value is not None:
             db_key = db_key + ":%s:%s" % (key, value)
+        elif key is not None and value is None:
+            db_key = db_key + ":%s" % (key)
         return self.db.delete_theta(db_key)
 
     def get_log_data(self, limit):
