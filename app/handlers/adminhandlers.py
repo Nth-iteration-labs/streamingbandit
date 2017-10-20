@@ -61,7 +61,7 @@ class GenerateExperiments(BaseHandler):
         :param string set_reward (optional): String of python code for set reward code.
         :param bool hourly_theta: Bool indicating whether the state of Theta should be stored hourly. 
         :param bool advice_id: Bool indicating whether the getadvice and setreward calls should return an advice_id.
-        :param int delta_hours: If advice_id is True, supply this to give the number of hours that an advice_id should be stored.
+        :param int delta_hours: If advice_id is True, supply this to give the number of hours that an advice_id should be stored (between 0 and 99999).
         :param dict default_reward: If advice_id is True, supply this to give the default reward for advice_id's that are over their delta_hours limit.
         :returns: A JSON of the form: 
         .. code-block:: json
@@ -103,7 +103,10 @@ class GenerateExperiments(BaseHandler):
             else:
                 exp_obj["advice_id"] = False
             if exp_obj["advice_id"] is True:
-                exp_obj["delta_hours"] = data["delta_hours"]
+                if 0 <= data["delta_hours"] <= 99999:
+                    exp_obj["delta_hours"] = data["delta_hours"]
+                else:
+                    raise ExceptionHandler(reason = "Supplied number for delta hours must be between 0 and 99999.", status_code = 400)
                 exp_obj["default_reward"] = data["default_reward"]
         
             exp_obj["key"] = hex(random.getrandbits(42))[2:-1]
@@ -233,7 +236,10 @@ class UpdateExperiment(BaseHandler):
                 else:
                     exp_obj["advice_id"] = False
                 if exp_obj["advice_id"] is True:
-                    exp_obj["delta_hours"] = data["delta_hours"]
+                    if 0 <= data["delta_hours"] <= 99999:
+                        exp_obj["delta_hours"] = data["delta_hours"]
+                    else:
+                        raise ExceptionHandler(reason = "Supplied number for delta hours must be between 0 and 99999.", status_code = 400)
                     exp_obj["default_reward"] = data["default_reward"]
             
                 db = Database()
