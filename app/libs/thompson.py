@@ -28,7 +28,10 @@ class BBThompsonList(List):
             theta = obj.get_dict()
             a = float(theta['p']) * int(theta['n'])
             b = int(theta['n']) - a
-            draw = np.random.beta(a,b)
+            if (a == 0) or (b == 0):
+                draw = np.random.beta(1,1)
+            else:
+                draw = np.random.beta(a,b)
             if draw > min_prob:
                 min_prob = draw
                 # We want to return something of the form of an action choice.
@@ -48,7 +51,10 @@ class BBThompsonList(List):
             theta = self.base_list[i].get_dict()
             a = float(theta['p']) * int(theta['n'])
             b = int(theta['n']) - a
-            draws = np.random.beta(a,b,n)
+            if (a == 0) or (b == 0):
+                draws = np.random.beta(1,1,n)
+            else:
+                draws = np.random.beta(a,b,n)
             stacked_draws[self.value_names.index(i),:] = draws
         maxes = np.argmax(stacked_draws, axis = 0)
         propensity = sum(maxes == index) / n

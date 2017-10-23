@@ -61,9 +61,11 @@ class Database:
             result = self.r_server.hgetall(key)
         else:
             number_of_keys = 0
+            obj_longer_than_key = False
             for obj in self.r_server.scan_iter(key + "*"):
                 number_of_keys += 1
-            if number_of_keys > 1:
+                obj_longer_than_key = (len(obj) > len(key))
+            if number_of_keys > 1 or obj_longer_than_key == True:
                 for obj in self.r_server.scan_iter(key + "*"):
                     final_key = obj[len(key)+1:]
                     result[final_key] = self.r_server.hgetall(obj)

@@ -5,6 +5,20 @@ from db.advice import Advice
 from math import sqrt; from itertools import count, islice
 import logging
 
+import libs.base as base
+import libs.lm as lm
+import libs.lif as lif
+import libs.thompson as thompson
+import libs.thompson_bayesian_linear as thompson_bayesian_linear
+import libs.bts as bts
+
+import numpy as np
+import random
+import scipy as sp
+
+global numpy
+global random
+
 class Experiment():
     """ Class that organizes experiments.
     
@@ -21,6 +35,13 @@ class Experiment():
         self.properties = self.db.get_one_experiment(self.exp_id)
         self.key = key
         self.valid = False     # should be taken from Redis
+        self.safe_builtins = {'print' : print, 'base' : base, 'numpy' : np, \
+                              'np' : np, 'scipy' : sp, 'sp' : sp, 'bts': bts, \
+                              'lm' : lm, 'lif': lif, 'thompson' : thompson, \
+                              'thmp' : thompson, 'tbl' : thompson_bayesian_linear, \
+                              'random' : random, 'self' : self, 'int' : int, \
+                              'float' : float, 'str' : str, 'len' : len, \
+                              'range' : range}
     
     def is_valid(self):
         """Checks wheter the exp_id and key match for the current experiment.
@@ -43,7 +64,8 @@ class Experiment():
         """
         self.context = context
         code = self.db.experiment_properties("exp:%s:properties" % (self.exp_id), "get_context")
-        exec(code)
+        byte_code = compile(code, filename='<inline code>', mode='exec')
+        exec(byte_code, {'__builtins__' : self.safe_builtins})
         return self.context
 
     def run_action_code(self, context, action = {}):    
@@ -61,7 +83,8 @@ class Experiment():
         self.action = action
         self.context = context
         code = self.db.experiment_properties("exp:%s:properties" % (self.exp_id), "get_action")
-        exec(code)
+        byte_code = compile(code, filename='<inline code>', mode='exec')
+        exec(byte_code, {'__builtins__' : self.safe_builtins})
         return self.action
 
     def run_get_reward_code(self, context, action, reward = {}):
@@ -80,7 +103,8 @@ class Experiment():
         self.context = context
         self.reward = reward
         code = self.db.experiment_properties("exp:%s:properties" % (self.exp_id), "get_reward")
-        exec(code)
+        byte_code = compile(code, filename='<inline code>', mode='exec')
+        exec(byte_code, {'__builtins__' : self.safe_builtins})
         return self.reward
         
     def run_reward_code(self, context, action, reward):
@@ -97,7 +121,8 @@ class Experiment():
         self.action = action
         self.reward = reward
         code = self.db.experiment_properties("exp:%s:properties" % (self.exp_id), "set_reward")
-        exec(code)
+        byte_code = compile(code, filename='<inline code>', mode='exec')
+        exec(byte_code, {'__builtins__' : self.safe_builtins})
         return True
     
     def log_data(self, value):
