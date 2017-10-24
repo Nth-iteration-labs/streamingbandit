@@ -20,6 +20,11 @@ from handlers import loginhandlers
 from handlers import evalhandlers
 from handlers import basehandler
 
+from pymongo import MongoClient
+from redis import Redis
+
+import builtins
+
 dir = os.path.dirname(__file__)
 f = open(os.path.join(dir,'config.cfg'),'r')
 settings = yaml.load(f)
@@ -89,14 +94,22 @@ urls = [
     (r"(?i)/", basehandler.IndexHandler)
 ]
 
-tornadoConfig = dict({
+# Instantiate DB clients
+redis_server = Redis(settings['redis_ip'], settings['redis_port'], decode_responses = True)
+mongo_client = MongoClient(settings['mongo_ip'], settings['mongo_port'])
+
+tornado_config = dict({
     "template_path": os.path.join(os.path.dirname(__file__),"templates"),
     "debug": True,   # Should get from config?
     "cookie_secret":"12",
-    "default_handler_class":basehandler.BaseHandler
+    "default_handler_class":basehandler.BaseHandler,
+    "redis_server" : redis_server,
+    "mongo_client" : mongo_client
 })
 
-application = tornado.web.Application(urls,**tornadoConfig)
+builtins.tornado_config = tornado_config
+
+application = tornado.web.Application(urls,**tornado_config)
 
 def main():
     # Use the above instantiated scheduler

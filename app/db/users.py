@@ -1,19 +1,16 @@
 from pymongo import MongoClient, DESCENDING
 from bcrypt import hashpw, checkpw, gensalt
-import yaml
+
+import builtins
 
 class Users:
     """ A class to store and retrieve user info and passwords to MongoDB.
 
     """
     def __init__(self):
-        f = open("config.cfg", 'r')
-        settings = yaml.load(f)
-        self.mongo_client = MongoClient(settings['mongo_ip'], settings['mongo_port'])
+        self.mongo_client = builtins.tornado_config['mongo_client']
         self.mongo_db = self.mongo_client['userinfo']
         self.userinfo = self.mongo_db['userinfo']
-
-        f.close()
 
     def get_user_info(self, username, password):
         user = self.userinfo.find_one({'username':username})

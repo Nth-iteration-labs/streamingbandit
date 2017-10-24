@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from pymongo import MongoClient, ASCENDING, DESCENDING
-import yaml
 from datetime import datetime
+
+import builtins
 
 class MongoLog:
     """ A class to simply log stuff to MongoDB.
@@ -12,12 +13,8 @@ class MongoLog:
     database.
     """
     def __init__(self):
-        f = open("config.cfg",'r')
-        settings = yaml.load(f)
-        self.mongo_client = MongoClient(settings['mongo_ip'], settings['mongo_port'])
+        self.mongo_client = builtins.tornado_config['mongo_client']
         self.mongo_db = self.mongo_client['logs']
-
-        f.close()
             
     def log_row(self, value):
         """ Simply log the value that is given in the logs database.

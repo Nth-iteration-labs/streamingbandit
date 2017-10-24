@@ -1,6 +1,7 @@
 import redis
 import yaml
 import random
+import builtins
 
 class Database:
     """ This database is written in Redis. If other types of database are used,
@@ -8,10 +9,7 @@ class Database:
     functions in this class.
     """
     def __init__(self):
-        f = open("config.cfg",'r')
-        settings = yaml.load(f)
-        self.r_server = redis.Redis(settings['redis_ip'], settings['redis_port'], decode_responses=True)
-        f.close()
+        self.r_server = builtins.tornado_config['redis_server']
         
     def set_theta(self, thetas, key):
         """ Set theta's in the database
