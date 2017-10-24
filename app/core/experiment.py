@@ -41,7 +41,8 @@ class Experiment():
                               'thmp' : thompson, 'tbl' : thompson_bayesian_linear, \
                               'random' : random, 'self' : self, 'int' : int, \
                               'float' : float, 'str' : str, 'len' : len, \
-                              'range' : range}
+                              'range' : range, 'Experiment' : Experiment, 'repr' : repr, \
+                              'pow' : pow}
     
     def is_valid(self):
         """Checks wheter the exp_id and key match for the current experiment.
