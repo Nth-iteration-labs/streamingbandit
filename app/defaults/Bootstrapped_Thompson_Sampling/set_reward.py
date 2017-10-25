@@ -1,7 +1,3 @@
-import libs.bts as bts
-import libs.lm as lm
-import numpy as np
-
 # Extract values:
 # Create dummy for customer
 if(self.context["customer"] == "returning"):

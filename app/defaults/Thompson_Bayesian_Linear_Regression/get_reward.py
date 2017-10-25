@@ -1,4 +1,3 @@
-import numpy as np
 mu = 0
 var = 0.1
 c = 5

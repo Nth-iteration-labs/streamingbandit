@@ -1,6 +1,3 @@
-import numpy
-global numpy
-
 # Get parameters
 # Create dummy for customer
 if(self.context["customer"] == "returning"):

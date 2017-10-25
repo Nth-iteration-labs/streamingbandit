@@ -1,7 +1,3 @@
-import libs.bts as bts
-import libs.lm as lm
-import numpy as np
-
 # Instantiate BTS with m=100 samples:
 BTS = bts.BTS(self.get_theta(), lm.LM, m = 100, default_params = \
        {'b': np.zeros(6).tolist(), 'A' : np.identity(6).tolist(), 'n' : 0})

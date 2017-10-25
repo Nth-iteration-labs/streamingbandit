@@ -1,6 +1,3 @@
-import libs.thompson_bayesian_linear as tbl
-import numpy as np
-
 key = "simulation"
 value = "simulation"
 

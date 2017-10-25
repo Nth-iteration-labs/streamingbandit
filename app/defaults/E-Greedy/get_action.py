@@ -1,5 +1,3 @@
-import libs.base as base
-import numpy as np
 e = .1
 meanList = base.List(self.get_theta(key="treatment"), base.Mean, ["control", "treatment"])
 if np.random.binomial(1,e) == 1:

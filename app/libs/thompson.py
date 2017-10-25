@@ -1,6 +1,7 @@
 # Thompson sampling for bernoulli 
 # See "old" tools.py
 from libs.base import *
+import numpy as np
 
 class BBThompsonList(List):
     """ Class to draw decisions using a Bernoulli Bandit Thompson sampler.

@@ -1,5 +1,3 @@
-import numpy as np
-
 id1 = "3ea45886b5" # The exp_id of E-First
 id2 = "121e3e0aeb" # The exp_id of E-Greedy
 
