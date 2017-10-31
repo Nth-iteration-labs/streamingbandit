@@ -5,7 +5,7 @@ import numpy as np
 import json
 
 
-class Lif:
+class LiF():
     """ Class implementing the Lock in Feedback algorithm.
     Implementation of Lock in Feedback, \
     following the definition by Maurits Kaptein and \
