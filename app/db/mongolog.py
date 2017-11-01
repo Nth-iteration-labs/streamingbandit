@@ -14,7 +14,6 @@ class MongoLog:
     """
     def __init__(self):
         self.mongo_client = builtins.tornado_config['mongo_client']
-        self.mongo_db = self.mongo_client['logs']
             
     def log_row(self, value):
         """ Simply log the value that is given in the logs database.
@@ -122,3 +121,9 @@ class MongoLog:
         for document in cursor:
             self.setrewards.append(document)
         return self.setrewards
+
+    def log_deleted_experiment(self, obj):
+        self.archive = self.mongo_client['archive']
+        self.archive_log = self.archive['deleted_experiments']
+        self.archive_log.insert_one(obj)
+        return True

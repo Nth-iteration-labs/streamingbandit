@@ -11,6 +11,7 @@ from handlers.basehandler import BaseHandler, ExceptionHandler
 from core.experiment import Experiment
 
 from db.database import Database
+from db.mongolog import MongoLog
 from db.users import Users
 
 
@@ -169,8 +170,10 @@ class UpdateExperiment(BaseHandler):
         if self.get_current_user():
             if self.validate_user_experiment(exp_id):
                 db = Database()
+                mongo_db = MongoLog()
                 response = db.delete_experiment(exp_id)
-                self.write(json.dumps(response))
+                mongo_db.log_deleted_experiment(response)
+                self.write(json.dumps(response['exp_id']))
             else:
                 raise ExceptionHandler(reason = "Experiment could not be validated.", status_code = 401)
         else:

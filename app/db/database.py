@@ -160,8 +160,10 @@ class Database:
         statement.
         """
         self.r_server.srem(explistkey, exp_id)
+        obj = self.r_server.hgetall("exp:%s:properties" % exp_id)
+        obj['exp_id'] = exp_id
         self.r_server.delete("exp:%s:properties" % exp_id)
-        return(exp_id)
+        return obj
         
     def get_all_experiments(self, user_id, explistkey="admin:experiments"):
         """ Returns a dict of experiment properties, so a dict of dicts.
