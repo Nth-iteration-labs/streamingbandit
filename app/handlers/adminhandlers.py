@@ -299,10 +299,10 @@ class GetDefault(BaseHandler):
             folderdata = dict(enumerate(folderdata))
             data={}
             data["name"] = folderdata[int(default_id)]
-            data["get_context"] = open("./defaults/"+data["name"]+"/get_context.py").read()
-            data["get_action"] = open("./defaults/"+data["name"]+"/get_action.py").read()
-            data["get_reward"] = open("./defaults/"+data["name"]+"/get_reward.py").read()
-            data["set_reward"] = open("./defaults/"+data["name"]+"/set_reward.py").read()
+            filenames = ["get_context", "get_action", "get_reward", "set_reward"]
+            for filename in filenames:
+                if os.path.isfile("./defaults/"+data["name"]+"/"+filename+".py"):
+                    data[filename] = open("./defaults/"+data["name"]+"/"+filename+".py").read()
             self.write(data)
         else:
             raise ExceptionHandler(reason = "Could not validate user.", status_code = 401)
