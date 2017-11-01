@@ -67,7 +67,7 @@ class Experiment():
         code = self.db.experiment_properties("exp:%s:properties" % (self.exp_id), "get_context")
         byte_code = compile(code, filename='<inline code>', mode='exec')
         exec(byte_code, {'__builtins__' : self.safe_builtins})
-        return self.context
+        return self.context.copy()
 
     def run_action_code(self, context, action = {}):    
         """ Takes get_action code from Redis and executes it.
@@ -86,7 +86,7 @@ class Experiment():
         code = self.db.experiment_properties("exp:%s:properties" % (self.exp_id), "get_action")
         byte_code = compile(code, filename='<inline code>', mode='exec')
         exec(byte_code, {'__builtins__' : self.safe_builtins})
-        return self.action
+        return self.action.copy()
 
     def run_get_reward_code(self, context, action, reward = {}):
         """ Takes get_reward code from Redis and executes it.
@@ -106,7 +106,7 @@ class Experiment():
         code = self.db.experiment_properties("exp:%s:properties" % (self.exp_id), "get_reward")
         byte_code = compile(code, filename='<inline code>', mode='exec')
         exec(byte_code, {'__builtins__' : self.safe_builtins})
-        return self.reward
+        return self.reward.copy()
         
     def run_reward_code(self, context, action, reward):
         """ Takes set_reward code from Redis and executes it.
