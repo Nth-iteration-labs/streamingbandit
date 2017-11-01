@@ -1,5 +1,7 @@
 import redis
 import yaml
+import random
+import builtins
 
 class Database:
     """ This database is written in Redis. If other types of database are used,
@@ -7,10 +9,7 @@ class Database:
     functions in this class.
     """
     def __init__(self):
-        f = open("config.cfg",'r')
-        settings = yaml.load(f)
-        self.r_server = redis.Redis(settings['redis_ip'], settings['redis_port'], decode_responses=True)
-        f.close()
+        self.r_server = builtins.tornado_config['redis_server']
         
     def set_theta(self, thetas, key):
         """ Set theta's in the database
@@ -59,9 +58,17 @@ class Database:
         if all_values == False:
             result = self.r_server.hgetall(key)
         else:
+            number_of_keys = 0
+            obj_longer_than_key = False
             for obj in self.r_server.scan_iter(key + "*"):
-                final_key = obj[len(key)+1:]
-                result[final_key] = self.r_server.hgetall(obj)
+                number_of_keys += 1
+                obj_longer_than_key = (len(obj) > len(key))
+            if number_of_keys > 1 or obj_longer_than_key == True:
+                for obj in self.r_server.scan_iter(key + "*"):
+                    final_key = obj[len(key)+1:]
+                    result[final_key] = self.r_server.hgetall(obj)
+            else:
+                result = self.r_server.hgetall(key)
         
         if all_float: #check
             for i in result.keys():
@@ -74,8 +81,13 @@ class Database:
         return result
     
     def delete_theta(self, key):
-        self.r_server.delete(key)
-        return True
+        count = 0
+        key = key + '*'
+        for k in self.r_server.scan_iter(key):
+            self.r_server.delete(k)
+            count += 1
+        return count
+        #return True
 
     def object_to_key(self, obj):   
         """ Converts an object to a redis key-style string.
@@ -120,7 +132,7 @@ class Database:
         experiment.
         """
         members = self.r_server.smembers(explistkey)
-        exp_id = len(members) + 1
+        exp_id = hex(random.getrandbits(42))[2:-1]
         self.r_server.sadd(explistkey, exp_id)
         self.r_server.hmset("exp:%s:properties" % exp_id, obj)
         return(exp_id)
@@ -148,10 +160,12 @@ class Database:
         statement.
         """
         self.r_server.srem(explistkey, exp_id)
+        obj = self.r_server.hgetall("exp:%s:properties" % exp_id)
+        obj['exp_id'] = exp_id
         self.r_server.delete("exp:%s:properties" % exp_id)
-        return(exp_id)
+        return obj
         
-    def get_all_experiments(self, explistkey="admin:experiments"):
+    def get_all_experiments(self, user_id, explistkey="admin:experiments"):
         """ Returns a dict of experiment properties, so a dict of dicts.
 
         :param string explistkey: Set to standard value. Typically redundant.
@@ -159,11 +173,11 @@ class Database:
         """
         # This currently returns all the properties, we might change that:
         members = self.r_server.smembers(explistkey)
-        i = 0         
         result = {}
         for member in members:
-            result[member] = self.r_server.hgetall("exp:%s:properties" % (member))
-            i += 1
+            tmp_result = self.r_server.hgetall("exp:%s:properties" % (member))
+            if int(tmp_result['user_id']) == user_id:
+                result[member] = tmp_result.copy()
         return result
         
     def get_one_experiment(self, exp_id, explistkey="admin:experiments"):   

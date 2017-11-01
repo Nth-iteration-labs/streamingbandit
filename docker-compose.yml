@@ -1,0 +1,10 @@
+version: '3'
+services:
+  redis:
+    image: "redis:4"
+  mongo:
+    image: "mongo:3.4"
+  web:
+    build: .
+    ports:
+     - "8080:8080"

@@ -127,7 +127,8 @@ class Variance(__strmBase):
         self.value['n'] = int(self.value['n']) + 1
         self.value['x_bar'] = float(self.value['x_bar']) + ((float(value) - float(self.value['x_bar'])) / (int(self.value['n'])))
         self.value['s'] = float(self.value['s']) + ( d * (float(value) - float(self.value['x_bar'])) )
-        self.value['v'] = float(self.value['s'])/(int(self.value['n']) - 1)
+        if self.value['n'] >= 2:
+            self.value['v'] = float(self.value['s'])/(int(self.value['n']) - 1)
 
     def __add__(self, other):
         new_value = float(self.value[self.main]) + float(other)
@@ -167,7 +168,7 @@ class Proportion(__strmBase):
     def __init__(self,default):
         self.main = 'p'
         if default == {}:
-            self.value = {'p':.5, 'n': 2}
+            self.value = {'p': 0, 'n': 0}
         else:
             self.value = default.copy()
 
@@ -230,37 +231,37 @@ class Covariance(__strmBase):
         # Value must be a dict of x and y as
         # {'x' : 0, 'y' : 0} since we compute covariance of two datapoints
         self.value['n'] = int(self.value['n']) + 1
-        self.value['x_bar'] = float(self.value['x_bar']) + ( (float(value['x']) - float(self.value['x_bar'])) / n )
+        self.value['x_bar'] = float(self.value['x_bar']) + ( (float(value['x']) - float(self.value['x_bar'])) / int(self.value['n']) )
+        self.value['y_bar'] = float(self.value['y_bar']) + ( (float(value['y']) - float(self.value['y_bar'])) / int(self.value['n']) )
         self.value['cov'] = float(self.value['cov']) + ((float(value['y']) - float(self.value['y_bar'])) * (float(value['x']) - float(self.value['x_bar']))) 
-        self.value['y_bar'] = float(self.value['y_bar']) + ( (float(value['y']) - float(self.value['y_bar'])) / n )
    
     def __add__(self, other):
         new_value = float(self.value[self.main]) + float(other)
         if new_value >= 0:
             self.value[self.main] = new_value
         else:
-            raise ValueError("Co-Variance can not be less than zero!") 
+            raise ValueError("Covariance can not be less than zero!") 
 
     def __sub__(self, other):
         new_value = float(self.value[self.main]) - float(other)
         if new_value >= 0:
             self.value[self.main] = new_value
         else:
-            raise ValueError("Co-Variance can not be less than zero!")
+            raise ValueError("Covariance can not be less than zero!")
 
     def __truediv__(self, other):
         new_value = float(self.value[self.main]) / float(other)
         if new_value >= 0:
             self.value[self.main] = new_value
         else:
-            raise ValueError("Co-Variance can not be less than zero!")
+            raise ValueError("Covariance can not be less than zero!")
 
     def __mul__(self, other):
         new_value = float(self.value[self.main]) * float(other)
         if new_value >= 0:
             self.value[self.main] = new_value
         else:
-            raise ValueError("Co-Variance can not be less than zero!")
+            raise ValueError("Covariance can not be less than zero!")
     
 class Correlation(__strmBase):
     """ Class to represent a correlation using an online estimator.
@@ -274,7 +275,7 @@ class Correlation(__strmBase):
     def __init__(self, default):
         self.main = 'c'
         if default == {}:
-            self.value = {'n':1, 'x_bar':0, 'y_bar':0, 'x_s':1, 'y_s':1, 'x_v':0, 'y_v':0, 'cov':0, 'c':0}
+            self.value = {'n':0, 'x_bar':0, 'y_bar':0, 'x_s':0, 'y_s':0, 'x_v':0, 'y_v':0, 'cov':0, 'c':0}
         else:
             self.value = default.copy()
 
@@ -287,13 +288,14 @@ class Correlation(__strmBase):
         d_x = float(value['x']) - float(self.value['x_bar'])
         d_y = float(value['y']) - float(self.value['y_bar'])
         self.value['x_bar'] = float(self.value['x_bar']) + ((float(value['x']) - float(self.value['x_bar'])) / int(self.value['n']))
-        self.value['x_s'] = float(self.value['x_s']) + (d_x * (float(value['x']) - float(self.value['x_bar'])))
-        self.value['x_v'] = float(self.value['x_s']) / (int(self.value['n'] - 1))
-        self.value['cov'] = float(self.value['cov']) + ((float(value['y']) - float(self.value['y'])) * (float(value['x']) - float(self.value['x_bar'])))
         self.value['y_bar'] = float(self.value['y_bar']) + ((float(value['y']) - float(self.value['y_bar'])) / int(self.value['n']))
-        self.value['y_s'] = float(self.value['y_s']) + (d_x * (float(value['y']) - self.value['y_bar']))
-        self.value['y_v'] = float(self.value['y_s']) / (int(self.value['n'] - 1))
-        self.value['c'] = float(self.value['cov']) / (math.sqrt(float(self.value['x_v'])) * math.sqrt(float(self.value['y_v'])))
+        self.value['x_s'] = float(self.value['x_s']) + (d_x * (float(value['x']) - float(self.value['x_bar'])))
+        self.value['y_s'] = float(self.value['y_s']) + (d_y * (float(value['y']) - self.value['y_bar']))
+        self.value['cov'] = float(self.value['cov']) + ((float(value['y']) - float(self.value['y_bar'])) * (float(value['x']) - float(self.value['x_bar'])))
+        if int(self.value['n']) >= 2:
+            self.value['x_v'] = float(self.value['x_s']) / (int(self.value['n'] - 1))
+            self.value['y_v'] = float(self.value['y_s']) / (int(self.value['n'] - 1))
+            self.value['c'] = float(self.value['cov']) / (np.sqrt(float(self.value['x_v'])) * np.sqrt(float(self.value['y_v'])))
 
     def __add__(self, other):
         new_value = float(self.value[self.main]) + float(other)
@@ -362,6 +364,7 @@ class List():
 
     def max(self):
         """ Finds the max of the main value of a Base class.
+        If no max is available yet (because the values are empty), it will return a random max.
         """
         max_val = 0
         max_key = ""
@@ -369,6 +372,8 @@ class List():
             if value.get_value() > max_val:
                 max_key = key
                 max_val = value.get_value()
+        if max_key == "":
+            max_key = self.random()
         return max_key
 
     def count(self):
