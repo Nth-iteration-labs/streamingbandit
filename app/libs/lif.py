@@ -83,7 +83,7 @@ class LiF():
 
         return suggestion
 
-    def update(self, t, x, y):
+    def update(self, t, x, y, x0):
         """  Update LiF with outcome y at time t and at value x \
         integrating yω over a time T = 2πN.
 
@@ -92,7 +92,8 @@ class LiF():
         :param float y: outcome variable y.
         :returns: True
         """
-
+        self.theta['x0'] = x0
+        self.theta['t'] = t 
         y = self.A * np.cos(self.omega * t) * y
         row_to_add = np.array([t, x, y])
         self.theta['Yw'] = self._matrixpush(self.theta['Yw'], row_to_add)
