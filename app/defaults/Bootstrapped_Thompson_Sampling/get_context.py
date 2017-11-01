@@ -1,1 +1,1 @@
-self.context["customer"] = random.sample(["new", "returning"],1)[0]
+self.context["customer"] = random.choice(["new", "returning"])

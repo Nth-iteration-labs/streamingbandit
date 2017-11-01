@@ -15,10 +15,10 @@ else:
     customer = 0
 
 # Maximize the function
-if (betas[2,0] + betas[5,0] * customer) == 0:
+if (betas[2] + betas[5] * customer) == 0:
     x = 0
 else:
-    x = - ((betas[1,0] + betas[4,0] * customer) / 2*(betas[2,0] + betas[5,0] * customer))
+    x = - ((betas[1] + betas[4] * customer) / 2*(betas[2] + betas[5] * customer))
     x = np.asscalar(x)
 
 # Return the price
