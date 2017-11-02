@@ -74,5 +74,5 @@ class LM():
         x = np.array(x)
         if self.intercept:
             x = np.insert(x, 0, 1)
-        beta = np.dot(np.linalg.inv(self.value['A']), self.value['b'].T)
-        return np.dot(beta, x)
+        beta = np.linalg.inv(self.value['A']) * self.value['b'].T
+        return beta*x

@@ -104,7 +104,7 @@ class GenerateExperiments(BaseHandler):
             else:
                 exp_obj["advice_id"] = False
             if exp_obj["advice_id"] is True:
-                if 0 <= data["delta_hours"] <= 99999:
+                if 0 <= int(data["delta_hours"]) <= 99999:
                     exp_obj["delta_hours"] = data["delta_hours"]
                 else:
                     raise ExceptionHandler(reason = "Supplied number for delta hours must be between 0 and 99999.", status_code = 400)
@@ -239,7 +239,7 @@ class UpdateExperiment(BaseHandler):
                 else:
                     exp_obj["advice_id"] = False
                 if exp_obj["advice_id"] is True:
-                    if 0 <= data["delta_hours"] <= 99999:
+                    if 0 <= int(data["delta_hours"]) <= 99999:
                         exp_obj["delta_hours"] = data["delta_hours"]
                     else:
                         raise ExceptionHandler(reason = "Supplied number for delta hours must be between 0 and 99999.", status_code = 400)

@@ -1,21 +1,23 @@
 Welcome to StreamingBandit's documentation!
 ===========================================
 
-Although the first version is released, the documentation and the code is 
-still under development.
-For any information contact the authors.
+This is the official documentation for StreamingBandit. You can find the source
+code at `GitHub`_.
 
-Documentation:
+**Contents:**
 
-.. toctree::
+    #. `About StreamingBandit`_
+    #. :doc:`Installation </install>`
+    #. `Contributing to the libraries`_
 
-   Core API <core> 
-   Statistics API <stats>
-   Evaluation API <eval>
-   Admin API <admin>
-   Login API <login>
-   Libs <libs>
-   Experiment <exp>
+
+.. _GitHub: https://github.com/nth-iteration-labs/streamingbandit
+
+
+About StreamingBandit
+=====================
+
+
 
 Contributing to the libraries
 =============================
@@ -32,20 +34,19 @@ following points:
 - Write an agent in the utils folder that uses the class and the default
   example.
 
-Changelog
-=========
-+------------+---------+------------------------------------------------------+
-| Date       | Version | Changelog                                            |
-+============+=========+======================================================+
-| 01-12-2015 | v1      | First version made available.                        |
-+------------+---------+------------------------------------------------------+
-| 21-10-2016 | v2      | Second version made available.                       |
-|            |         | Added classes, such as LiF, BTS, TBL.                |
-+------------+---------+------------------------------------------------------+
-
 Authors
 =======
 
 Maurits Kaptein (``maurits at mauritskaptein dot com``)
 
 Jules Kruijswijk (``juleskruijswijk at gmail dot com``)
+
+Documentation
+=============
+
+.. toctree::
+
+   Installation <install>
+   API <api>
+   Libs <libs>
+   Experiment <exp>

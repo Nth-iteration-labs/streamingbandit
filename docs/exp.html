@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Experiment functions &mdash; StreamingBandit 1 documentation</title>
+  <title>Experiment functions &mdash; StreamingBandit 3 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="StreamingBandit 1 documentation" href="index.html"/>
+    <link rel="top" title="StreamingBandit 3 documentation" href="index.html"/>
         <link rel="prev" title="Documentation of the supplied Libraries" href="libs.html"/> 
 
   
@@ -65,7 +65,7 @@
             
             
               <div class="version">
-                1
+                3
               </div>
             
           
@@ -90,11 +90,8 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="core.html">Core API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stats.html">Statistics API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="eval.html">Evaluation API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="admin.html">Admin API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="login.html">Login API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libs.html">Libs</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Experiment</a></li>
 </ul>
@@ -178,113 +175,6 @@
 </tr>
 </tbody>
 </table>
-<dl class="attribute">
-<dt id="core.experiment.Experiment.__weakref__">
-<code class="descname">__weakref__</code><a class="headerlink" href="#core.experiment.Experiment.__weakref__" title="Permalink to this definition">¶</a></dt>
-<dd><p>list of weak references to the object (if defined)</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="core.experiment.Experiment.get_getaction_log_data">
-<code class="descname">get_getaction_log_data</code><span class="sig-paren">(</span><em>limit</em><span class="sig-paren">)</span><a class="headerlink" href="#core.experiment.Experiment.get_getaction_log_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get all the automatically logged get_action data from the experiment.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>limit</strong> (<em>int</em>) – Limit the amount of logs returned</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Dict of dict of all the get_action logs</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="core.experiment.Experiment.get_hourly_theta">
-<code class="descname">get_hourly_theta</code><span class="sig-paren">(</span><em>limit</em><span class="sig-paren">)</span><a class="headerlink" href="#core.experiment.Experiment.get_hourly_theta" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get all the hourly logged thetas (if flag is set).</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>limit</strong> (<em>int</em>) – Limit the amount of logs returned</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A dict of dict with all the hourly logged thetas (or limited).</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="core.experiment.Experiment.get_log_data">
-<code class="descname">get_log_data</code><span class="sig-paren">(</span><em>limit</em><span class="sig-paren">)</span><a class="headerlink" href="#core.experiment.Experiment.get_log_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get all the logged data from the experiment.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>limit</strong> (<em>int</em>) – Limit the amount of logs returned</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Dict of dict of all the manual logs</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="core.experiment.Experiment.get_setreward_log_data">
-<code class="descname">get_setreward_log_data</code><span class="sig-paren">(</span><em>limit</em><span class="sig-paren">)</span><a class="headerlink" href="#core.experiment.Experiment.get_setreward_log_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get all the automatically logged set_reward data from the experiment.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>limit</strong> (<em>int</em>) – Limit the amount of logs returned</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Dict of dict of all the set_reward logs</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="core.experiment.Experiment.get_simulation_log_data">
-<code class="descname">get_simulation_log_data</code><span class="sig-paren">(</span><em>limit</em><span class="sig-paren">)</span><a class="headerlink" href="#core.experiment.Experiment.get_simulation_log_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get all the logged data for the simulations of this experiment.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List of dict of dicts of the simulations</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="core.experiment.Experiment.get_summary">
-<code class="descname">get_summary</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.experiment.Experiment.get_summary" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Get a summary, consisting of:</dt>
-<dd><ul class="first last simple">
-<li>The number of get_action calls</li>
-<li>The date of the last get_action call</li>
-<li>The number of set_reward calls</li>
-<li>The date of the last set_reward call</li>
-</ul>
-</dd>
-</dl>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A dict of dict with the complete summary.</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 <dl class="method">
 <dt id="core.experiment.Experiment.get_theta">
 <code class="descname">get_theta</code><span class="sig-paren">(</span><em>key=None</em>, <em>value=None</em>, <em>name='_theta'</em>, <em>all_float=False</em><span class="sig-paren">)</span><a class="headerlink" href="#core.experiment.Experiment.get_theta" title="Permalink to this definition">¶</a></dt>
@@ -303,84 +193,6 @@
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A dictionary with the parameter set.</p>
 </td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="core.experiment.Experiment.is_valid">
-<code class="descname">is_valid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#core.experiment.Experiment.is_valid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks wheter the exp_id and key match for the current experiment.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if a valid key is provided, False otherwise.</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="core.experiment.Experiment.log_data">
-<code class="descname">log_data</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#core.experiment.Experiment.log_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Manual logging that is used in the get_action and set_reward codes.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>dict</em>) – The value that needs to be logged. Since MongoDB is                 used, a dictionary is needed.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">True if executed correctly.</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="core.experiment.Experiment.log_getaction_data">
-<code class="descname">log_getaction_data</code><span class="sig-paren">(</span><em>context</em>, <em>action</em><span class="sig-paren">)</span><a class="headerlink" href="#core.experiment.Experiment.log_getaction_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Logging for all the get_action calls.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>dict</em>) – Dict that contains action, and context</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">True if executed correctly</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="core.experiment.Experiment.log_setreward_data">
-<code class="descname">log_setreward_data</code><span class="sig-paren">(</span><em>context</em>, <em>action</em>, <em>reward</em><span class="sig-paren">)</span><a class="headerlink" href="#core.experiment.Experiment.log_setreward_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Logging for all the set_reward calls.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>dict</em>) – Dict that contains action, context and reward</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">True if executed correctly</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="core.experiment.Experiment.log_simulation_data">
-<code class="descname">log_simulation_data</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#core.experiment.Experiment.log_simulation_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Log one simulation loop.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>dict</em>) – Dict of dicts with all interactions</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">True if executed correctly</td>
 </tr>
 </tbody>
 </table>
@@ -533,7 +345,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1',
+            VERSION:'3',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
