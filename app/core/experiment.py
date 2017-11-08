@@ -16,6 +16,8 @@ import numpy as np
 import random
 import scipy as sp
 
+import builtins
+
 global numpy
 global random
 
@@ -35,14 +37,17 @@ class Experiment():
         self.properties = self.db.get_one_experiment(self.exp_id)
         self.key = key
         self.valid = False     # should be taken from Redis
-        self.safe_builtins = {'print' : print, 'base' : base, 'numpy' : np, \
+        self.safe_builtins = builtins.__dict__.copy()
+        del self.safe_builtins["compile"], \
+            self.safe_builtins["exec"], \
+            self.safe_builtins["eval"], \
+            self.safe_builtins["__import__"]
+        self.safe_builtins.update({'base' : base, 'numpy' : np, \
                               'np' : np, 'scipy' : sp, 'sp' : sp, 'bts': bts, \
                               'lm' : lm, 'lif': lif, 'thompson' : thompson, \
                               'thmp' : thompson, 'tbl' : thompson_bayesian_linear, \
-                              'random' : random, 'self' : self, 'int' : int, \
-                              'float' : float, 'str' : str, 'len' : len, \
-                              'range' : range, 'Experiment' : Experiment, 'repr' : repr, \
-                              'pow' : pow}
+                              'random' : random, 'self' : self, \
+                              'Experiment' : Experiment})
     
     def is_valid(self):
         """Checks wheter the exp_id and key match for the current experiment.
