@@ -1,5 +1,5 @@
-Full API
-========
+Complete RESTful API
+====================
 
 Core API
 --------

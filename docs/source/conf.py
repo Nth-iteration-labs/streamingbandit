@@ -41,7 +41,8 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinxcontrib.httpdomain',
     'sphinxcontrib.autohttp.tornado',
-    'sphinxcontrib.fulltoc'
+    'sphinxcontrib.fulltoc',
+    'sphinx.ext.mathjax'
 ]
 
 # Add any paths that contain templates here, relative to this directory.

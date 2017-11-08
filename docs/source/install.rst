@@ -60,7 +60,7 @@ To install Redis on Mac, we can use brew::
 
 Linux
 """""
-To install Redis on Linux and have it running as a daemon from start-up, check out this tutorial on `DigitalOcean`_.
+To install Redis on Linux and have it running as a daemon from start-up, check out `this <https://www.digitalocean.com/community/tutorials/how-to-install-and-use-redis>`_ tutorial.
 
 MongoDB
 ^^^^^^^
@@ -86,6 +86,7 @@ Running StreamingBandit
 -----------------------
 
 If everything is correctly configured:
+
 * Start Redis
 * Start MongoDB
 
@@ -101,10 +102,9 @@ Using StreamingBandit front-end
 
 To use StreamingBandit more intuitively, you can use our front-end (`StreamingBandit-ui`_) as well. 
 
-Just follow these steps.
+Just follow these steps after you have installed the back-end.
 
-1. Download and unzip the StreamingBanditUI package [here](https://github.com/Nth-iteration-labs/streamingbandit-ui/releases/download/v1.0/StreamingBanditUI.zip), if you haven't already. 
-The StreamingBanditUI package will extract into a folder called StreamingBanditUI in the same directory that you downloaded StreamingBanditUI.zip
+1. Download and unzip the StreamingBanditUI package `here <https://github.com/Nth-iteration-labs/streamingbandit-ui/releases/download/v1.0/StreamingBanditUI.zip>`_, if you haven't already. The StreamingBanditUI package will extract into a folder called StreamingBanditUI in the same directory that you downloaded StreamingBanditUI.zip
 2. Upload the all of the files contained in the StreamingBanditUI folder to the desired location on your web server and visit index.html.
 
 OR
@@ -118,6 +118,5 @@ That's it! You should now be able to access your StreamingBandit server, and sta
 .. _Docker: http://docs.docker.io/
 .. _Dockerhub: https://hub.docker.com/
 .. _Git: https://git-scm.com/
-.. _DigitalOcean: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-redis
 .. _MongoDB: https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
 .. _StreamingBandit-ui: https://github.com/nth-iteration-labs/streamingbandit-ui

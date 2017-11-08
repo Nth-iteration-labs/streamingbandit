@@ -36,7 +36,7 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="StreamingBandit 3 documentation" href="index.html"/>
-        <link rel="next" title="Full API" href="api.html"/>
+        <link rel="next" title="Complete RESTful API" href="api.html"/>
         <link rel="prev" title="Welcome to StreamingBandit’s documentation!" href="index.html"/> 
 
   
@@ -91,6 +91,7 @@
             
             
               <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#install-in-docker">Install in Docker</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#install-and-running-from-source">Install and running from Source</a><ul>
@@ -239,7 +240,7 @@ $ docker-compose -f docker-compose.yml -f docker-compose.front-end.yml start
 </div>
 <div class="section" id="linux">
 <h5>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h5>
-<p>To install Redis on Linux and have it running as a daemon from start-up, check out this tutorial on <a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-install-and-use-redis">DigitalOcean</a>.</p>
+<p>To install Redis on Linux and have it running as a daemon from start-up, check out <a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-install-and-use-redis">this</a> tutorial.</p>
 </div>
 </div>
 <div class="section" id="mongodb">
@@ -264,9 +265,11 @@ $ docker-compose -f docker-compose.yml -f docker-compose.front-end.yml start
 </div>
 <div class="section" id="running-streamingbandit">
 <h3>Running StreamingBandit<a class="headerlink" href="#running-streamingbandit" title="Permalink to this headline">¶</a></h3>
-<p>If everything is correctly configured:
-* Start Redis
-* Start MongoDB</p>
+<p>If everything is correctly configured:</p>
+<ul class="simple">
+<li>Start Redis</li>
+<li>Start MongoDB</li>
+</ul>
 <p>Then you can start the StreamingBandit back-end by issuing the following commands:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>$ cd streamingbandit/app
 $ python3 app.py
@@ -277,10 +280,11 @@ $ python3 app.py
 <div class="section" id="using-streamingbandit-front-end">
 <h3>Using StreamingBandit front-end<a class="headerlink" href="#using-streamingbandit-front-end" title="Permalink to this headline">¶</a></h3>
 <p>To use StreamingBandit more intuitively, you can use our front-end (<a class="reference external" href="https://github.com/nth-iteration-labs/streamingbandit-ui">StreamingBandit-ui</a>) as well.</p>
-<p>Just follow these steps.</p>
-<p>1. Download and unzip the StreamingBanditUI package [here](<a class="reference external" href="https://github.com/Nth-iteration-labs/streamingbandit-ui/releases/download/v1.0/StreamingBanditUI.zip">https://github.com/Nth-iteration-labs/streamingbandit-ui/releases/download/v1.0/StreamingBanditUI.zip</a>), if you haven’t already.
-The StreamingBanditUI package will extract into a folder called StreamingBanditUI in the same directory that you downloaded StreamingBanditUI.zip
-2. Upload the all of the files contained in the StreamingBanditUI folder to the desired location on your web server and visit index.html.</p>
+<p>Just follow these steps after you have installed the back-end.</p>
+<ol class="arabic simple">
+<li>Download and unzip the StreamingBanditUI package <a class="reference external" href="https://github.com/Nth-iteration-labs/streamingbandit-ui/releases/download/v1.0/StreamingBanditUI.zip">here</a>, if you haven’t already. The StreamingBanditUI package will extract into a folder called StreamingBanditUI in the same directory that you downloaded StreamingBanditUI.zip</li>
+<li>Upload the all of the files contained in the StreamingBanditUI folder to the desired location on your web server and visit index.html.</li>
+</ol>
 <p>OR</p>
 <ol class="arabic simple" start="2">
 <li>Run StreamingBanditUI by clicking on index.html in the StreamingBanditUI directory. This works in most, but not all browsers. Recent versions of Firefox, Microsoft Edge and Google Chrome should work fine.</li>
@@ -301,7 +305,7 @@ The StreamingBanditUI package will extract into a folder called StreamingBanditU
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="api.html" class="btn btn-neutral float-right" title="Full API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="api.html" class="btn btn-neutral float-right" title="Complete RESTful API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="index.html" class="btn btn-neutral" title="Welcome to StreamingBandit’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -345,6 +349,7 @@ The StreamingBanditUI package will extract into a folder called StreamingBanditU
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
