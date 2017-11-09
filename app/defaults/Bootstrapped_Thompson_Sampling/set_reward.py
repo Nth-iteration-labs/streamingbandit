@@ -10,7 +10,7 @@ price = self.action["price"]
 X = [1, price, price**2, customer, customer*price, customer*price**2]
 y = self.reward["revenue"]
 
-# Instantiate the m=100 lm.models
+# Instantiate the m=100 lm models
 BTS = bts.BTS(self.get_theta(), lm.LM, m = 100, default_params = \
        {'b': np.zeros(6).tolist(), 'A' : np.identity(6).tolist(), 'n' : 0})
 

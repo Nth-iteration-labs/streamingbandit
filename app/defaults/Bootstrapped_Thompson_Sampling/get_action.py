@@ -15,11 +15,13 @@ else:
     customer = 0
 
 # Maximize the function
-if (betas[2] + betas[5] * customer) == 0:
-    x = 0
-else:
-    x = - ((betas[1] + betas[4] * customer) / 2*(betas[2] + betas[5] * customer))
+if betas[2] != 0 or betas[5] != 0:
+    x = ( (-(betas[1] + betas[4] * customer)) / (2*(betas[2] + betas[5] * customer)) )
     x = np.asscalar(x)
+    if x < 5 or x > 20:
+        x = np.random.uniform(5,20)
+else:
+    x = np.random.uniform(5,20)
 
 # Return the price
 self.action["price"] = x

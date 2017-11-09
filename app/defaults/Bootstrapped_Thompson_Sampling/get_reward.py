@@ -10,7 +10,7 @@ price = self.action["price"]
 logistic = lambda x: 1 / (1 + numpy.exp(-x))
 
 # Compute purchase yes / no
-buy = numpy.random.binomial(1, logistic(0.1 * ((price + (customer * 4))-10)**2))
+buy = numpy.random.binomial(1, logistic(-0.1 * (price - (10+4*customer))**2))
 
 # Compute the reward
 self.reward["revenue"] = buy * price
