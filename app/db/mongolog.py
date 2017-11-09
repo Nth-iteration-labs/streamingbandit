@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 from pymongo import MongoClient, ASCENDING, DESCENDING
 from datetime import datetime
+import gridfs
+import ast
+import json
 
 import builtins
 
@@ -47,8 +50,8 @@ class MongoLog:
         :returns True: If executed correctly.
         """
         self.sim_db = self.mongo_client['simulations']
-        self.sim_logs = self.sim_db[str(exp_id)]
-        self.sim_logs.insert_one(sim_data)
+        self.fs = gridfs.GridFS(self.sim_db)
+        self.fs.put(json.dumps(sim_data).encode("UTF-8"), filename = str(exp_id))
         return True
 
     def get_simulation_log(self, exp_id, limit):
@@ -58,10 +61,10 @@ class MongoLog:
         :returns list of dicts logs: All the simulation runs for that experiment.
         """
         self.sim_db = self.mongo_client['simulations']
-        self.sim_logs = self.sim_db[str(exp_id)]
+        self.fs = gridfs.GridFS(self.sim_db)
         self.sim_log_rows = []
-        for row in self.sim_logs.find({}, {'_id': False}).sort('_id', DESCENDING).limit(limit):
-            self.sim_log_rows.append(row)
+        for row in self.fs.find({"filename" : str(exp_id)}).sort("uploadDate", -1).limit(limit):
+            self.sim_log_rows.append(json.loads(row.read().decode("UTF-8")))
         return self.sim_log_rows
         
     def log_hourly_theta(self, value):
