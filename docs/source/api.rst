@@ -5,7 +5,7 @@ Here we describe the details of the REST API endpoints that are provided by Stre
 
 Core API
 --------
-The core API contains the **getaction** and **setreward** calls (or, alternatively the decision and summary step of a bandit policy)
+The core API contains the **getaction** and **setreward** calls (or, alternatively the decision and summary step of a bandit policy).
 
 .. autotornado:: app:application
    :endpoints: ActionHandler.get, RewardHandler.get

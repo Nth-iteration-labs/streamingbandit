@@ -95,12 +95,12 @@
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Libs</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#module-libs.base">Base classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-libs.thompson">Thompson sampling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-libs.lm">Linear Regression</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-libs.bts">Bootstrapped Thompson Sampling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-libs.lif">Lock-in Feedback</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-libs.thompson_bayesian_linear">Thompson Bayesian Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#base-classes">Base classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#linear-regression">Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#thompson-sampling">Thompson sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bootstrapped-thompson-sampling">Bootstrapped Thompson Sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lock-in-feedback">Lock-in Feedback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#thompson-bayesian-linear-regression">Thompson Bayesian Linear Regression</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="exp.html">Experiment</a></li>
@@ -169,9 +169,38 @@
             
   <div class="section" id="documentation-of-the-supplied-libraries">
 <h1>Documentation of the supplied Libraries<a class="headerlink" href="#documentation-of-the-supplied-libraries" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="module-libs.base">
-<span id="base-classes"></span><h2>Base classes<a class="headerlink" href="#module-libs.base" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<p>StreamingBandit is build on a philosophy of streaming (or online, or row-by-row) updating of parameters of a policy. The <strong>libs</strong> libraries provide some functionality for estimating and fitting statistical models online. These libraries are available directly in the <strong>getaction</strong> and <strong>setreward</strong> code.</p>
+<p>The following code provides an example of the use of one of the <strong>libs</strong> in the <strong>getaction</strong> code of an experiment:</p>
+<div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">mean_list</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">List</span><span class="p">(</span>
+              <span class="bp">self</span><span class="o">.</span><span class="n">get_theta</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;treatment&quot;</span><span class="p">),</span>
+              <span class="n">base</span><span class="o">.</span><span class="n">Mean</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;control&quot;</span><span class="p">,</span> <span class="s2">&quot;treatment&quot;</span><span class="p">]</span>
+              <span class="p">)</span>
+ <span class="bp">self</span><span class="o">.</span><span class="n">action</span><span class="p">[</span><span class="s2">&quot;treatment&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">meanList</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<p>which would retrieve a list of sample means by name (<strong>treatment</strong> and <strong>control</strong>), and subsequently select the name with the highest mean.</p>
+<p>Note that each of the <strong>libs</strong> provides update methods to update the object when new data is observed. For example, the code:</p>
+<div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">mean</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">Mean</span><span class="p">(</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">get_theta</span><span class="p">(</span>
+      <span class="n">key</span><span class="o">=</span><span class="s2">&quot;treatment&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">action</span><span class="p">[</span><span class="s2">&quot;treatment&quot;</span><span class="p">])</span>
+      <span class="p">)</span>
+ <span class="n">mean</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reward</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+</pre></div>
+</td></tr></table></div>
+<p>can be used in the <strong>setreward</strong> code to retrieve the mean specified in the <strong>treatment</strong> variable, and subsequently update it using the <strong>value</strong>.</p>
+<p>Below we detail the current <strong>libs</strong> and each of their methods.</p>
+<div class="section" id="base-classes">
+<h2>Base classes<a class="headerlink" href="#base-classes" title="Permalink to this headline">¶</a></h2>
+<p>The base classes provide the functionality to create, store, and update (lists of) counts, means, variances, proportions, and co-variances in data streams.</p>
+<span class="target" id="module-libs.base"></span><dl class="class">
 <dt id="libs.base.Correlation">
 <em class="property">class </em><code class="descclassname">libs.base.</code><code class="descname">Correlation</code><span class="sig-paren">(</span><em>default</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Correlation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to represent a correlation using an online estimator.</p>
@@ -395,87 +424,10 @@ If no max is available yet (because the values are empty), it will return a rand
 </dd></dl>
 
 </div>
-<div class="section" id="module-libs.thompson">
-<span id="thompson-sampling"></span><h2>Thompson sampling<a class="headerlink" href="#module-libs.thompson" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="libs.thompson.BBThompsonList">
-<em class="property">class </em><code class="descclassname">libs.thompson.</code><code class="descname">BBThompsonList</code><span class="sig-paren">(</span><em>objects</em>, <em>value_names</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.thompson.BBThompsonList" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class to draw decisions using a Bernoulli Bandit Thompson sampler.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
-<li><strong>objects</strong> (<em>dict</em>) – A dict of dict of thetas (which should be     proportions, see documentation of Proportions on how it should look like.)</li>
-<li><strong>value_names</strong> (<em>list</em>) – A list with the possible value names for the     actions</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="method">
-<dt id="libs.thompson.BBThompsonList.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>objects</em>, <em>value_names</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.thompson.BBThompsonList.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create an instance of a BB Thompson Sampler.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="libs.thompson.BBThompsonList.propensity">
-<code class="descname">propensity</code><span class="sig-paren">(</span><em>value</em>, <em>n=1000</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.thompson.BBThompsonList.propensity" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate propensity of given arm using n draws.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name" colspan="2">Returns int propensity:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body">The propensity of the arm.</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="libs.thompson.BBThompsonList.thompson">
-<code class="descname">thompson</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libs.thompson.BBThompsonList.thompson" title="Permalink to this definition">¶</a></dt>
-<dd><p>Draw decision using the Bernoulli Bandit Thompson sampler.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name" colspan="2">Returns string choice:</th></tr>
-<tr class="field-odd field"><td>&#160;</td><td class="field-body">The choice of action that’s made.</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="libs.thompson.ThompsonVarList">
-<em class="property">class </em><code class="descclassname">libs.thompson.</code><code class="descname">ThompsonVarList</code><span class="sig-paren">(</span><em>objects</em>, <em>value_names</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.thompson.ThompsonVarList" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class to allocate observations in 2 group a within subjects desing
-such as to maximize the precision of the estimated effect size 
-(assuming unequal variance of the two groups)</p>
-<dl class="method">
-<dt id="libs.thompson.ThompsonVarList.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>objects</em>, <em>value_names</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.thompson.ThompsonVarList.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create instance of a Thompson Variance Sampler
-by creating a variance list</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="libs.thompson.ThompsonVarList.experimentThompson">
-<code class="descname">experimentThompson</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libs.thompson.ThompsonVarList.experimentThompson" title="Permalink to this definition">¶</a></dt>
-<dd><p>Obtain draw and allocate to minimize estimation precision</p>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="module-libs.lm">
-<span id="linear-regression"></span><h2>Linear Regression<a class="headerlink" href="#module-libs.lm" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<div class="section" id="linear-regression">
+<h2>Linear Regression<a class="headerlink" href="#linear-regression" title="Permalink to this headline">¶</a></h2>
+<p>The linear regression library allows online fitting of a linear regression model using OLS.</p>
+<span class="target" id="module-libs.lm"></span><dl class="class">
 <dt id="libs.lm.LM">
 <em class="property">class </em><code class="descclassname">libs.lm.</code><code class="descname">LM</code><span class="sig-paren">(</span><em>default</em>, <em>p=None</em>, <em>add_intercept=False</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.lm.LM" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to interpet a linear model.</p>
@@ -555,9 +507,89 @@ by creating a variance list</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-libs.bts">
-<span id="bootstrapped-thompson-sampling"></span><h2>Bootstrapped Thompson Sampling<a class="headerlink" href="#module-libs.bts" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="thompson-sampling">
+<h2>Thompson sampling<a class="headerlink" href="#thompson-sampling" title="Permalink to this headline">¶</a></h2>
+<p>This library implements Thompson sampling for the k-armed Bernoulli bandit as well as Thompson sampling for optimal design of experiments (Thompson sampling based on the posterior variance of the observed outcome). See also <a class="reference external" href="https://link.springer.com/article/10.3758/s13428-014-0480-0">this paper</a>.</p>
+<span class="target" id="module-libs.thompson"></span><dl class="class">
+<dt id="libs.thompson.BBThompsonList">
+<em class="property">class </em><code class="descclassname">libs.thompson.</code><code class="descname">BBThompsonList</code><span class="sig-paren">(</span><em>objects</em>, <em>value_names</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.thompson.BBThompsonList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to draw decisions using a Bernoulli Bandit Thompson sampler.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>objects</strong> (<em>dict</em>) – A dict of dict of thetas (which should be     proportions, see documentation of Proportions on how it should look like.)</li>
+<li><strong>value_names</strong> (<em>list</em>) – A list with the possible value names for the     actions</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="libs.thompson.BBThompsonList.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>objects</em>, <em>value_names</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.thompson.BBThompsonList.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an instance of a BB Thompson Sampler.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.thompson.BBThompsonList.propensity">
+<code class="descname">propensity</code><span class="sig-paren">(</span><em>value</em>, <em>n=1000</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.thompson.BBThompsonList.propensity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate propensity of given arm using n draws.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Returns int propensity:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">The propensity of the arm.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.thompson.BBThompsonList.thompson">
+<code class="descname">thompson</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libs.thompson.BBThompsonList.thompson" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw decision using the Bernoulli Bandit Thompson sampler.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Returns string choice:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">The choice of action that’s made.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="class">
+<dt id="libs.thompson.ThompsonVarList">
+<em class="property">class </em><code class="descclassname">libs.thompson.</code><code class="descname">ThompsonVarList</code><span class="sig-paren">(</span><em>objects</em>, <em>value_names</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.thompson.ThompsonVarList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to allocate observations in 2 group a within subjects desing
+such as to maximize the precision of the estimated effect size 
+(assuming unequal variance of the two groups)</p>
+<dl class="method">
+<dt id="libs.thompson.ThompsonVarList.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>objects</em>, <em>value_names</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.thompson.ThompsonVarList.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create instance of a Thompson Variance Sampler
+by creating a variance list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.thompson.ThompsonVarList.experimentThompson">
+<code class="descname">experimentThompson</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libs.thompson.ThompsonVarList.experimentThompson" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtain draw and allocate to minimize estimation precision</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="bootstrapped-thompson-sampling">
+<h2>Bootstrapped Thompson Sampling<a class="headerlink" href="#bootstrapped-thompson-sampling" title="Permalink to this headline">¶</a></h2>
+<p>This library provides the functionality to perform on online bootstrap of any streaming estimate obtained by the <strong>libs</strong> and subsequently implements Bootstrap Thompson Sampling (BTS, <a class="reference external" href="https://arxiv.org/abs/1410.4009">see this paper</a> for details).</p>
+<span class="target" id="module-libs.bts"></span><dl class="class">
 <dt id="libs.bts.BTS">
 <em class="property">class </em><code class="descclassname">libs.bts.</code><code class="descname">BTS</code><span class="sig-paren">(</span><em>params</em>, <em>update_method=None</em>, <em>m=100</em>, <em>default_params=None</em>, <em>param_noise=True</em>, <em>noisesd=0.1</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.bts.BTS" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to implement BTS.</p>
@@ -616,9 +648,10 @@ by creating a variance list</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-libs.lif">
-<span id="lock-in-feedback"></span><h2>Lock-in Feedback<a class="headerlink" href="#module-libs.lif" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<div class="section" id="lock-in-feedback">
+<h2>Lock-in Feedback<a class="headerlink" href="#lock-in-feedback" title="Permalink to this headline">¶</a></h2>
+<p>This library provides a (1D) implementation of Lock-in Feedback. See <a class="reference external" href="https://arxiv.org/abs/1502.00598">this paper</a> for details.</p>
+<span class="target" id="module-libs.lif"></span><dl class="class">
 <dt id="libs.lif.LiF">
 <em class="property">class </em><code class="descclassname">libs.lif.</code><code class="descname">LiF</code><span class="sig-paren">(</span><em>theta</em>, <em>x0=1.0</em>, <em>a=1.4</em>, <em>t=100</em>, <em>gamma=0.004</em>, <em>omega=0.8</em>, <em>lifversion=2</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.lif.LiF" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class implementing the Lock in Feedback algorithm.
@@ -705,9 +738,10 @@ Implementation of Lock in Feedback,     following the definition by Maurits Kapt
 </dd></dl>
 
 </div>
-<div class="section" id="module-libs.thompson_bayesian_linear">
-<span id="thompson-bayesian-linear-regression"></span><h2>Thompson Bayesian Linear Regression<a class="headerlink" href="#module-libs.thompson_bayesian_linear" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<div class="section" id="thompson-bayesian-linear-regression">
+<h2>Thompson Bayesian Linear Regression<a class="headerlink" href="#thompson-bayesian-linear-regression" title="Permalink to this headline">¶</a></h2>
+<p>This library implements (online) Bayesian linear regression and Thompson sampling based on the posterior Beta’s.</p>
+<span class="target" id="module-libs.thompson_bayesian_linear"></span><dl class="class">
 <dt id="libs.thompson_bayesian_linear.ThompsonBayesianLinear">
 <em class="property">class </em><code class="descclassname">libs.thompson_bayesian_linear.</code><code class="descname">ThompsonBayesianLinear</code><span class="sig-paren">(</span><em>default</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.thompson_bayesian_linear.ThompsonBayesianLinear" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class for Thompson sampling for Bayesian Linear Regression</p>

@@ -9,7 +9,7 @@ code at `GitHub`_.
 About StreamingBandit
 =====================
 
-StreamingBandit is a RESTful API web application for developing and testing sequential experiments in field and simulation studies. This is done by formalizing a sequential experiment as a `(contextual) multi-armed bandit problem <https://en.wikipedia.org/wiki/Multi-armed_bandit>`_. Each sequential experiment can be defined as follows. At each interation :math:`t`:
+StreamingBandit is a RESTful API web application for developing and testing sequential experiments in field and simulation studies. This is done by formalizing a sequential experiment as a `(contextual) multi-armed bandit problem <https://en.wikipedia.org/wiki/Multi-armed_bandit>`_. Each sequential experiment can be defined as follows. At each interaction :math:`t`:
     
     1. the experimenter observes a *context* :math:`x_t`,
     2. subsequently, the experimenter chooses an *action* :math:`a_t`,
@@ -22,7 +22,7 @@ The following are some examples of when StreamingBandit is a useful tool:
 * Personalized healthcare: A physician meets with patients sequentially. For each patient she observes a number of background characteristics (gender, age, current condition) constituting the context. Subsequently, her action is to choose a treatment such that the reward—measured in terms of general health of the patient—is maximized.
 * Online advertising: In online advertising a firm selecting an ad observes the context consisting of a description of the current user visiting a specific webpage. The action is to choose an advertisement out of a set of possible advertisements (possibly dependent on the context itself), and the rewards constitute the clicks on the ad.
 * Product recommendation systems: The context denotes all that is known about the user at a certain point in time. The action is choosing one out of a set of products, and the reward consists of the revenue generated at each interaction.
-* Social science experiments: Many social science experiments constitute a special case of contextual decision making: during the experiment participants are recruited sequen- tially. The context consists of all that’s known about the participant, and sequently the action is to assign a participant to a specific experimental condition (possibly dependent on the context in cases of, e.g., stratified sampling). Finally, the reward(s) consist of the outcome measures of the experiments.
+* Social science experiments: Many social science experiments constitute a special case of contextual decision making: during the experiment participants are recruited sequentially. The context consists of all that’s known about the participant, and sequently the action is to assign a participant to a specific experimental condition (possibly dependent on the context in cases of, e.g., stratified sampling). Finally, the reward(s) consist of the outcome measures of the experiments.
 
 The list above illustrates the generality of our approach; StreamingBandit can be used to allocate actions in all of the above applications.
 

@@ -158,9 +158,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-core.experiment">
-<span id="experiment-functions"></span><h1>Experiment functions<a class="headerlink" href="#module-core.experiment" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
+  <div class="section" id="experiment-functions">
+<h1>Experiment functions<a class="headerlink" href="#experiment-functions" title="Permalink to this headline">¶</a></h1>
+<p>Here we describe the <strong>Experiment</strong> class. This class, and its associated methods, allow accessing and storing policy parameters, logging data, and nesting experiments.</p>
+<p>Note that the <strong>Experiment</strong> class is used in two ways in StreamingBandit:</p>
+<ol class="arabic simple">
+<li>The <strong>getaction</strong> and <strong>setreward</strong> code of an experiment are both executed within the scope of the <strong>Experiment</strong> class. Hence, here you can use <strong>self.METHOD</strong> to use the methods described below.</li>
+<li>Within an experiment, you can instantiate a new experiment by referring to its experiment <strong>id</strong> (thus by using <strong>exp_nested = Experiment(exp_id = id1))</strong>). You can subsequently execute the <strong>getaction</strong> and <strong>setreward</strong> code of this experiment. This functionality allows nesting of multiple experiments.</li>
+</ol>
+<span class="target" id="module-core.experiment"></span><dl class="class">
 <dt id="core.experiment.Experiment">
 <em class="property">class </em><code class="descclassname">core.experiment.</code><code class="descname">Experiment</code><span class="sig-paren">(</span><em>exp_id</em>, <em>key='notUsedForLoopBack'</em><span class="sig-paren">)</span><a class="headerlink" href="#core.experiment.Experiment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class that organizes experiments.</p>
@@ -194,6 +200,22 @@
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A dictionary with the parameter set.</p>
 </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.experiment.Experiment.log_data">
+<code class="descname">log_data</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#core.experiment.Experiment.log_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Manual logging that is used in the get_action and set_reward codes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>dict</em>) – The value that needs to be logged. Since MongoDB is                 used, a dictionary is needed.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">True if executed correctly.</td>
 </tr>
 </tbody>
 </table>

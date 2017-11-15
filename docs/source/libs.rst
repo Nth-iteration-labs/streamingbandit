@@ -3,26 +3,30 @@ Documentation of the supplied Libraries
 StreamingBandit is build on a philosophy of streaming (or online, or row-by-row) updating of parameters of a policy. The **libs** libraries provide some functionality for estimating and fitting statistical models online. These libraries are available directly in the **getaction** and **setreward** code.
 
 The following code provides an example of the use of one of the **libs** in the **getaction** code of an experiment:
-.. highlight:: python
-   :linenothreshold: 1
-mean_list = base.List(
-             self.get_theta(key="treatment"), 
-             base.Mean, ["control", "treatment"]
-             )
-self.action["treatment"] = meanList.max()
-.. highlight:: 
+
+.. code-block:: python3
+   :linenos:
+
+    mean_list = base.List(
+                 self.get_theta(key="treatment"), 
+                 base.Mean, ["control", "treatment"]
+                 )
+    self.action["treatment"] = meanList.max()
+
 which would retrieve a list of sample means by name (**treatment** and **control**), and subsequently select the name with the highest mean. 
 
 Note that each of the **libs** provides update methods to update the object when new data is observed. For example, the code:
-.. highlight:: python
-   :linenothreshold: 1
-mean = base.Mean(
-     self.get_theta(
-     key="treatment", value=self.action["treatment"])
-     )
-mean.update(self.reward["value"])
-.. highlight:: 
-can be used in the **setreward** code to retrieve the mean specified in the **treatment** variable, and subsequently update it using the **value**
+
+.. code-block:: python3
+   :linenos:
+
+    mean = base.Mean(
+         self.get_theta(
+         key="treatment", value=self.action["treatment"])
+         )
+    mean.update(self.reward["value"])
+
+can be used in the **setreward** code to retrieve the mean specified in the **treatment** variable, and subsequently update it using the **value**.
 
 Below we detail the current **libs** and each of their methods.
 
