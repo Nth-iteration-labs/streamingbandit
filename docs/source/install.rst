@@ -2,7 +2,7 @@
 Installation
 ************
 
-We offer two ways of using StreamingBandit. If you want the smoothest and easiest experience, we recommend to look at `Install in Docker`_.
+There are multiple ways in which you can get StreamingBandit up and running.. If you want the smoothest and easiest experience, we recommend to look at `Install in Docker`_.
 
 Install in Docker
 =================
