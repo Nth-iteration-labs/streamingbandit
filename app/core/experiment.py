@@ -1,75 +1,138 @@
 # -*- coding: utf-8 -*-
 from db.database import Database
 from db.mongolog import MongoLog 
+from db.advice import Advice
 from math import sqrt; from itertools import count, islice
 import logging
+
+import libs.base as base
+import libs.lm as lm
+import libs.lif as lif
+import libs.thompson as thompson
+import libs.thompson_bayesian_linear as thompson_bayesian_linear
+import libs.bts as bts
+
+import numpy as np
+import random
+import scipy as sp
+
+import builtins
+
+global numpy
+global random
 
 class Experiment():
     """ Class that organizes experiments.
     
     :var int exp_id: The exp_id that is tied to the experiment and the \
     database.
+    :var string key: The key that is tied to the experiment, to validate \
+    the user.
     """
     def __init__(self, exp_id, key = "notUsedForLoopBack"):
         self.db = Database()
         self.mongo_db = MongoLog()
+        self.advice_db = Advice()
         self.exp_id = exp_id   # sets the experimentID
         self.properties = self.db.get_one_experiment(self.exp_id)
         self.key = key
         self.valid = False     # should be taken from Redis
+        self.safe_builtins = builtins.__dict__.copy()
+        del self.safe_builtins["compile"], \
+            self.safe_builtins["exec"], \
+            self.safe_builtins["eval"], \
+            self.safe_builtins["__import__"]
+        self.safe_builtins.update({'base' : base, 'numpy' : np, \
+                              'np' : np, 'scipy' : sp, 'sp' : sp, 'bts': bts, \
+                              'lm' : lm, 'lif': lif, 'thompson' : thompson, \
+                              'thmp' : thompson, 'tbl' : thompson_bayesian_linear, \
+                              'random' : random, 'self' : self, \
+                              'Experiment' : Experiment})
     
     def is_valid(self):
         """Checks wheter the exp_id and key match for the current experiment.
         
-        :returns: A boolean: true if a valid key is provided, false otherwise.
+        :returns: True if a valid key is provided, False otherwise.
         """
         key = self.db.experiment_properties("exp:%s:properties" % (self.exp_id), "key")
         if key == self.key:
             self.valid = True
         return self.valid
-    
-    def run_action_code(self, context, action={}):    
-        """ Takes getAction code from Redis and executes it
+
+    def run_context_code(self, context = {}):
+        """ Takes get_context code from Redis and executes it.
+        
+        :param dict context: Context is pre-created such that the exec(code) \
+        function can return an context dict for this function (this is because \
+        of the behavior of Python).
+        :returns: A dict of context of which the content is \
+        determined by the get_context code.
+        """
+        self.context = context
+        code = self.db.experiment_properties("exp:%s:properties" % (self.exp_id), "get_context")
+        byte_code = compile(code, filename='<inline code>', mode='exec')
+        exec(byte_code, {'__builtins__' : self.safe_builtins})
+        return self.context.copy()
+
+    def run_action_code(self, context, action = {}):    
+        """ Takes get_action code from Redis and executes it.
         
         :param dict context: Context is a dictionary with the context for the \
         getAction algorithm
         :param dict action: Action is pre-created such that the exec(code) \
-        function can return an action dict for this function (This is because \
-        of the behavior of Python.).
+        function can return an action dict for this function (this is because \
+        of the behavior of Python).
 
         :returns: A dict of action of which the content is \
-        determined by the getAction code.
+        determined by the get_action code.
         """
         self.action = action
         self.context = context
-        code = self.db.experiment_properties("exp:%s:properties" % (self.exp_id), "getAction")
-        #logging.debug(code)
-        exec(code)
-        return self.action
-        
-    def run_reward_code(self, context, action, reward):
-        """ Takes setReward code from Redis and executes it
+        code = self.db.experiment_properties("exp:%s:properties" % (self.exp_id), "get_action")
+        byte_code = compile(code, filename='<inline code>', mode='exec')
+        exec(byte_code, {'__builtins__' : self.safe_builtins})
+        return self.action.copy()
+
+    def run_get_reward_code(self, context, action, reward = {}):
+        """ Takes get_reward code from Redis and executes it.
 
         :param dict context: The context that may be needed for the algorithm.
-        :param string action: The action that is needed for the algorith. Is \
+        :param string action: The action that is needed for the algorithm. Is \
+        actually free of type, but generally a string is used. \
+        but must be specified by used algorithm.
+        :param dict reward: Reward is pre-created such that the exec(code) \
+        function can return an reward dict for this function (this is because \
+        of the behavior of Python).
+        :returns: True if executed correctly.
+        """
+        self.action = action
+        self.context = context
+        self.reward = reward
+        code = self.db.experiment_properties("exp:%s:properties" % (self.exp_id), "get_reward")
+        byte_code = compile(code, filename='<inline code>', mode='exec')
+        exec(byte_code, {'__builtins__' : self.safe_builtins})
+        return self.reward.copy()
+        
+    def run_reward_code(self, context, action, reward):
+        """ Takes set_reward code from Redis and executes it.
+
+        :param dict context: The context that may be needed for the algorithm.
+        :param string action: The action that is needed for the algorithm. Is \
         actually free of type, but generally a string is used.
         :param int reward: Generally an int, in 0 or 1. Can be of other type, \
         but must be specified by used algorithm.
-        :returns: Boolean True if executed correctly.
+        :returns: True if executed correctly.
         """
         self.context = context
         self.action = action
         self.reward = reward
-        code = self.db.experiment_properties("exp:%s:properties" % (self.exp_id), "setReward")
-        exec(code)
+        code = self.db.experiment_properties("exp:%s:properties" % (self.exp_id), "set_reward")
+        byte_code = compile(code, filename='<inline code>', mode='exec')
+        exec(byte_code, {'__builtins__' : self.safe_builtins})
         return True
     
     def log_data(self, value):
-        """ Raw logging that is used in the getAction and setReward codes.
-        
-        .. note:: Needs less ambiguity when it comes to the use of the \
-                specific database. As we will use MongoDB for multiple \
-                different logging purposes.
+        """ Manual logging that is used in the get_action and set_reward codes.
 
         :param dict value: The value that needs to be logged. Since MongoDB is \
                 used, a dictionary is needed.
@@ -77,6 +140,33 @@ class Experiment():
         """
         value["exp_id"] = self.exp_id
         self.mongo_db.log_row(value)
+        return True
+
+    def log_simulation_data(self, data):
+        """ Log one simulation loop.
+        
+        :param dict data: Dict of dicts with all interactions
+        :returns: True if executed correctly
+        """
+        self.mongo_db.log_simulation(self.exp_id, data)
+        return True
+
+    def log_getaction_data(self, context, action):
+        """ Logging for all the get_action calls.
+
+        :param dict data: Dict that contains action, and context
+        :returns: True if executed correctly
+        """
+        self.mongo_db.log_getaction(self.exp_id, context, action)
+        return True
+
+    def log_setreward_data(self, context, action, reward):
+        """ Logging for all the set_reward calls.
+
+        :param dict data: Dict that contains action, context and reward
+        :returns: True if executed correctly
+        """
+        self.mongo_db.log_setreward(self.exp_id, context, action, reward)
         return True
         
     def set_theta(self, thetas, key = None, value = None, name = "_theta"):
@@ -105,6 +195,8 @@ class Experiment():
         db_key = "exp:%s:" % (self.exp_id) + name
         if key is not None and value is not None:
             db_key = db_key + ":%s:%s" % (key, value)
+        elif key is not None and value is None:
+            db_key = db_key + ":%s" % (key)
         return self.db.set_theta(thetas, db_key)
     
     def get_theta(self, key = None, value = None, name = "_theta", all_float = False):
@@ -112,7 +204,7 @@ class Experiment():
 
         :param string key: The key with which the theta will be associated. If \
         only a key is given, all the thetas that belong to that key will be \
-        returned. Typically a key distinguishes experiments from each other. \
+        returned. Typically a key distinguishes experiments from each other. 
         :param string value: The value with which the theta will be assiocated. \
         Typically the value distinguishes the different versions within an \
         experiment. If no value is given, all thetas belonging to the \
@@ -128,43 +220,91 @@ class Experiment():
         all_values = False
         if key is not None and value is not None:
             db_key = db_key + ":%s:%s" % (key, value)
-        if key is not None and value is None:
+        elif key is not None and value is None:
             db_key = db_key + ":%s" % (key)
+            all_values = True
+        elif key is None and value is None:
             all_values = True
         return self.db.get_theta(db_key, all_values, all_float)
 
     def delete_theta(self, key = None, value = None, name = "_theta"):
-            
         db_key = "exp:%s:" % (self.exp_id) + name
         if key is not None and value is not None:
             db_key = db_key + ":%s:%s" % (key, value)
+        elif key is not None and value is None:
+            db_key = db_key + ":%s" % (key)
         return self.db.delete_theta(db_key)
 
-    def get_log_data(self):
-        """ Get all the logged data from the experiment
+    def get_log_data(self, limit):
+        """ Get all the logged data from the experiment.
 
-        :returns dict logs: Dict of dict of all the manual logs
+        :param int limit: Limit the amount of logs returned
+        :returns: Dict of dict of all the manual logs
         """
-        return self.mongo_db.get_log_rows(self.exp_id)
-        
-    def get_hourly_theta(self):
-        """ Get all the hourly logged thetas (if flag is set)
+        return self.mongo_db.get_log_rows(self.exp_id, limit)
 
-        :returns dict of dict hourly: All the hourly logged thetas
-        """
-        return self.mongo_db.get_hourly_theta(self.exp_id)
+    def get_simulation_log_data(self, limit):
+        """ Get all the logged data for the simulations of this experiment.
         
+        :returns: List of dict of dicts of the simulations
+        """
+        return self.mongo_db.get_simulation_log(self.exp_id, limit)
+
+    def get_getaction_log_data(self, limit):
+        """ Get all the automatically logged get_action data from the experiment.
+
+        :param int limit: Limit the amount of logs returned
+        :returns: Dict of dict of all the get_action logs
+        """
+        return self.mongo_db.get_getaction_log(self.exp_id, limit)
+
+    def get_setreward_log_data(self, limit):
+        """ Get all the automatically logged set_reward data from the experiment.
+
+        :param int limit: Limit the amount of logs returned
+        :returns: Dict of dict of all the set_reward logs
+        """
+        return self.mongo_db.get_setreward_log(self.exp_id, limit)
+
+    def get_summary(self):
+        """ Get a summary, consisting of:
+            - The number of get_action calls
+            - The date of the last get_action call
+            - The number of set_reward calls
+            - The date of the last set_reward call
+        
+        :returns: A dict of dict with the complete summary.
+        """
+        summary = {}
+        getactioncalls = self.get_getaction_log_data(limit = 0)
+        seq = [x['date'] for x in getactioncalls]
+        if len(seq) > 0:
+            summary['last_added_get_action'] = max(seq)
+        else:
+            summary['last_added_get_action'] = "No get_action calls yet."
+        summary['get_action_calls'] = len(getactioncalls)
+        setrewardcalls = self.get_setreward_log_data(limit = 0)
+        seq = [x['date'] for x in setrewardcalls]
+        if len(seq) > 0:
+            summary['last_added_set_reward'] = max(seq)
+        else:
+            summary['last_added_set_reward'] = "No set_reward calls yet."
+        summary['set_reward_calls'] = len(setrewardcalls)
+        return summary
+        
+    def get_hourly_theta(self, limit):
+        """ Get all the hourly logged thetas (if flag is set).
+
+        :param int limit: Limit the amount of logs returned
+        :returns: A dict of dict with all the hourly logged thetas (or limited).
+        """
+        return self.mongo_db.get_hourly_theta(self.exp_id, limit)
+    
+    def gen_advice_id(self, action, context):
+        return self.advice_db.log_advice(action, context)
+    
+    def get_by_advice_id(self, _id):
+        return self.advice_db.get_advice(_id)
+
     def debug(self, obj):
         self.context['_debug'] = obj
-        
-#    def is_prime(self, n):
-#        """ Checks if given number is a prima.
-#
-#        :params int n
-#        """
-#        if n < 2: return False
-#        for number in islice(count(2), int(sqrt(n)-1)):
-#            if not n%number:
-#                return False
-#        return True
-        

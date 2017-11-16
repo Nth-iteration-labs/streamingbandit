@@ -1,0 +1,1 @@
+self.context["customer"] = random.choice(["new", "returning"])

@@ -48,7 +48,7 @@ class LM():
         """ Returns the coefficients beta as a numpy array.
         """
         beta = np.linalg.inv(self.value['A']) * self.value['b'].T
-        return beta
+        return np.asarray(beta).flatten()
 
     def update(self,y,x,discount = 1):
         """ Update the linear model.
@@ -74,5 +74,5 @@ class LM():
         x = np.array(x)
         if self.intercept:
             x = np.insert(x, 0, 1)
-        beta = np.dot(np.linalg.inv(self.value['A']), self.value['b'].T)
-        return np.dot(beta, x)
+        beta = np.linalg.inv(self.value['A']) * self.value['b'].T
+        return beta*x
