@@ -5,6 +5,8 @@ from datetime import datetime, timedelta
 from db.mongolog import MongoLog
 from db.advice import Advice
 
+import ast
+
 def log_theta():
     """ For every experiment, if Theta logging flag is set. Log theta from
     redis to mongodb.
@@ -15,7 +17,7 @@ def log_theta():
     experiment_ids = redis_db.get_experiment_ids()
     for experiment_id in experiment_ids:
         exp = Experiment(experiment_id)
-        if exp.properties["hourlyTheta"] == "True":
+        if exp.properties["hourly_theta"] == "True":
             theta = exp.get_theta()
             theta["exp_id"] = experiment_id
             mongo_db.log_hourly_theta(theta)
@@ -34,9 +36,9 @@ def advice_time_out():
         if exp.properties["advice_id"] == "True":
             # Get all the advices for this experiment
             # Check whether or not the date has exceeded the time-out rate
-            delta_days = int(exp.properties["delta_days"])
-            advices_retrieved = advice_db.advices.find({"date":{"$lt":datetime.utcnow()-timedelta(days=delta_days)}})
+            delta_hours = int(exp.properties["delta_hours"])
+            advices_retrieved = advice_db.advices.find({"date":{"$lt":datetime.utcnow()-timedelta(hours=delta_hours)}})
             for adv in advices_retrieved:
                 log = exp.get_by_advice_id(str(adv["_id"]))
-                reward = exp.properties["default_reward"]
+                reward = ast.literal_eval(exp.properties["default_reward"])
                 exp.run_reward_code(adv["context"],adv["action"],reward)

@@ -1,67 +1,24 @@
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to StreamingBandit!</title>
+<style>
+p,li,h1{font-family: sans-serif}
+</style>
+</head>
+<body>
 
-        <link rel="stylesheet" href="../static/css/bootstrap.min.css">
-        <style>
-            body {
-                padding-top: 50px;
-                padding-bottom: 20px;
-            }
-        </style>
-        <link rel="stylesheet" href="../static/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="../staticcss/main.css">
-
-        <script src="../static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
-    </head>
-    <body>
-     {% include "_navigation.html" %}
-
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
-        <h1>Welcome to StreamingBandit!</h1>
-        <p>This is the homepage for the StreamingBandit server hosted by the N-th Iteration Lab. Solving (bandit) decision problems in data streams in production environment is challenging. With this Python module we are trying to develop a framework for streaming/online solutions to bandit problems which can be used to experiment with novel solutions in production environments.</p>
-        <p><a class="btn btn-primary btn-lg" href="http://github.com/MKaptein/streamingbandit" role="button">Go get it from GitHub &raquo;</a></p>
-      </div>
-    </div>
-
-    <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-
-        <div class="col-md-4">
-          <h2>Setup</h2>
-          <p>To setup an experiment is easy. Go to the management interface to get started right away.</p>
-          <p><a class="btn btn-default" href="./management.html" role="button">Management &raquo;</a></p>
-        </div>
-
-        <div class="col-md-4">
-          <h2>API Reference</h2>
-          <p>All of StreamingBandit is done as a REST api. Check out the API reference here.</p>
-          <p><a class="btn btn-default" href="http://mkaptein.github.io/streamingbandit" role="button">Reference &raquo;</a></p>
-        </div>
-
-        <div class="col-md-4">
-          <h2>MAB problems</h2>
-          <p>StreamingBandit was created to test different solutions to multi-armed Bandit problems.</p>
-          <p><a class="btn btn-default" href="http://www.nth-iteration.com" role="button">More &raquo;</a></p>
-        </div>
-
-      </div>
-
-      <hr>
-
-    <!-- END OF BODY -->
-    {% include "_footer.html" %}
+<h1>Welcome</h1>
+<p>Hi! Clearly, you have gotten an instance of StreamingBandit up and running! Nice.</p>
+<p>However, StreamingBandit is a REST application and it does not have a nice UI; at least, not one that's included in the default git repository (which, in case you are wondering, can be found <a href="https://github.com/Nth-iteration-labs/streamingbandit">here</a>). Also, the streamingbandit <a href="https://hub.docker.com/r/nthiterationlabs/streamingbandit/">docker container</a>, in case that's what you used to get started, does not include a front end.</p>
+<p>There are however a number of ways to get started: 
+<ul>
+	<li>If you just want to use the REST API itself, and interact with it using your own application or front-end, a good place to start is the <a href="http://nth-iteration-labs.github.io/streamingbandit/">documentation</a>. Here you will find descriptions of all the REST endpoints and a number of usage examples.</li>
+	<li>If you want to use a convenient front-end, please check out our <a href="https://github.com/Nth-iteration-labs/streamingbandit-ui">front-end repository</a>. The README on github should be enough to get you started and hence proceed using StreamingBandit but now with a nice UI, buttons, and all that. You can also get the front end up and running by using its <a href="https://hub.docker.com/r/nthiterationlabs/streamingbandit-ui/">docker container</a>.</li>
+</ul>
+</p>
+<p>If you are wondering what this software is good for (which, admittedly, is a bit late after you got it up and running) we recommend you start by reading <a href="">https://arxiv.org/abs/1602.06700/<a>.</p>
+<p>In case you have any questions please do contact us by sending an email to <a href="mailto:m.c.kaptein@uvt.nl">m.c.kaptein@uvt.nl</a>. If you find any issues, bugs, or have feature requests, than please use our <a href="https://github.com/Nth-iteration-labs/streamingbandit">github page</a>.
 
 </body>
 </html>

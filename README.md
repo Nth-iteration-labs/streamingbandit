@@ -15,6 +15,7 @@ Python 3.x+ (untested on Python 2.7) with the following packages:
 * [SciPy](http://www.scipy.org)
 * [scikit-learn](http://scikit-learn.org/stable/)
 * [APScheduler](http://apscheduler.readthedocs.io/)
+* [bcrypt](https://pypi.python.org/pypi/bcrypt/3.1.0)
 
 [Redis](http://redis.io)
 
@@ -28,7 +29,7 @@ Python 3.x+ (untested on Python 2.7) with the following packages:
 To install all dependencies:
 
 ```
-sudo python3 setup.py install
+sudo pip3 install .
 ```
 
 ## Redis
@@ -61,7 +62,7 @@ When everything is configured, do the following:
 
 (Ideally they are automatically started, as they are usally used in a server-context. Look at the links above to find how-to's on starting Redis and MongoDB automatically.)
 
-Then you can start streamingbandit web-server via the terminal:
+Then you can start streamingbandit web-server via the terminal by navigating to /app and starting the application:
 ```
 python3 app.py
 ```

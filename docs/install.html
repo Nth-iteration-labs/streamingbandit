@@ -1,0 +1,371 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installation &mdash; StreamingBandit 3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="StreamingBandit 3 documentation" href="index.html"/>
+        <link rel="next" title="Complete RESTful API" href="api.html"/>
+        <link rel="prev" title="Welcome to StreamingBandit’s documentation!" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> StreamingBandit
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#install-in-docker">Install in Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-and-running-from-source">Install and running from Source</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installing-from-source">Installing from Source</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#redis">Redis</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#mac">Mac</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#linux">Linux</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#mongodb">MongoDB</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#id1">Mac</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#linux-ubuntu-debian">Linux (Ubuntu/Debian)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#configurating-redis-and-mongodb-locations">Configurating Redis and MongoDB locations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-streamingbandit">Running StreamingBandit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-streamingbandit-front-end">Using StreamingBandit front-end</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libs.html">Libs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exp.html">Experiment</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">StreamingBandit</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Installation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/install.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>There are multiple ways in which you can get StreamingBandit up and running.. If you want the smoothest and easiest experience, we recommend to look at <a class="reference internal" href="#install-in-docker">Install in Docker</a>.</p>
+<div class="section" id="install-in-docker">
+<h2>Install in Docker<a class="headerlink" href="#install-in-docker" title="Permalink to this headline">¶</a></h2>
+<p>Using <a class="reference external" href="http://docs.docker.io/">Docker</a> you can easily install StreamingBandit in an isolated container and will have you up and running within a matter of minutes. Docker is a virtualization framework that uses separate containers for each piece of software that you are using. Every dependency and installation procedure is handled by Docker. This is the easiest and recommended way to run StreamingBandit. For more information about <a class="reference external" href="http://docs.docker.io/">Docker</a>, check out their website.</p>
+<p>After you have installed Docker and have it up and running, you can get StreamingBandit started using the following commands (note that you also need <a class="reference external" href="https://git-scm.com/">Git</a>):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ git clone https://github.com/nth-iteration-labs/streamingbandit
+$ cd streamingbandit
+$ docker-compose up -d
+</pre></div>
+</div>
+<p>After the Docker containers are up and running, we can add an admin account with password ‘test’ so that you can login to the back-end:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ docker exec -t streamingbandit_web_1 python3 ../insert_admin.py -p test
+</pre></div>
+</div>
+<p>Stopping and starting the containers can be done by:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ docker-compose stop
+$ docker-compose start
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can also stop the Docker containers using <code class="docutils literal"><span class="pre">$</span> <span class="pre">docker-compose</span> <span class="pre">down</span></code>, but use this with caution, as it will destroy the containers and also all your saved progress and data!</p>
+</div>
+<p>The last few commands will only start up the back-end. If you would like to have the front-end running as well, you can accomplish that using the following commands:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ docker-compose -f docker-compose.yml -f docker-compose.front-end.yml up -d
+</pre></div>
+</div>
+<p>Then starting and stopping can be done by issuing:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ docker-compose -f docker-compose.yml -f docker-compose.front-end.yml stop
+$ docker-compose -f docker-compose.yml -f docker-compose.front-end.yml start
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The front-end will be taken from an existing image from the <a class="reference external" href="https://hub.docker.com/">Dockerhub</a> and thus you will not need to download a Git repository.</p>
+</div>
+</div>
+<div class="section" id="install-and-running-from-source">
+<h2>Install and running from Source<a class="headerlink" href="#install-and-running-from-source" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="installing-from-source">
+<h3>Installing from Source<a class="headerlink" href="#installing-from-source" title="Permalink to this headline">¶</a></h3>
+<p>Currently this section is only for Mac/Linux and only Python 3 is supported. Firstly, you will have to install all the Python dependencies:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pip3 install .
+</pre></div>
+</div>
+<div class="section" id="redis">
+<h4>Redis<a class="headerlink" href="#redis" title="Permalink to this headline">¶</a></h4>
+<p>We use Redis for its speed to store our parameters.</p>
+<div class="section" id="mac">
+<h5>Mac<a class="headerlink" href="#mac" title="Permalink to this headline">¶</a></h5>
+<p>To install Redis on Mac, we can use brew:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ brew install redis
+</pre></div>
+</div>
+</div>
+<div class="section" id="linux">
+<h5>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h5>
+<p>To install Redis on Linux and have it running as a daemon from start-up, check out <a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-install-and-use-redis">this</a> tutorial.</p>
+</div>
+</div>
+<div class="section" id="mongodb">
+<h4>MongoDB<a class="headerlink" href="#mongodb" title="Permalink to this headline">¶</a></h4>
+<p>We use MongoDB for all logging and archiving.</p>
+<div class="section" id="id1">
+<h5>Mac<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h5>
+<p>To install MongoDB on Mac, we can again use brew:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ brew install mongodb
+</pre></div>
+</div>
+</div>
+<div class="section" id="linux-ubuntu-debian">
+<h5>Linux (Ubuntu/Debian)<a class="headerlink" href="#linux-ubuntu-debian" title="Permalink to this headline">¶</a></h5>
+<p>To install MongoDB on Linux (Ubuntu/Debian) and have it running as a daemon from start-up, check out the tutorial on the official website <a class="reference external" href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/">MongoDB</a>. For other distributions there are similar tutorials.</p>
+</div>
+</div>
+</div>
+<div class="section" id="configurating-redis-and-mongodb-locations">
+<h3>Configurating Redis and MongoDB locations<a class="headerlink" href="#configurating-redis-and-mongodb-locations" title="Permalink to this headline">¶</a></h3>
+<p>If you have a Redis and MongoDB instance running on other systems (e.g. different Amazon clusters) than you are running StreamingBandit on, you can change the IP and port in the config file (/app/config.cfg).</p>
+</div>
+<div class="section" id="running-streamingbandit">
+<h3>Running StreamingBandit<a class="headerlink" href="#running-streamingbandit" title="Permalink to this headline">¶</a></h3>
+<p>If everything is correctly configured:</p>
+<ul class="simple">
+<li>Start Redis</li>
+<li>Start MongoDB</li>
+</ul>
+<p>Then you can start the StreamingBandit back-end by issuing the following commands:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ cd streamingbandit/app
+$ python3 app.py
+</pre></div>
+</div>
+<p>You can now go to <code class="docutils literal"><span class="pre">http://localhost:8080/</span></code> and if everything is running correctly, you will see a welcome page!</p>
+</div>
+<div class="section" id="using-streamingbandit-front-end">
+<h3>Using StreamingBandit front-end<a class="headerlink" href="#using-streamingbandit-front-end" title="Permalink to this headline">¶</a></h3>
+<p>To use StreamingBandit more intuitively, you can use our front-end (<a class="reference external" href="https://github.com/nth-iteration-labs/streamingbandit-ui">StreamingBandit-ui</a>) as well.</p>
+<p>Just follow these steps after you have installed the back-end.</p>
+<ol class="arabic simple">
+<li>Download and unzip the StreamingBanditUI package <a class="reference external" href="https://github.com/Nth-iteration-labs/streamingbandit-ui/releases/download/v1.0/StreamingBanditUI.zip">here</a>, if you haven’t already. The StreamingBanditUI package will extract into a folder called StreamingBanditUI in the same directory that you downloaded StreamingBanditUI.zip</li>
+<li>Upload the all of the files contained in the StreamingBanditUI folder to the desired location on your web server and visit index.html.</li>
+</ol>
+<p>OR</p>
+<ol class="arabic simple" start="2">
+<li>Run StreamingBanditUI by clicking on index.html in the StreamingBanditUI directory. This works in most, but not all browsers. Recent versions of Firefox, Microsoft Edge and Google Chrome should work fine.</li>
+<li>Now enter the IP or domain together with the port on StreamingBandit is running (default: <a class="reference external" href="http://localhost:8080">http://localhost:8080</a>) and login to the StreamingBandit server.</li>
+</ol>
+<p>That’s it! You should now be able to access your StreamingBandit server, and start experimenting!</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="api.html" class="btn btn-neutral float-right" title="Complete RESTful API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Welcome to StreamingBandit’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, M.C. Kaptein, J.M.A. Kruijswijk, R. van Emden.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

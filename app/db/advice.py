@@ -1,18 +1,16 @@
 # -*- coding: utf-8 -*-
 from pymongo import MongoClient
 from bson.objectid import ObjectId
-import yaml
 from datetime import datetime
+
+import builtins
 
 class Advice:
 
     def __init__(self):
-        f = open("config.cfg",'r')
-        settings = yaml.load(f)
-        self.mongo_client = MongoClient(settings['mongo_ip'], settings['mongo_port'])
+        self.mongo_client = builtins.tornado_config['mongo_client']
         self.mongo_db = self.mongo_client['advices']
         self.advices = self.mongo_db['advices']
-        f.close()
 
     def log_advice(self, action, context):
         context['date'] = datetime.utcnow()

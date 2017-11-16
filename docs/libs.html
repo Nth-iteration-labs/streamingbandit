@@ -1,0 +1,871 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Documentation of the supplied Libraries &mdash; StreamingBandit 3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="StreamingBandit 3 documentation" href="index.html"/>
+        <link rel="next" title="Experiment functions" href="exp.html"/>
+        <link rel="prev" title="Complete RESTful API" href="api.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> StreamingBandit
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Libs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#base-classes">Base classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#linear-regression">Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#thompson-sampling">Thompson sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bootstrapped-thompson-sampling">Bootstrapped Thompson Sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lock-in-feedback">Lock-in Feedback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#thompson-bayesian-linear-regression">Thompson Bayesian Linear Regression</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="exp.html">Experiment</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">StreamingBandit</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Documentation of the supplied Libraries</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/libs.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="documentation-of-the-supplied-libraries">
+<h1>Documentation of the supplied Libraries<a class="headerlink" href="#documentation-of-the-supplied-libraries" title="Permalink to this headline">¶</a></h1>
+<p>StreamingBandit is build on a philosophy of streaming (or online, or row-by-row) updating of parameters of a policy. The <strong>libs</strong> libraries provide some functionality for estimating and fitting statistical models online. These libraries are available directly in the <strong>getaction</strong> and <strong>setreward</strong> code.</p>
+<p>The following code provides an example of the use of one of the <strong>libs</strong> in the <strong>getaction</strong> code of an experiment:</p>
+<div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">mean_list</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">List</span><span class="p">(</span>
+              <span class="bp">self</span><span class="o">.</span><span class="n">get_theta</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;treatment&quot;</span><span class="p">),</span>
+              <span class="n">base</span><span class="o">.</span><span class="n">Mean</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;control&quot;</span><span class="p">,</span> <span class="s2">&quot;treatment&quot;</span><span class="p">]</span>
+              <span class="p">)</span>
+ <span class="bp">self</span><span class="o">.</span><span class="n">action</span><span class="p">[</span><span class="s2">&quot;treatment&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">meanList</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<p>which would retrieve a list of sample means by name (<strong>treatment</strong> and <strong>control</strong>), and subsequently select the name with the highest mean.</p>
+<p>Note that each of the <strong>libs</strong> provides update methods to update the object when new data is observed. For example, the code:</p>
+<div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">mean</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">Mean</span><span class="p">(</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">get_theta</span><span class="p">(</span>
+      <span class="n">key</span><span class="o">=</span><span class="s2">&quot;treatment&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">action</span><span class="p">[</span><span class="s2">&quot;treatment&quot;</span><span class="p">])</span>
+      <span class="p">)</span>
+ <span class="n">mean</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reward</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+</pre></div>
+</td></tr></table></div>
+<p>can be used in the <strong>setreward</strong> code to retrieve the mean specified in the <strong>treatment</strong> variable, and subsequently update it using the <strong>value</strong>.</p>
+<p>Below we detail the current <strong>libs</strong> and each of their methods.</p>
+<div class="section" id="base-classes">
+<h2>Base classes<a class="headerlink" href="#base-classes" title="Permalink to this headline">¶</a></h2>
+<p>The base classes provide the functionality to create, store, and update (lists of) counts, means, variances, proportions, and co-variances in data streams.</p>
+<span class="target" id="module-libs.base"></span><dl class="class">
+<dt id="libs.base.Correlation">
+<em class="property">class </em><code class="descclassname">libs.base.</code><code class="descname">Correlation</code><span class="sig-paren">(</span><em>default</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Correlation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to represent a correlation using an online estimator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><strong>default</strong> (<em>dict</em>) – A dictionary that consists of a counter n, mean             for x x_bar, mean for y y_bar, standard deviation for x x_s,             standard deviation for y y_s, variance for x x_v, variance for y             y_v, covariance cov and correlation c. Leave empty to start a new correlation.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="libs.base.Correlation.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Correlation.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds value to correlation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>dict</em>) – A dict of ints of x and y.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="libs.base.Count">
+<em class="property">class </em><code class="descclassname">libs.base.</code><code class="descname">Count</code><span class="sig-paren">(</span><em>default</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to represent a counter using an online estimator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><strong>default</strong> (<em>dict</em>) – A dictionary that consists of the counter n. Leave     empty to start a new counter.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="libs.base.Count.increment">
+<code class="descname">increment</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Count.increment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the counter with value 1.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.base.Count.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>value=1</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Count.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds value to the counter.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="libs.base.Covariance">
+<em class="property">class </em><code class="descclassname">libs.base.</code><code class="descname">Covariance</code><span class="sig-paren">(</span><em>default</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Covariance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to represent a covariance using an online estimator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><strong>default</strong> (<em>dict</em>) – A dictionary that consists of a counter n, mean             for x x_bar, mean for y y_bar and covariance cov. Leave empty to             start a new covariance.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="libs.base.Covariance.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Covariance.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds value to covariance.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>dict</em>) – A dict of ints of x and y.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="libs.base.List">
+<em class="property">class </em><code class="descclassname">libs.base.</code><code class="descname">List</code><span class="sig-paren">(</span><em>objects</em>, <em>_t</em>, <em>value_names</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.List" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to represent a list of Base classes. Here you can store multiple     Base classes to simplify your AB test and whatnot.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>objects</strong> (<em>dict</em>) – A dict of dicts with the objects in dictionary             form - so not a class instance!</li>
+<li><strong>_t</strong> (<em>type</em>) – The type of Base class (e.g. Proportion, Count).</li>
+<li><strong>value_names</strong> (<em>list</em>) – The different value names that are in the             objects dict. This is used for e.g. random picks.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="libs.base.List.__weakref__">
+<code class="descname">__weakref__</code><a class="headerlink" href="#libs.base.List.__weakref__" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of weak references to the object (if defined)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.base.List.count">
+<code class="descname">count</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.List.count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the Base class has a counter. If that’s the case, it will
+add all the counters and return the total count.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.base.List.get_dict">
+<code class="descname">get_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.List.get_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns each Base class in the objects as a dict in a dict.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.base.List.max">
+<code class="descname">max</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.List.max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds the max of the main value of a Base class.
+If no max is available yet (because the values are empty), it will return a random max.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.base.List.random">
+<code class="descname">random</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.List.random" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a random choice from the value_names list.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="libs.base.Mean">
+<em class="property">class </em><code class="descclassname">libs.base.</code><code class="descname">Mean</code><span class="sig-paren">(</span><em>default</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Mean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to represent a mean using an online estimator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><strong>default</strong> (<em>dict</em>) – A dictionary that consists of a counter n and mean     m. Leave empty to start a new mean.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="libs.base.Mean.get_count">
+<code class="descname">get_count</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Mean.get_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the counter of the mean object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.base.Mean.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Mean.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds value to the mean.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>int</em>) – The value of x to update the mean.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="libs.base.Proportion">
+<em class="property">class </em><code class="descclassname">libs.base.</code><code class="descname">Proportion</code><span class="sig-paren">(</span><em>default</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Proportion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to represent a proportion using an online estimator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><strong>default</strong> (<em>dict</em>) – A dictionary that consists of a counter n, and     proportion p. Leave empty to start a new proportion.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="libs.base.Proportion.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Proportion.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds value to the proportion.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>int</em>) – A value 0 or 1.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="libs.base.Variance">
+<em class="property">class </em><code class="descclassname">libs.base.</code><code class="descname">Variance</code><span class="sig-paren">(</span><em>default</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Variance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to represent a variance using an online estimator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><strong>default</strong> (<em>dict</em>) – A dictionary that consists of a counter n, mean     x_bar, standard deviation s and variance v. Leave empty to start a new     variance.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="libs.base.Variance.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Variance.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds value to the variance.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>int</em>) – The value used for updating.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="linear-regression">
+<h2>Linear Regression<a class="headerlink" href="#linear-regression" title="Permalink to this headline">¶</a></h2>
+<p>The linear regression library allows online fitting of a linear regression model using OLS.</p>
+<span class="target" id="module-libs.lm"></span><dl class="class">
+<dt id="libs.lm.LM">
+<em class="property">class </em><code class="descclassname">libs.lm.</code><code class="descname">LM</code><span class="sig-paren">(</span><em>default</em>, <em>p=None</em>, <em>add_intercept=False</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.lm.LM" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to interpet a linear model.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>default</strong> (<em>dict</em>) – The value of the model, consisting of a 1*p     list of b, p*p list of lists A and counter n.</li>
+<li><strong>p</strong> (<em>int</em>) – Number of estimators.</li>
+<li><strong>add_intercept</strong> (<em>bool</em>) – If True, the update function expects that     there it has to add the intercept to the X vector itself.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="libs.lm.LM.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>default</em>, <em>p=None</em>, <em>add_intercept=False</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.lm.LM.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to fit a linear model with a sequential solution for linear         regression.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="libs.lm.LM.__weakref__">
+<code class="descname">__weakref__</code><a class="headerlink" href="#libs.lm.LM.__weakref__" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of weak references to the object (if defined)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.lm.LM.get_coefs">
+<code class="descname">get_coefs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libs.lm.LM.get_coefs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the coefficients beta as a numpy array.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.lm.LM.get_dict">
+<code class="descname">get_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libs.lm.LM.get_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all the variables that are needed to do an online               estimation in a dictionary.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.lm.LM.predict">
+<code class="descname">predict</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.lm.LM.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predict the output/observation value based on values for         the regressors.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> (<em>list</em>) – A list of ints of the regressors.</li>
+<li><strong>y</strong> (<em>numpy</em>) – A numpy array of the predicted observation.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.lm.LM.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>y</em>, <em>x</em>, <em>discount=1</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.lm.LM.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the linear model.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>y</strong> (<em>int</em>) – The observation value.</li>
+<li><strong>x</strong> (<em>list</em>) – A list of ints of the regressors.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="thompson-sampling">
+<h2>Thompson sampling<a class="headerlink" href="#thompson-sampling" title="Permalink to this headline">¶</a></h2>
+<p>This library implements Thompson sampling for the k-armed Bernoulli bandit as well as Thompson sampling for optimal design of experiments (Thompson sampling based on the posterior variance of the observed outcome). See also <a class="reference external" href="https://link.springer.com/article/10.3758/s13428-014-0480-0">this paper</a>.</p>
+<span class="target" id="module-libs.thompson"></span><dl class="class">
+<dt id="libs.thompson.BBThompsonList">
+<em class="property">class </em><code class="descclassname">libs.thompson.</code><code class="descname">BBThompsonList</code><span class="sig-paren">(</span><em>objects</em>, <em>value_names</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.thompson.BBThompsonList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to draw decisions using a Bernoulli Bandit Thompson sampler.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>objects</strong> (<em>dict</em>) – A dict of dict of thetas (which should be     proportions, see documentation of Proportions on how it should look like.)</li>
+<li><strong>value_names</strong> (<em>list</em>) – A list with the possible value names for the     actions</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="libs.thompson.BBThompsonList.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>objects</em>, <em>value_names</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.thompson.BBThompsonList.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an instance of a BB Thompson Sampler.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.thompson.BBThompsonList.propensity">
+<code class="descname">propensity</code><span class="sig-paren">(</span><em>value</em>, <em>n=1000</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.thompson.BBThompsonList.propensity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate propensity of given arm using n draws.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Returns int propensity:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">The propensity of the arm.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.thompson.BBThompsonList.thompson">
+<code class="descname">thompson</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libs.thompson.BBThompsonList.thompson" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw decision using the Bernoulli Bandit Thompson sampler.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Returns string choice:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">The choice of action that’s made.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="libs.thompson.ThompsonVarList">
+<em class="property">class </em><code class="descclassname">libs.thompson.</code><code class="descname">ThompsonVarList</code><span class="sig-paren">(</span><em>objects</em>, <em>value_names</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.thompson.ThompsonVarList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to allocate observations in 2 group a within subjects desing
+such as to maximize the precision of the estimated effect size 
+(assuming unequal variance of the two groups)</p>
+<dl class="method">
+<dt id="libs.thompson.ThompsonVarList.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>objects</em>, <em>value_names</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.thompson.ThompsonVarList.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create instance of a Thompson Variance Sampler
+by creating a variance list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.thompson.ThompsonVarList.experimentThompson">
+<code class="descname">experimentThompson</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libs.thompson.ThompsonVarList.experimentThompson" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtain draw and allocate to minimize estimation precision</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="bootstrapped-thompson-sampling">
+<h2>Bootstrapped Thompson Sampling<a class="headerlink" href="#bootstrapped-thompson-sampling" title="Permalink to this headline">¶</a></h2>
+<p>This library provides the functionality to perform on online bootstrap of any streaming estimate obtained by the <strong>libs</strong> and subsequently implements Bootstrap Thompson Sampling (BTS, <a class="reference external" href="https://arxiv.org/abs/1410.4009">see this paper</a> for details).</p>
+<span class="target" id="module-libs.bts"></span><dl class="class">
+<dt id="libs.bts.BTS">
+<em class="property">class </em><code class="descclassname">libs.bts.</code><code class="descname">BTS</code><span class="sig-paren">(</span><em>params</em>, <em>update_method=None</em>, <em>m=100</em>, <em>default_params=None</em>, <em>param_noise=True</em>, <em>noisesd=0.1</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.bts.BTS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to implement BTS.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>params</strong> (<em>dict</em>) – If initialized, a dict of dicts, containing m samples of     parameters for the update_method/model that is being used. If not initialized     this will be made into a dict of dicts using the given params or default_params.</li>
+<li><strong>update_method</strong> (<em>Class</em>) – A class reference containing the update method.     This will be checked and if it is a class, it will be used to update the parameters.</li>
+<li><strong>m</strong> (<em>int</em>) – The number of bootstraps that BTS uses.</li>
+<li><strong>default_params</strong> (<em>dict</em>) – A dictionary containing the default parameters.     If the params variable is empty/not long enough, this will be used.</li>
+<li><strong>param_noise</strong> (<em>bool</em>) – If True, BTS will add parameter noise to all the lists     in the default_params dictionary when initializing the bootstraps.</li>
+<li><strong>noisesd</strong> (<em>double</em>) – If param_noise is used, this is the standard deviation     used for adding noise using a Normal distribution.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="libs.bts.BTS.__weakref__">
+<code class="descname">__weakref__</code><a class="headerlink" href="#libs.bts.BTS.__weakref__" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of weak references to the object (if defined)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.bts.BTS.get_dict">
+<code class="descname">get_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libs.bts.BTS.get_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all the variables and bootstraps that are needed to do an online         estimation in a dictionary. Or to save the data into a database.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.bts.BTS.sample">
+<code class="descname">sample</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libs.bts.BTS.sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a sample of the m bootstraps.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.bts.BTS.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>y</em>, <em>x</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.bts.BTS.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the bootstraps using a double or nothing update policy.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>y</strong> – This may contain any type of class as long as the update_method         provided is able to parse this type.</li>
+<li><strong>x</strong> – This may contain any type of class as long as the update_method         provided is able to parse this type.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="lock-in-feedback">
+<h2>Lock-in Feedback<a class="headerlink" href="#lock-in-feedback" title="Permalink to this headline">¶</a></h2>
+<p>This library provides a (1D) implementation of Lock-in Feedback. See <a class="reference external" href="https://arxiv.org/abs/1502.00598">this paper</a> for details.</p>
+<span class="target" id="module-libs.lif"></span><dl class="class">
+<dt id="libs.lif.LiF">
+<em class="property">class </em><code class="descclassname">libs.lif.</code><code class="descname">LiF</code><span class="sig-paren">(</span><em>theta</em>, <em>x0=1.0</em>, <em>a=1.4</em>, <em>t=100</em>, <em>gamma=0.004</em>, <em>omega=0.8</em>, <em>lifversion=2</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.lif.LiF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class implementing the Lock in Feedback algorithm.
+Implementation of Lock in Feedback,     following the definition by Maurits Kaptein and     Davide Iannuzzi in <a class="reference external" href="https://arxiv.org/abs/1502.00598">https://arxiv.org/abs/1502.00598</a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>theta</strong> (<em>dict</em>) – Theta, consisting of Yw, t, and x0.</li>
+<li><strong>x0</strong> (<em>float</em>) – Start value of X.</li>
+<li><strong>A</strong> (<em>float</em>) – Amplitude.</li>
+<li><strong>T</strong> (<em>int</em>) – Integration time.</li>
+<li><strong>gamma</strong> (<em>float</em>) – Learnrate.</li>
+<li><strong>omega</strong> (<em>float</em>) – Omega.</li>
+<li><strong>lifversion</strong> (<em>int</em>) – Either version 1 or 2.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="libs.lif.LiF.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>theta</em>, <em>x0=1.0</em>, <em>a=1.4</em>, <em>t=100</em>, <em>gamma=0.004</em>, <em>omega=0.8</em>, <em>lifversion=2</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.lif.LiF.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class implementing the Lock in Feedback algorithm.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="libs.lif.LiF.__weakref__">
+<code class="descname">__weakref__</code><a class="headerlink" href="#libs.lif.LiF.__weakref__" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of weak references to the object (if defined)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.lif.LiF.get_dict">
+<code class="descname">get_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libs.lif.LiF.get_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return dict theta.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Theta, consisting of Yw, t, and x0.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.lif.LiF.suggest">
+<code class="descname">suggest</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libs.lif.LiF.suggest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns dict containing controlled variable x         oscillating with time t, the value of t itself and         the current x0.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Suggestion {x,t,x0}</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.lif.LiF.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>t</em>, <em>x</em>, <em>y</em>, <em>x0</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.lif.LiF.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update LiF with outcome y at time t and at value x         integrating yω over a time T = 2πN.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>t</strong> (<em>int</em>) – time t.</li>
+<li><strong>x</strong> (<em>float</em>) – controlled variable x.</li>
+<li><strong>y</strong> (<em>float</em>) – outcome variable y.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">True</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="thompson-bayesian-linear-regression">
+<h2>Thompson Bayesian Linear Regression<a class="headerlink" href="#thompson-bayesian-linear-regression" title="Permalink to this headline">¶</a></h2>
+<p>This library implements (online) Bayesian linear regression and Thompson sampling based on the posterior Beta’s.</p>
+<span class="target" id="module-libs.thompson_bayesian_linear"></span><dl class="class">
+<dt id="libs.thompson_bayesian_linear.ThompsonBayesianLinear">
+<em class="property">class </em><code class="descclassname">libs.thompson_bayesian_linear.</code><code class="descname">ThompsonBayesianLinear</code><span class="sig-paren">(</span><em>default</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.thompson_bayesian_linear.ThompsonBayesianLinear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for Thompson sampling for Bayesian Linear Regression</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><strong>default</strong> (<em>dict</em>) – The value of the model, consisting of a 1*p     list of J, p*p list of P and an error rate.</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="libs.thompson_bayesian_linear.ThompsonBayesianLinear.__weakref__">
+<code class="descname">__weakref__</code><a class="headerlink" href="#libs.thompson_bayesian_linear.ThompsonBayesianLinear.__weakref__" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of weak references to the object (if defined)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.thompson_bayesian_linear.ThompsonBayesianLinear.get_dict">
+<code class="descname">get_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libs.thompson_bayesian_linear.ThompsonBayesianLinear.get_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all the variables that are needed to do an online estimation         in a dictionary. Or to save the parameters in a database.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.thompson_bayesian_linear.ThompsonBayesianLinear.sample">
+<code class="descname">sample</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libs.thompson_bayesian_linear.ThompsonBayesianLinear.sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a sample of coefficients Betas using Thompson sampling.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.thompson_bayesian_linear.ThompsonBayesianLinear.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>y</em>, <em>x</em>, <em>discount=1</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.thompson_bayesian_linear.ThompsonBayesianLinear.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the Bayesian linear model.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>y</strong> (<em>int</em>) – The observation value.</li>
+<li><strong>x</strong> (<em>list</em>) – A list of ints of the regressors.</li>
+<li><strong>discount</strong> (<em>int</em>) – A discount. Default is 1, which means no discount is used.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="exp.html" class="btn btn-neutral float-right" title="Experiment functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="api.html" class="btn btn-neutral" title="Complete RESTful API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, M.C. Kaptein, J.M.A. Kruijswijk, R. van Emden.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

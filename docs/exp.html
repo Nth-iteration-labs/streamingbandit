@@ -1,0 +1,400 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Experiment functions &mdash; StreamingBandit 3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="StreamingBandit 3 documentation" href="index.html"/>
+        <link rel="prev" title="Documentation of the supplied Libraries" href="libs.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> StreamingBandit
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libs.html">Libs</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Experiment</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">StreamingBandit</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Experiment functions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/exp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="experiment-functions">
+<h1>Experiment functions<a class="headerlink" href="#experiment-functions" title="Permalink to this headline">¶</a></h1>
+<p>Here we describe the <strong>Experiment</strong> class. This class, and its associated methods, allow accessing and storing policy parameters, logging data, and nesting experiments.</p>
+<p>Note that the <strong>Experiment</strong> class is used in two ways in StreamingBandit:</p>
+<ol class="arabic simple">
+<li>The <strong>getaction</strong> and <strong>setreward</strong> code of an experiment are both executed within the scope of the <strong>Experiment</strong> class. Hence, here you can use <strong>self.METHOD</strong> to use the methods described below.</li>
+<li>Within an experiment, you can instantiate a new experiment by referring to its experiment <strong>id</strong> (thus by using <strong>exp_nested = Experiment(exp_id = id1))</strong>). You can subsequently execute the <strong>getaction</strong> and <strong>setreward</strong> code of this experiment. This functionality allows nesting of multiple experiments.</li>
+</ol>
+<span class="target" id="module-core.experiment"></span><dl class="class">
+<dt id="core.experiment.Experiment">
+<em class="property">class </em><code class="descclassname">core.experiment.</code><code class="descname">Experiment</code><span class="sig-paren">(</span><em>exp_id</em>, <em>key='notUsedForLoopBack'</em><span class="sig-paren">)</span><a class="headerlink" href="#core.experiment.Experiment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class that organizes experiments.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>exp_id</strong> (<em>int</em>) – The exp_id that is tied to the experiment and the     database.</li>
+<li><strong>key</strong> (<em>string</em>) – The key that is tied to the experiment, to validate     the user.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="core.experiment.Experiment.get_theta">
+<code class="descname">get_theta</code><span class="sig-paren">(</span><em>key=None</em>, <em>value=None</em>, <em>name='_theta'</em>, <em>all_float=False</em><span class="sig-paren">)</span><a class="headerlink" href="#core.experiment.Experiment.get_theta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the theta (parameters) from the database.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>key</strong> (<em>string</em>) – The key with which the theta will be associated. If         only a key is given, all the thetas that belong to that key will be         returned. Typically a key distinguishes experiments from each other.</li>
+<li><strong>value</strong> (<em>string</em>) – The value with which the theta will be assiocated.         Typically the value distinguishes the different versions within an         experiment. If no value is given, all thetas belonging to the         key/experiment will be returned.</li>
+<li><strong>name</strong> (<em>string</em>) – The name of the parameters. Typically theta is         okay.</li>
+<li><strong>all_float</strong> (<em>bool</em>) – If all_float is True, it will try to convert         every value within the theta to a float.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A dictionary with the parameter set.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.experiment.Experiment.log_data">
+<code class="descname">log_data</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#core.experiment.Experiment.log_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Manual logging that is used in the get_action and set_reward codes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> (<em>dict</em>) – The value that needs to be logged. Since MongoDB is                 used, a dictionary is needed.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">True if executed correctly.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.experiment.Experiment.run_action_code">
+<code class="descname">run_action_code</code><span class="sig-paren">(</span><em>context</em>, <em>action={}</em><span class="sig-paren">)</span><a class="headerlink" href="#core.experiment.Experiment.run_action_code" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes get_action code from Redis and executes it.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>context</strong> (<em>dict</em>) – Context is a dictionary with the context for the         getAction algorithm</li>
+<li><strong>action</strong> (<em>dict</em>) – Action is pre-created such that the exec(code)         function can return an action dict for this function (this is because         of the behavior of Python).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A dict of action of which the content is         determined by the get_action code.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.experiment.Experiment.run_context_code">
+<code class="descname">run_context_code</code><span class="sig-paren">(</span><em>context={}</em><span class="sig-paren">)</span><a class="headerlink" href="#core.experiment.Experiment.run_context_code" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes get_context code from Redis and executes it.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>context</strong> (<em>dict</em>) – Context is pre-created such that the exec(code)         function can return an context dict for this function (this is because         of the behavior of Python).</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A dict of context of which the content is         determined by the get_context code.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.experiment.Experiment.run_get_reward_code">
+<code class="descname">run_get_reward_code</code><span class="sig-paren">(</span><em>context</em>, <em>action</em>, <em>reward={}</em><span class="sig-paren">)</span><a class="headerlink" href="#core.experiment.Experiment.run_get_reward_code" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes get_reward code from Redis and executes it.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>context</strong> (<em>dict</em>) – The context that may be needed for the algorithm.</li>
+<li><strong>action</strong> (<em>string</em>) – The action that is needed for the algorithm. Is         actually free of type, but generally a string is used.         but must be specified by used algorithm.</li>
+<li><strong>reward</strong> (<em>dict</em>) – Reward is pre-created such that the exec(code)         function can return an reward dict for this function (this is because         of the behavior of Python).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">True if executed correctly.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.experiment.Experiment.run_reward_code">
+<code class="descname">run_reward_code</code><span class="sig-paren">(</span><em>context</em>, <em>action</em>, <em>reward</em><span class="sig-paren">)</span><a class="headerlink" href="#core.experiment.Experiment.run_reward_code" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes set_reward code from Redis and executes it.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>context</strong> (<em>dict</em>) – The context that may be needed for the algorithm.</li>
+<li><strong>action</strong> (<em>string</em>) – The action that is needed for the algorithm. Is         actually free of type, but generally a string is used.</li>
+<li><strong>reward</strong> (<em>int</em>) – Generally an int, in 0 or 1. Can be of other type,         but must be specified by used algorithm.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">True if executed correctly.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="core.experiment.Experiment.set_theta">
+<code class="descname">set_theta</code><span class="sig-paren">(</span><em>thetas</em>, <em>key=None</em>, <em>value=None</em>, <em>name='_theta'</em><span class="sig-paren">)</span><a class="headerlink" href="#core.experiment.Experiment.set_theta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the new theta (parameters) in the database.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>thetas</strong> (<em>dict</em>) – The thetas that will eb stored. Typically a         dictionary or a class of base.py. The function will check if it is a         class and whether it has a get_dict function. It is okay to give a         class with these conditions - it will call the get_dict function and         store the dictionary.</li>
+<li><strong>key</strong> (<em>string</em>) – The key with which the theta will be associated. If         only a key is given, all the thetas that belong to that key will be         returned. Typically a key distinguishes experiments from each other.</li>
+<li><strong>value</strong> (<em>string</em>) – The value with which the theta will be assiocated.         Typically the value distinguishes the different versions within an         experiment. If no value is given, all thetas belonging to the         key/experiment will be returned.</li>
+<li><strong>name</strong> (<em>string</em>) – The name of the parameter set.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="libs.html" class="btn btn-neutral" title="Documentation of the supplied Libraries" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, M.C. Kaptein, J.M.A. Kruijswijk, R. van Emden.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
