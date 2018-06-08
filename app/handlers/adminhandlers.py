@@ -270,7 +270,7 @@ class ListDefaults(BaseHandler):
         :raises 401: If user is not logged in or if there is no secure cookie available.
         """
         if self.get_secure_cookie("user"):
-            folderdata = os.listdir("./defaults")
+            folderdata = sorted([f for f in os.listdir("./defaults") if not f.startswith('.')])
             folderdata = [x.replace("_"," ") for x in folderdata]
             folders = dict(enumerate(folderdata))
             self.write(folders)
@@ -295,7 +295,7 @@ class GetDefault(BaseHandler):
         :raises 401: If user is not logged in or if there is no secure cookie available.
         """ 
         if self.get_secure_cookie("user"):
-            folderdata = os.listdir("./defaults")
+            folderdata = sorted([f for f in os.listdir("./defaults") if not f.startswith('.')])
             folderdata = dict(enumerate(folderdata))
             data={}
             data["name"] = folderdata[int(default_id)]

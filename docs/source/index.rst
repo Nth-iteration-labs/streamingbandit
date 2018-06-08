@@ -38,8 +38,12 @@ For more information on how StreamingBandit works, check out the documentation a
 Contributing to the libraries
 =============================
 
-We gladly accept any contribution to expanding the libraries of
-StreamingBandit.
+We gladly accept any contribution to expanding the libraries of StreamingBandit.
+However, we maintain a strict policy for further development to ensure that the master branch of the project is always clean. 
+We encourage contributors to checkout of the dev branch on a fork of the repository, create a new feature branch (using “f/<feature_name>”, where f stands for feature), and submit a merge request to the dev branch once additions have been thoroughly tested and documented. 
+Merge requests that are not accompanied with thorough documentation will be rejected. 
+Once tested by the team of maintainers, updates are pushed to the dev branch and subsequently to the main branch (and the Docker distribution) as quickly as possible.
+
 The libraries that are currently written are all tested and have a default that
 functions with them.
 If you would like to contribute by writing a part of the library, look at the
@@ -53,7 +57,9 @@ following points:
     * getReward.py (optional)
     * setReward.py
 
-Providing all four files makes it easier to test, simulate and use your newly implemented policy. Make sure that you develop your new library inside your own fork of StreamingBandit. After you have tested your policy and library, you can create a pull request which we will review.
+Providing all four files makes it easier to test, simulate and use your newly implemented policy. Make sure that you develop your new library inside your own fork of StreamingBandit. Again, after you have tested your policy and library, you can create a pull request which we will review.
+
+Furthermore, we also encourage users to request features in the issues section in the main repository, which our team can discuss and possibly implement.
 
 
 Authors
