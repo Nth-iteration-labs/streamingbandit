@@ -1,5 +1,9 @@
 import numpy as np
 import random
+
+global numpy
+global random
+
 #import json
 #from scipy.optimize import minimize_scalar
 

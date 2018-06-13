@@ -14,6 +14,9 @@ import _pickle
 from handlers.basehandler import BaseHandler, ExceptionHandler
 from core.experiment import Experiment
 
+global numpy
+global random
+
 class Simulate(BaseHandler):
 
     def get(self, exp_id):

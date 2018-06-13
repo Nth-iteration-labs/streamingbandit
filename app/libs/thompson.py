@@ -3,6 +3,8 @@
 from libs.base import *
 import numpy as np
 
+global numpy
+
 class BBThompsonList(List):
     """ Class to draw decisions using a Bernoulli Bandit Thompson sampler.
 

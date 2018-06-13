@@ -4,6 +4,7 @@ from libs.base import *
 import numpy as np
 import json
 
+global numpy
 
 class LiF():
     """ Class implementing the Lock in Feedback algorithm.

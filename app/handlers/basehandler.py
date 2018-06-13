@@ -11,6 +11,8 @@ import contextlib
 
 from db.database import Database
 
+global numpy
+
 class ExceptionHandler(tornado.web.HTTPError):
 
     pass

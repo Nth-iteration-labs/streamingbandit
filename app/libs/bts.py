@@ -8,6 +8,8 @@ import inspect
 import collections
 import ast
 
+global numpy
+
 class BTS():
     """ Class to implement BTS.
 
