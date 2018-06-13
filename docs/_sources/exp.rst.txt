@@ -1,5 +1,6 @@
+********************
 Experiment functions
-====================
+********************
 Here we describe the **Experiment** class. This class, and its associated methods, allow accessing and storing policy parameters, logging data, and nesting experiments.
 
 Note that the **Experiment** class is used in two ways in StreamingBandit:

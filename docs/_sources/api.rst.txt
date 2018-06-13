@@ -1,5 +1,6 @@
+********************
 Complete RESTful API
-====================
+********************
 
 Here we describe the details of the REST API endpoints that are provided by StreamingBandit. Note that, with the exception of the two Core API calls, all the calls require authentication (for details see the Login API specs below).
 

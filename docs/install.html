@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installation &mdash; StreamingBandit 1 documentation</title>
+  <title>Installation &mdash; StreamingBandit 1.0.1 documentation</title>
   
 
   
@@ -24,27 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="StreamingBandit 1 documentation" href="index.html"/>
-        <link rel="next" title="Complete RESTful API" href="api.html"/>
-        <link rel="prev" title="Welcome to StreamingBandit’s documentation!" href="index.html"/> 
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Complete RESTful API" href="api.html" />
+    <link rel="prev" title="Welcome to StreamingBandit’s documentation!" href="index.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -66,7 +58,7 @@
             
             
               <div class="version">
-                1
+                1.0.1
               </div>
             
           
@@ -91,28 +83,15 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Introduction</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#about-streamingbandit">About StreamingBandit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#contributing-to-the-libraries">Contributing to the libraries</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#authors">Authors</a></li>
+</ul>
+</li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#install-in-docker">Install in Docker</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#install-and-running-from-source">Install and running from Source</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#installing-from-source">Installing from Source</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#redis">Redis</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#mac">Mac</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#linux">Linux</a></li>
-</ul>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#mongodb">MongoDB</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#id1">Mac</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#linux-ubuntu-debian">Linux (Ubuntu/Debian)</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#configurating-redis-and-mongodb-locations">Configurating Redis and MongoDB locations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#running-streamingbandit">Running StreamingBandit</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#using-streamingbandit-front-end">Using StreamingBandit front-end</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#install-and-running-from-source">Install and running from Source</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
@@ -129,7 +108,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">StreamingBandit</a>
@@ -137,9 +116,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -188,30 +168,30 @@
 <h2>Install in Docker<a class="headerlink" href="#install-in-docker" title="Permalink to this headline">¶</a></h2>
 <p>Using <a class="reference external" href="http://docs.docker.io/">Docker</a> you can easily install StreamingBandit in an isolated container and will have you up and running within a matter of minutes. Docker is a virtualization framework that uses separate containers for each piece of software that you are using. Every dependency and installation procedure is handled by Docker. This is the easiest and recommended way to run StreamingBandit. For more information about <a class="reference external" href="http://docs.docker.io/">Docker</a>, check out their website.</p>
 <p>After you have installed Docker and have it up and running, you can get StreamingBandit started using the following commands (note that you also need <a class="reference external" href="https://git-scm.com/">Git</a>):</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ git clone https://github.com/nth-iteration-labs/streamingbandit
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/nth-iteration-labs/streamingbandit
 $ cd streamingbandit
 $ docker-compose up -d
 </pre></div>
 </div>
 <p>After the Docker containers are up and running, we can add an admin account with password ‘test’ so that you can login to the back-end:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ docker exec -t streamingbandit_web_1 python3 ../insert_admin.py -p test
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ docker exec -t streamingbandit_web_1 python3 ../insert_admin.py -p test
 </pre></div>
 </div>
 <p>Stopping and starting the containers can be done by:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ docker-compose stop
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ docker-compose stop
 $ docker-compose start
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">You can also stop the Docker containers using <code class="docutils literal"><span class="pre">$</span> <span class="pre">docker-compose</span> <span class="pre">down</span></code>, but use this with caution, as it will destroy the containers and also all your saved progress and data!</p>
+<p class="last">You can also stop the Docker containers using <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">docker-compose</span> <span class="pre">down</span></code>, but use this with caution, as it will destroy the containers and also all your saved progress and data!</p>
 </div>
 <p>The last few commands will only start up the back-end. If you would like to have the front-end running as well, you can accomplish that using the following commands:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ docker-compose -f docker-compose.yml -f docker-compose.front-end.yml up -d
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ docker-compose -f docker-compose.yml -f docker-compose.front-end.yml up -d
 </pre></div>
 </div>
 <p>Then starting and stopping can be done by issuing:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ docker-compose -f docker-compose.yml -f docker-compose.front-end.yml stop
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ docker-compose -f docker-compose.yml -f docker-compose.front-end.yml stop
 $ docker-compose -f docker-compose.yml -f docker-compose.front-end.yml start
 </pre></div>
 </div>
@@ -225,7 +205,7 @@ $ docker-compose -f docker-compose.yml -f docker-compose.front-end.yml start
 <div class="section" id="installing-from-source">
 <h3>Installing from Source<a class="headerlink" href="#installing-from-source" title="Permalink to this headline">¶</a></h3>
 <p>Currently this section is only for Mac/Linux and only Python 3 is supported. Firstly, you will have to install all the Python dependencies:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ pip3 install .
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip3 install .
 </pre></div>
 </div>
 <div class="section" id="redis">
@@ -234,7 +214,7 @@ $ docker-compose -f docker-compose.yml -f docker-compose.front-end.yml start
 <div class="section" id="mac">
 <h5>Mac<a class="headerlink" href="#mac" title="Permalink to this headline">¶</a></h5>
 <p>To install Redis on Mac, we can use brew:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ brew install redis
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ brew install redis
 </pre></div>
 </div>
 </div>
@@ -249,7 +229,7 @@ $ docker-compose -f docker-compose.yml -f docker-compose.front-end.yml start
 <div class="section" id="id1">
 <h5>Mac<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h5>
 <p>To install MongoDB on Mac, we can again use brew:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ brew install mongodb
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ brew install mongodb
 </pre></div>
 </div>
 </div>
@@ -271,11 +251,11 @@ $ docker-compose -f docker-compose.yml -f docker-compose.front-end.yml start
 <li>Start MongoDB</li>
 </ul>
 <p>Then you can start the StreamingBandit back-end by issuing the following commands:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>$ cd streamingbandit/app
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd streamingbandit/app
 $ python3 app.py
 </pre></div>
 </div>
-<p>You can now go to <code class="docutils literal"><span class="pre">http://localhost:8080/</span></code> and if everything is running correctly, you will see a welcome page!</p>
+<p>You can now go to <code class="docutils literal notranslate"><span class="pre">http://localhost:8080/</span></code> and if everything is running correctly, you will see a welcome page!</p>
 </div>
 <div class="section" id="using-streamingbandit-front-end">
 <h3>Using StreamingBandit front-end<a class="headerlink" href="#using-streamingbandit-front-end" title="Permalink to this headline">¶</a></h3>
@@ -297,9 +277,7 @@ $ python3 app.py
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -321,7 +299,7 @@ $ python3 app.py
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -339,7 +317,8 @@ $ python3 app.py
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1',
+            VERSION:'1.0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -353,19 +332,13 @@ $ python3 app.py
 
   
 
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

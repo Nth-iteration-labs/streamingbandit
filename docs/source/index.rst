@@ -1,5 +1,6 @@
+*******************************************
 Welcome to StreamingBandit's documentation!
-===========================================
+*******************************************
 
 This is the official documentation for StreamingBandit. You can find the source
 code at `GitHub`_.
@@ -67,14 +68,15 @@ Authors
 
 Maurits Kaptein (``maurits at mauritskaptein dot com``)
 
-Jules Kruijswijk (``juleskruijswijk at gmail dot com``)
+Jules Kruijswijk (``j.m.a.kruijswijk at uvt dot nl``)
 
 Robin van Emden (``robin at pwy dot nl``)
 
 .. toctree::
+   :maxdepth: 1
    :hidden:
 
-   Introduction <self>
+   Introduction <index>
    Installation <install>
    API <api>
    Libs <libs>
