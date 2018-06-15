@@ -27,8 +27,11 @@ class BBThompsonList(List):
         """
         min_prob = 0
         choice = None
-        for key, obj in self.base_list.items():
-            theta = obj.get_dict()
+        #for key, obj in self.base_list.items():
+        for i in self.value_names:
+            #theta = obj.get_dict()
+            theta = self.base_list[i].get_dict()
+            key = i
             a = float(theta['p']) * int(theta['n'])
             b = int(theta['n']) - a
             if (a == 0) or (b == 0):
