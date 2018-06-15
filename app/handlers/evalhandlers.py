@@ -85,18 +85,15 @@ class Simulate(BaseHandler):
                         action.clear()
                         reward.clear()
 
-                #if seed is not None:
-                #    np.random.seed()
-                #    random.seed()
-
                 if log_stats == True:
                     __EXP__.log_simulation_data(data.copy())
+                data_tmp = data.copy()
+                data.clear()
 
                 if verbose == True:
-                    self.write(json.dumps({'simulate':'success', 'experiment':exp_id, 'data':data}))
+                    self.write(json.dumps({'simulate':'success', 'experiment':exp_id, 'data':data_tmp}))
                 else:
                     self.write(json.dumps({'simulate':'success', 'experiment':exp_id, 'theta':theta}))
-
             else:
                 raise ExceptionHandler(reason="Experiment could not be validated.", status_code=401)
         else:
