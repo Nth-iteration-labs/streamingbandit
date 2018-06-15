@@ -27,9 +27,7 @@ class BBThompsonList(List):
         """
         min_prob = 0
         choice = None
-        #for key, obj in self.base_list.items():
         for i in self.value_names:
-            #theta = obj.get_dict()
             theta = self.base_list[i].get_dict()
             key = i
             a = float(theta['p']) * int(theta['n'])
@@ -40,8 +38,6 @@ class BBThompsonList(List):
                 draw = np.random.beta(a,b)
             if draw > min_prob:
                 min_prob = draw
-                # We want to return something of the form of an action choice.
-                # Do we return 
                 choice = key
         return choice
 
@@ -84,21 +80,17 @@ class ThompsonVarList(List):
         """
         max_criterion = 0
         choice = None
-        for key, obj in self.base_list.items():
-
-            # Get the objects
-            theta = obj.get_dict()
-
+        for i in self.value_names:
+            theta = self.base_list[i].get_dict()
+            key = i
             # Get sum of squares and N
             SS = float(theta['s'])            
             n = int(theta['n']) 
             if n < 2:
                 choice = key
                 break
-            
             # Computer criterion based on posterior variance
             criterion = self._postVariance(SS,n) / n
-            
             # Return condition with hightest criterion
             if criterion > max_criterion:
                 max_criterion = criterion
