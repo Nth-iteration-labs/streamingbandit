@@ -3,6 +3,8 @@ import numpy as np
 from libs.base import *
 import ast
 
+global numpy
+
 class ThompsonBayesianLinear():
     """ Class for Thompson sampling for Bayesian Linear Regression
     

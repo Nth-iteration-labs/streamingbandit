@@ -4,6 +4,8 @@ from libs.base import *
 import numpy as np
 import pickle
 
+global numpy
+
 ## OK, this could just work, but its not tested
 ## And, we should use some kind of *args to pass multiple arguments...
 

@@ -8,6 +8,8 @@ import inspect
 import collections
 import ast
 
+global numpy
+
 class BTS():
     """ Class to implement BTS.
 
@@ -36,7 +38,7 @@ class BTS():
         if isinstance(params,dict):
             if len(params) != m:
                 if default_params is not None:
-                    self.params = {}
+                    self.params = collections.OrderedDict()
                     for i in range(0,m):
                         tmp_params = {}
                         for k,v in default_params.items():
@@ -44,8 +46,8 @@ class BTS():
                                 tmp_params[k] = np.random.normal(v,noisesd).tolist()
                             else:
                                 tmp_params[k] = v
-                        self.params[i] = tmp_params.copy()
-                    self.params = collections.OrderedDict(self.params)
+                        self.params.update({i : tmp_params.copy()})
+                    #self.params = collections.OrderedDict(self.params)
                 else:
                     self.params = {i : params.copy() for i in range(0,m)}
                     self.params = collections.OrderedDict(self.params)

@@ -5,8 +5,14 @@ import tornado.web
 import yaml
 import json
 import traceback
+import numpy as np
+import random
+import contextlib
 
 from db.database import Database
+
+from numpy.random.mtrand import _rand as global_randstate
+global numpy
 
 class ExceptionHandler(tornado.web.HTTPError):
 
@@ -77,6 +83,19 @@ class BaseHandler(tornado.web.RequestHandler):
                     'message': self._reason,
                 }
             }))
+
+    @contextlib.contextmanager
+    def temp_seed(self, seed):
+        statenp = np.random.get_state()
+        state = random.getstate()
+        #np.random.seed(seed)
+        global_randstate.seed(seed)
+        random.seed(seed)
+        try:
+            yield
+        finally:
+            np.random.set_state(statenp)
+            random.setstate(state)
 
 class IndexHandler(tornado.web.RequestHandler):
 

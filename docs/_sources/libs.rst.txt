@@ -1,5 +1,6 @@
+***************************************
 Documentation of the supplied Libraries
-=======================================
+***************************************
 StreamingBandit is build on a philosophy of streaming (or online, or row-by-row) updating of parameters of a policy. The **libs** libraries provide some functionality for estimating and fitting statistical models online. These libraries are available directly in the **getaction** and **setreward** code.
 
 The following code provides an example of the use of one of the **libs** in the **getaction** code of an experiment:

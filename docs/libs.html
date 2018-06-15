@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Documentation of the supplied Libraries &mdash; StreamingBandit 1 documentation</title>
+  <title>Documentation of the supplied Libraries &mdash; StreamingBandit 1.0.1 documentation</title>
   
 
   
@@ -24,27 +24,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="StreamingBandit 1 documentation" href="index.html"/>
-        <link rel="next" title="Experiment functions" href="exp.html"/>
-        <link rel="prev" title="Complete RESTful API" href="api.html"/> 
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Experiment functions" href="exp.html" />
+    <link rel="prev" title="Complete RESTful API" href="api.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -66,7 +58,7 @@
             
             
               <div class="version">
-                1
+                1.0.1
               </div>
             
           
@@ -91,7 +83,12 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Introduction</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#about-streamingbandit">About StreamingBandit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#contributing-to-the-libraries">Contributing to the libraries</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#authors">Authors</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Libs</a><ul>
@@ -115,7 +112,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">StreamingBandit</a>
@@ -123,9 +120,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -171,7 +169,7 @@
 <h1>Documentation of the supplied Libraries<a class="headerlink" href="#documentation-of-the-supplied-libraries" title="Permalink to this headline">¶</a></h1>
 <p>StreamingBandit is build on a philosophy of streaming (or online, or row-by-row) updating of parameters of a policy. The <strong>libs</strong> libraries provide some functionality for estimating and fitting statistical models online. These libraries are available directly in the <strong>getaction</strong> and <strong>setreward</strong> code.</p>
 <p>The following code provides an example of the use of one of the <strong>libs</strong> in the <strong>getaction</strong> code of an experiment:</p>
-<div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<div class="highlight-python3 notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -184,7 +182,7 @@
 </td></tr></table></div>
 <p>which would retrieve a list of sample means by name (<strong>treatment</strong> and <strong>control</strong>), and subsequently select the name with the highest mean.</p>
 <p>Note that each of the <strong>libs</strong> provides update methods to update the object when new data is observed. For example, the code:</p>
-<div class="highlight-python3"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<div class="highlight-python3 notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -212,6 +210,36 @@
 </tr>
 </tbody>
 </table>
+<dl class="method">
+<dt id="libs.base.Correlation.__add__">
+<code class="descname">__add__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Correlation.__add__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override the arithmetic + function.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.base.Correlation.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>default</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Correlation.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct a new strmBase object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.base.Correlation.__mul__">
+<code class="descname">__mul__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Correlation.__mul__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override the arithmetic * function.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.base.Correlation.__sub__">
+<code class="descname">__sub__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Correlation.__sub__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override the arithmetic - function.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.base.Correlation.__truediv__">
+<code class="descname">__truediv__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Correlation.__truediv__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override the arithmetic / function.</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="libs.base.Correlation.update">
 <code class="descname">update</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Correlation.update" title="Permalink to this definition">¶</a></dt>
@@ -241,6 +269,12 @@
 </tbody>
 </table>
 <dl class="method">
+<dt id="libs.base.Count.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>default</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Count.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct a new strmBase object.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="libs.base.Count.increment">
 <code class="descname">increment</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Count.increment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update the counter with value 1.</p>
@@ -266,6 +300,36 @@
 </tr>
 </tbody>
 </table>
+<dl class="method">
+<dt id="libs.base.Covariance.__add__">
+<code class="descname">__add__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Covariance.__add__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override the arithmetic + function.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.base.Covariance.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>default</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Covariance.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct a new strmBase object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.base.Covariance.__mul__">
+<code class="descname">__mul__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Covariance.__mul__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override the arithmetic * function.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.base.Covariance.__sub__">
+<code class="descname">__sub__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Covariance.__sub__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override the arithmetic - function.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.base.Covariance.__truediv__">
+<code class="descname">__truediv__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Covariance.__truediv__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override the arithmetic / function.</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="libs.base.Covariance.update">
 <code class="descname">update</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Covariance.update" title="Permalink to this definition">¶</a></dt>
@@ -299,6 +363,12 @@
 </tr>
 </tbody>
 </table>
+<dl class="method">
+<dt id="libs.base.List.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>objects</em>, <em>_t</em>, <em>value_names</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.List.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="libs.base.List.__weakref__">
 <code class="descname">__weakref__</code><a class="headerlink" href="#libs.base.List.__weakref__" title="Permalink to this definition">¶</a></dt>
@@ -346,6 +416,12 @@ If no max is available yet (because the values are empty), it will return a rand
 </tbody>
 </table>
 <dl class="method">
+<dt id="libs.base.Mean.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>default</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Mean.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct a new strmBase object.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="libs.base.Mean.get_count">
 <code class="descname">get_count</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Mean.get_count" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the counter of the mean object.</p>
@@ -380,6 +456,36 @@ If no max is available yet (because the values are empty), it will return a rand
 </tbody>
 </table>
 <dl class="method">
+<dt id="libs.base.Proportion.__add__">
+<code class="descname">__add__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Proportion.__add__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override the arithmetic + function.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.base.Proportion.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>default</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Proportion.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct a new strmBase object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.base.Proportion.__mul__">
+<code class="descname">__mul__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Proportion.__mul__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override the arithmetic * function.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.base.Proportion.__sub__">
+<code class="descname">__sub__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Proportion.__sub__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override the arithmetic - function.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.base.Proportion.__truediv__">
+<code class="descname">__truediv__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Proportion.__truediv__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override the arithmetic / function.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="libs.base.Proportion.update">
 <code class="descname">update</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Proportion.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds value to the proportion.</p>
@@ -407,6 +513,36 @@ If no max is available yet (because the values are empty), it will return a rand
 </tr>
 </tbody>
 </table>
+<dl class="method">
+<dt id="libs.base.Variance.__add__">
+<code class="descname">__add__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Variance.__add__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override the arithmetic + function.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.base.Variance.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>default</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Variance.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct a new strmBase object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.base.Variance.__mul__">
+<code class="descname">__mul__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Variance.__mul__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override the arithmetic * function.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.base.Variance.__sub__">
+<code class="descname">__sub__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Variance.__sub__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override the arithmetic - function.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="libs.base.Variance.__truediv__">
+<code class="descname">__truediv__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Variance.__truediv__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override the arithmetic / function.</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="libs.base.Variance.update">
 <code class="descname">update</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.base.Variance.update" title="Permalink to this definition">¶</a></dt>
@@ -609,6 +745,12 @@ by creating a variance list</p>
 </tr>
 </tbody>
 </table>
+<dl class="method">
+<dt id="libs.bts.BTS.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>params</em>, <em>update_method=None</em>, <em>m=100</em>, <em>default_params=None</em>, <em>param_noise=True</em>, <em>noisesd=0.1</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.bts.BTS.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="libs.bts.BTS.__weakref__">
 <code class="descname">__weakref__</code><a class="headerlink" href="#libs.bts.BTS.__weakref__" title="Permalink to this definition">¶</a></dt>
@@ -753,6 +895,12 @@ Implementation of Lock in Feedback,     following the definition by Maurits Kapt
 </tr>
 </tbody>
 </table>
+<dl class="method">
+<dt id="libs.thompson_bayesian_linear.ThompsonBayesianLinear.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>default</em><span class="sig-paren">)</span><a class="headerlink" href="#libs.thompson_bayesian_linear.ThompsonBayesianLinear.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="libs.thompson_bayesian_linear.ThompsonBayesianLinear.__weakref__">
 <code class="descname">__weakref__</code><a class="headerlink" href="#libs.thompson_bayesian_linear.ThompsonBayesianLinear.__weakref__" title="Permalink to this definition">¶</a></dt>
@@ -797,9 +945,7 @@ Implementation of Lock in Feedback,     following the definition by Maurits Kapt
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -821,7 +967,7 @@ Implementation of Lock in Feedback,     following the definition by Maurits Kapt
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -839,7 +985,8 @@ Implementation of Lock in Feedback,     following the definition by Maurits Kapt
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1',
+            VERSION:'1.0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -853,19 +1000,13 @@ Implementation of Lock in Feedback,     following the definition by Maurits Kapt
 
   
 
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

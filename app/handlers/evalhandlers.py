@@ -6,12 +6,16 @@ import json
 import numpy as np
 import random
 import time
+import contextlib
 
 from bson.binary import Binary
 import _pickle
 
 from handlers.basehandler import BaseHandler, ExceptionHandler
 from core.experiment import Experiment
+
+global numpy
+global random
 
 class Simulate(BaseHandler):
 
@@ -42,9 +46,8 @@ class Simulate(BaseHandler):
                 log_stats = self.get_argument("log_stats", default = False)
                 verbose = self.get_argument("verbose", default = True)
                 seed = self.get_argument("seed", default = None)
-                if seed is not None:
-                    np.random.seed(int(seed))
-                    random.seed(int(seed))
+                if seed is None:
+                    seed = np.random.randint(2**32-1, dtype=np.uint32)
                 if verbose == "True":
                     verbose = True
                 else:
@@ -58,41 +61,39 @@ class Simulate(BaseHandler):
 
                 data = {}
 
-                for i in range(N):
-                    # Generate context
-                    context = __EXP__.run_context_code()
+                with self.temp_seed(int(seed)):
+                    for i in range(N):
+                        # Generate context
+                        context = __EXP__.run_context_code()
 
-                    # Get action
-                    action = __EXP__.run_action_code(context)
+                        # Get action
+                        action = __EXP__.run_action_code(context)
 
-                    # Generate reward
-                    reward = __EXP__.run_get_reward_code(context, action)
+                        # Generate reward
+                        reward = __EXP__.run_get_reward_code(context, action)
 
-                    # Set reward
-                    __EXP__.run_reward_code(context, action, reward)
+                        # Set reward
+                        __EXP__.run_reward_code(context, action, reward)
 
-                    # Get theta
-                    theta = __EXP__.get_theta()
-                    
-                    # Save stats
-                    data[str(i)] = {'context' : context.copy(), 'action' : action.copy(), 'reward' : reward.copy(), 'theta' : theta.copy()}
+                        # Get theta
+                        theta = __EXP__.get_theta()
+                        
+                        # Save stats
+                        data[str(i)] = {'context' : context.copy(), 'action' : action.copy(), 'reward' : reward.copy(), 'theta' : theta.copy()}
 
-                    context.clear()
-                    action.clear()
-                    reward.clear()
-
-                if seed is not None:
-                    np.random.seed()
-                    random.seed()
+                        context.clear()
+                        action.clear()
+                        reward.clear()
 
                 if log_stats == True:
                     __EXP__.log_simulation_data(data.copy())
+                data_tmp = data.copy()
+                data.clear()
 
                 if verbose == True:
-                    self.write(json.dumps({'simulate':'success', 'experiment':exp_id, 'data':data}))
+                    self.write(json.dumps({'simulate':'success', 'experiment':exp_id, 'data':data_tmp}))
                 else:
                     self.write(json.dumps({'simulate':'success', 'experiment':exp_id, 'theta':theta}))
-
             else:
                 raise ExceptionHandler(reason="Experiment could not be validated.", status_code=401)
         else:

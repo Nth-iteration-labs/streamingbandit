@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Welcome to StreamingBandit’s documentation! &mdash; StreamingBandit 1 documentation</title>
+  <title>Welcome to StreamingBandit’s documentation! &mdash; StreamingBandit 1.0.1 documentation</title>
   
 
   
@@ -24,26 +24,18 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="StreamingBandit 1 documentation" href="#"/>
-        <link rel="next" title="Installation" href="install.html"/> 
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="install.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -65,7 +57,7 @@
             
             
               <div class="version">
-                1
+                1.0.1
               </div>
             
           
@@ -90,7 +82,12 @@
             
             
               <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#about-streamingbandit">About StreamingBandit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contributing-to-the-libraries">Contributing to the libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#authors">Authors</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="libs.html">Libs</a></li>
@@ -106,7 +103,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="#">StreamingBandit</a>
@@ -114,9 +111,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -162,18 +160,17 @@
 <h1>Welcome to StreamingBandit’s documentation!<a class="headerlink" href="#welcome-to-streamingbandit-s-documentation" title="Permalink to this headline">¶</a></h1>
 <p>This is the official documentation for StreamingBandit. You can find the source
 code at <a class="reference external" href="https://github.com/nth-iteration-labs/streamingbandit">GitHub</a>.</p>
-</div>
 <div class="section" id="about-streamingbandit">
-<h1>About StreamingBandit<a class="headerlink" href="#about-streamingbandit" title="Permalink to this headline">¶</a></h1>
-<p>StreamingBandit is a RESTful API web application for developing and testing sequential experiments in field and simulation studies. This is done by formalizing a sequential experiment as a <a class="reference external" href="https://en.wikipedia.org/wiki/Multi-armed_bandit">(contextual) multi-armed bandit problem</a>. Each sequential experiment can be defined as follows. At each interaction <span class="math">\(t\)</span>:</p>
+<h2>About StreamingBandit<a class="headerlink" href="#about-streamingbandit" title="Permalink to this headline">¶</a></h2>
+<p>StreamingBandit is a RESTful API web application for developing and testing sequential experiments in field and simulation studies. This is done by formalizing a sequential experiment as a <a class="reference external" href="https://en.wikipedia.org/wiki/Multi-armed_bandit">(contextual) multi-armed bandit problem</a>. Each sequential experiment can be defined as follows. At each interaction <span class="math notranslate nohighlight">\(t\)</span>:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li>the experimenter observes a <em>context</em> <span class="math">\(x_t\)</span>,</li>
-<li>subsequently, the experimenter chooses an <em>action</em> <span class="math">\(a_t\)</span>,</li>
-<li>and finally a <em>reward</em> <span class="math">\(r_t\)</span> is observed.</li>
+<li>the experimenter observes a <em>context</em> <span class="math notranslate nohighlight">\(x_t\)</span>,</li>
+<li>subsequently, the experimenter chooses an <em>action</em> <span class="math notranslate nohighlight">\(a_t\)</span>,</li>
+<li>and finally a <em>reward</em> <span class="math notranslate nohighlight">\(r_t\)</span> is observed.</li>
 </ol>
 </div></blockquote>
-<p>The main aim of the experimenter is to maximize the cumulative reward <span class="math">\(\sum_{t=1}^N r_t\)</span> where <span class="math">\(N\)</span> denotes the total number of interactions. To do so, the experimenter applies a <em>policy</em> <span class="math">\(\pi\)</span> which is some function that takes the context <span class="math">\(x_t\)</span> and the historical interactions, and returns an action. For convenience we denote all historical interactions using <span class="math">\(\mathcal{D}_{(t-1)}\)</span> and thus we have <span class="math">\(\pi(x_t, \mathcal{D}_{t-1}) \rightarrow a_t\)</span>.</p>
+<p>The main aim of the experimenter is to maximize the cumulative reward <span class="math notranslate nohighlight">\(\sum_{t=1}^N r_t\)</span> where <span class="math notranslate nohighlight">\(N\)</span> denotes the total number of interactions. To do so, the experimenter applies a <em>policy</em> <span class="math notranslate nohighlight">\(\pi\)</span> which is some function that takes the context <span class="math notranslate nohighlight">\(x_t\)</span> and the historical interactions, and returns an action. For convenience we denote all historical interactions using <span class="math notranslate nohighlight">\(\mathcal{D}_{(t-1)}\)</span> and thus we have <span class="math notranslate nohighlight">\(\pi(x_t, \mathcal{D}_{t-1}) \rightarrow a_t\)</span>.</p>
 <p>The following are some examples of when StreamingBandit is a useful tool:</p>
 <ul class="simple">
 <li>Personalized healthcare: A physician meets with patients sequentially. For each patient she observes a number of background characteristics (gender, age, current condition) constituting the context. Subsequently, her action is to choose a treatment such that the reward—measured in terms of general health of the patient—is maximized.</li>
@@ -182,19 +179,22 @@ code at <a class="reference external" href="https://github.com/nth-iteration-lab
 <li>Social science experiments: Many social science experiments constitute a special case of contextual decision making: during the experiment participants are recruited sequentially. The context consists of all that’s known about the participant, and sequently the action is to assign a participant to a specific experimental condition (possibly dependent on the context in cases of, e.g., stratified sampling). Finally, the reward(s) consist of the outcome measures of the experiments.</li>
 </ul>
 <p>The list above illustrates the generality of our approach; StreamingBandit can be used to allocate actions in all of the above applications.</p>
-<p>To ensure the computational scalability of StreamingBandit, we assume that at the latest interaction <span class="math">\(t=t'\)</span>, all the information necessary to choose an action can be summarized using a limited set of parameters denoted <span class="math">\(\theta_{t'}\)</span>, where often the dimensionality of <span class="math">\(\theta_t\)</span> is (much) smaller than that of <span class="math">\(\mathcal{D}_{t-1}\)</span>. Given this assumption, we identify the following two steps of a policy:</p>
+<p>To ensure the computational scalability of StreamingBandit, we assume that at the latest interaction <span class="math notranslate nohighlight">\(t=t'\)</span>, all the information necessary to choose an action can be summarized using a limited set of parameters denoted <span class="math notranslate nohighlight">\(\theta_{t'}\)</span>, where often the dimensionality of <span class="math notranslate nohighlight">\(\theta_t\)</span> is (much) smaller than that of <span class="math notranslate nohighlight">\(\mathcal{D}_{t-1}\)</span>. Given this assumption, we identify the following two steps of a policy:</p>
 <ol class="arabic simple">
-<li>The <em>decision</em> step: In the decision step, using <span class="math">\(x_{t'}\)</span> and <span class="math">\(\theta_{t'}\)</span>, and often using some (statistical) model relating the actions, the context, and the reward which is parametrized by <span class="math">\(\theta_{t'}\)</span>, a next action <span class="math">\(a_{t'}\)</span> is selected. Making a request to StreamingBandit’s <strong>getaction</strong> REST endpoint returns a JSON object containing the selected action. Optionally, you can request an <strong>advice_id</strong> that will couple your <strong>getaction</strong> to your <strong>setreward</strong> call - more info on this is inside the Experiment documentation.</li>
-<li>The <em>summary</em> step: In each summary step <span class="math">\(\theta_{t'}\)</span> is updated using the new information <span class="math">\(\{x_{t'},a_{t'},r_{t'}, p_{t'}\}\)</span>. Thus, in this step, <span class="math">\(\theta_{t'+1} = g(\theta_{t'}, x_{t'},a_{t'},r_{t'}, p_{t'})\)</span> where <span class="math">\(g()\)</span> is some update function. Effectively, all the prior data, <span class="math">\(\mathcal{D}_{t-1}\)</span> are <em>summarized</em> into <span class="math">\(\theta_{t'}\)</span>. This choice makes that the computations are bounded by the dimension of <span class="math">\(\theta\)</span> and the time required to update <span class="math">\(\theta\)</span> instead of growing as a function of <span class="math">\(t\)</span>. Note that this effectively forces users to implement an online policy; the complete dataset <span class="math">\(\mathcal{D}_{t-1}\)</span> is not revisited at subsequent interactions. Making a request to StreamingBandit’s <strong>setreward</strong> endpoint containing a JSON object including either the <strong>advice_id</strong>, or a complete description of <span class="math">\(\{x_{t'},a_{t'}, p_{t'}\}\)</span>, and the reward <span class="math">\(r_{t'}\)</span>, allows one to update <span class="math">\(\theta_{t'+1}\)</span> and subsequently influence the actions selected at <span class="math">\(t'+1\)</span>.</li>
+<li>The <em>decision</em> step: In the decision step, using <span class="math notranslate nohighlight">\(x_{t'}\)</span> and <span class="math notranslate nohighlight">\(\theta_{t'}\)</span>, and often using some (statistical) model relating the actions, the context, and the reward which is parametrized by <span class="math notranslate nohighlight">\(\theta_{t'}\)</span>, a next action <span class="math notranslate nohighlight">\(a_{t'}\)</span> is selected. Making a request to StreamingBandit’s <strong>getaction</strong> REST endpoint returns a JSON object containing the selected action. Optionally, you can request an <strong>advice_id</strong> that will couple your <strong>getaction</strong> to your <strong>setreward</strong> call - more info on this is inside the Experiment documentation.</li>
+<li>The <em>summary</em> step: In each summary step <span class="math notranslate nohighlight">\(\theta_{t'}\)</span> is updated using the new information <span class="math notranslate nohighlight">\(\{x_{t'},a_{t'},r_{t'}, p_{t'}\}\)</span>. Thus, in this step, <span class="math notranslate nohighlight">\(\theta_{t'+1} = g(\theta_{t'}, x_{t'},a_{t'},r_{t'}, p_{t'})\)</span> where <span class="math notranslate nohighlight">\(g()\)</span> is some update function. Effectively, all the prior data, <span class="math notranslate nohighlight">\(\mathcal{D}_{t-1}\)</span> are <em>summarized</em> into <span class="math notranslate nohighlight">\(\theta_{t'}\)</span>. This choice makes that the computations are bounded by the dimension of <span class="math notranslate nohighlight">\(\theta\)</span> and the time required to update <span class="math notranslate nohighlight">\(\theta\)</span> instead of growing as a function of <span class="math notranslate nohighlight">\(t\)</span>. Note that this effectively forces users to implement an online policy; the complete dataset <span class="math notranslate nohighlight">\(\mathcal{D}_{t-1}\)</span> is not revisited at subsequent interactions. Making a request to StreamingBandit’s <strong>setreward</strong> endpoint containing a JSON object including either the <strong>advice_id</strong>, or a complete description of <span class="math notranslate nohighlight">\(\{x_{t'},a_{t'}, p_{t'}\}\)</span>, and the reward <span class="math notranslate nohighlight">\(r_{t'}\)</span>, allows one to update <span class="math notranslate nohighlight">\(\theta_{t'+1}\)</span> and subsequently influence the actions selected at <span class="math notranslate nohighlight">\(t'+1\)</span>.</li>
 </ol>
 <p>For the basic usage of StreamingBandit the experimenter—or rather an external server or mobile application—sequentially executes requests to the <strong>getaction</strong> and <strong>setreward</strong> endpoints, and allocates actions accordingly. Using this setup, StreamingBandit can be used to, for example, sequentially select advertisements on webpages, allocate research subjects in an online experiment to different experimental conditions, or sequentially optimize the feedback provided to users off a mobile eHealth application.</p>
 <p>For more information on how StreamingBandit works, check out the documentation and <a class="reference external" href="https://arxiv.org/abs/1602.06700">this paper</a>.</p>
 </div>
 <div class="section" id="contributing-to-the-libraries">
-<h1>Contributing to the libraries<a class="headerlink" href="#contributing-to-the-libraries" title="Permalink to this headline">¶</a></h1>
-<p>We gladly accept any contribution to expanding the libraries of
-StreamingBandit.
-The libraries that are currently written are all tested and have a default that
+<h2>Contributing to the libraries<a class="headerlink" href="#contributing-to-the-libraries" title="Permalink to this headline">¶</a></h2>
+<p>We gladly accept any contribution to expanding the libraries of StreamingBandit.
+However, we maintain a strict policy for further development to ensure that the master branch of the project is always clean.
+We encourage contributors to checkout of the dev branch on a fork of the repository, create a new feature branch (using “f/&lt;feature_name&gt;”, where f stands for feature), and submit a merge request to the dev branch once additions have been thoroughly tested and documented.
+Merge requests that are not accompanied with thorough documentation will be rejected.
+Once tested by the team of maintainers, updates are pushed to the dev branch and subsequently to the main branch (and the Docker distribution) as quickly as possible.</p>
+<p>The libraries that are currently written are all tested and have a default that
 functions with them.
 If you would like to contribute by writing a part of the library, look at the
 following points:</p>
@@ -212,22 +212,22 @@ following points:</p>
 </div></blockquote>
 </li>
 </ul>
-<p>Providing all four files makes it easier to test, simulate and use your newly implemented policy. Make sure that you develop your new library inside your own fork of StreamingBandit. After you have tested your policy and library, you can create a pull request which we will review.</p>
+<p>Providing all four files makes it easier to test, simulate and use your newly implemented policy. Make sure that you develop your new library inside your own fork of StreamingBandit. Again, after you have tested your policy and library, you can create a pull request which we will review.</p>
+<p>Furthermore, we also encourage users to request features in the issues section in the main repository, which our team can discuss and possibly implement.</p>
 </div>
 <div class="section" id="authors">
-<h1>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h1>
-<p>Maurits Kaptein (<code class="docutils literal"><span class="pre">maurits</span> <span class="pre">at</span> <span class="pre">mauritskaptein</span> <span class="pre">dot</span> <span class="pre">com</span></code>)</p>
-<p>Jules Kruijswijk (<code class="docutils literal"><span class="pre">juleskruijswijk</span> <span class="pre">at</span> <span class="pre">gmail</span> <span class="pre">dot</span> <span class="pre">com</span></code>)</p>
-<p>Robin van Emden (<code class="docutils literal"><span class="pre">robin</span> <span class="pre">at</span> <span class="pre">pwy</span> <span class="pre">dot</span> <span class="pre">nl</span></code>)</p>
+<h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
+<p>Maurits Kaptein (<code class="docutils literal notranslate"><span class="pre">maurits</span> <span class="pre">at</span> <span class="pre">mauritskaptein</span> <span class="pre">dot</span> <span class="pre">com</span></code>)</p>
+<p>Jules Kruijswijk (<code class="docutils literal notranslate"><span class="pre">j.m.a.kruijswijk</span> <span class="pre">at</span> <span class="pre">uvt</span> <span class="pre">dot</span> <span class="pre">nl</span></code>)</p>
+<p>Robin van Emden (<code class="docutils literal notranslate"><span class="pre">robin</span> <span class="pre">at</span> <span class="pre">pwy</span> <span class="pre">dot</span> <span class="pre">nl</span></code>)</p>
 <div class="toctree-wrapper compound">
 </div>
 </div>
+</div>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -247,7 +247,7 @@ following points:</p>
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -265,7 +265,8 @@ following points:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1',
+            VERSION:'1.0.1',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
@@ -279,19 +280,13 @@ following points:</p>
 
   
 
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>
