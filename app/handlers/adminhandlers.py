@@ -100,10 +100,10 @@ class GenerateExperiments(BaseHandler):
             exp_obj["hourly_theta"] = data["hourly_theta"]
             exp_obj["advice_id"] = data["advice_id"]
             if exp_obj["advice_id"] in ["true", "True", "y", "yes"]:
-                exp_obj["advice_id"] = True
+                exp_obj["advice_id"] = "True"
             else:
-                exp_obj["advice_id"] = False
-            if exp_obj["advice_id"] is True:
+                exp_obj["advice_id"] = "False"
+            if exp_obj["advice_id"] is "True":
                 if 0 <= int(data["delta_hours"]) <= 99999:
                     exp_obj["delta_hours"] = data["delta_hours"]
                 else:
@@ -235,10 +235,10 @@ class UpdateExperiment(BaseHandler):
                 exp_obj["hourly_theta"] = data["hourly_theta"]
                 exp_obj["advice_id"] = data["advice_id"]
                 if exp_obj["advice_id"] in ["true", "True", "y", "yes"]:
-                    exp_obj["advice_id"] = True
+                    exp_obj["advice_id"] = "True"
                 else:
-                    exp_obj["advice_id"] = False
-                if exp_obj["advice_id"] is True:
+                    exp_obj["advice_id"] = "False"
+                if exp_obj["advice_id"] is "True":
                     if 0 <= int(data["delta_hours"]) <= 99999:
                         exp_obj["delta_hours"] = data["delta_hours"]
                     else:
