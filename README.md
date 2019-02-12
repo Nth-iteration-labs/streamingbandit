@@ -6,6 +6,8 @@ For the documentation and a short introduction to StreamingBandit see http://nth
 
 For installation instructions see the documentation at http://nth-iteration-labs.github.io/streamingbandit/install.html
 
+You can find a paper explaining StreamingBandit in more detail at https://arxiv.org/abs/1602.06700
+
 ## Contribution
 
 We welcome all contribution to StreamingBandit. For details see http://nth-iteration-labs.github.io/streamingbandit/#contributing-to-the-libraries
