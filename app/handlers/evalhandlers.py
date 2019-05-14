@@ -9,7 +9,6 @@ import time
 import contextlib
 
 from bson.binary import Binary
-import _pickle
 
 from handlers.basehandler import BaseHandler, ExceptionHandler
 from core.experiment import Experiment
