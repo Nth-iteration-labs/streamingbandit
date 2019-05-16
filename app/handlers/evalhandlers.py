@@ -1,14 +1,6 @@
 # -* coding: utf-8 -*-
-import tornado.escape
-import tornado.ioloop
-import tornado.web
 import json
 import numpy as np
-import random
-import time
-import contextlib
-
-from bson.binary import Binary
 
 from handlers.basehandler import BaseHandler, ExceptionHandler
 from core.experiment import Experiment
