@@ -17,9 +17,6 @@ RUN pip install --upgrade pip
 
 #CMD python3 ./insert_admin.py --password ${PASS}
 
-RUN sed -i -e 's/redis_ip : localhost/redis_ip : redis/g' ./app/config.cfg
-RUN sed -i -e 's/mongo_ip : localhost/mongo_ip : mongo/g' ./app/config.cfg
-
 RUN pip install .
 
 WORKDIR /sb/app/
