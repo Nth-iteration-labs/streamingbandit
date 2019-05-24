@@ -26,9 +26,11 @@ import builtins
 
 dir = os.path.dirname(__file__)
 f = open(os.path.join(dir,'config.cfg'),'r')
-settings = yaml.load(f)
+env=os.getenv('env', 'default')
+config = yaml.load(f, Loader=yaml.FullLoader)
+settings = config[env]
 f.close()
-        
+
 ########## Logging ##########
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
