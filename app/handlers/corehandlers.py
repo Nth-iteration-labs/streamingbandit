@@ -1,6 +1,4 @@
 # -* coding: utf-8 -*-
-import tornado.escape
-import tornado.ioloop
 import tornado.web
 from bson import json_util
 import json
