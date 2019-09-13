@@ -2,7 +2,6 @@
 import tornado.escape
 import tornado.ioloop
 import tornado.web
-import yaml
 
 from handlers.basehandler import BaseHandler, ExceptionHandler
 

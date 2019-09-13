@@ -11,7 +11,8 @@ def insert_admin():
         f = open("app/config.cfg", 'r')
     else:
         f = open("./config.cfg", 'r')
-    settings = yaml.load(f)
+    settings = yaml.full_load(f)
+    settings = settings['docker']
     mongo_client = MongoClient(settings['mongo_ip'], settings['mongo_port'])
     mongo_db = mongo_client['userinfo']
     userinfo = mongo_db['userinfo']

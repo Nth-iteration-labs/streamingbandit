@@ -6,7 +6,7 @@
 from setuptools import setup
 
 setup(name='StreamingBandit',
-    version='1.0.2',
+    version='1.0.3',
     description='Python application to setup and run streaming (contextual) bandit experiments.',
     author='Nth-iteration',
     author_email='maurits@mauritskaptein.com',
@@ -15,7 +15,7 @@ setup(name='StreamingBandit',
     packages=[],
     install_requires=[
     'tornado',
-    'redis',
+    'redis==2.10.6',
     'pyyaml',
     'pymongo',            
     'numpy',

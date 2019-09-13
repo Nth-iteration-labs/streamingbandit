@@ -1,7 +1,4 @@
 # -* coding: utf-8 -*-
-import tornado.escape
-import tornado.ioloop
-import tornado.web
 import json
 
 from handlers.basehandler import BaseHandler, ExceptionHandler
