@@ -15,17 +15,18 @@ class Advice:
     def log_advice(self, action, context):
         context['date'] = datetime.utcnow()
         context['action'] = action
+        context['exp_id'] = exp_id
         advice_id = self.advices.insert_one(context)
-        del context['date']
         return str(advice_id.inserted_id)
 
     def get_advice(self, advice_id):
-        context = self.advices.find_one_and_delete({'_id' : ObjectId(advice_id)})
+        context = self.advices.find_one_and_delete({'_id' : ObjectId(advice_id), 'exp_id': exp_id})
         if context is not None:
             del context['_id']
             del context['date']
+            del context['exp_id']
             action = context['action']
             del context['action']
-            return {'context':context, 'action':action}
+            return {'context': context, 'action': action}
         else:
             return False
