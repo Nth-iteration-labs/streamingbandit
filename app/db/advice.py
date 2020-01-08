@@ -12,14 +12,14 @@ class Advice:
         self.mongo_db = self.mongo_client['advices']
         self.advices = self.mongo_db['advices']
 
-    def log_advice(self, action, context):
+    def log_advice(self, exp_id, action, context):
         context['date'] = datetime.utcnow()
         context['action'] = action
         context['exp_id'] = exp_id
         advice_id = self.advices.insert_one(context)
         return str(advice_id.inserted_id)
 
-    def get_advice(self, advice_id):
+    def get_advice(self, exp_id, advice_id):
         context = self.advices.find_one_and_delete({'_id' : ObjectId(advice_id), 'exp_id': exp_id})
         if context is not None:
             del context['_id']
