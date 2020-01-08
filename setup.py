@@ -6,7 +6,7 @@
 from setuptools import setup
 
 setup(name='StreamingBandit',
-    version='1.0.3',
+    version='1.0.4',
     description='Python application to setup and run streaming (contextual) bandit experiments.',
     author='Nth-iteration',
     author_email='maurits@mauritskaptein.com',
