@@ -36,7 +36,7 @@ class ActionHandler(tornado.web.RequestHandler):
         __EXP__ = Experiment(exp_id, key)
         
         if __EXP__.is_valid():
-            response = __EXP__.run_action_code(context)
+            response = __EXP__.run_action_code(context, {})
             
             if __EXP__.properties['advice_id'] == "True":
                 advice_id = __EXP__.gen_advice_id(response.copy(), context.copy())
