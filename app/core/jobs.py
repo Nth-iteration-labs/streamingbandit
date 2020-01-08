@@ -40,5 +40,6 @@ def advice_time_out():
             advices_retrieved = advice_db.advices.find({"date":{"$lt":datetime.utcnow()-timedelta(hours=delta_hours)}})
             for adv in advices_retrieved:
                 log = exp.get_by_advice_id(str(adv["_id"]))
-                reward = ast.literal_eval(exp.properties["default_reward"])
-                exp.run_reward_code(adv["context"],adv["action"],reward)
+                if log is not False:
+                    reward = ast.literal_eval(exp.properties["default_reward"])
+                    exp.run_reward_code(log["context"], log["action"], reward)

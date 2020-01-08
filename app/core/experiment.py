@@ -301,10 +301,10 @@ class Experiment():
         return self.mongo_db.get_hourly_theta(self.exp_id, limit)
     
     def gen_advice_id(self, action, context):
-        return self.advice_db.log_advice(action, context)
+        return self.advice_db.log_advice(self.exp_id, action, context)
     
     def get_by_advice_id(self, _id):
-        return self.advice_db.get_advice(_id)
+        return self.advice_db.get_advice(self.exp_id, _id)
 
     def debug(self, obj):
         self.context['_debug'] = obj
