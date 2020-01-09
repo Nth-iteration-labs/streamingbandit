@@ -58,7 +58,7 @@ class Simulate(BaseHandler):
                         context = __EXP__.run_context_code()
 
                         # Get action
-                        action = __EXP__.run_action_code(context)
+                        action = __EXP__.run_action_code(context, {})
 
                         # Generate reward
                         reward = __EXP__.run_get_reward_code(context, action)
