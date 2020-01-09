@@ -33,7 +33,7 @@ class Database:
         # should contain error checking:
         return True
 
-    def get_theta(self, key, all_values = False, all_float = False):
+    def get_theta(self, key, all_values=False, all_float=False):
         """ Retrieve theta's from the database
 
         :param string key_prefix: The key prefix for the stored theta.
@@ -55,28 +55,35 @@ class Database:
         }
         """
         result = {}
-        if all_values == False:
+        if all_values is False:
             result = self.r_server.hgetall(key)
         else:
             number_of_keys = 0
             obj_longer_than_key = False
+            scan_keys = False
             for obj in self.r_server.scan_iter(key + "*"):
                 number_of_keys += 1
                 obj_longer_than_key = (len(obj) > len(key))
-            if number_of_keys > 1 or obj_longer_than_key == True:
+                if number_of_keys > 1:
+                    scan_keys = True
+                    break
+            if (scan_keys is False) and (obj_longer_than_key is True):
+                scan_keys = True
+            if scan_keys is True:
+                idx = len(key) + 1
                 for obj in self.r_server.scan_iter(key + "*"):
-                    final_key = obj[len(key)+1:]
+                    final_key = obj[idx:]
                     result[final_key] = self.r_server.hgetall(obj)
             else:
                 result = self.r_server.hgetall(key)
         
-        if all_float: #check
-            for i in result.keys():
-                if(type(result[i])==dict):
-                    for j in result[i].keys():
-                        result[i][j] = float(result[i][j]) 
+        if all_float is True:
+            for k, v in result.items():
+                if type(v) == dict:
+                    for i, j in v.items():
+                        v[i] = float(j)
                 else:
-                    result[i] = float(result[i])
+                    result[k] = float(v)
                 
         return result
     
