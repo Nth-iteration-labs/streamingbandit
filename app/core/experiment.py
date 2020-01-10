@@ -59,7 +59,7 @@ class Experiment():
             self.valid = True
         return self.valid
 
-    def run_context_code(self, context = {}):
+    def run_context_code(self, context=None):
         """ Takes get_context code from Redis and executes it.
         
         :param dict context: Context is pre-created such that the exec(code) \
@@ -68,13 +68,16 @@ class Experiment():
         :returns: A dict of context of which the content is \
         determined by the get_context code.
         """
-        self.context = context
+        if context is None:
+            self.context = {}
+        else:
+            self.context = context
         code = self.db.experiment_properties("exp:%s:properties" % (self.exp_id), "get_context")
         byte_code = compile(code, filename='<inline code>', mode='exec')
         exec(byte_code, {'__builtins__' : self.safe_builtins})
         return self.context.copy()
 
-    def run_action_code(self, context, action = {}):    
+    def run_action_code(self, context, action=None):
         """ Takes get_action code from Redis and executes it.
         
         :param dict context: Context is a dictionary with the context for the \
@@ -86,14 +89,17 @@ class Experiment():
         :returns: A dict of action of which the content is \
         determined by the get_action code.
         """
-        self.action = action
+        if action is None:
+            self.action = {}
+        else:
+            self.action = action
         self.context = context
         code = self.db.experiment_properties("exp:%s:properties" % (self.exp_id), "get_action")
         byte_code = compile(code, filename='<inline code>', mode='exec')
         exec(byte_code, {'__builtins__' : self.safe_builtins})
         return self.action.copy()
 
-    def run_get_reward_code(self, context, action, reward = {}):
+    def run_get_reward_code(self, context, action, reward=None):
         """ Takes get_reward code from Redis and executes it.
 
         :param dict context: The context that may be needed for the algorithm.
@@ -105,9 +111,12 @@ class Experiment():
         of the behavior of Python).
         :returns: True if executed correctly.
         """
+        if reward is None:
+            self.reward = {}
+        else:
+            self.reward = reward
         self.action = action
         self.context = context
-        self.reward = reward
         code = self.db.experiment_properties("exp:%s:properties" % (self.exp_id), "get_reward")
         byte_code = compile(code, filename='<inline code>', mode='exec')
         exec(byte_code, {'__builtins__' : self.safe_builtins})
