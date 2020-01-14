@@ -55,9 +55,11 @@ class BaseHandler(tornado.web.RequestHandler):
             return False
 
     def valid_admin(self):
-        user_id = self.get_current_user()
+        user_id = int(self.get_current_user())
         if user_id == 0:
             return True
+        else:
+            return False
     
     def write_error(self, status_code, **kwargs): 
         self.set_header('Content-Type', 'application/json')
