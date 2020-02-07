@@ -178,7 +178,7 @@ class Experiment():
         self.mongo_db.log_setreward(self.exp_id, context, action, reward)
         return True
         
-    def set_theta(self, thetas, key = None, value = None, name = "_theta"):
+    def set_theta(self, thetas, key=None, value=None, name="_theta"):
         """ Set the new theta (parameters) in the database.
 
         :param dict thetas: The thetas that will eb stored. Typically a \
@@ -201,14 +201,14 @@ class Experiment():
            check_dict = False
         if check_dict and callable(check_dict):
             thetas = thetas.get_dict()
-        db_key = "exp:%s:" % (self.exp_id) + name
+        db_key = "exp:%s:%s" % (self.exp_id, name)
         if key is not None and value is not None:
-            db_key = db_key + ":%s:%s" % (key, value)
+            db_key = "%s:%s:%s" % (db_key, key, value)
         elif key is not None and value is None:
-            db_key = db_key + ":%s" % (key)
+            db_key = "%s:%s" % (db_key, key)
         return self.db.set_theta(thetas, db_key)
     
-    def get_theta(self, key = None, value = None, name = "_theta", all_float = False):
+    def get_theta(self, key=None, value=None, name="_theta", all_float=False):
         """ Get the theta (parameters) from the database.
 
         :param string key: The key with which the theta will be associated. If \
@@ -225,23 +225,23 @@ class Experiment():
 
         :returns: A dictionary with the parameter set.
         """
-        db_key = "exp:%s:" % (self.exp_id) + name
+        db_key = "exp:%s:%s" % (self.exp_id, name)
         all_values = False
         if key is not None and value is not None:
-            db_key = db_key + ":%s:%s" % (key, value)
+            db_key = "%s:%s:%s" % (db_key, key, value)
         elif key is not None and value is None:
-            db_key = db_key + ":%s" % (key)
+            db_key = "%s:%s" % (db_key, key)
             all_values = True
         elif key is None and value is None:
             all_values = True
         return self.db.get_theta(db_key, all_values, all_float)
 
-    def delete_theta(self, key = None, value = None, name = "_theta"):
-        db_key = "exp:%s:" % (self.exp_id) + name
+    def delete_theta(self, key=None, value=None, name="_theta"):
+        db_key = "exp:%s:%s" % (self.exp_id, name)
         if key is not None and value is not None:
-            db_key = db_key + ":%s:%s" % (key, value)
+            db_key = "%s:%s:%s" % (db_key, key, value)
         elif key is not None and value is None:
-            db_key = db_key + ":%s" % (key)
+            db_key = "%s:%s" % (db_key, key)
         return self.db.delete_theta(db_key)
 
     def get_log_data(self, limit):
