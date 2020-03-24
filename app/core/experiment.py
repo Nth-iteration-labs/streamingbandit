@@ -315,5 +315,11 @@ class Experiment():
     def get_by_advice_id(self, _id):
         return self.advice_db.get_advice(self.exp_id, _id)
 
+    def delete_all_advice_ids(self):
+        if self.properties["advice_id"] == "True":
+            return self.advice_db.delete_all_advice_ids(self.exp_id)
+        else:
+            return None
+
     def debug(self, obj):
         self.context['_debug'] = obj
