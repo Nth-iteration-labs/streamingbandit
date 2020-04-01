@@ -368,7 +368,11 @@ class List:
         """ Checks if the Base class has a counter. If that's the case, it will
         add all the counters and return the total count.
         """
-        return int(sum(v.get_dict().get("n", 0) for v in self.base_list.values()))
+        for v in self.base_list.values():
+            if "n" not in v.get_dict():
+                return 0 
+            else:
+                return int(sum(v.get_dict().get("n") for v in self.base_list.values()))
 
     def random(self):
         """ Return a random choice from the value_names list.
