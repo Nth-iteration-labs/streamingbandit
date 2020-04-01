@@ -342,6 +342,7 @@ class List:
 
     def __init__(self, objects, _t, value_names):
         self.value_names = value_names
+        self.num_values = len(self.value_names)
         self.base_list = {value_name: _t(objects.get(value_name, {})) for value_name in self.value_names}
         self.size = len(self.base_list)
     
