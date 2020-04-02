@@ -333,20 +333,22 @@ class ResetExperiment(BaseHandler):
         """
         if self.get_secure_cookie("user"):
             if self.validate_user_experiment(exp_id):
-                key = self.get_argument("key", default = False)
-                theta_key = self.get_argument("theta_key", default = None)
-                theta_value = self.get_argument("theta_value", default = None)
+                key = self.get_argument("key", default=False)
+                theta_key = self.get_argument("theta_key", default=None)
+                theta_value = self.get_argument("theta_value", default=None)
                 __EXP__ = Experiment(exp_id, key)
-
-                status = __EXP__.delete_theta(key = theta_key, value = theta_value)
+                status = __EXP__.delete_theta(key=theta_key, value=theta_value)
+                if __EXP__.properties["advice_id"] == "True":
+                    if (theta_key is None) and (theta_value is None):
+                        __EXP__.delete_all_advice_ids()
                 if status >= 1:
-                    self.write(json.dumps({'status':'success'}))
+                    self.write(json.dumps({"status": "success"}))
                 else:
-                    raise ExceptionHandler(reason = "Theta_key or theta_value could not be validated.", status_code = 401)
+                    raise ExceptionHandler(reason="Theta_key or theta_value could not be validated.", status_code=401)
             else:
-                raise ExceptionHandler(reason = "Experiment could not be validated.", status_code = 401)
+                raise ExceptionHandler(reason="Experiment could not be validated.", status_code=401)
         else:
-            raise ExceptionHandler(reason = "Could not validate user.", status_code = 401)
+            raise ExceptionHandler(reason="Could not validate user.", status_code=401)
 
 class AddUser(BaseHandler):
 

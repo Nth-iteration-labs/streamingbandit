@@ -30,3 +30,7 @@ class Advice:
             return {'context': context, 'action': action}
         else:
             return False
+
+    def delete_all_advice_ids(self, exp_id):
+        result = self.advices.delete_many({"exp_id": exp_id})
+        return result
