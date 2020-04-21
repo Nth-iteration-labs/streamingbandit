@@ -336,7 +336,7 @@ class List:
     :var dict objects: A dict of dicts with the objects in dictionary \
             form - so not a class instance!
     :var type _t: The type of Base class (e.g. Proportion, Count).
-    :var list value_names: The different value names that are in the \
+    :var list value_names: The value names to be grabbed from the \
             objects dict. This is used for e.g. random picks.
     """
 
@@ -352,11 +352,13 @@ class List:
         return {k: v.get_dict() for k, v in self.base_list.items()}
 
     def get_value(self):
+        """ Returns the main value of each Base class in the objects in a dict.
+        """
         return {k: v.get_value() for k, v in self.base_list.items()}
 
     def max(self):
-        """ Finds the max of the main value of a Base class.
-        If no max is available yet (because the values are empty), it will return a random max.
+        """ Finds the maximum main value from all Base classes.
+        If no max is available yet (because all main values are 0), it will return a random max.
         """
         d = self.get_value()
         max_key = max(d, key=d.get)
