@@ -329,68 +329,53 @@ class Correlation(__strmBase):
         else:
             raise ValueError("Correlation should be between -1 and +1!")
 
-class List():
+class List:
     """ Class to represent a list of Base classes. Here you can store multiple \
     Base classes to simplify your AB test and whatnot.
 
     :var dict objects: A dict of dicts with the objects in dictionary \
             form - so not a class instance!
     :var type _t: The type of Base class (e.g. Proportion, Count).
-    :var list value_names: The different value names that are in the \
+    :var list value_names: The value names to be grabbed from the \
             objects dict. This is used for e.g. random picks.
     """
 
     def __init__(self, objects, _t, value_names):
-        self.base_list = {}
         self.value_names = value_names
         self.num_values = len(self.value_names)
-        if objects == {}:
-            for value_name in self.value_names:
-                self.base_list[value_name] = _t(default={})
-        elif len(objects) < len(self.value_names):
-            for key, obj in objects.items():
-                self.base_list[key] = _t(default=obj)
-            for val in self.value_names:
-                if val not in self.base_list:
-                    self.base_list[val] = _t(default={})
-        else:
-            for key, obj in objects.items():
-                self.base_list[key] = _t(default=obj)
+        self.base_list = {value_name: _t(objects.get(value_name, {})) for value_name in self.value_names}
         self.size = len(self.base_list)
     
     def get_dict(self):
         """ Returns each Base class in the objects as a dict in a dict.
         """
-        dict_list = {}
-        for key, val in self.base_list.items():
-            dict_list[key] = val.get_dict()
-        return dict_list
+        return {k: v.get_dict() for k, v in self.base_list.items()}
+
+    def get_value(self):
+        """ Returns the main value of each Base class in the objects in a dict.
+        """
+        return {k: v.get_value() for k, v in self.base_list.items()}
 
     def max(self):
-        """ Finds the max of the main value of a Base class.
-        If no max is available yet (because the values are empty), it will return a random max.
+        """ Finds the maximum main value from all Base classes.
+        If no max is available yet (because all main values are 0), it will return a random max.
         """
-        max_val = 0
-        max_key = ""
-        for key, value in self.base_list.items():
-            if value.get_value() > max_val:
-                max_key = key
-                max_val = value.get_value()
-        if max_key == "":
-            max_key = self.random()
-        return max_key
+        d = self.get_value()
+        max_key = max(d, key=d.get)
+        if d[max_key] == 0:
+            return self.random()
+        else:
+            return max_key
 
     def count(self):
         """ Checks if the Base class has a counter. If that's the case, it will
         add all the counters and return the total count.
         """
-        count = 0
-        for key, value in self.base_list.items():
-            values = value.get_dict()
-            if 'n' not in values:
-                break
-            count = count + int(values['n'])
-        return count
+        for v in self.base_list.values():
+            if "n" not in v.get_dict():
+                return 0 
+            else:
+                return int(sum(v.get_dict().get("n") for v in self.base_list.values()))
 
     def random(self):
         """ Return a random choice from the value_names list.
