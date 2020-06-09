@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Complete RESTful API &mdash; StreamingBandit 1.0.4 documentation</title>
+  <title>Complete RESTful API &mdash; StreamingBandit 1.0.5 documentation</title>
   
 
   
@@ -17,34 +17,37 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Documentation of the supplied Libraries" href="libs.html" />
     <link rel="prev" title="Installation" href="install.html" /> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -58,7 +61,7 @@
             
             
               <div class="version">
-                1.0.4
+                1.0.5
               </div>
             
           
@@ -172,70 +175,66 @@
 <p>The core API contains the <strong>getaction</strong> and <strong>setreward</strong> calls (or, alternatively the decision and summary step of a bandit policy).</p>
 <dl class="get">
 <dt id="get-(?i)-getaction-(?P-exp_id-w+)">
-<code class="descname">GET </code><code class="descname">(?i)/getaction/(?P&lt;exp_id&gt;w+)</code><a class="headerlink" href="#get-(?i)-getaction-(?P-exp_id-w+)" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">GET </code><code class="sig-name descname">(?i)/getaction/(?P&lt;exp_id&gt;w+)</code><a class="headerlink" href="#get-(?i)-getaction-(?P-exp_id-w+)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get an action given a context for a specific exp_id.</p>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="100%" />
+<col style="width: 100%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Example</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><a class="reference external" href="http://example.com/getaction/EXP_ID?key=KEY&amp;context=CONTEXT">http://example.com/getaction/EXP_ID?key=KEY&amp;context=CONTEXT</a></td>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="http://example.com/getaction/EXP_ID?key=KEY&amp;context=CONTEXT">http://example.com/getaction/EXP_ID?key=KEY&amp;context=CONTEXT</a></p></td>
 </tr>
 </tbody>
 </table>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>exp_id</strong> (<em>int</em>) – Experiment ID as specified in the url.</li>
-<li><strong>key</strong> (<em>string</em>) – The key corresponding to the experiment.</li>
-<li><strong>context (optional)</strong> (<em>JSON</em>) – The context to be evaluated.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>exp_id</strong> (<em>int</em>) – Experiment ID as specified in the url.</p></li>
+<li><p><strong>key</strong> (<em>string</em>) – The key corresponding to the experiment.</p></li>
+<li><p><strong>context (optional)</strong> (<em>JSON</em>) – The context to be evaluated.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A JSON that standard only includes action. When debug is toggled,         it returns the context as well. When Advice ID is toggled, it will also return         an Advice ID that can be used to set the reward later on.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Raises 400:</th><td class="field-body"><p class="first">If the key is not supplied.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first last">If the key or exp_id is invalid.</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A JSON that standard only includes action. When debug is toggled,         it returns the context as well. When Advice ID is toggled, it will also return         an Advice ID that can be used to set the reward later on.</p>
+</dd>
+<dt class="field-odd">Raises 400</dt>
+<dd class="field-odd"><p>If the key is not supplied.</p>
+</dd>
+<dt class="field-even">Raises 401</dt>
+<dd class="field-even"><p>If the key or exp_id is invalid.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="get">
 <dt id="get-(?i)-setreward-(?P-exp_id-w+)">
-<code class="descname">GET </code><code class="descname">(?i)/setreward/(?P&lt;exp_id&gt;w+)</code><a class="headerlink" href="#get-(?i)-setreward-(?P-exp_id-w+)" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">GET </code><code class="sig-name descname">(?i)/setreward/(?P&lt;exp_id&gt;w+)</code><a class="headerlink" href="#get-(?i)-setreward-(?P-exp_id-w+)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update the parameters and set a reward for a given experiment.</p>
 <p>For parameters, there are two options (next to the mandatory key 
 and exp_id). The first option is supplying all the information manually, 
 meaning that you supply the following parameters:</p>
 <blockquote>
 <div><ul class="simple">
-<li>Context</li>
-<li>Action</li>
-<li>Reward</li>
+<li><p>Context</p></li>
+<li><p>Action</p></li>
+<li><p>Reward</p></li>
 </ul>
 </div></blockquote>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="100%" />
+<col style="width: 100%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Example</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><a class="reference external" href="http://example.com/setreward/EXP_ID?key=KEY&amp;context=CONTEXT">http://example.com/setreward/EXP_ID?key=KEY&amp;context=CONTEXT</a>
-&amp;action=ACTION&amp;reward=REWARD</td>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="http://example.com/setreward/EXP_ID?key=KEY&amp;context=CONTEXT">http://example.com/setreward/EXP_ID?key=KEY&amp;context=CONTEXT</a>
+&amp;action=ACTION&amp;reward=REWARD</p></td>
 </tr>
 </tbody>
 </table>
@@ -244,49 +243,45 @@ and have received an Advice ID from the getaction call, you only have
 to supply the following parameters:</p>
 <blockquote>
 <div><ul class="simple">
-<li>Advice ID</li>
-<li>Reward</li>
+<li><p>Advice ID</p></li>
+<li><p>Reward</p></li>
 </ul>
 </div></blockquote>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="100%" />
+<col style="width: 100%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Example</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><a class="reference external" href="http://example.com/setreward/EXP_ID?key=KEY">http://example.com/setreward/EXP_ID?key=KEY</a>
-&amp;advice_id=ADVICE_ID&amp;reward=REWARD</td>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="http://example.com/setreward/EXP_ID?key=KEY">http://example.com/setreward/EXP_ID?key=KEY</a>
+&amp;advice_id=ADVICE_ID&amp;reward=REWARD</p></td>
 </tr>
 </tbody>
 </table>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>exp_id</strong> (<em>int</em>) – Experiment ID as specified in the url.</li>
-<li><strong>key</strong> (<em>string</em>) – The key corresponding to the experiment.</li>
-<li><strong>context (optional)</strong> (<em>JSON</em>) – The context for the current update.</li>
-<li><strong>action (optional)</strong> (<em>JSON</em>) – The action for the current update.</li>
-<li><strong>advice_id (optional)</strong> (<em>string</em>) – The advice_id for the current         full update loop.</li>
-<li><strong>reward</strong> (<em>JSON</em>) – The reward for the current update.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>exp_id</strong> (<em>int</em>) – Experiment ID as specified in the url.</p></li>
+<li><p><strong>key</strong> (<em>string</em>) – The key corresponding to the experiment.</p></li>
+<li><p><strong>context (optional)</strong> (<em>JSON</em>) – The context for the current update.</p></li>
+<li><p><strong>action (optional)</strong> (<em>JSON</em>) – The action for the current update.</p></li>
+<li><p><strong>advice_id (optional)</strong> (<em>string</em>) – The advice_id for the current         full update loop.</p></li>
+<li><p><strong>reward</strong> (<em>JSON</em>) – The reward for the current update.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A JSON indicating success.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Raises 400:</th><td class="field-body"><p class="first">If key is not supplied.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first last">If the key or exp_id is invalid.</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A JSON indicating success.</p>
+</dd>
+<dt class="field-odd">Raises 400</dt>
+<dd class="field-odd"><p>If key is not supplied.</p>
+</dd>
+<dt class="field-even">Raises 401</dt>
+<dd class="field-even"><p>If the key or exp_id is invalid.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -295,310 +290,281 @@ to supply the following parameters:</p>
 <p>The Stats API provides endpoints to retrieve data concerning running experiments. It is possible to retrieve the current state of the stored parameters, retrieve logged data, or retrieve summaries regarding the use of an experiment.</p>
 <dl class="get">
 <dt id="get-(?i)-stats-(?P-exp_id-w+)-currenttheta">
-<code class="descname">GET </code><code class="descname">(?i)/stats/(?P&lt;exp_id&gt;w+)/currenttheta</code><a class="headerlink" href="#get-(?i)-stats-(?P-exp_id-w+)-currenttheta" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">GET </code><code class="sig-name descname">(?i)/stats/(?P&lt;exp_id&gt;w+)/currenttheta</code><a class="headerlink" href="#get-(?i)-stats-(?P-exp_id-w+)-currenttheta" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the current theta.</p>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="100%" />
+<col style="width: 100%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Example</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><a class="reference external" href="http://example.com/stats/EXP_ID/currenttheta">http://example.com/stats/EXP_ID/currenttheta</a></td>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="http://example.com/stats/EXP_ID/currenttheta">http://example.com/stats/EXP_ID/currenttheta</a></p></td>
 </tr>
 </tbody>
 </table>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Requires:</th><td class="field-body"><p class="first">A secure cookie, obtained by logging in.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>exp_id</strong> (<em>int</em>) – The experiment ID for the theta that is to be retrieved.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Requires</dt>
+<dd class="field-odd"><p>A secure cookie, obtained by logging in.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>exp_id</strong> (<em>int</em>) – The experiment ID for the theta that is to be retrieved.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A JSON of the current theta.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first">If the experiment does not belong to this user or the exp_id is wrong.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first last">If user is not logged in or if there is no secure cookie available.</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A JSON of the current theta.</p>
+</dd>
+<dt class="field-even">Raises 401</dt>
+<dd class="field-even"><p>If the experiment does not belong to this user or the exp_id is wrong.</p>
+</dd>
+<dt class="field-odd">Raises 401</dt>
+<dd class="field-odd"><p>If user is not logged in or if there is no secure cookie available.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="get">
 <dt id="get-(?i)-stats-(?P-exp_id-w+)-hourlytheta">
-<code class="descname">GET </code><code class="descname">(?i)/stats/(?P&lt;exp_id&gt;w+)/hourlytheta</code><a class="headerlink" href="#get-(?i)-stats-(?P-exp_id-w+)-hourlytheta" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">GET </code><code class="sig-name descname">(?i)/stats/(?P&lt;exp_id&gt;w+)/hourlytheta</code><a class="headerlink" href="#get-(?i)-stats-(?P-exp_id-w+)-hourlytheta" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a dict of all logged thetas.</p>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="100%" />
+<col style="width: 100%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Example</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><a class="reference external" href="http://example.com/stats/EXP_ID/hourlytheta?limit=10">http://example.com/stats/EXP_ID/hourlytheta?limit=10</a></td>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="http://example.com/stats/EXP_ID/hourlytheta?limit=10">http://example.com/stats/EXP_ID/hourlytheta?limit=10</a></p></td>
 </tr>
 </tbody>
 </table>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Requires:</th><td class="field-body"><p class="first">A secure cookie, obtained by logging in.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>exp_id</strong> (<em>int</em>) – The experiment ID for the thetas that are to be retrieved.</li>
-<li><strong>limit (optional)</strong> (<em>int</em>) – Set an optional limit to the amount of logs returned.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Requires</dt>
+<dd class="field-odd"><p>A secure cookie, obtained by logging in.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>exp_id</strong> (<em>int</em>) – The experiment ID for the thetas that are to be retrieved.</p></li>
+<li><p><strong>limit (optional)</strong> (<em>int</em>) – Set an optional limit to the amount of logs returned.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A list of JSONs of the hourly logged thetas.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first">If the experiment does not belong to this user or the exp_id is wrong.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first last">If user is not logged in or if there is no secure cookie available.</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A list of JSONs of the hourly logged thetas.</p>
+</dd>
+<dt class="field-even">Raises 401</dt>
+<dd class="field-even"><p>If the experiment does not belong to this user or the exp_id is wrong.</p>
+</dd>
+<dt class="field-odd">Raises 401</dt>
+<dd class="field-odd"><p>If user is not logged in or if there is no secure cookie available.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="get">
 <dt id="get-(?i)-stats-(?P-exp_id-w+)-log">
-<code class="descname">GET </code><code class="descname">(?i)/stats/(?P&lt;exp_id&gt;w+)/log</code><a class="headerlink" href="#get-(?i)-stats-(?P-exp_id-w+)-log" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">GET </code><code class="sig-name descname">(?i)/stats/(?P&lt;exp_id&gt;w+)/log</code><a class="headerlink" href="#get-(?i)-stats-(?P-exp_id-w+)-log" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get all the (manually) logged data.</p>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="100%" />
+<col style="width: 100%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Example</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><a class="reference external" href="http://example.com/stats/EXP_ID/log?limit=10">http://example.com/stats/EXP_ID/log?limit=10</a></td>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="http://example.com/stats/EXP_ID/log?limit=10">http://example.com/stats/EXP_ID/log?limit=10</a></p></td>
 </tr>
 </tbody>
 </table>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Requires:</th><td class="field-body"><p class="first">A secure cookie, obtained by logging in.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>exp_id</strong> (<em>int</em>) – The experiment ID for the logs that are to be retrieved.</li>
-<li><strong>limit (optional)</strong> (<em>int</em>) – Set an optional limit to the amount of logs returned.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Requires</dt>
+<dd class="field-odd"><p>A secure cookie, obtained by logging in.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>exp_id</strong> (<em>int</em>) – The experiment ID for the logs that are to be retrieved.</p></li>
+<li><p><strong>limit (optional)</strong> (<em>int</em>) – Set an optional limit to the amount of logs returned.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A list of JSONs of the logs.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first">If the experiment does not belong to this user or the exp_id is wrong.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first last">If user is not logged in or if there is no secure cookie available.</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A list of JSONs of the logs.</p>
+</dd>
+<dt class="field-even">Raises 401</dt>
+<dd class="field-even"><p>If the experiment does not belong to this user or the exp_id is wrong.</p>
+</dd>
+<dt class="field-odd">Raises 401</dt>
+<dd class="field-odd"><p>If user is not logged in or if there is no secure cookie available.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="get">
 <dt id="get-(?i)-stats-(?P-exp_id-w+)-actionlog">
-<code class="descname">GET </code><code class="descname">(?i)/stats/(?P&lt;exp_id&gt;w+)/actionlog</code><a class="headerlink" href="#get-(?i)-stats-(?P-exp_id-w+)-actionlog" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">GET </code><code class="sig-name descname">(?i)/stats/(?P&lt;exp_id&gt;w+)/actionlog</code><a class="headerlink" href="#get-(?i)-stats-(?P-exp_id-w+)-actionlog" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get all the (automatically) logged get_action data.</p>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="100%" />
+<col style="width: 100%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Example</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><a class="reference external" href="http://example.com/stats/EXP_ID/actionlog?limit=10">http://example.com/stats/EXP_ID/actionlog?limit=10</a></td>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="http://example.com/stats/EXP_ID/actionlog?limit=10">http://example.com/stats/EXP_ID/actionlog?limit=10</a></p></td>
 </tr>
 </tbody>
 </table>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Requires:</th><td class="field-body"><p class="first">A secure cookie, obtained by logging in.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>exp_id</strong> (<em>int</em>) – The experiment ID for the logs that are to be retrieved.</li>
-<li><strong>limit (optional)</strong> (<em>int</em>) – Set an optional limit to the amount of logs returned.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Requires</dt>
+<dd class="field-odd"><p>A secure cookie, obtained by logging in.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>exp_id</strong> (<em>int</em>) – The experiment ID for the logs that are to be retrieved.</p></li>
+<li><p><strong>limit (optional)</strong> (<em>int</em>) – Set an optional limit to the amount of logs returned.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A list of JSONs of the logs.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first">If the experiment does not belong to this user or the exp_id is wrong.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first last">If user is not logged in or if there is no secure cookie available.</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A list of JSONs of the logs.</p>
+</dd>
+<dt class="field-even">Raises 401</dt>
+<dd class="field-even"><p>If the experiment does not belong to this user or the exp_id is wrong.</p>
+</dd>
+<dt class="field-odd">Raises 401</dt>
+<dd class="field-odd"><p>If user is not logged in or if there is no secure cookie available.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="get">
 <dt id="get-(?i)-stats-(?P-exp_id-w+)-rewardlog">
-<code class="descname">GET </code><code class="descname">(?i)/stats/(?P&lt;exp_id&gt;w+)/rewardlog</code><a class="headerlink" href="#get-(?i)-stats-(?P-exp_id-w+)-rewardlog" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">GET </code><code class="sig-name descname">(?i)/stats/(?P&lt;exp_id&gt;w+)/rewardlog</code><a class="headerlink" href="#get-(?i)-stats-(?P-exp_id-w+)-rewardlog" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get all the (automatically) logged set_reward data.</p>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="100%" />
+<col style="width: 100%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Example</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><a class="reference external" href="http://example.com/stats/EXP_ID/rewardlog?limit=10">http://example.com/stats/EXP_ID/rewardlog?limit=10</a></td>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="http://example.com/stats/EXP_ID/rewardlog?limit=10">http://example.com/stats/EXP_ID/rewardlog?limit=10</a></p></td>
 </tr>
 </tbody>
 </table>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Requires:</th><td class="field-body"><p class="first">A secure cookie, obtained by logging in.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>exp_id</strong> (<em>int</em>) – The experiment ID for the logs that are to be retrieved.</li>
-<li><strong>limit (optional)</strong> (<em>int</em>) – Set an optional limit to the amount of logs returned.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Requires</dt>
+<dd class="field-odd"><p>A secure cookie, obtained by logging in.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>exp_id</strong> (<em>int</em>) – The experiment ID for the logs that are to be retrieved.</p></li>
+<li><p><strong>limit (optional)</strong> (<em>int</em>) – Set an optional limit to the amount of logs returned.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A list of JSONs of the logs.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first">If the experiment does not belong to this user or the exp_id is wrong.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first last">If user is not logged in or if there is no secure cookie available.</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A list of JSONs of the logs.</p>
+</dd>
+<dt class="field-even">Raises 401</dt>
+<dd class="field-even"><p>If the experiment does not belong to this user or the exp_id is wrong.</p>
+</dd>
+<dt class="field-odd">Raises 401</dt>
+<dd class="field-odd"><p>If user is not logged in or if there is no secure cookie available.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="get">
 <dt id="get-(?i)-stats-(?P-exp_id-w+)-simulationlog">
-<code class="descname">GET </code><code class="descname">(?i)/stats/(?P&lt;exp_id&gt;w+)/simulationlog</code><a class="headerlink" href="#get-(?i)-stats-(?P-exp_id-w+)-simulationlog" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">GET </code><code class="sig-name descname">(?i)/stats/(?P&lt;exp_id&gt;w+)/simulationlog</code><a class="headerlink" href="#get-(?i)-stats-(?P-exp_id-w+)-simulationlog" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get all the logged simulation data.</p>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="100%" />
+<col style="width: 100%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Example</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><a class="reference external" href="http://example.com/stats/EXP_ID/simulationlog?limit=10">http://example.com/stats/EXP_ID/simulationlog?limit=10</a></td>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="http://example.com/stats/EXP_ID/simulationlog?limit=10">http://example.com/stats/EXP_ID/simulationlog?limit=10</a></p></td>
 </tr>
 </tbody>
 </table>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Requires:</th><td class="field-body"><p class="first">A secure cookie, obtained by logging in.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>exp_id</strong> (<em>int</em>) – The experiment ID for the logs that are to be retrieved.</li>
-<li><strong>limit (optional)</strong> (<em>int</em>) – Set an optional limit to the amount of logs returned.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Requires</dt>
+<dd class="field-odd"><p>A secure cookie, obtained by logging in.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>exp_id</strong> (<em>int</em>) – The experiment ID for the logs that are to be retrieved.</p></li>
+<li><p><strong>limit (optional)</strong> (<em>int</em>) – Set an optional limit to the amount of logs returned.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A list of JSONs of the logs.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first">If the experiment does not belong to this user or the exp_id is wrong.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first last">If user is not logged in or if there is no secure cookie available.</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A list of JSONs of the logs.</p>
+</dd>
+<dt class="field-even">Raises 401</dt>
+<dd class="field-even"><p>If the experiment does not belong to this user or the exp_id is wrong.</p>
+</dd>
+<dt class="field-odd">Raises 401</dt>
+<dd class="field-odd"><p>If user is not logged in or if there is no secure cookie available.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="get">
 <dt id="get-(?i)-stats-(?P-exp_id-w+)-summary">
-<code class="descname">GET </code><code class="descname">(?i)/stats/(?P&lt;exp_id&gt;w+)/summary</code><a class="headerlink" href="#get-(?i)-stats-(?P-exp_id-w+)-summary" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Get a summary, consisting of:</dt>
-<dd><ul class="first last simple">
-<li>The number of get_action calls</li>
-<li>The date of the last get_action call</li>
-<li>The number of set_reward calls</li>
-<li>The date of the last set_reward call</li>
+<code class="sig-name descname">GET </code><code class="sig-name descname">(?i)/stats/(?P&lt;exp_id&gt;w+)/summary</code><a class="headerlink" href="#get-(?i)-stats-(?P-exp_id-w+)-summary" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Get a summary, consisting of:</dt><dd><ul class="simple">
+<li><p>The number of get_action calls</p></li>
+<li><p>The date of the last get_action call</p></li>
+<li><p>The number of set_reward calls</p></li>
+<li><p>The date of the last set_reward call</p></li>
 </ul>
 </dd>
 </dl>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="100%" />
+<col style="width: 100%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Example</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><a class="reference external" href="http://example.com/stats/EXP_ID/summary">http://example.com/stats/EXP_ID/summary</a></td>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="http://example.com/stats/EXP_ID/summary">http://example.com/stats/EXP_ID/summary</a></p></td>
 </tr>
 </tbody>
 </table>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Requires:</th><td class="field-body"><p class="first">A secure cookie, obtained by logging in.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>exp_id</strong> (<em>int</em>) – The experiment ID for the summary that are to be retrieved.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Requires</dt>
+<dd class="field-odd"><p>A secure cookie, obtained by logging in.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>exp_id</strong> (<em>int</em>) – The experiment ID for the summary that are to be retrieved.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A JSON object consisting of the summary.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first">If the experiment does not belong to this user or the exp_id is wrong.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first last">If user is not logged in or if there is no secure cookie available.</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A JSON object consisting of the summary.</p>
+</dd>
+<dt class="field-even">Raises 401</dt>
+<dd class="field-even"><p>If the experiment does not belong to this user or the exp_id is wrong.</p>
+</dd>
+<dt class="field-odd">Raises 401</dt>
+<dd class="field-odd"><p>If user is not logged in or if there is no secure cookie available.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -607,49 +573,45 @@ to supply the following parameters:</p>
 <p>The evaluation API provides the functionality to simulate the running of an experiment. Simulation will execute, in sequence, the <strong>getcontext</strong>, <strong>getaction</strong>, <strong>getreward</strong>, and <strong>setreward</strong> code as specified when creating a new experiment.</p>
 <dl class="get">
 <dt id="get-(?i)-eval-(?P-exp_id-w+)-simulate">
-<code class="descname">GET </code><code class="descname">(?i)/eval/(?P&lt;exp_id&gt;w+)/simulate</code><a class="headerlink" href="#get-(?i)-eval-(?P-exp_id-w+)-simulate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">GET </code><code class="sig-name descname">(?i)/eval/(?P&lt;exp_id&gt;w+)/simulate</code><a class="headerlink" href="#get-(?i)-eval-(?P-exp_id-w+)-simulate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Simulate your experiment based on four scripts, which create a closed feedback loop.</p>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="100%" />
+<col style="width: 100%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Example</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><a class="reference external" href="http://example.com/eval/EXP_ID/simulate?N=1000&amp;log_stats=True">http://example.com/eval/EXP_ID/simulate?N=1000&amp;log_stats=True</a>
-&amp;verbose=True&amp;seed=10</td>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="http://example.com/eval/EXP_ID/simulate?N=1000&amp;log_stats=True">http://example.com/eval/EXP_ID/simulate?N=1000&amp;log_stats=True</a>
+&amp;verbose=True&amp;seed=10</p></td>
 </tr>
 </tbody>
 </table>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Requires:</th><td class="field-body"><p class="first">A secure cookie, obtained by logging in.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>exp_id</strong> (<em>int</em>) – Experiment ID as specified in the url.</li>
-<li><strong>N</strong> (<em>int</em>) – The number of simulation draws.</li>
-<li><strong>log_stats</strong> (<em>bool</em>) – Flag for logging the results in the database (default is False)</li>
-<li><strong>verbose</strong> (<em>bool</em>) – Flag for displaying the results in the returning JSON object (default is True)</li>
-<li><strong>seed (optional)</strong> (<em>int</em>) – Set numpy seed.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Requires</dt>
+<dd class="field-odd"><p>A secure cookie, obtained by logging in.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>exp_id</strong> (<em>int</em>) – Experiment ID as specified in the url.</p></li>
+<li><p><strong>N</strong> (<em>int</em>) – The number of simulation draws.</p></li>
+<li><p><strong>log_stats</strong> (<em>bool</em>) – Flag for logging the results in the database (default is False)</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – Flag for displaying the results in the returning JSON object (default is True)</p></li>
+<li><p><strong>seed (optional)</strong> (<em>int</em>) – Set numpy seed.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A JSON indicating success when verbose flag is False, and a JSON with all the data when verbose flag is True.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises 400:</th><td class="field-body"><p class="first">If the experiment does not belong to this user or the exp_id is wrong.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first last">If user is not logged in or if there is no secure cookie available.</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A JSON indicating success when verbose flag is False, and a JSON with all the data when verbose flag is True.</p>
+</dd>
+<dt class="field-even">Raises 400</dt>
+<dd class="field-even"><p>If the experiment does not belong to this user or the exp_id is wrong.</p>
+</dd>
+<dt class="field-odd">Raises 401</dt>
+<dd class="field-odd"><p>If user is not logged in or if there is no secure cookie available.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -658,55 +620,53 @@ to supply the following parameters:</p>
 <p>The admin endpoints provide the functionality to create, alter, and delete experiments.</p>
 <dl class="get">
 <dt id="get-(?i)-exp">
-<code class="descname">GET </code><code class="descname">(?i)/exp</code><a class="headerlink" href="#get-(?i)-exp" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">GET </code><code class="sig-name descname">(?i)/exp</code><a class="headerlink" href="#get-(?i)-exp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve a list of experiments running on this server</p>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="100%" />
+<col style="width: 100%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Example</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><a class="reference external" href="http://example.com/exp">http://example.com/exp</a></td>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="http://example.com/exp">http://example.com/exp</a></p></td>
 </tr>
 </tbody>
 </table>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Requires:</th><td class="field-body">A secure cookie obtained by logging in.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A JSON containing exp_id and name pairs.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Raises 401:</th><td class="field-body">If user is not logged in or if there is no secure cookie available.</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Requires</dt>
+<dd class="field-odd"><p>A secure cookie obtained by logging in.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A JSON containing exp_id and name pairs.</p>
+</dd>
+<dt class="field-odd">Raises 401</dt>
+<dd class="field-odd"><p>If user is not logged in or if there is no secure cookie available.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="post">
 <dt id="post-(?i)-exp">
-<code class="descname">POST </code><code class="descname">(?i)/exp</code><a class="headerlink" href="#post-(?i)-exp" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">POST </code><code class="sig-name descname">(?i)/exp</code><a class="headerlink" href="#post-(?i)-exp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new experiment</p>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="100%" />
+<col style="width: 100%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Example</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><dl class="first last docutils">
-<dt><a class="reference external" href="http://example.com/exp">http://example.com/exp</a></dt>
-<dd><dl class="first last docutils">
-<dt>{“name” <span class="classifier-delimiter">:</span> <span class="classifier">NAME, “get_context”</span> <span class="classifier-delimiter">:</span> <span class="classifier">CODE, “get_action”</span> <span class="classifier-delimiter">:</span> <span class="classifier">CODE,</span></dt>
-<dd>“get_reward” : CODE, “set_reward” : CODE, “advice_id” : True,
+<tbody>
+<tr class="row-even"><td><dl class="simple">
+<dt><a class="reference external" href="http://example.com/exp">http://example.com/exp</a></dt><dd><dl class="simple">
+<dt>{“name”<span class="classifier">NAME, “get_context”</span><span class="classifier">CODE, “get_action”</span><span class="classifier">CODE,</span></dt><dd><p>“get_reward” : CODE, “set_reward” : CODE, “advice_id” : True,
 “hourly_theta” : True, “delta_hours” : DELTA_HOURS,
-“default_reward” : DEFAULT_REWARD}</dd>
+“default_reward” : DEFAULT_REWARD}</p>
+</dd>
 </dl>
 </dd>
 </dl>
@@ -715,34 +675,30 @@ to supply the following parameters:</p>
 </tbody>
 </table>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The parameters for the POST calls have to be posted in the                     body as a JSON object.</p>
+<p class="admonition-title">Note</p>
+<p>The parameters for the POST calls have to be posted in the                     body as a JSON object.</p>
 </div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Requires:</th><td class="field-body"><p class="first">A secure cookie obtained by logging in.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<em>string</em>) – Name of the experiment.</li>
-<li><strong>get_context (optional)</strong> (<em>string</em>) – String of python code for get context code.</li>
-<li><strong>get_action (optional)</strong> (<em>string</em>) – String of python code for get action code.</li>
-<li><strong>get_reward (optional)</strong> (<em>string</em>) – String of python code for get reward code.</li>
-<li><strong>set_reward (optional)</strong> (<em>string</em>) – String of python code for set reward code.</li>
-<li><strong>hourly_theta</strong> (<em>bool</em>) – Bool indicating whether the state of Theta should be stored hourly.</li>
-<li><strong>advice_id</strong> (<em>bool</em>) – Bool indicating whether the getadvice and setreward calls should return an advice_id.</li>
-<li><strong>delta_hours</strong> (<em>int</em>) – If advice_id is True, supply this to give the number of hours that an advice_id should be stored (between 0 and 99999).</li>
-<li><strong>default_reward</strong> (<em>dict</em>) – If advice_id is True, supply this to give the default reward for advice_id’s that are over their delta_hours limit.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Requires</dt>
+<dd class="field-odd"><p>A secure cookie obtained by logging in.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>name</strong> (<em>string</em>) – Name of the experiment.</p></li>
+<li><p><strong>get_context (optional)</strong> (<em>string</em>) – String of python code for get context code.</p></li>
+<li><p><strong>get_action (optional)</strong> (<em>string</em>) – String of python code for get action code.</p></li>
+<li><p><strong>get_reward (optional)</strong> (<em>string</em>) – String of python code for get reward code.</p></li>
+<li><p><strong>set_reward (optional)</strong> (<em>string</em>) – String of python code for set reward code.</p></li>
+<li><p><strong>hourly_theta</strong> (<em>bool</em>) – Bool indicating whether the state of Theta should be stored hourly.</p></li>
+<li><p><strong>advice_id</strong> (<em>bool</em>) – Bool indicating whether the getadvice and setreward calls should return an advice_id.</p></li>
+<li><p><strong>delta_hours</strong> (<em>int</em>) – If advice_id is True, supply this to give the number of hours that an advice_id should be stored (between 0 and 99999).</p></li>
+<li><p><strong>default_reward</strong> (<em>dict</em>) – If advice_id is True, supply this to give the default reward for advice_id’s that are over their delta_hours limit.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A JSON of the form:</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A JSON of the form:</p>
+</dd>
+</dl>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span>{ 
     &quot;id&quot; : The assigned experiment id, 
     &quot;name&quot; : The name of the experiment (checked for duplicates), 
@@ -751,316 +707,289 @@ to supply the following parameters:</p>
 } 
 </pre></div>
 </div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Raises 401:</th><td class="field-body">If user is not logged in or if there is no secure cookie available.</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Raises 401</dt>
+<dd class="field-odd"><p>If user is not logged in or if there is no secure cookie available.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="get">
 <dt id="get-(?i)-exp-defaults">
-<code class="descname">GET </code><code class="descname">(?i)/exp/defaults</code><a class="headerlink" href="#get-(?i)-exp-defaults" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">GET </code><code class="sig-name descname">(?i)/exp/defaults</code><a class="headerlink" href="#get-(?i)-exp-defaults" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the list with default available experiments.</p>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="100%" />
+<col style="width: 100%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Example</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><a class="reference external" href="http://example.com/exp/defaults">http://example.com/exp/defaults</a></td>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="http://example.com/exp/defaults">http://example.com/exp/defaults</a></p></td>
 </tr>
 </tbody>
 </table>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Requires:</th><td class="field-body">A secure cookie obtained by logging in.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A JSON with the default experiments.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Raises 401:</th><td class="field-body">If user is not logged in or if there is no secure cookie available.</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Requires</dt>
+<dd class="field-odd"><p>A secure cookie obtained by logging in.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A JSON with the default experiments.</p>
+</dd>
+<dt class="field-odd">Raises 401</dt>
+<dd class="field-odd"><p>If user is not logged in or if there is no secure cookie available.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="get">
 <dt id="get-(?i)-exp-defaults-(?P-default_id-w+)">
-<code class="descname">GET </code><code class="descname">(?i)/exp/defaults/(?P&lt;default_id&gt;w+)</code><a class="headerlink" href="#get-(?i)-exp-defaults-(?P-default_id-w+)" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">GET </code><code class="sig-name descname">(?i)/exp/defaults/(?P&lt;default_id&gt;w+)</code><a class="headerlink" href="#get-(?i)-exp-defaults-(?P-default_id-w+)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve properties of a default experiment.</p>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="100%" />
+<col style="width: 100%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Example</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><a class="reference external" href="http://example.com/exp/defaults/DEFAULT_ID">http://example.com/exp/defaults/DEFAULT_ID</a></td>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="http://example.com/exp/defaults/DEFAULT_ID">http://example.com/exp/defaults/DEFAULT_ID</a></p></td>
 </tr>
 </tbody>
 </table>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Requires:</th><td class="field-body"><p class="first">A secure cookie obtained by logging in.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>default_id</strong> (<em>int</em>) – The ID of the default experiment.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Requires</dt>
+<dd class="field-odd"><p>A secure cookie obtained by logging in.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>default_id</strong> (<em>int</em>) – The ID of the default experiment.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A JSON containing the experiment properties.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first last">If user is not logged in or if there is no secure cookie available.</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A JSON containing the experiment properties.</p>
+</dd>
+<dt class="field-even">Raises 401</dt>
+<dd class="field-even"><p>If user is not logged in or if there is no secure cookie available.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="get">
 <dt id="get-(?i)-exp-(?P-exp_id-w+)">
-<code class="descname">GET </code><code class="descname">(?i)/exp/(?P&lt;exp_id&gt;w+)</code><a class="headerlink" href="#get-(?i)-exp-(?P-exp_id-w+)" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">GET </code><code class="sig-name descname">(?i)/exp/(?P&lt;exp_id&gt;w+)</code><a class="headerlink" href="#get-(?i)-exp-(?P-exp_id-w+)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve a specific experiment running on this server</p>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="100%" />
+<col style="width: 100%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Example</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><a class="reference external" href="http://example.com/exp/EXP_ID">http://example.com/exp/EXP_ID</a></td>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="http://example.com/exp/EXP_ID">http://example.com/exp/EXP_ID</a></p></td>
 </tr>
 </tbody>
 </table>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Requires:</th><td class="field-body"><p class="first">A secure cookie obtained by logging in.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>exp_id</strong> (<em>int</em>) – Experiment ID for the experiment that is to be retrieved.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Requires</dt>
+<dd class="field-odd"><p>A secure cookie obtained by logging in.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>exp_id</strong> (<em>int</em>) – Experiment ID for the experiment that is to be retrieved.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A JSON containing all the info for the expriment.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first">If the experiment does not belong to this user or the exp_id is wrong.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first last">If user is not logged in or if there is no secure cookie available.</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A JSON containing all the info for the expriment.</p>
+</dd>
+<dt class="field-even">Raises 401</dt>
+<dd class="field-even"><p>If the experiment does not belong to this user or the exp_id is wrong.</p>
+</dd>
+<dt class="field-odd">Raises 401</dt>
+<dd class="field-odd"><p>If user is not logged in or if there is no secure cookie available.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="delete">
 <dt id="delete-(?i)-exp-(?P-exp_id-w+)">
-<code class="descname">DELETE </code><code class="descname">(?i)/exp/(?P&lt;exp_id&gt;w+)</code><a class="headerlink" href="#delete-(?i)-exp-(?P-exp_id-w+)" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">DELETE </code><code class="sig-name descname">(?i)/exp/(?P&lt;exp_id&gt;w+)</code><a class="headerlink" href="#delete-(?i)-exp-(?P-exp_id-w+)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete an experiment</p>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="100%" />
+<col style="width: 100%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Example</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><a class="reference external" href="http://example.com/exp/EXP_ID">http://example.com/exp/EXP_ID</a></td>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="http://example.com/exp/EXP_ID">http://example.com/exp/EXP_ID</a></p></td>
 </tr>
 </tbody>
 </table>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Requires:</th><td class="field-body"><p class="first">A secure cookie obtained by logging in.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>exp_id</strong> (<em>int</em>) – The ID of the experiment to be deleted.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Requires</dt>
+<dd class="field-odd"><p>A secure cookie obtained by logging in.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>exp_id</strong> (<em>int</em>) – The ID of the experiment to be deleted.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A JSON showing the deleted experiment.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first">If the experiment does not belong to this user or the exp_id is wrong.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first last">If user is not logged in or if there is no secure cookie available.</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A JSON showing the deleted experiment.</p>
+</dd>
+<dt class="field-even">Raises 401</dt>
+<dd class="field-even"><p>If the experiment does not belong to this user or the exp_id is wrong.</p>
+</dd>
+<dt class="field-odd">Raises 401</dt>
+<dd class="field-odd"><p>If user is not logged in or if there is no secure cookie available.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="put">
 <dt id="put-(?i)-exp-(?P-exp_id-w+)">
-<code class="descname">PUT </code><code class="descname">(?i)/exp/(?P&lt;exp_id&gt;w+)</code><a class="headerlink" href="#put-(?i)-exp-(?P-exp_id-w+)" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">PUT </code><code class="sig-name descname">(?i)/exp/(?P&lt;exp_id&gt;w+)</code><a class="headerlink" href="#put-(?i)-exp-(?P-exp_id-w+)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Edit an experiment</p>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="100%" />
+<col style="width: 100%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Example</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><p class="first"><a class="reference external" href="http://example.com/exp/EXP_ID">http://example.com/exp/EXP_ID</a>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="http://example.com/exp/EXP_ID">http://example.com/exp/EXP_ID</a>
 {“name” : NAME, “getcontext” : CODE, “getaction” : CODE,</p>
-<blockquote class="last">
-<div>“getreward” : CODE, “setreward” : CODE, “advice_id” : True,
+<blockquote>
+<div><p>“getreward” : CODE, “setreward” : CODE, “advice_id” : True,
 “hourly_theta” : True, “delta_hours” : DELTA_HOURS,
-“default_reward” : DEFAULT_REWARD}</div></blockquote>
+“default_reward” : DEFAULT_REWARD}</p>
+</div></blockquote>
 </td>
 </tr>
 </tbody>
 </table>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The parameters for the PUT calls have to be posted in the                     body as a JSON object.</p>
+<p class="admonition-title">Note</p>
+<p>The parameters for the PUT calls have to be posted in the                     body as a JSON object.</p>
 </div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Requires:</th><td class="field-body"><p class="first">A secure cookie obtained by logging in.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<em>string</em>) – Name of the experiment.</li>
-<li><strong>get_context (optional)</strong> (<em>string</em>) – String of python code for get context code.</li>
-<li><strong>get_action (optional)</strong> (<em>string</em>) – String of python code for get action code.</li>
-<li><strong>get_reward (optional)</strong> (<em>string</em>) – String of python code for get reward code.</li>
-<li><strong>set_reward (optional)</strong> (<em>string</em>) – String of python code for set reward code.</li>
-<li><strong>hourly_theta</strong> (<em>bool</em>) – Bool indicating whether the state of Theta should be stored hourly.</li>
-<li><strong>advice_id</strong> (<em>bool</em>) – Bool indicating whether the getAdvice and setReward calls should return an advice_id.</li>
-<li><strong>delta_hours</strong> (<em>int</em>) – If advice_id is True, supply this to give the number of hours that an advice_id should be stored.</li>
-<li><strong>default_reward</strong> (<em>dict</em>) – If advice_id is True, supply this to give the default reward for advice_id’s that are over their delta_hours limit.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Requires</dt>
+<dd class="field-odd"><p>A secure cookie obtained by logging in.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>name</strong> (<em>string</em>) – Name of the experiment.</p></li>
+<li><p><strong>get_context (optional)</strong> (<em>string</em>) – String of python code for get context code.</p></li>
+<li><p><strong>get_action (optional)</strong> (<em>string</em>) – String of python code for get action code.</p></li>
+<li><p><strong>get_reward (optional)</strong> (<em>string</em>) – String of python code for get reward code.</p></li>
+<li><p><strong>set_reward (optional)</strong> (<em>string</em>) – String of python code for set reward code.</p></li>
+<li><p><strong>hourly_theta</strong> (<em>bool</em>) – Bool indicating whether the state of Theta should be stored hourly.</p></li>
+<li><p><strong>advice_id</strong> (<em>bool</em>) – Bool indicating whether the getAdvice and setReward calls should return an advice_id.</p></li>
+<li><p><strong>delta_hours</strong> (<em>int</em>) – If advice_id is True, supply this to give the number of hours that an advice_id should be stored.</p></li>
+<li><p><strong>default_reward</strong> (<em>dict</em>) – If advice_id is True, supply this to give the default reward for advice_id’s that are over their delta_hours limit.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A JSON indicating success.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first">If the experiment does not belong to this user or the exp_id is wrong.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first last">If user is not logged in or if there is no secure cookie available.</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A JSON indicating success.</p>
+</dd>
+<dt class="field-even">Raises 401</dt>
+<dd class="field-even"><p>If the experiment does not belong to this user or the exp_id is wrong.</p>
+</dd>
+<dt class="field-odd">Raises 401</dt>
+<dd class="field-odd"><p>If user is not logged in or if there is no secure cookie available.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="get">
 <dt id="get-(?i)-exp-(?P-exp_id-w+)-resetexperiment">
-<code class="descname">GET </code><code class="descname">(?i)/exp/(?P&lt;exp_id&gt;w+)/resetexperiment</code><a class="headerlink" href="#get-(?i)-exp-(?P-exp_id-w+)-resetexperiment" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">GET </code><code class="sig-name descname">(?i)/exp/(?P&lt;exp_id&gt;w+)/resetexperiment</code><a class="headerlink" href="#get-(?i)-exp-(?P-exp_id-w+)-resetexperiment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reset the theta of an experiment.</p>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="100%" />
+<col style="width: 100%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Example</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><a class="reference external" href="http://example.com/exp/EXP_ID/resetexperiment?key=KEY">http://example.com/exp/EXP_ID/resetexperiment?key=KEY</a>
-&amp;theta_key=THETA_KEY&amp;theta_value=THETA_VALUE</td>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="http://example.com/exp/EXP_ID/resetexperiment?key=KEY">http://example.com/exp/EXP_ID/resetexperiment?key=KEY</a>
+&amp;theta_key=THETA_KEY&amp;theta_value=THETA_VALUE</p></td>
 </tr>
 </tbody>
 </table>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Requires:</th><td class="field-body"><p class="first">A secure cookie obtained by logging in.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>exp_id</strong> (<em>int</em>) – The experiment ID.</li>
-<li><strong>key</strong> (<em>string</em>) – The key of the experiment.</li>
-<li><strong>theta_key (optional)</strong> (<em>string</em>) – The key for theta used when setting         theta in the setReward and getAction code.</li>
-<li><strong>theta_value (optional)</strong> (<em>string</em>) – The value for theta used when         setting theta in the setReward and getAction code.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Requires</dt>
+<dd class="field-odd"><p>A secure cookie obtained by logging in.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>exp_id</strong> (<em>int</em>) – The experiment ID.</p></li>
+<li><p><strong>key</strong> (<em>string</em>) – The key of the experiment.</p></li>
+<li><p><strong>theta_key (optional)</strong> (<em>string</em>) – The key for theta used when setting         theta in the setReward and getAction code.</p></li>
+<li><p><strong>theta_value (optional)</strong> (<em>string</em>) – The value for theta used when         setting theta in the setReward and getAction code.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first">If the theta_key or theta_value does not exist or is not valid.</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first">If the experiment does not belong to this user or the exp_id is wrong.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first last">If user is not logged in or if there is no secure cookie available.</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-odd">Raises 401</dt>
+<dd class="field-odd"><p>If the theta_key or theta_value does not exist or is not valid.</p>
+</dd>
+<dt class="field-even">Raises 401</dt>
+<dd class="field-even"><p>If the experiment does not belong to this user or the exp_id is wrong.</p>
+</dd>
+<dt class="field-odd">Raises 401</dt>
+<dd class="field-odd"><p>If user is not logged in or if there is no secure cookie available.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="post">
 <dt id="post-(?i)-user">
-<code class="descname">POST </code><code class="descname">(?i)/user</code><a class="headerlink" href="#post-(?i)-user" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">POST </code><code class="sig-name descname">(?i)/user</code><a class="headerlink" href="#post-(?i)-user" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a user to StreamingBandit.</p>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="100%" />
+<col style="width: 100%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Example</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><a class="reference external" href="http://example.com/user">http://example.com/user</a>
-{“username” : USERNAME, “password” : PASSWORD}</td>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="http://example.com/user">http://example.com/user</a>
+{“username” : USERNAME, “password” : PASSWORD}</p></td>
 </tr>
 </tbody>
 </table>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The parameters for the POST calls have to be posted in the                     body as a JSON object.</p>
+<p class="admonition-title">Note</p>
+<p>The parameters for the POST calls have to be posted in the                     body as a JSON object.</p>
 </div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>username</strong> (<em>string</em>) – The preferred username.</li>
-<li><strong>password</strong> (<em>string</em>) – The preferred password.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> (<em>string</em>) – The preferred username.</p></li>
+<li><p><strong>password</strong> (<em>string</em>) – The preferred password.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">JSON indicating success.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Raises 400:</th><td class="field-body"><p class="first last">If user with username already exists.</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>JSON indicating success.</p>
+</dd>
+<dt class="field-odd">Raises 400</dt>
+<dd class="field-odd"><p>If user with username already exists.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -1069,57 +998,53 @@ to supply the following parameters:</p>
 <p>The login API provides secure authentication.</p>
 <dl class="post">
 <dt id="post-(?i)-login">
-<code class="descname">POST </code><code class="descname">(?i)/login</code><a class="headerlink" href="#post-(?i)-login" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">POST </code><code class="sig-name descname">(?i)/login</code><a class="headerlink" href="#post-(?i)-login" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handler to login and retrieve a secure cookie.</p>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="100%" />
+<col style="width: 100%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Example</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><a class="reference external" href="http://example.com/login">http://example.com/login</a>
-{“username” : USERNAME, “password” : PASSWORD}</td>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="http://example.com/login">http://example.com/login</a>
+{“username” : USERNAME, “password” : PASSWORD}</p></td>
 </tr>
 </tbody>
 </table>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The parameters for the POST calls have to be posted in the                     body as a JSON object.</p>
+<p class="admonition-title">Note</p>
+<p>The parameters for the POST calls have to be posted in the                     body as a JSON object.</p>
 </div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>username</strong> (<em>string</em>) – Experiment ID as specified in the url.</li>
-<li><strong>password</strong> (<em>string</em>) – The number of simulation draws.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> (<em>string</em>) – Experiment ID as specified in the url.</p></li>
+<li><p><strong>password</strong> (<em>string</em>) – The number of simulation draws.</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises 401:</th><td class="field-body"><p class="first last">If wrong username or password.</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Raises 401</dt>
+<dd class="field-even"><p>If wrong username or password.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="get">
 <dt id="get-(?i)-logout">
-<code class="descname">GET </code><code class="descname">(?i)/logout</code><a class="headerlink" href="#get-(?i)-logout" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">GET </code><code class="sig-name descname">(?i)/logout</code><a class="headerlink" href="#get-(?i)-logout" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handler to logout and clear the set secure cookie.</p>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="100%" />
+<col style="width: 100%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Example</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><a class="reference external" href="http://example.com/logout">http://example.com/logout</a></td>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="http://example.com/logout">http://example.com/logout</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -1139,7 +1064,7 @@ to supply the following parameters:</p>
         <a href="libs.html" class="btn btn-neutral float-right" title="Documentation of the supplied Libraries" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="install.html" class="btn btn-neutral" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="install.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -1148,7 +1073,7 @@ to supply the following parameters:</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, M.C. Kaptein, J.M.A. Kruijswijk, R. van Emden.
+        &copy; Copyright 2020, M.C. Kaptein, J.M.A. Kruijswijk, R. van Emden
 
     </p>
   </div>
@@ -1165,33 +1090,16 @@ to supply the following parameters:</p>
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'1.0.4',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-  
-
-  <script type="text/javascript" src="_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

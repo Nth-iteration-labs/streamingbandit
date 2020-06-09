@@ -1,0 +1,11 @@
+# Install sphinx-build and pip (Linux)
+sudo apt install python3-sphinx
+sudo apt install python3-pip
+
+# Install required packages, in app folder
+pip3 install .
+
+pip3 install sphinx_rtd_theme
+
+# Update the docs number if needed in conf.py and build the docs inside the docs folder
+sphinx-build -b html -d ./build/doctrees ./source ./

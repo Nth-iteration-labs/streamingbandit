@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Welcome to StreamingBandit’s documentation! &mdash; StreamingBandit 1.0.4 documentation</title>
+  <title>Welcome to StreamingBandit’s documentation! &mdash; StreamingBandit 1.0.5 documentation</title>
   
 
   
@@ -17,33 +17,36 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Installation" href="install.html" /> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -57,7 +60,7 @@
             
             
               <div class="version">
-                1.0.4
+                1.0.5
               </div>
             
           
@@ -165,24 +168,24 @@ code at <a class="reference external" href="https://github.com/nth-iteration-lab
 <p>StreamingBandit is a RESTful API web application for developing and testing sequential experiments in field and simulation studies. This is done by formalizing a sequential experiment as a <a class="reference external" href="https://en.wikipedia.org/wiki/Multi-armed_bandit">(contextual) multi-armed bandit problem</a>. Each sequential experiment can be defined as follows. At each interaction <span class="math notranslate nohighlight">\(t\)</span>:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li>the experimenter observes a <em>context</em> <span class="math notranslate nohighlight">\(x_t\)</span>,</li>
-<li>subsequently, the experimenter chooses an <em>action</em> <span class="math notranslate nohighlight">\(a_t\)</span>,</li>
-<li>and finally a <em>reward</em> <span class="math notranslate nohighlight">\(r_t\)</span> is observed.</li>
+<li><p>the experimenter observes a <em>context</em> <span class="math notranslate nohighlight">\(x_t\)</span>,</p></li>
+<li><p>subsequently, the experimenter chooses an <em>action</em> <span class="math notranslate nohighlight">\(a_t\)</span>,</p></li>
+<li><p>and finally a <em>reward</em> <span class="math notranslate nohighlight">\(r_t\)</span> is observed.</p></li>
 </ol>
 </div></blockquote>
 <p>The main aim of the experimenter is to maximize the cumulative reward <span class="math notranslate nohighlight">\(\sum_{t=1}^N r_t\)</span> where <span class="math notranslate nohighlight">\(N\)</span> denotes the total number of interactions. To do so, the experimenter applies a <em>policy</em> <span class="math notranslate nohighlight">\(\pi\)</span> which is some function that takes the context <span class="math notranslate nohighlight">\(x_t\)</span> and the historical interactions, and returns an action. For convenience we denote all historical interactions using <span class="math notranslate nohighlight">\(\mathcal{D}_{(t-1)}\)</span> and thus we have <span class="math notranslate nohighlight">\(\pi(x_t, \mathcal{D}_{t-1}) \rightarrow a_t\)</span>.</p>
 <p>The following are some examples of when StreamingBandit is a useful tool:</p>
 <ul class="simple">
-<li>Personalized healthcare: A physician meets with patients sequentially. For each patient she observes a number of background characteristics (gender, age, current condition) constituting the context. Subsequently, her action is to choose a treatment such that the reward—measured in terms of general health of the patient—is maximized.</li>
-<li>Online advertising: In online advertising a firm selecting an ad observes the context consisting of a description of the current user visiting a specific webpage. The action is to choose an advertisement out of a set of possible advertisements (possibly dependent on the context itself), and the rewards constitute the clicks on the ad.</li>
-<li>Product recommendation systems: The context denotes all that is known about the user at a certain point in time. The action is choosing one out of a set of products, and the reward consists of the revenue generated at each interaction.</li>
-<li>Social science experiments: Many social science experiments constitute a special case of contextual decision making: during the experiment participants are recruited sequentially. The context consists of all that’s known about the participant, and sequently the action is to assign a participant to a specific experimental condition (possibly dependent on the context in cases of, e.g., stratified sampling). Finally, the reward(s) consist of the outcome measures of the experiments.</li>
+<li><p>Personalized healthcare: A physician meets with patients sequentially. For each patient she observes a number of background characteristics (gender, age, current condition) constituting the context. Subsequently, her action is to choose a treatment such that the reward—measured in terms of general health of the patient—is maximized.</p></li>
+<li><p>Online advertising: In online advertising a firm selecting an ad observes the context consisting of a description of the current user visiting a specific webpage. The action is to choose an advertisement out of a set of possible advertisements (possibly dependent on the context itself), and the rewards constitute the clicks on the ad.</p></li>
+<li><p>Product recommendation systems: The context denotes all that is known about the user at a certain point in time. The action is choosing one out of a set of products, and the reward consists of the revenue generated at each interaction.</p></li>
+<li><p>Social science experiments: Many social science experiments constitute a special case of contextual decision making: during the experiment participants are recruited sequentially. The context consists of all that’s known about the participant, and sequently the action is to assign a participant to a specific experimental condition (possibly dependent on the context in cases of, e.g., stratified sampling). Finally, the reward(s) consist of the outcome measures of the experiments.</p></li>
 </ul>
 <p>The list above illustrates the generality of our approach; StreamingBandit can be used to allocate actions in all of the above applications.</p>
 <p>To ensure the computational scalability of StreamingBandit, we assume that at the latest interaction <span class="math notranslate nohighlight">\(t=t'\)</span>, all the information necessary to choose an action can be summarized using a limited set of parameters denoted <span class="math notranslate nohighlight">\(\theta_{t'}\)</span>, where often the dimensionality of <span class="math notranslate nohighlight">\(\theta_t\)</span> is (much) smaller than that of <span class="math notranslate nohighlight">\(\mathcal{D}_{t-1}\)</span>. Given this assumption, we identify the following two steps of a policy:</p>
 <ol class="arabic simple">
-<li>The <em>decision</em> step: In the decision step, using <span class="math notranslate nohighlight">\(x_{t'}\)</span> and <span class="math notranslate nohighlight">\(\theta_{t'}\)</span>, and often using some (statistical) model relating the actions, the context, and the reward which is parametrized by <span class="math notranslate nohighlight">\(\theta_{t'}\)</span>, a next action <span class="math notranslate nohighlight">\(a_{t'}\)</span> is selected. Making a request to StreamingBandit’s <strong>getaction</strong> REST endpoint returns a JSON object containing the selected action. Optionally, you can request an <strong>advice_id</strong> that will couple your <strong>getaction</strong> to your <strong>setreward</strong> call - more info on this is inside the Experiment documentation.</li>
-<li>The <em>summary</em> step: In each summary step <span class="math notranslate nohighlight">\(\theta_{t'}\)</span> is updated using the new information <span class="math notranslate nohighlight">\(\{x_{t'},a_{t'},r_{t'}, p_{t'}\}\)</span>. Thus, in this step, <span class="math notranslate nohighlight">\(\theta_{t'+1} = g(\theta_{t'}, x_{t'},a_{t'},r_{t'}, p_{t'})\)</span> where <span class="math notranslate nohighlight">\(g()\)</span> is some update function. Effectively, all the prior data, <span class="math notranslate nohighlight">\(\mathcal{D}_{t-1}\)</span> are <em>summarized</em> into <span class="math notranslate nohighlight">\(\theta_{t'}\)</span>. This choice makes that the computations are bounded by the dimension of <span class="math notranslate nohighlight">\(\theta\)</span> and the time required to update <span class="math notranslate nohighlight">\(\theta\)</span> instead of growing as a function of <span class="math notranslate nohighlight">\(t\)</span>. Note that this effectively forces users to implement an online policy; the complete dataset <span class="math notranslate nohighlight">\(\mathcal{D}_{t-1}\)</span> is not revisited at subsequent interactions. Making a request to StreamingBandit’s <strong>setreward</strong> endpoint containing a JSON object including either the <strong>advice_id</strong>, or a complete description of <span class="math notranslate nohighlight">\(\{x_{t'},a_{t'}, p_{t'}\}\)</span>, and the reward <span class="math notranslate nohighlight">\(r_{t'}\)</span>, allows one to update <span class="math notranslate nohighlight">\(\theta_{t'+1}\)</span> and subsequently influence the actions selected at <span class="math notranslate nohighlight">\(t'+1\)</span>.</li>
+<li><p>The <em>decision</em> step: In the decision step, using <span class="math notranslate nohighlight">\(x_{t'}\)</span> and <span class="math notranslate nohighlight">\(\theta_{t'}\)</span>, and often using some (statistical) model relating the actions, the context, and the reward which is parametrized by <span class="math notranslate nohighlight">\(\theta_{t'}\)</span>, a next action <span class="math notranslate nohighlight">\(a_{t'}\)</span> is selected. Making a request to StreamingBandit’s <strong>getaction</strong> REST endpoint returns a JSON object containing the selected action. Optionally, you can request an <strong>advice_id</strong> that will couple your <strong>getaction</strong> to your <strong>setreward</strong> call - more info on this is inside the Experiment documentation.</p></li>
+<li><p>The <em>summary</em> step: In each summary step <span class="math notranslate nohighlight">\(\theta_{t'}\)</span> is updated using the new information <span class="math notranslate nohighlight">\(\{x_{t'},a_{t'},r_{t'}, p_{t'}\}\)</span>. Thus, in this step, <span class="math notranslate nohighlight">\(\theta_{t'+1} = g(\theta_{t'}, x_{t'},a_{t'},r_{t'}, p_{t'})\)</span> where <span class="math notranslate nohighlight">\(g()\)</span> is some update function. Effectively, all the prior data, <span class="math notranslate nohighlight">\(\mathcal{D}_{t-1}\)</span> are <em>summarized</em> into <span class="math notranslate nohighlight">\(\theta_{t'}\)</span>. This choice makes that the computations are bounded by the dimension of <span class="math notranslate nohighlight">\(\theta\)</span> and the time required to update <span class="math notranslate nohighlight">\(\theta\)</span> instead of growing as a function of <span class="math notranslate nohighlight">\(t\)</span>. Note that this effectively forces users to implement an online policy; the complete dataset <span class="math notranslate nohighlight">\(\mathcal{D}_{t-1}\)</span> is not revisited at subsequent interactions. Making a request to StreamingBandit’s <strong>setreward</strong> endpoint containing a JSON object including either the <strong>advice_id</strong>, or a complete description of <span class="math notranslate nohighlight">\(\{x_{t'},a_{t'}, p_{t'}\}\)</span>, and the reward <span class="math notranslate nohighlight">\(r_{t'}\)</span>, allows one to update <span class="math notranslate nohighlight">\(\theta_{t'+1}\)</span> and subsequently influence the actions selected at <span class="math notranslate nohighlight">\(t'+1\)</span>.</p></li>
 </ol>
 <p>For the basic usage of StreamingBandit the experimenter—or rather an external server or mobile application—sequentially executes requests to the <strong>getaction</strong> and <strong>setreward</strong> endpoints, and allocates actions accordingly. Using this setup, StreamingBandit can be used to, for example, sequentially select advertisements on webpages, allocate research subjects in an online experiment to different experimental conditions, or sequentially optimize the feedback provided to users off a mobile eHealth application.</p>
 <p>For more information on how StreamingBandit works, check out the documentation and <a class="reference external" href="https://arxiv.org/abs/1602.06700">this paper</a>.</p>
@@ -199,15 +202,14 @@ functions with them.
 If you would like to contribute by writing a part of the library, look at the
 following points:</p>
 <ul>
-<li><p class="first">Write a Base class according to the skeleton class __strmBase.</p>
-</li>
-<li><p class="first">Write a default example of a use-case of the class in the defaults folder. This should include at least two but preferably four of the following files:</p>
+<li><p>Write a Base class according to the skeleton class __strmBase.</p></li>
+<li><p>Write a default example of a use-case of the class in the defaults folder. This should include at least two but preferably four of the following files:</p>
 <blockquote>
 <div><ul class="simple">
-<li>getContext.py (optional)</li>
-<li>getAction.py</li>
-<li>getReward.py (optional)</li>
-<li>setReward.py</li>
+<li><p>getContext.py (optional)</p></li>
+<li><p>getAction.py</p></li>
+<li><p>getReward.py (optional)</p></li>
+<li><p>setReward.py</p></li>
 </ul>
 </div></blockquote>
 </li>
@@ -243,7 +245,7 @@ following points:</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, M.C. Kaptein, J.M.A. Kruijswijk, R. van Emden.
+        &copy; Copyright 2020, M.C. Kaptein, J.M.A. Kruijswijk, R. van Emden
 
     </p>
   </div>
@@ -260,33 +262,16 @@ following points:</p>
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'1.0.4',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-  
-
-  <script type="text/javascript" src="_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installation &mdash; StreamingBandit 1.0.4 documentation</title>
+  <title>Installation &mdash; StreamingBandit 1.0.5 documentation</title>
   
 
   
@@ -17,34 +17,37 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Complete RESTful API" href="api.html" />
     <link rel="prev" title="Welcome to StreamingBandit’s documentation!" href="index.html" /> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -58,7 +61,7 @@
             
             
               <div class="version">
-                1.0.4
+                1.0.5
               </div>
             
           
@@ -183,8 +186,8 @@ $ docker-compose start
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">You can also stop the Docker containers using <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">docker-compose</span> <span class="pre">down</span></code>, but use this with caution, as it will destroy the containers and also all your saved progress and data!</p>
+<p class="admonition-title">Note</p>
+<p>You can also stop the Docker containers using <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">docker-compose</span> <span class="pre">down</span></code>, but use this with caution, as it will destroy the containers and also all your saved progress and data!</p>
 </div>
 <p>The last few commands will only start up the back-end. If you would like to have the front-end running as well, you can accomplish that using the following commands:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ docker-compose -f docker-compose.yml -f docker-compose.front-end.yml up -d
@@ -196,8 +199,8 @@ $ docker-compose -f docker-compose.yml -f docker-compose.front-end.yml start
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The front-end will be taken from an existing image from the <a class="reference external" href="https://hub.docker.com/">Dockerhub</a> and thus you will not need to download a Git repository.</p>
+<p class="admonition-title">Note</p>
+<p>The front-end will be taken from an existing image from the <a class="reference external" href="https://hub.docker.com/">Dockerhub</a> and thus you will not need to download a Git repository.</p>
 </div>
 </div>
 <div class="section" id="install-and-running-from-source">
@@ -247,8 +250,8 @@ $ docker-compose -f docker-compose.yml -f docker-compose.front-end.yml start
 <h3>Running StreamingBandit<a class="headerlink" href="#running-streamingbandit" title="Permalink to this headline">¶</a></h3>
 <p>If everything is correctly configured:</p>
 <ul class="simple">
-<li>Start Redis</li>
-<li>Start MongoDB</li>
+<li><p>Start Redis</p></li>
+<li><p>Start MongoDB</p></li>
 </ul>
 <p>Then you can start the StreamingBandit back-end by issuing the following commands:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd streamingbandit/app
@@ -262,13 +265,13 @@ $ python3 app.py
 <p>To use StreamingBandit more intuitively, you can use our front-end (<a class="reference external" href="https://github.com/nth-iteration-labs/streamingbandit-ui">StreamingBandit-ui</a>) as well.</p>
 <p>Just follow these steps after you have installed the back-end.</p>
 <ol class="arabic simple">
-<li>Download and unzip the StreamingBanditUI package <a class="reference external" href="https://github.com/Nth-iteration-labs/streamingbandit-ui/releases/download/v1.0/StreamingBanditUI.zip">here</a>, if you haven’t already. The StreamingBanditUI package will extract into a folder called StreamingBanditUI in the same directory that you downloaded StreamingBanditUI.zip</li>
-<li>Upload the all of the files contained in the StreamingBanditUI folder to the desired location on your web server and visit index.html.</li>
+<li><p>Download and unzip the StreamingBanditUI package <a class="reference external" href="https://github.com/Nth-iteration-labs/streamingbandit-ui/releases/download/v1.0/StreamingBanditUI.zip">here</a>, if you haven’t already. The StreamingBanditUI package will extract into a folder called StreamingBanditUI in the same directory that you downloaded StreamingBanditUI.zip</p></li>
+<li><p>Upload the all of the files contained in the StreamingBanditUI folder to the desired location on your web server and visit index.html.</p></li>
 </ol>
 <p>OR</p>
 <ol class="arabic simple" start="2">
-<li>Run StreamingBanditUI by clicking on index.html in the StreamingBanditUI directory. This works in most, but not all browsers. Recent versions of Firefox, Microsoft Edge and Google Chrome should work fine.</li>
-<li>Now enter the IP or domain together with the port on StreamingBandit is running (default: <a class="reference external" href="http://localhost:8080">http://localhost:8080</a>) and login to the StreamingBandit server.</li>
+<li><p>Run StreamingBanditUI by clicking on index.html in the StreamingBanditUI directory. This works in most, but not all browsers. Recent versions of Firefox, Microsoft Edge and Google Chrome should work fine.</p></li>
+<li><p>Now enter the IP or domain together with the port on StreamingBandit is running (default: <a class="reference external" href="http://localhost:8080">http://localhost:8080</a>) and login to the StreamingBandit server.</p></li>
 </ol>
 <p>That’s it! You should now be able to access your StreamingBandit server, and start experimenting!</p>
 </div>
@@ -286,7 +289,7 @@ $ python3 app.py
         <a href="api.html" class="btn btn-neutral float-right" title="Complete RESTful API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="Welcome to StreamingBandit’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to StreamingBandit’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -295,7 +298,7 @@ $ python3 app.py
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, M.C. Kaptein, J.M.A. Kruijswijk, R. van Emden.
+        &copy; Copyright 2020, M.C. Kaptein, J.M.A. Kruijswijk, R. van Emden
 
     </p>
   </div>
@@ -312,33 +315,16 @@ $ python3 app.py
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'1.0.4',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-  
-
-  <script type="text/javascript" src="_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>
