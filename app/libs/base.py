@@ -366,6 +366,15 @@ class List:
             return self.random()
         else:
             return max_key
+    
+    def min(self):
+        """ Finds the minimum main value from all Base classes.
+        If there are multiple minima available (for example because all main values are 0) \
+        it will return a random min
+        """
+        d = self.get_value()
+        min_key = min(d, key=d.get)
+        return min_key
 
     def count(self):
         """ Checks if the Base class has a counter. If that's the case, it will
@@ -375,7 +384,7 @@ class List:
             if "n" not in v.get_dict():
                 return 0 
             else:
-                return int(sum(v.get_dict().get("n") for v in self.base_list.values()))
+                return sum(int(v.get_dict().get("n")) for v in self.base_list.values())
 
     def random(self):
         """ Return a random choice from the value_names list.
