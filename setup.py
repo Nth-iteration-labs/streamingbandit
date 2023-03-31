@@ -15,7 +15,7 @@ setup(name='StreamingBandit',
     packages=[],
     install_requires=[
     'tornado',
-    'redis==2.10.6',
+    'redis==4.4.4',
     'pyyaml',
     'pymongo',            
     'numpy',
