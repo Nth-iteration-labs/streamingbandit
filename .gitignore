@@ -34,6 +34,19 @@ var/
 .installed.cfg
 *.egg
 
+# Virtual environments
+venv/
+.venv/
+ENV/
+env/
+.env
+
+# IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
 # PyInstaller
 #  Usually these files are written by a python script from a template
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
@@ -53,6 +66,10 @@ htmlcov/
 nosetests.xml
 coverage.xml
 *,cover
+.pytest_cache/
+
+# Claude Code settings
+.claude/*
 
 # Translations
 *.mo

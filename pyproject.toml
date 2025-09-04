@@ -1,0 +1,90 @@
+[tool.poetry]
+name = "StreamingBandit"
+version = "1.0.5"
+description = "Python application to setup and run streaming (contextual) bandit experiments."
+authors = ["Nth-iteration <maurits@mauritskaptein.com>"]
+license = "MIT"
+homepage = "https://github.com/nth-iteration-labs/streamingbandit"
+repository = "https://github.com/nth-iteration-labs/streamingbandit"
+packages = [{include = "app"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+tornado = "*"
+redis = "2.10.6"
+pyyaml = "*"
+pymongo = "*"
+numpy = "*"
+scipy = "*"
+scikit-learn = "*"
+apscheduler = "*"
+bcrypt = "*"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^7.4.0"
+pytest-cov = "^4.1.0"
+pytest-mock = "^3.11.1"
+
+[tool.poetry.scripts]
+test = "pytest:main"
+tests = "pytest:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--cov=app",
+    "--cov-report=html:htmlcov",
+    "--cov-report=xml:coverage.xml",
+    "--cov-report=term-missing",
+    "--cov-fail-under=80",
+    "-v",
+]
+markers = [
+    "unit: marks tests as unit tests (fast, isolated)",
+    "integration: marks tests as integration tests (slower, may require external resources)",
+    "slow: marks tests as slow (may take several seconds to run)",
+]
+
+[tool.coverage.run]
+source = ["app"]
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "*/__pycache__/*",
+    "*/venv/*",
+    "*/virtualenv/*",
+    "*/.venv/*",
+    "*/site-packages/*",
+    "*/migrations/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
+show_missing = true
+precision = 2
+
+[tool.coverage.html]
+directory = "htmlcov"
+
+[tool.coverage.xml]
+output = "coverage.xml"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
